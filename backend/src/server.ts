@@ -26,12 +26,17 @@ import tradeRoutes from './routes/trades';
 import userRoutes from './routes/users';
 import adminRoutes from './routes/admin';
 import liquidityRoutes from './routes/liquidity';
+import oracleRoutes from './routes/oracle';
+import supabaseOracleRoutes from './routes/supabaseOracle';
+import metricsRoutes from './routes/metrics';
+import grafanaIntegrationRoutes from './routes/grafanaIntegration';
 
 // Import services
 import { WebSocketService } from './services/websocket';
 import { pythOracleService } from './services/pythOracleService';
 import { fundingService } from './services/funding';
 import { LiquidationBot } from './services/liquidationBot';
+import { metricsCollector } from './services/metricsCollector';
 import { Logger } from './utils/logger';
 
 // Load environment variables
@@ -167,6 +172,10 @@ app.use('/api/trades', authMiddleware, tradeRoutes);
 app.use('/api/users', authMiddleware, userRoutes);
 app.use('/api/admin', authMiddleware, adminRoutes);
 app.use('/api/liquidity', liquidityRoutes);
+app.use('/api/oracle', oracleRoutes);
+app.use('/api/supabase-oracle', supabaseOracleRoutes);
+app.use('/api/metrics', metricsRoutes);
+app.use('/api/grafana', grafanaIntegrationRoutes);
 
 // WebSocket service
 const wsService = WebSocketService.getInstance(io);
@@ -218,6 +227,11 @@ server.listen(PORT, () => {
 
   // Start liquidation monitoring (scaffold)
   LiquidationBot.getInstance().start();
+
+  // Start metrics collection for Grafana
+  logger.info(`📊 Starting metrics collection service...`);
+  metricsCollector.start();
+  logger.info(`✅ Metrics collection service started`);
 });
 
 export default app;

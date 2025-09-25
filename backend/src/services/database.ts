@@ -1,4 +1,5 @@
 import { Pool, PoolClient } from 'pg';
+import { supabaseService } from './supabaseService';
 import { Logger } from '../utils/logger';
 
 const logger = new Logger();

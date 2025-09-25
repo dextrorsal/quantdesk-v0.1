@@ -18,8 +18,8 @@ quantdesk_perp_dex = "G7isTpCkw8TWhPhozSuZMbUjTEF8Jf8xxAguZyL39L8J"
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "localnet"
-wallet = "~/.config/solana/id.json"
+cluster = "devnet"
+wallet = "~/.config/solana/keys/id.json"
 
 [scripts]
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"

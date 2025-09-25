@@ -126,7 +126,7 @@ export class JitAuctionService {
     return auction
   }
 
-  public submitQuote(auctionId: string, makerId: string, price: number): Auction {
+  public async submitQuote(auctionId: string, makerId: string, price: number): Promise<Auction> {
     const auc = this.auctions.get(auctionId)
     if (!auc) throw new Error('Auction not found')
     if (auc.settled) throw new Error('Auction already settled')
@@ -145,7 +145,7 @@ export class JitAuctionService {
     return auc
   }
 
-  public settle(auctionId: string): SettlementResult {
+  public async settle(auctionId: string): Promise<SettlementResult> {
     const auc = this.auctions.get(auctionId)
     if (!auc) return { filled: false, reason: 'Auction not found' }
     if (auc.settled) return { filled: false, reason: 'Already settled' }

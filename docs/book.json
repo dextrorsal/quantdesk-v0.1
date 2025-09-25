@@ -1,0 +1,69 @@
+{
+  "title": "QuantDesk Documentation",
+  "description": "The Bloomberg Terminal for Crypto - Professional Trading Platform Documentation",
+  "author": "QuantDesk Team",
+  "language": "en",
+  "gitbook": "3.2.3",
+  "structure": {
+    "readme": "README.md",
+    "summary": "SUMMARY.md"
+  },
+  "plugins": [
+    "theme-default",
+    "highlight",
+    "search",
+    "sharing",
+    "fontsettings",
+    "livereload",
+    "back-to-top-button",
+    "expandable-chapters",
+    "anchors",
+    "github",
+    "edit-link",
+    "copy-code-button"
+  ],
+  "pluginsConfig": {
+    "theme-default": {
+      "showLevel": true,
+      "styles": {
+        "website": "styles/website.css"
+      }
+    },
+    "github": {
+      "url": "https://github.com/quantdesk/quantdesk"
+    },
+    "edit-link": {
+      "base": "https://github.com/quantdesk/quantdesk-docs/edit/main",
+      "label": "Edit This Page"
+    },
+    "sharing": {
+      "facebook": true,
+      "twitter": true,
+      "google": false,
+      "weibo": false,
+      "instapaper": false,
+      "vk": false,
+      "all": [
+        "facebook",
+        "twitter",
+        "google",
+        "weibo",
+        "instapaper"
+      ]
+    }
+  },
+  "pdf": {
+    "pageNumbers": true,
+    "fontSize": 12,
+    "fontFamily": "Arial",
+    "paperSize": "a4",
+    "chapterMark": "pagebreak",
+    "pageBreaksBefore": "/",
+    "margin": {
+      "right": 62,
+      "left": 62,
+      "top": 56,
+      "bottom": 56
+    }
+  }
+}

@@ -28,8 +28,24 @@ describe("quantdesk-perp-dex", () => {
     // Mock price feed account (in production, this would be a real Pyth price feed)
     priceFeed = Keypair.generate().publicKey;
     
-    // Airdrop SOL to user
-    await provider.connection.requestAirdrop(user.publicKey, 2 * anchor.web3.LAMPORTS_PER_SOL);
+    // Airdrop SOL to user and wait for confirmation
+    try {
+      const airdropTx = await provider.connection.requestAirdrop(user.publicKey, 2 * anchor.web3.LAMPORTS_PER_SOL);
+      await provider.connection.confirmTransaction(airdropTx);
+    } catch (error) {
+      console.log("Airdrop failed, continuing with test...");
+    }
+    
+    // Also airdrop to provider wallet if needed
+    try {
+      const providerBalance = await provider.connection.getBalance(provider.wallet.publicKey);
+      if (providerBalance < anchor.web3.LAMPORTS_PER_SOL) {
+        const providerAirdropTx = await provider.connection.requestAirdrop(provider.wallet.publicKey, 2 * anchor.web3.LAMPORTS_PER_SOL);
+        await provider.connection.confirmTransaction(providerAirdropTx);
+      }
+    } catch (error) {
+      console.log("Provider airdrop failed, continuing with test...");
+    }
   });
 
   describe("Market Operations", () => {
@@ -98,6 +114,10 @@ describe("quantdesk-perp-dex", () => {
 
       // Create mock user collateral account
       const userCollateral = Keypair.generate();
+      
+      // Fund the user collateral account
+      const collateralAirdropTx = await provider.connection.requestAirdrop(userCollateral.publicKey, anchor.web3.LAMPORTS_PER_SOL);
+      await provider.connection.confirmTransaction(collateralAirdropTx);
 
       const tx = await program.methods
         .openPosition(
@@ -128,6 +148,10 @@ describe("quantdesk-perp-dex", () => {
 
     it("Closes a position", async () => {
       const userCollateral = Keypair.generate();
+      
+      // Fund the user collateral account
+      const collateralAirdropTx = await provider.connection.requestAirdrop(userCollateral.publicKey, anchor.web3.LAMPORTS_PER_SOL);
+      await provider.connection.confirmTransaction(collateralAirdropTx);
 
       const tx = await program.methods
         .closePosition()

@@ -98,11 +98,11 @@ check_wallet() {
     print_status "Wallet address: $wallet_address"
     
     # Check SOL balance
-    local balance=$(solana balance)
-    print_status "Current SOL balance: $balance"
+    local balance=$(solana balance | awk '{print $1}')
+    print_status "Current SOL balance: $balance SOL"
     
     # Request airdrop if balance is low
-    if [ "$network" != "localnet" ] && [ "$balance" -lt 1 ]; then
+    if [ "$network" != "localnet" ] && (( $(echo "$balance < 1" | bc -l) )); then
         print_status "Requesting SOL airdrop..."
         solana airdrop 2
         local new_balance=$(solana balance)

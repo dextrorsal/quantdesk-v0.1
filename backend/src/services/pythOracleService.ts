@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { DatabaseService } from './database'
+import { mcpSupabaseService } from './mcpSupabaseService'
 import { Logger } from '../utils/logger'
 
 export interface PythPriceData {
@@ -12,7 +12,7 @@ export interface PythPriceData {
 
 class PythOracleService {
   private static instance: PythOracleService
-  private db: DatabaseService
+  private db: typeof mcpSupabaseService
   private logger: Logger
   private readonly HERMES_API_URL = 'https://hermes.pyth.network/v2/updates/price/latest'
   
@@ -32,7 +32,7 @@ class PythOracleService {
   }
 
   private constructor() {
-    this.db = DatabaseService.getInstance()
+    this.db = mcpSupabaseService
     this.logger = new Logger()
   }
 
@@ -139,10 +139,11 @@ class PythOracleService {
 
         // Store in oracle_prices table
         try {
-          await this.db.query(
-            `INSERT INTO oracle_prices (market_id, price, confidence, exponent, created_at)
-             VALUES ($1, $2, $3, $4, NOW())`,
-            [market.id, priceData.price, priceData.confidence, priceData.exponent]
+          await this.db.storeOraclePrice(
+            market.id, 
+            priceData.price, 
+            priceData.confidence, 
+            priceData.exponent
           )
         } catch (_e: any) {
           // Soft-fail DB writes so live prices still flow

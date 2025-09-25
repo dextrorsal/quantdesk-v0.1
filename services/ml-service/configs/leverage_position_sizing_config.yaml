@@ -1,0 +1,141 @@
+# Leverage-Based Position Sizing Configuration
+# This configuration MUST be used by all trading strategies, backtests, and optimizers
+# to ensure proper risk management and expected performance results
+
+position_sizing:
+  # Core Philosophy: High leverage with small allocations
+  strategy_type: "leverage_based"
+  
+  # Leverage Allocation Ranges
+  # These are the ONLY position sizing rules that should be used
+  leverage_ranges:
+    ultra_high_leverage:  # 50-100x leverage
+      min_leverage: 50
+      max_leverage: 125
+      min_allocation: 0.01  # 1% of capital
+      max_allocation: 0.10  # 10% of capital
+      description: "Ultra high leverage with minimal capital allocation"
+      
+    high_leverage:  # 20-50x leverage
+      min_leverage: 20
+      max_leverage: 49
+      min_allocation: 0.10  # 10% of capital
+      max_allocation: 0.20  # 20% of capital
+      description: "High leverage with moderate capital allocation"
+      
+    medium_leverage:  # 1-20x leverage
+      min_leverage: 1
+      max_leverage: 19
+      min_allocation: 0.20  # 20% of capital
+      max_allocation: 1.00  # 100% of capital
+      description: "Lower leverage with higher capital allocation"
+
+  # Market Condition Adjustments
+  market_adjustments:
+    volume_impact_range: [-0.25, 0.25]  # Volume ratio adjustment
+    sentiment_impact_range: [-0.15, 0.15]  # Sentiment score adjustment
+    bullish_bonus: 0.10  # Additional allocation during bullish conditions
+    adjustment_bounds: [0.5, 1.5]  # Min/max adjustment multipliers
+
+  # Scale-In Strategy
+  scale_in:
+    enabled: true
+    max_levels: 3
+    max_loss_per_level: 0.167  # 16.7% loss per level (50% total)
+    position_multiplier: 1.5  # Increase position size by 50% each level
+    
+  # Risk Management
+  risk_management:
+    max_position_percentage: 0.10  # Never exceed 10% of capital per position
+    min_position_percentage: 0.01  # Minimum 1% of capital per position
+    kelly_criterion_enabled: true
+    kelly_max_fraction: 0.20  # Cap Kelly at 20%
+    correlation_adjustment: true
+    max_correlation_reduction: 0.50  # Max 50% reduction for correlated positions
+
+  # Liquidation Protection
+  liquidation_protection:
+    safety_margin: 0.20  # Stay 20% away from liquidation price
+    emergency_close_threshold: 0.10  # Close if within 10% of liquidation
+    trailing_stop_enabled: true
+    chandelier_exit_enabled: true
+
+# Exchange-Specific Settings
+exchange_settings:
+  bitget:
+    max_leverage: 125
+    min_trade_amount: 1  # 1 contract
+    maker_fee: 0.0002  # 0.02%
+    taker_fee: 0.0006  # 0.06%
+    funding_interval: 8  # hours
+    
+  binance:
+    max_leverage: 125
+    min_trade_amount: 1
+    maker_fee: 0.0002
+    taker_fee: 0.0004
+    funding_interval: 8
+
+# Strategy-Specific Overrides
+strategy_overrides:
+  lorentzian:
+    preferred_leverage: 75  # 75x leverage
+    allocation_range: [0.02, 0.05]  # 2-5% of capital
+    use_chandelier_exit: true
+    
+  logistic_regression:
+    preferred_leverage: 50  # 50x leverage
+    allocation_range: [0.03, 0.07]  # 3-7% of capital
+    use_trailing_stops: true
+    
+  chandelier_exit:
+    preferred_leverage: 100  # 100x leverage
+    allocation_range: [0.01, 0.03]  # 1-3% of capital
+    use_native_exits: true
+    
+  lag_based:
+    preferred_leverage: 25  # 25x leverage
+    allocation_range: [0.05, 0.15]  # 5-15% of capital
+    use_correlation_adjustment: true
+
+# Backtesting Configuration
+backtesting:
+  # CRITICAL: All backtests MUST use these settings
+  initial_capital: 500.0  # $500 USDT starting capital
+  use_leverage_position_sizing: true
+  use_realistic_fees: true
+  enable_liquidation_simulation: true
+  
+  # Fee Structure (realistic for leverage trading)
+  fee_structure:
+    maker_fee: 0.0002  # 0.02%
+    taker_fee: 0.0006  # 0.06%
+    funding_rate: 0.0001  # 0.01% (8-hour funding)
+    no_slippage_simulation: true  # Don't double-charge fees
+    
+  # Position Sizing Rules
+  position_sizing:
+    type: "leverage_based"
+    use_fixed_allocation: true  # Don't use decreasing capital
+    respect_leverage_limits: true
+    apply_market_adjustments: true
+
+# Files That MUST Use This Configuration
+required_implementations:
+  - "src/ml/paper_trading_framework.py"
+  - "src/ml/strategy_backtest.py"
+  - "scripts/example_paper_trading.py"
+  - "scripts/systematic_multi_timeframe_test.py"
+  - "src/ml/models/strategy/lorentzian_classifier.py"
+  - "src/ml/models/strategy/logistic_regression_torch.py"
+  - "src/ml/models/strategy/chandelier_exit.py"
+  - "src/ml/models/strategy/lag_based_strategy.py"
+  - "src/trading/bitget/portfolio.py"
+  - "src/cli/trading/lag_live_trader.py"
+
+# Documentation References
+documentation:
+  position_sizing_module: "src/utils/position_sizing.py"
+  technical_strategy: "docs/TECHNICAL_STRATEGY.md"
+  exchange_config: "src/trading/bitget/config.py"
+  main_readme: "README.md"

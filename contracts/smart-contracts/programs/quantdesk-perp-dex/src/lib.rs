@@ -1,7 +1,5 @@
 use anchor_lang::prelude::*;
-use anchor_spl::token::{Token, TokenAccount, Transfer};
-use pyth_sdk_solana::load_price_feed_from_account_info;
-use std::ops::Div;
+use anchor_spl::token::TokenAccount;
 
 declare_id!("G7isTpCkw8TWhPhozSuZMbUjTEF8Jf8xxAguZyL39L8J");
 
@@ -46,23 +44,18 @@ pub mod quantdesk_perp_dex {
     }
 
     // Update oracle price (called by keeper bots)
-    pub fn update_oracle_price(ctx: Context<UpdateOraclePrice>) -> Result<()> {
+    pub fn update_oracle_price(ctx: Context<UpdateOraclePrice>, new_price: u64) -> Result<()> {
         let market = &mut ctx.accounts.market;
         
-        // Load Pyth price feed
-        let price_feed = load_price_feed_from_account_info(&ctx.accounts.price_feed)?;
-        let current_price = price_feed.get_current_price()?;
-        
         // Validate price data
-        require!(current_price.conf < 1000000, ErrorCode::PriceStale); // Max 0.1% confidence
-        require!(current_price.price > 0, ErrorCode::InvalidPrice);
+        require!(new_price > 0, ErrorCode::InvalidPrice);
         
         // Update market with oracle price
-        market.last_oracle_price = current_price.price as u64;
+        market.last_oracle_price = new_price;
         market.last_oracle_update = Clock::get()?.unix_timestamp;
         
         msg!("Oracle price updated: {} for {}/{}", 
-             current_price.price, market.base_asset, market.quote_asset);
+             new_price, market.base_asset, market.quote_asset);
         Ok(())
     }
 
@@ -172,7 +165,7 @@ pub mod quantdesk_perp_dex {
         
         // Mark position as closed
         position.size = 0;
-        position.unrealized_pnl = pnl;
+        position.unrealized_pnl = pnl as i64;
         
         Ok(())
     }
@@ -209,7 +202,7 @@ pub mod quantdesk_perp_dex {
         
         // Mark position as liquidated
         position.size = 0;
-        position.unrealized_pnl = unrealized_pnl;
+        position.unrealized_pnl = unrealized_pnl as i64;
         
         Ok(())
     }
@@ -473,6 +466,7 @@ pub enum OrderStatus {
 
 // Context structures
 #[derive(Accounts)]
+#[instruction(base_asset: String, quote_asset: String)]
 pub struct InitializeMarket<'info> {
     #[account(
         init,
