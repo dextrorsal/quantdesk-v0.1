@@ -1,0 +1,366 @@
+# Environment Variables & Secrets
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+**/.env
+**/.env.*
+
+# Database & Logs
+*.db
+*.sqlite
+*.sqlite3
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+.venv/
+venv/
+ENV/
+env/
+.env
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Build outputs
+dist/
+dist-ssr/
+build/
+out/
+.next/
+.nuxt/
+.vuepress/dist
+
+# Coverage & Testing
+coverage/
+*.lcov
+.nyc_output
+.coverage
+.pytest_cache/
+.tox/
+.nox/
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+.temp/
+
+# Solana & Blockchain
+test-ledger/
+target/
+*.keypair.json
+*.log
+validator.log
+validator-*.log
+tower-*.bin
+vote-account-keypair.json
+validator-keypair.json
+stake-account-keypair.json
+faucet-keypair.json
+admin.rpc
+genesis.bin
+genesis.tar.bz2
+rocksdb/
+
+# Trading & Financial Data
+backtester/src/data/backup/
+*.csv
+*.json
+data/
+market-data/
+trading-data/
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# Security & Keys
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+secrets/
+keys/
+private/
+wallet-keys/
+
+# Backup files
+*.backup
+*.bak
+*.old
+backup/
+
+# Cache
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env.test
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# Next.js build output
+.next
+
+# Nuxt.js build / generate output
+.nuxt
+dist
+
+# Gatsby files
+.cache/
+public
+
+# Storybook build outputs
+.out
+.storybook-out
+
+# Temporary folders
+tmp/
+temp/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# TypeScript
+*.tsbuildinfo
+
+# Project specific
+algotrader-reference/
+ctrader/
+
+# ========================================
+# QUANTDESK OPEN SOURCE PROTECTION
+# ========================================
+
+# PROPRIETARY TRADING ALGORITHMS & ML MODELS
+# ========================================
+# Protect your competitive advantage
+services/ml-service/src/
+services/ml-service/models/
+services/ml-service/configs/
+services/ml-service/logs/
+algotrader-reference/
+services/data-service/data/
+services/trading-engine/src/
+
+# SENSITIVE DOCUMENTATION & INTERNAL FILES
+# ========================================
+# Protect internal business information
+docs/FUNDRAISING_DECK.md
+docs/COMPREHENSIVE_RESEARCH.md
+docs/BACKEND_ROADMAP.md
+docs/UI_INTEGRATION_PLAN.md
+docs/UI_MERGE_RULES.md
+docs/DOCUMENTATION_ALIGNMENT.md
+docs/JIT_LIQUIDITY.md
+
+# Internal progress & status files
+BACKEND_PROGRESS.md
+FRONTEND_PROGRESS.md
+CURRENT_STATUS_ANALYSIS.md
+PRODUCTION_READY_SUMMARY.md
+WALLET_INTEGRATION_PROGRESS.md
+GIT_DEPLOYMENT_READY.md
+SECURITY_CHECKLIST.md
+CHART_FIXES_SUMMARY.md
+TAB_FIXES_SUMMARY.md
+
+# TODO files (internal planning)
+TODO*.md
+TODO.md
+TODO_NEW.md
+TODO_REALISTIC.md
+TODO_UPDATED.md
+
+# TEST DATA & LOGS
+# ========================================
+# Protect test data and application logs
+test-ledger/
+backend/logs/
+services/*/logs/
+*.log
+trading-data/
+market-data/
+program-logs/
+
+# SOLANA & BLOCKCHAIN ARTIFACTS
+# ========================================
+# Protect blockchain test data and artifacts
+contracts/smart-contracts/.anchor/
+contracts/smart-contracts/target/
+contracts/smart-contracts/node_modules/
+contracts/smart-contracts/yarn.lock
+contracts/smart-contracts/test-results.log
+*.so
+*.dylib
+*.dll
+.anchor/
+
+# BUILD ARTIFACTS & DEPENDENCIES
+# ========================================
+# Protect build outputs and dependencies
+dist/
+build/
+out/
+*.tsbuildinfo
+node_modules/
+.pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE & EDITOR FILES
+# ========================================
+# Protect IDE-specific configurations
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+.idea/
+*.iml
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS GENERATED FILES
+# ========================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# TEMPORARY & CACHE FILES
+# ========================================
+*.tmp
+*.temp
+.tmp/
+.temp/
+*.swp
+*.swo
+*~
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+.pytest_cache/
+.tox/
+.nox/
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+.npm
+.node_repl_history
+
+# BACKUP FILES
+# ========================================
+*.backup
+*.bak
+*.old
+backup/
+
+# RUNTIME DATA
+# ========================================
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# PACKAGE MANAGER FILES
+# ========================================
+*.tgz
+.yarn-integrity

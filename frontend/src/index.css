@@ -1,0 +1,187 @@
+/* React Grid Layout Styles */
+@import 'react-grid-layout/css/styles.css';
+@import 'react-resizable/css/styles.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Grid Layout Styles for Dark Theme */
+.react-grid-layout {
+  position: relative;
+  height: 100% !important;
+}
+
+.react-grid-item {
+  transition: all 200ms ease;
+  transition-property: left, top;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.react-grid-item.cssTransforms {
+  transition-property: transform;
+}
+
+.react-grid-item > .react-resizable-handle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  bottom: 0;
+  right: 0;
+  background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNiIgaGVpZ2h0PSI2IiB2aWV3Qm94PSIwIDAgNiA2IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNNiA2TDAgNloiIGZpbGw9IiM2QjcyODAiLz4KPC9zdmc+');
+  background-position: bottom right;
+  padding: 0 3px 3px 0;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  box-sizing: border-box;
+  cursor: se-resize;
+  opacity: 0.7;
+}
+
+.react-grid-item > .react-resizable-handle:hover {
+  opacity: 1;
+}
+
+/* Ensure grid items fill their containers */
+.react-grid-item > div {
+  height: 100%;
+  width: 100%;
+}
+
+.react-grid-item.react-grid-placeholder {
+  background: rgba(59, 130, 246, 0.2);
+  opacity: 0.2;
+  transition-duration: 100ms;
+  z-index: 2;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.react-grid-item > .react-resizable-handle::after {
+  content: '';
+  position: absolute;
+  right: 3px;
+  bottom: 3px;
+  width: 5px;
+  height: 5px;
+  border-right: 2px solid rgba(0, 0, 0, 0.4);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.4);
+}
+
+@layer base {
+  * {
+    @apply border-slate-700;
+  }
+  
+  body {
+    @apply bg-slate-950 text-slate-50 font-sans antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-slate-900;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-600 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-500;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-lg text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none;
+  }
+  
+  .btn-primary {
+    @apply btn bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 active:scale-95 shadow-lg hover:shadow-xl;
+  }
+  
+  .btn-secondary {
+    @apply btn bg-slate-800 text-slate-200 hover:bg-slate-700 active:scale-95 border border-slate-700 hover:border-slate-600;
+  }
+  
+  .btn-success {
+    @apply btn bg-gradient-to-r from-emerald-600 to-emerald-700 text-white hover:from-emerald-700 hover:to-emerald-800 active:scale-95 shadow-lg hover:shadow-xl;
+  }
+  
+  .btn-danger {
+    @apply btn bg-gradient-to-r from-red-600 to-red-700 text-white hover:from-red-700 hover:to-red-800 active:scale-95 shadow-lg hover:shadow-xl;
+  }
+  
+  .btn-ghost {
+    @apply btn text-slate-400 hover:text-slate-200 hover:bg-slate-800/50;
+  }
+  
+  .input {
+    @apply flex h-11 w-full rounded-lg border border-slate-700 bg-slate-900/50 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 disabled:cursor-not-allowed disabled:opacity-50 backdrop-blur-sm;
+  }
+  
+  .card {
+    @apply rounded-xl border border-slate-800/50 bg-slate-900/30 p-6 shadow-xl backdrop-blur-sm;
+  }
+  
+  .trading-card {
+    @apply rounded-xl border border-slate-800/50 bg-slate-900/40 p-5 shadow-2xl backdrop-blur-sm;
+  }
+  
+  .glass-card {
+    @apply rounded-xl border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur-xl;
+  }
+  
+  .price-up {
+    @apply text-emerald-400;
+  }
+  
+  .price-down {
+    @apply text-red-400;
+  }
+  
+  .price-neutral {
+    @apply text-slate-400;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent;
+  }
+  
+  .gradient-border {
+    @apply relative before:absolute before:inset-0 before:rounded-xl before:p-[1px] before:bg-gradient-to-r before:from-blue-500/20 before:to-purple-500/20 before:content-[''];
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent;
+  }
+}
