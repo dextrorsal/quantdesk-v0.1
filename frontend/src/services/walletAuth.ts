@@ -27,7 +27,7 @@ class WalletAuthService {
   private baseUrl: string
 
   constructor() {
-    this.baseUrl = process.env.REACT_APP_API_URL || 'http://localhost:3001'
+    this.baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3002'
   }
 
   /**
@@ -142,4 +142,14 @@ class WalletAuthService {
   }
 }
 
-export const walletAuthService = new WalletAuthService()
+// Lazy initialization to avoid constructor running at module level
+let _walletAuthService: WalletAuthService | null = null
+
+export const walletAuthService = {
+  get instance() {
+    if (!_walletAuthService) {
+      _walletAuthService = new WalletAuthService()
+    }
+    return _walletAuthService
+  }
+}

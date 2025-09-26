@@ -158,7 +158,7 @@ class PortfolioService {
 
   private generateMockData(): void {
     // Generate mock positions
-    const symbols = ['BTC/USDT', 'ETH/USDT', 'SOL/USDT']
+    const symbols = ['BTC/USDT', 'ETH/USDT', 'SOL/USDT', 'AVAX/USDT', 'MATIC/USDT', 'ARB/USDT', 'OP/USDT', 'DOGE/USDT', 'ADA/USDT', 'DOT/USDT', 'LINK/USDT']
     
     symbols.forEach((symbol, index) => {
       const side = index % 2 === 0 ? 'long' : 'short'
@@ -228,7 +228,7 @@ class PortfolioService {
   }
 
   private generateMockTrades(): void {
-    const symbols = ['BTC/USDT', 'ETH/USDT', 'SOL/USDT']
+    const symbols = ['BTC/USDT', 'ETH/USDT', 'SOL/USDT', 'AVAX/USDT', 'MATIC/USDT', 'ARB/USDT', 'OP/USDT', 'DOGE/USDT', 'ADA/USDT', 'DOT/USDT', 'LINK/USDT']
     
     for (let i = 0; i < 50; i++) {
       const symbol = symbols[Math.floor(Math.random() * symbols.length)]
@@ -258,7 +258,7 @@ class PortfolioService {
   }
 
   private generateMockOrders(): void {
-    const symbols = ['BTC/USDT', 'ETH/USDT', 'SOL/USDT']
+    const symbols = ['BTC/USDT', 'ETH/USDT', 'SOL/USDT', 'AVAX/USDT', 'MATIC/USDT', 'ARB/USDT', 'OP/USDT', 'DOGE/USDT', 'ADA/USDT', 'DOT/USDT', 'LINK/USDT']
     const orderTypes = ['market', 'limit', 'stopLoss', 'takeProfit']
     const statuses = ['pending', 'filled', 'cancelled', 'expired']
 
@@ -532,4 +532,14 @@ class PortfolioService {
 }
 
 // Export singleton instance
-export const portfolioService = new PortfolioService()
+// Lazy initialization to avoid constructor running at module level
+let _portfolioService: PortfolioService | null = null
+
+export const portfolioService = {
+  get instance() {
+    if (!_portfolioService) {
+      _portfolioService = new PortfolioService()
+    }
+    return _portfolioService
+  }
+}

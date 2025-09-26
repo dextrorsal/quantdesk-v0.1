@@ -308,4 +308,14 @@ class MarketDataService {
 }
 
 // Export singleton instance
-export const marketDataService = new MarketDataService()
+// Lazy initialization to avoid constructor running at module level
+let _marketDataService: MarketDataService | null = null
+
+export const marketDataService = {
+  get instance() {
+    if (!_marketDataService) {
+      _marketDataService = new MarketDataService()
+    }
+    return _marketDataService
+  }
+}

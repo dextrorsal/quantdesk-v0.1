@@ -19,9 +19,14 @@ const LiteRouter: React.FC = () => {
       { symbol: 'BTC', name: 'Bitcoin', price: 115778, change: -218, changePercent: -0.18, volume: 24567890, marketCap: 2845678901234, high24h: 117500, low24h: 114200, category: 'Large Cap' },
       { symbol: 'ETH', name: 'Ethereum', price: 4483, change: -15, changePercent: -0.34, volume: 12345678, marketCap: 55345678901, high24h: 4550, low24h: 4420, category: 'Large Cap' },
       { symbol: 'SOL', name: 'Solana', price: 239, change: -1.1, changePercent: -0.46, volume: 8765432, marketCap: 2094567890, high24h: 245, low24h: 235, category: 'Mid Cap' },
-      { symbol: 'ADA', name: 'Cardano', price: 0.8938, change: -0.0057, changePercent: -0.63, volume: 5432109, marketCap: 4856789, high24h: 0.91, low24h: 0.88, category: 'Mid Cap' },
-      { symbol: 'DOGE', name: 'Dogecoin', price: 0.2668, change: -0.0019, changePercent: -0.70, volume: 3210987, marketCap: 856789, high24h: 0.27, low24h: 0.26, category: 'Small Cap' },
+      { symbol: 'AVAX', name: 'Avalanche', price: 45.67, change: 1.23, changePercent: 2.77, volume: 2345678, marketCap: 1234567890, high24h: 46.50, low24h: 44.20, category: 'Mid Cap' },
       { symbol: 'MATIC', name: 'Polygon', price: 1.25, change: 0.05, changePercent: 4.17, volume: 1876543, marketCap: 1234567, high24h: 1.30, low24h: 1.20, category: 'Small Cap' },
+      { symbol: 'ARB', name: 'Arbitrum', price: 2.34, change: -0.12, changePercent: -4.88, volume: 987654, marketCap: 2345678, high24h: 2.50, low24h: 2.20, category: 'Small Cap' },
+      { symbol: 'OP', name: 'Optimism', price: 3.45, change: 0.15, changePercent: 4.55, volume: 765432, marketCap: 3456789, high24h: 3.60, low24h: 3.20, category: 'Small Cap' },
+      { symbol: 'DOGE', name: 'Dogecoin', price: 0.2668, change: -0.0019, changePercent: -0.70, volume: 3210987, marketCap: 856789, high24h: 0.27, low24h: 0.26, category: 'Small Cap' },
+      { symbol: 'ADA', name: 'Cardano', price: 0.8938, change: -0.0057, changePercent: -0.63, volume: 5432109, marketCap: 4856789, high24h: 0.91, low24h: 0.88, category: 'Mid Cap' },
+      { symbol: 'DOT', name: 'Polkadot', price: 8.45, change: -0.23, changePercent: -2.65, volume: 1234567, marketCap: 5678901, high24h: 8.80, low24h: 8.20, category: 'Mid Cap' },
+      { symbol: 'LINK', name: 'Chainlink', price: 15.67, change: 0.45, changePercent: 2.96, volume: 2345678, marketCap: 8901234, high24h: 16.20, low24h: 15.10, category: 'Mid Cap' },
     ])
 
     // Mock order book data
@@ -365,7 +370,7 @@ const LiteRouter: React.FC = () => {
     const [selectedSymbol, setSelectedSymbol] = React.useState('BTC')
     const [timeframe, setTimeframe] = React.useState('1h')
     
-    const symbols = ['BTC', 'ETH', 'SOL', 'ADA', 'DOGE', 'MATIC']
+    const symbols = ['BTC', 'ETH', 'SOL', 'AVAX', 'MATIC', 'ARB', 'OP', 'DOGE', 'ADA', 'DOT', 'LINK']
     const timeframes = ['1m', '5m', '15m', '1h', '4h', '1d']
 
     return (
@@ -3056,7 +3061,7 @@ const LiteRouter: React.FC = () => {
   return (
     <div className="flex-1 flex flex-col bg-black text-white">
       {/* Debug Info */}
-      {process.env.NODE_ENV === 'development' && (
+      {import.meta.env.DEV && (
         <div style={{
           position: 'fixed',
           top: '80px',

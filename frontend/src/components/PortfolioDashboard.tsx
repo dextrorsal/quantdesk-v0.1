@@ -12,15 +12,15 @@ const PortfolioDashboard: React.FC = () => {
 
   useEffect(() => {
     // Load initial data
-    setPortfolioSummary(portfolioService.getPortfolioSummary())
-    setRiskMetrics(portfolioService.getRiskMetrics())
-    setPerformanceMetrics(portfolioService.getPerformanceMetrics())
+    setPortfolioSummary(portfolioService.instance.getPortfolioSummary())
+    setRiskMetrics(portfolioService.instance.getRiskMetrics())
+    setPerformanceMetrics(portfolioService.instance.getPerformanceMetrics())
 
     // Update data every 5 seconds
     const interval = setInterval(() => {
-      setPortfolioSummary(portfolioService.getPortfolioSummary())
-      setRiskMetrics(portfolioService.getRiskMetrics())
-      setPerformanceMetrics(portfolioService.getPerformanceMetrics())
+      setPortfolioSummary(portfolioService.instance.getPortfolioSummary())
+      setRiskMetrics(portfolioService.instance.getRiskMetrics())
+      setPerformanceMetrics(portfolioService.instance.getPerformanceMetrics())
     }, 5000)
 
     return () => clearInterval(interval)

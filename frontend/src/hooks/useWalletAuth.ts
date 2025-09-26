@@ -12,7 +12,7 @@ export interface WalletAuthState {
 export const useWalletAuth = () => {
   const { connected, publicKey, signMessage } = useWallet()
   const [state, setState] = useState<WalletAuthState>({
-    isAuthenticated: walletAuthService.isAuthenticated(),
+    isAuthenticated: walletAuthService.instance.isAuthenticated(),
     isLoading: false,
     error: null,
     user: null
@@ -31,14 +31,14 @@ export const useWalletAuth = () => {
 
     try {
       const walletAddress = publicKey.toString()
-      const nonce = walletAuthService.generateNonce()
-      const authMessage = walletAuthService.createAuthMessage(walletAddress, nonce)
+      const nonce = walletAuthService.instance.generateNonce()
+      const authMessage = walletAuthService.instance.createAuthMessage(walletAddress, nonce)
 
       // Sign the message with the wallet
       const signature = await signMessage(new TextEncoder().encode(authMessage.message))
 
       // Authenticate with backend
-      const response: AuthResponse = await walletAuthService.authenticateWithWallet(
+      const response: AuthResponse = await walletAuthService.instance.authenticateWithWallet(
         walletAddress,
         signature,
         authMessage.message
@@ -73,7 +73,7 @@ export const useWalletAuth = () => {
   }, [connected, publicKey, signMessage])
 
   const logout = useCallback(() => {
-    walletAuthService.logout()
+    walletAuthService.instance.logout()
     setState({
       isAuthenticated: false,
       isLoading: false,
@@ -83,7 +83,7 @@ export const useWalletAuth = () => {
   }, [])
 
   const checkAuth = useCallback(() => {
-    const isAuth = walletAuthService.isAuthenticated()
+    const isAuth = walletAuthService.instance.isAuthenticated()
     setState(prev => ({
       ...prev,
       isAuthenticated: isAuth

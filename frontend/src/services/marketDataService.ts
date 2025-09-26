@@ -23,7 +23,7 @@ class MarketDataService {
   private baseUrl: string
 
   constructor() {
-    this.baseUrl = process.env.REACT_APP_API_URL || 'http://localhost:3001'
+    this.baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3002'
   }
 
   /**
@@ -156,8 +156,18 @@ class MarketDataService {
    * Get supported market symbols
    */
   getSupportedSymbols(): string[] {
-    return ['BTC-PERP', 'ETH-PERP', 'SOL-PERP']
+    return ['BTC-PERP', 'ETH-PERP', 'SOL-PERP', 'AVAX-PERP', 'MATIC-PERP', 'ARB-PERP', 'OP-PERP', 'DOGE-PERP', 'ADA-PERP', 'DOT-PERP', 'LINK-PERP']
   }
 }
 
-export const marketDataService = new MarketDataService()
+// Lazy initialization to avoid constructor running at module level
+let _marketDataService: MarketDataService | null = null
+
+export const marketDataService = {
+  get instance() {
+    if (!_marketDataService) {
+      _marketDataService = new MarketDataService()
+    }
+    return _marketDataService
+  }
+}

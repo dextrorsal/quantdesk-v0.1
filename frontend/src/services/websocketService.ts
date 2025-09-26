@@ -372,7 +372,7 @@ class MockWebSocketService extends WebSocketService {
   }
 
   private generateMockTrades(): void {
-    const symbols = ['BTC/USDT', 'ETH/USDT', 'SOL/USDT']
+    const symbols = ['BTC/USDT', 'ETH/USDT', 'SOL/USDT', 'AVAX/USDT', 'MATIC/USDT', 'ARB/USDT', 'OP/USDT', 'DOGE/USDT', 'ADA/USDT', 'DOT/USDT', 'LINK/USDT']
     
     symbols.forEach(symbol => {
       if (Math.random() > 0.7) { // 30% chance of new trade
@@ -394,7 +394,7 @@ class MockWebSocketService extends WebSocketService {
   }
 
   private generateMockOrderBookUpdates(): void {
-    const symbols = ['BTC/USDT', 'ETH/USDT', 'SOL/USDT']
+    const symbols = ['BTC/USDT', 'ETH/USDT', 'SOL/USDT', 'AVAX/USDT', 'MATIC/USDT', 'ARB/USDT', 'OP/USDT', 'DOGE/USDT', 'ADA/USDT', 'DOT/USDT', 'LINK/USDT']
     
     symbols.forEach(symbol => {
       const market = this.mockData.get(symbol)
@@ -441,4 +441,14 @@ class MockWebSocketService extends WebSocketService {
 }
 
 // Export singleton instance (using mock for development)
-export const websocketService = new MockWebSocketService()
+// Lazy initialization to avoid constructor running at module level
+let _websocketService: MockWebSocketService | null = null
+
+export const websocketService = {
+  get instance() {
+    if (!_websocketService) {
+      _websocketService = new MockWebSocketService()
+    }
+    return _websocketService
+  }
+}

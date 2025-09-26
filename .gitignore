@@ -16,6 +16,9 @@ dist/
 build/
 out/
 
+# Frontend (keep private - competitive advantage)
+frontend/
+
 # Logs
 logs/
 *.log
