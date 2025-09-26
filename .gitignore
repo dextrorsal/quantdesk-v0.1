@@ -3,7 +3,6 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
 
 # Environment variables
 .env
@@ -20,10 +19,6 @@ out/
 # Logs
 logs/
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
 
 # Runtime data
 pids/
@@ -39,17 +34,10 @@ coverage/
 .nyc_output
 
 # Dependency directories
-node_modules/
 jspm_packages/
-
-# TypeScript cache
-*.tsbuildinfo
 
 # Optional npm cache directory
 .npm
-
-# Optional eslint cache
-.eslintcache
 
 # Optional REPL history
 .node_repl_history
@@ -64,26 +52,31 @@ jspm_packages/
 .cache
 .parcel-cache
 
-# Next.js build output
+# next.js build output
 .next
 
-# Nuxt.js build / generate output
+# nuxt.js build output
 .nuxt
-dist
 
-# Gatsby files
-.cache/
-public
+# vuepress build output
+.vuepress/dist
 
-# Storybook build outputs
-.out
-.storybook-out
+# Serverless directories
+.serverless
 
-# Temporary folders
-tmp/
-temp/
+# FuseBox cache
+.fusebox/
 
-# Editor directories and files
+# DynamoDB Local files
+.dynamodb/
+
+# TernJS port file
+.tern-port
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# IDE files
 .vscode/
 .idea/
 *.swp
@@ -105,17 +98,48 @@ test-ledger/
 target/
 **/*.rs.bk
 
-# Anchor specific
-.anchor/
-target/
-**/*.rs.bk
+# Database files
+*.db
+*.sqlite
+*.sqlite3
 
-# Solana CLI
-~/.config/solana/
+# Temporary files
+tmp/
+temp/
 
-# Rust
-target/
-Cargo.lock
+# Private keys and sensitive data
+*.key
+*.pem
+*.p12
+*.pfx
+wallet.json
+id.json
+
+# API keys and secrets
+secrets/
+keys/
+credentials/
+
+# Production configs
+config/production/
+config/staging/
+
+# Monitoring and analytics
+monitoring/
+analytics/
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Test files
+test-results/
+coverage/
+
+# Documentation builds
+docs/_build/
+docs/build/
 
 # Python
 __pycache__/
@@ -129,36 +153,16 @@ ENV/
 env.bak/
 venv.bak/
 
-# Database
-*.db
-*.sqlite
-*.sqlite3
+# Rust
+Cargo.lock
+target/
 
-# Docker
-.dockerignore
-
-# Grafana
-grafana-data/
-
-# Backup files
-*.bak
-*.backup
-*.old
-
-# Test files
-test-results.log
-coverage/
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Temporary files
-*.tmp
-*.temp
+# Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work

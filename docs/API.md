@@ -1,498 +1,367 @@
 # QuantDesk API Documentation
 
-## Overview
+Welcome to the QuantDesk API! This documentation provides comprehensive information about our REST API endpoints for trading, portfolio management, and market data.
 
-The QuantDesk API provides comprehensive endpoints for trading operations, market data, user management, and system monitoring.
-
-**Base URL**: `http://localhost:3002/api`
-
-## Authentication
-
-Most endpoints require authentication via JWT tokens. Include the token in the Authorization header:
+## 🔗 **Base URL**
 
 ```
-Authorization: Bearer <your-jwt-token>
+Development: https://api-dev.quantdesk.com
+Production: https://api.quantdesk.com
+Local: http://localhost:3002
 ```
 
-## Endpoints
+## 🔐 **Authentication**
 
-### Authentication
+Most endpoints require authentication using JWT tokens:
 
-#### POST `/auth/authenticate`
-Authenticate a user with wallet signature.
-
-**Request Body**:
-```json
-{
-  "publicKey": "string",
-  "signature": "string",
-  "message": "string"
-}
+```bash
+Authorization: Bearer <your_jwt_token>
 ```
 
-**Response**:
-```json
-{
-  "success": true,
-  "token": "jwt-token",
-  "user": {
-    "id": "string",
-    "publicKey": "string",
-    "createdAt": "timestamp"
-  }
-}
-```
+### Getting Started
 
-#### GET `/auth/profile`
-Get current user profile.
+1. **Register/Login** to get your JWT token
+2. **Include the token** in all API requests
+3. **Refresh tokens** as needed
 
-**Headers**: `Authorization: Bearer <token>`
-
-**Response**:
-```json
-{
-  "success": true,
-  "user": {
-    "id": "string",
-    "publicKey": "string",
-    "balance": "number",
-    "createdAt": "timestamp"
-  }
-}
-```
+## 📊 **Core Endpoints**
 
 ### Markets
 
-#### GET `/markets`
-Get all available markets.
+#### Get All Markets
+```http
+GET /api/supabase-oracle/markets
+```
 
-**Response**:
+**Response:**
 ```json
 {
   "success": true,
   "data": [
     {
-      "id": "string",
+      "id": "d87a99b4-148a-49c2-a2ad-ca1ee17a9372",
       "symbol": "BTC-PERP",
-      "baseAsset": "BTC",
-      "quoteAsset": "USDT",
-      "isActive": true,
-      "maxLeverage": 100,
-      "tickSize": 0.01,
-      "stepSize": 0.001
+      "base_asset": "BTC",
+      "quote_asset": "USDT",
+      "is_active": true,
+      "max_leverage": 100,
+      "tick_size": 0.01,
+      "step_size": 0.001,
+      "min_order_size": 0.001,
+      "max_order_size": 1000000
     }
-  ]
-}
-```
-
-#### GET `/markets/:id`
-Get specific market details.
-
-**Parameters**:
-- `id` (string): Market ID
-
-**Response**:
-```json
-{
-  "success": true,
-  "data": {
-    "id": "string",
-    "symbol": "BTC-PERP",
-    "baseAsset": "BTC",
-    "quoteAsset": "USDT",
-    "isActive": true,
-    "maxLeverage": 100,
-    "tickSize": 0.01,
-    "stepSize": 0.001,
-    "minOrderSize": 0.001,
-    "maxOrderSize": 1000000
-  }
+  ],
+  "count": 11,
+  "timestamp": 1703123456789
 }
 ```
 
 ### Orders
 
-#### POST `/orders`
-Create a new order.
+#### Place Order
+```http
+POST /api/orders
+Authorization: Bearer <token>
+Content-Type: application/json
 
-**Headers**: `Authorization: Bearer <token>`
-
-**Request Body**:
-```json
 {
-  "marketId": "string",
-  "side": "long" | "short",
-  "type": "market" | "limit",
-  "size": "number",
-  "price": "number",
-  "leverage": "number"
+  "marketId": "d87a99b4-148a-49c2-a2ad-ca1ee17a9372",
+  "side": "buy",
+  "size": 0.1,
+  "price": 45000,
+  "orderType": "limit"
 }
 ```
 
-**Response**:
-```json
-{
-  "success": true,
-  "data": {
-    "id": "string",
-    "marketId": "string",
-    "userId": "string",
-    "side": "long",
-    "type": "market",
-    "size": 1.0,
-    "price": 50000,
-    "leverage": 10,
-    "status": "pending",
-    "createdAt": "timestamp"
-  }
-}
-```
-
-#### GET `/orders`
-Get user's orders.
-
-**Headers**: `Authorization: Bearer <token>`
-
-**Query Parameters**:
-- `status` (optional): Filter by order status
-- `marketId` (optional): Filter by market
-- `limit` (optional): Number of results (default: 50)
-- `offset` (optional): Pagination offset
-
-**Response**:
-```json
-{
-  "success": true,
-  "data": [
-    {
-      "id": "string",
-      "marketId": "string",
-      "side": "long",
-      "type": "market",
-      "size": 1.0,
-      "price": 50000,
-      "leverage": 10,
-      "status": "filled",
-      "createdAt": "timestamp",
-      "filledAt": "timestamp"
-    }
-  ],
-  "pagination": {
-    "total": 100,
-    "limit": 50,
-    "offset": 0
-  }
-}
-```
-
-#### DELETE `/orders/:id`
-Cancel an order.
-
-**Headers**: `Authorization: Bearer <token>`
-
-**Parameters**:
-- `id` (string): Order ID
-
-**Response**:
-```json
-{
-  "success": true,
-  "message": "Order cancelled successfully"
-}
+#### Get Orders
+```http
+GET /api/orders?status=open&limit=50
+Authorization: Bearer <token>
 ```
 
 ### Positions
 
-#### GET `/positions`
-Get user's positions.
+#### Get Positions
+```http
+GET /api/positions
+Authorization: Bearer <token>
+```
 
-**Headers**: `Authorization: Bearer <token>`
+#### Open Position
+```http
+POST /api/positions
+Authorization: Bearer <token>
+Content-Type: application/json
 
-**Response**:
-```json
 {
-  "success": true,
-  "data": [
-    {
-      "id": "string",
-      "marketId": "string",
-      "side": "long",
-      "size": 1.0,
-      "entryPrice": 50000,
-      "markPrice": 51000,
-      "leverage": 10,
-      "pnl": 1000,
-      "unrealizedPnl": 1000,
-      "margin": 5000,
-      "status": "open",
-      "createdAt": "timestamp"
-    }
-  ]
+  "marketId": "d87a99b4-148a-49c2-a2ad-ca1ee17a9372",
+  "side": "long",
+  "size": 0.1,
+  "leverage": 10
 }
 ```
 
-#### POST `/positions/:id/close`
-Close a position.
+### Portfolio Analytics
 
-**Headers**: `Authorization: Bearer <token>`
+#### Get Portfolio Metrics
+```http
+GET /api/portfolio/metrics
+Authorization: Bearer <token>
+```
 
-**Parameters**:
-- `id` (string): Position ID
-
-**Response**:
+**Response:**
 ```json
 {
   "success": true,
   "data": {
-    "id": "string",
-    "status": "closed",
-    "closedAt": "timestamp",
-    "pnl": 1000
+    "totalValue": 100000,
+    "totalPnL": 5000,
+    "totalPnLPercentage": 5.0,
+    "dayPnL": 1000,
+    "dayPnLPercentage": 1.0,
+    "sharpeRatio": 1.2,
+    "maxDrawdown": 0.15,
+    "winRate": 0.65,
+    "totalTrades": 150,
+    "avgTradeSize": 0.5
   }
 }
 ```
 
-### Oracle Data
+#### Get Risk Analysis
+```http
+GET /api/portfolio/risk
+Authorization: Bearer <token>
+```
 
-#### GET `/supabase-oracle/prices`
-Get latest oracle prices.
+### Advanced Orders
 
-**Response**:
-```json
+#### Place Advanced Order
+```http
+POST /api/advanced-orders
+Authorization: Bearer <token>
+Content-Type: application/json
+
 {
-  "success": true,
-  "data": [
-    {
-      "symbol": "BTC-PERP",
-      "baseAsset": "BTC",
-      "quoteAsset": "USDT",
-      "price": 50000.50,
-      "confidence": 0.01,
-      "exponent": -8,
-      "timestamp": "timestamp"
-    }
-  ],
-  "timestamp": "timestamp",
-  "source": "supabase-mcp"
+  "marketId": "d87a99b4-148a-49c2-a2ad-ca1ee17a9372",
+  "orderType": "stop_loss",
+  "side": "sell",
+  "size": 0.1,
+  "triggerPrice": 40000,
+  "limitPrice": 39500
 }
 ```
 
-#### GET `/supabase-oracle/markets`
-Get active markets from oracle.
+### Cross-Collateral
 
-**Response**:
-```json
+#### Get Collateral Accounts
+```http
+GET /api/cross-collateral/accounts
+Authorization: Bearer <token>
+```
+
+#### Add Collateral
+```http
+POST /api/cross-collateral/accounts
+Authorization: Bearer <token>
+Content-Type: application/json
+
 {
-  "success": true,
-  "data": [
-    {
-      "id": "string",
-      "symbol": "BTC-PERP",
-      "baseAsset": "BTC",
-      "quoteAsset": "USDT",
-      "programId": "string",
-      "isActive": true,
-      "maxLeverage": 100,
-      "tickSize": 0.01,
-      "stepSize": 0.001,
-      "minOrderSize": 0.001,
-      "maxOrderSize": 1000000
-    }
-  ],
-  "count": 3,
-  "timestamp": "timestamp"
+  "collateralType": "SOL",
+  "amount": 10
 }
 ```
 
-### Metrics & Monitoring
+## 📈 **WebSocket API**
 
-#### GET `/metrics/trading`
-Get current trading metrics.
+### Connection
+```javascript
+const ws = new WebSocket('ws://localhost:3002/ws');
 
-**Response**:
-```json
-{
-  "success": true,
-  "data": {
-    "timestamp": "timestamp",
-    "totalVolume24h": 1000000,
-    "activeTraders": 150,
-    "totalPositions": 500,
-    "totalValueLocked": 5000000,
-    "averagePositionSize": 10000,
-    "leverageDistribution": {
-      "1x-5x": 200,
-      "5x-10x": 150,
-      "10x-20x": 100,
-      "20x+": 50
-    },
-    "marketMetrics": [
-      {
-        "symbol": "BTC-PERP",
-        "volume24h": 500000,
-        "priceChange24h": 0.05,
-        "openInterest": 2000000,
-        "longShortRatio": 1.2
-      }
-    ]
-  }
-}
+ws.onopen = () => {
+  console.log('Connected to QuantDesk WebSocket');
+};
+
+ws.onmessage = (event) => {
+  const data = JSON.parse(event.data);
+  console.log('Received:', data);
+};
 ```
 
-#### GET `/metrics/system`
-Get system performance metrics.
-
-**Response**:
-```json
-{
-  "success": true,
-  "data": {
-    "timestamp": "timestamp",
-    "apiResponseTime": 25.5,
-    "databaseQueryTime": 15.2,
-    "activeConnections": 150,
-    "errorRate": 0.001,
-    "memoryUsage": 256.5,
-    "cpuUsage": 45.2
-  }
-}
+### Subscribe to Market Data
+```javascript
+ws.send(JSON.stringify({
+  type: 'subscribe',
+  channel: 'market_data',
+  marketId: 'd87a99b4-148a-49c2-a2ad-ca1ee17a9372'
+}));
 ```
 
-#### GET `/grafana/metrics`
-Get metrics formatted for Grafana.
-
-**Response**:
-```json
-{
-  "success": true,
-  "data": {
-    "quantdesk_trading_volume_24h": 1000000,
-    "quantdesk_active_traders": 150,
-    "quantdesk_total_positions": 500,
-    "quantdesk_total_value_locked": 5000000,
-    "quantdesk_api_response_time": 25.5,
-    "quantdesk_memory_usage": 256.5,
-    "quantdesk_cpu_usage": 45.2,
-    "quantdesk_market_volume_by_symbol": [
-      {"symbol": "BTC-PERP", "volume": 500000},
-      {"symbol": "ETH-PERP", "volume": 300000}
-    ],
-    "quantdesk_leverage_distribution": [
-      {"leverage_range": "1x-5x", "count": 200},
-      {"leverage_range": "5x-10x", "count": 150}
-    ]
-  }
-}
+### Subscribe to User Updates
+```javascript
+ws.send(JSON.stringify({
+  type: 'subscribe',
+  channel: 'user_updates',
+  token: 'your_jwt_token'
+}));
 ```
 
-### Health Check
+## 🔧 **Error Handling**
 
-#### GET `/health`
-Check API health status.
-
-**Response**:
-```json
-{
-  "status": "healthy",
-  "timestamp": "timestamp",
-  "uptime": 3600,
-  "environment": "development",
-  "version": "1.0.0"
-}
-```
-
-## Error Responses
-
-All endpoints may return error responses in the following format:
-
+### Error Response Format
 ```json
 {
   "success": false,
-  "error": "Error type",
-  "message": "Detailed error message",
-  "code": "ERROR_CODE"
+  "error": "Error message",
+  "code": "ERROR_CODE",
+  "details": {
+    "field": "additional error details"
+  },
+  "timestamp": 1703123456789
 }
 ```
 
 ### Common Error Codes
+- `MISSING_TOKEN`: Authentication required
+- `INVALID_TOKEN`: Invalid or expired token
+- `INSUFFICIENT_BALANCE`: Not enough balance
+- `INVALID_ORDER`: Order validation failed
+- `MARKET_CLOSED`: Market is not available
+- `RATE_LIMITED`: Too many requests
 
-- `UNAUTHORIZED`: Authentication required
-- `FORBIDDEN`: Insufficient permissions
-- `NOT_FOUND`: Resource not found
-- `VALIDATION_ERROR`: Invalid request data
-- `RATE_LIMIT_EXCEEDED`: Too many requests
-- `INTERNAL_ERROR`: Server error
+## 📊 **Rate Limits**
 
-## Rate Limiting
+| Endpoint Type | Limit | Window |
+|---------------|-------|--------|
+| Public Data | 100 requests | 1 minute |
+| Trading | 30 requests | 1 minute |
+| Authentication | 5 requests | 15 minutes |
+| WebSocket | 1000 messages | 1 minute |
 
-API requests are rate limited:
-- **General endpoints**: 1000 requests per 15 minutes
-- **Trading endpoints**: 60 requests per minute
-- **Authentication endpoints**: 10 requests per minute
+## 🧪 **Testing**
 
-Rate limit headers are included in responses:
-- `RateLimit-Limit`: Request limit
-- `RateLimit-Remaining`: Remaining requests
-- `RateLimit-Reset`: Reset timestamp
+### Test Environment
+Use our test environment for development:
+```
+Base URL: https://api-test.quantdesk.com
+Testnet: Solana Devnet
+```
 
-## WebSocket API
+### Example Requests
 
-Real-time updates are available via WebSocket connection to `ws://localhost:3002`.
+#### Using cURL
+```bash
+# Get markets
+curl -X GET "https://api-dev.quantdesk.com/api/supabase-oracle/markets"
 
-### Connection
+# Place order
+curl -X POST "https://api-dev.quantdesk.com/api/orders" \
+  -H "Authorization: Bearer your_token" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "marketId": "d87a99b4-148a-49c2-a2ad-ca1ee17a9372",
+    "side": "buy",
+    "size": 0.1,
+    "price": 45000,
+    "orderType": "limit"
+  }'
+```
+
+#### Using JavaScript
 ```javascript
-const ws = new WebSocket('ws://localhost:3002');
+const response = await fetch('https://api-dev.quantdesk.com/api/orders', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer your_token',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    marketId: 'd87a99b4-148a-49c2-a2ad-ca1ee17a9372',
+    side: 'buy',
+    size: 0.1,
+    price: 45000,
+    orderType: 'limit'
+  })
+});
+
+const data = await response.json();
+console.log(data);
 ```
 
-### Message Types
+## 📚 **SDKs**
 
-#### Price Updates
-```json
+### JavaScript/TypeScript
+```bash
+npm install @quantdesk/sdk
+```
+
+```javascript
+import { QuantDeskClient } from '@quantdesk/sdk';
+
+const client = new QuantDeskClient({
+  apiKey: 'your_api_key',
+  environment: 'development'
+});
+
+// Place order
+const order = await client.orders.create({
+  marketId: 'd87a99b4-148a-49c2-a2ad-ca1ee17a9372',
+  side: 'buy',
+  size: 0.1,
+  price: 45000,
+  orderType: 'limit'
+});
+```
+
+### Python
+```bash
+pip install quantdesk-sdk
+```
+
+```python
+from quantdesk import QuantDeskClient
+
+client = QuantDeskClient(api_key='your_api_key', environment='development')
+
+# Place order
+order = client.orders.create(
+    market_id='d87a99b4-148a-49c2-a2ad-ca1ee17a9372',
+    side='buy',
+    size=0.1,
+    price=45000,
+    order_type='limit'
+)
+```
+
+## 🔄 **Webhooks**
+
+### Setup Webhook
+```http
+POST /api/webhooks
+Authorization: Bearer <token>
+Content-Type: application/json
+
 {
-  "type": "price_update",
-  "data": {
-    "symbol": "BTC-PERP",
-    "price": 50000.50,
-    "timestamp": "timestamp"
-  }
+  "url": "https://your-app.com/webhook",
+  "events": ["order_filled", "position_opened", "position_closed"],
+  "secret": "your_webhook_secret"
 }
 ```
 
-#### Order Updates
-```json
-{
-  "type": "order_update",
-  "data": {
-    "orderId": "string",
-    "status": "filled",
-    "filledSize": 1.0,
-    "filledPrice": 50000
-  }
-}
-```
+### Webhook Events
+- `order_filled`: Order was executed
+- `position_opened`: New position opened
+- `position_closed`: Position closed
+- `deposit_completed`: Deposit confirmed
+- `withdrawal_completed`: Withdrawal confirmed
 
-#### Position Updates
-```json
-{
-  "type": "position_update",
-  "data": {
-    "positionId": "string",
-    "markPrice": 51000,
-    "unrealizedPnl": 1000
-  }
-}
-```
+## 📞 **Support**
 
-## SDKs
-
-Official SDKs are available for:
-- [JavaScript/TypeScript](https://github.com/quantdesk/sdk-js)
-- [Python](https://github.com/quantdesk/sdk-python)
-- [Rust](https://github.com/quantdesk/sdk-rust)
-
-## Support
-
-For API support:
-- **Documentation**: [docs.quantdesk.io](https://docs.quantdesk.io)
+- **Documentation**: [GitBook](https://quantdesk.gitbook.io)
+- **API Status**: [Status Page](https://status.quantdesk.com)
+- **Support**: [Discord](https://discord.gg/quantdesk)
 - **Issues**: [GitHub Issues](https://github.com/quantdesk/quantdesk/issues)
-- **Discord**: [Join our community](https://discord.gg/quantdesk)
+
+---
+
+*QuantDesk API - Professional trading infrastructure for the decentralized future*

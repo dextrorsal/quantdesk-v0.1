@@ -4,8 +4,6 @@ import cors from 'cors';
 import helmet from 'helmet';
 import compression from 'compression';
 import morgan from 'morgan';
-import rateLimit from 'express-rate-limit';
-import slowDown from 'express-slow-down';
 import dotenv from 'dotenv';
 import { createServer } from 'http';
 import { createServer as createHttpsServer } from 'https';
@@ -13,9 +11,9 @@ import { readFileSync } from 'fs';
 import { Server as SocketIOServer } from 'socket.io';
 
 // Import middleware
-import { errorHandler } from './middleware/errorHandler';
+import { errorHandler, notFoundHandler, requestIdMiddleware, responseTimeMiddleware } from './middleware/errorHandling';
 import { authMiddleware } from './middleware/auth';
-import { rateLimitMiddleware } from './middleware/rateLimit';
+import { rateLimiters, createTieredRateLimit } from './middleware/rateLimiting';
 
 // Import routes
 import authRoutes from './routes/auth';
@@ -30,6 +28,15 @@ import oracleRoutes from './routes/oracle';
 import supabaseOracleRoutes from './routes/supabaseOracle';
 import metricsRoutes from './routes/metrics';
 import grafanaIntegrationRoutes from './routes/grafanaIntegration';
+import advancedOrdersRoutes from './routes/advancedOrders';
+import crossCollateralRoutes from './routes/crossCollateral';
+import portfolioAnalyticsRoutes from './routes/portfolioAnalytics';
+import advancedRiskManagementRoutes from './routes/advancedRiskManagement';
+import jitLiquidityRoutes from './routes/jitLiquidity';
+
+// Import API improvements
+import { createWebhookRoutes } from './services/webhookService';
+import { createAPIDocRoutes } from './services/apiDocumentation';
 
 // Import services
 import { WebSocketService } from './services/websocket';
@@ -37,6 +44,7 @@ import { pythOracleService } from './services/pythOracleService';
 import { fundingService } from './services/funding';
 import { LiquidationBot } from './services/liquidationBot';
 import { metricsCollector } from './services/metricsCollector';
+import { orderScheduler } from './services/orderScheduler';
 import { Logger } from './utils/logger';
 
 // Load environment variables
@@ -89,6 +97,8 @@ const NODE_ENV = process.env['NODE_ENV'] || 'development';
 const logger = new Logger();
 
 // Security middleware
+app.use(requestIdMiddleware);
+app.use(responseTimeMiddleware);
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
@@ -105,7 +115,7 @@ app.use(cors({
   origin: process.env['FRONTEND_URL'] || "http://localhost:3000",
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'X-Request-ID', 'X-API-Key']
 }));
 
 // Compression
@@ -122,35 +132,12 @@ app.use(morgan('combined', {
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// Rate limiting
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 1000, // limit each IP to 1000 requests per windowMs
-  message: {
-    error: 'Too many requests from this IP, please try again later.',
-    retryAfter: '15 minutes'
-  },
-  standardHeaders: true,
-  legacyHeaders: false,
-});
-
-const speedLimiter = slowDown({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  delayAfter: 100, // allow 100 requests per 15 minutes, then...
-  // express-slow-down v2 expects delayMs to be a function for the old behavior
-  delayMs: () => 500,
-  validate: { delayMs: false }
-});
-
-app.use('/api/', limiter);
-app.use('/api/', speedLimiter);
-
-// Custom rate limiting for trading endpoints
-app.use('/api/trading/', rateLimitMiddleware({
-  windowMs: 60 * 1000, // 1 minute
-  max: 60, // 60 requests per minute for trading
-  skipSuccessfulRequests: true
-}));
+// Apply rate limiting
+app.use('/api/', rateLimiters.public);
+app.use('/api/trading/', rateLimiters.trading);
+app.use('/api/auth/', rateLimiters.auth);
+app.use('/api/admin/', rateLimiters.admin);
+app.use('/api/webhooks/', rateLimiters.webhook);
 
 // Health check endpoint
 app.get('/health', (_req, res) => {
@@ -176,19 +163,22 @@ app.use('/api/oracle', oracleRoutes);
 app.use('/api/supabase-oracle', supabaseOracleRoutes);
 app.use('/api/metrics', metricsRoutes);
 app.use('/api/grafana', grafanaIntegrationRoutes);
+app.use('/api/advanced-orders', authMiddleware, advancedOrdersRoutes);
+app.use('/api/cross-collateral', authMiddleware, crossCollateralRoutes);
+app.use('/api/portfolio', authMiddleware, portfolioAnalyticsRoutes);
+app.use('/api/risk', authMiddleware, advancedRiskManagementRoutes);
+app.use('/api/jit-liquidity', authMiddleware, jitLiquidityRoutes);
+
+// API improvements routes
+app.use('/api/webhooks', authMiddleware, createWebhookRoutes());
+app.use('/api/docs', createAPIDocRoutes());
 
 // WebSocket service
 const wsService = WebSocketService.getInstance(io);
 wsService.initialize();
 
-// 404 handler
-app.use('*', (req, res) => {
-  res.status(404).json({
-    error: 'Endpoint not found',
-    path: req.originalUrl,
-    method: req.method
-  });
-});
+// 404 handler (must be before error handler)
+app.use('*', notFoundHandler);
 
 // Error handling middleware (must be last)
 app.use(errorHandler);
@@ -232,6 +222,11 @@ server.listen(PORT, () => {
   logger.info(`📊 Starting metrics collection service...`);
   metricsCollector.start();
   logger.info(`✅ Metrics collection service started`);
+
+  // Start order scheduler for advanced orders
+  logger.info(`⏰ Starting order scheduler service...`);
+  orderScheduler.start();
+  logger.info(`✅ Order scheduler service started`);
 });
 
 export default app;

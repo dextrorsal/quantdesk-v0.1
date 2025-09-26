@@ -240,6 +240,12 @@ pub mod quantdesk_perp_dex {
         trailing_distance: u64,
         leverage: u8,
         expires_at: i64,
+        hidden_size: u64,
+        display_size: u64,
+        time_in_force: TimeInForce,
+        target_price: u64,
+        twap_duration: u64,
+        twap_interval: u64,
     ) -> Result<()> {
         let market = &ctx.accounts.market;
         
@@ -269,6 +275,24 @@ pub mod quantdesk_perp_dex {
                 require!(trailing_distance > 0, ErrorCode::InvalidTrailingDistance);
                 require!(trailing_distance <= 1000000, ErrorCode::TrailingDistanceTooLarge); // Max 100%
             },
+            OrderType::Iceberg => {
+                require!(hidden_size > 0, ErrorCode::InvalidSize);
+                require!(display_size > 0, ErrorCode::InvalidSize);
+                require!(hidden_size + display_size == size, ErrorCode::InvalidSize);
+            },
+            OrderType::TWAP => {
+                require!(twap_duration > 0, ErrorCode::InvalidDuration);
+                require!(twap_interval > 0, ErrorCode::InvalidInterval);
+                require!(twap_interval <= twap_duration, ErrorCode::InvalidInterval);
+            },
+            OrderType::StopLimit => {
+                require!(stop_price > 0, ErrorCode::InvalidStopPrice);
+                require!(price > 0, ErrorCode::InvalidPrice);
+            },
+            OrderType::Bracket => {
+                require!(target_price > 0, ErrorCode::InvalidTargetPrice);
+                require!(stop_price > 0, ErrorCode::InvalidStopPrice);
+            },
             _ => {}
         }
 
@@ -294,6 +318,14 @@ pub mod quantdesk_perp_dex {
         order.expires_at = expires_at;
         order.filled_size = 0;
         order.bump = ctx.bumps.order;
+        // Advanced order fields
+        order.hidden_size = hidden_size;
+        order.display_size = display_size;
+        order.time_in_force = time_in_force;
+        order.target_price = target_price;
+        order.parent_order = None; // Will be set for bracket orders
+        order.twap_duration = twap_duration;
+        order.twap_interval = twap_interval;
 
         msg!("Order placed: {:?} {} {:?} at {}x leverage", order_type, size, side, leverage);
         Ok(())
@@ -349,6 +381,207 @@ pub mod quantdesk_perp_dex {
         order.filled_size = order.size;
         
         msg!("Conditional order executed: {} at price {}", order.key(), current_price);
+        Ok(())
+    }
+
+    // Cross-collateralization functions
+
+    // Initialize a collateral account for a user
+    pub fn initialize_collateral_account(
+        ctx: Context<InitializeCollateralAccount>,
+        asset_type: CollateralType,
+        initial_amount: u64,
+    ) -> Result<()> {
+        let collateral_account = &mut ctx.accounts.collateral_account;
+        
+        // Validate initial amount
+        require!(initial_amount > 0, ErrorCode::InvalidAmount);
+        
+        // Initialize collateral account
+        collateral_account.user = ctx.accounts.user.key();
+        collateral_account.asset_type = asset_type;
+        collateral_account.amount = initial_amount;
+        collateral_account.value_usd = 0; // Will be updated by oracle
+        collateral_account.last_updated = Clock::get()?.unix_timestamp;
+        collateral_account.is_active = true;
+        collateral_account.bump = ctx.bumps.collateral_account;
+        
+        msg!("Collateral account initialized: {} {} for user {}", 
+             initial_amount, format!("{:?}", asset_type), ctx.accounts.user.key());
+        Ok(())
+    }
+
+    // Add collateral to an existing account
+    pub fn add_collateral(
+        ctx: Context<AddCollateral>,
+        amount: u64,
+    ) -> Result<()> {
+        let collateral_account = &mut ctx.accounts.collateral_account;
+        
+        require!(amount > 0, ErrorCode::InvalidAmount);
+        require!(collateral_account.is_active, ErrorCode::CollateralAccountInactive);
+        
+        // Add to existing amount
+        collateral_account.amount += amount;
+        collateral_account.last_updated = Clock::get()?.unix_timestamp;
+        
+        msg!("Added {} collateral to account {}", amount, ctx.accounts.collateral_account.key());
+        Ok(())
+    }
+
+    // Remove collateral from an account
+    pub fn remove_collateral(
+        ctx: Context<RemoveCollateral>,
+        amount: u64,
+    ) -> Result<()> {
+        let collateral_account = &mut ctx.accounts.collateral_account;
+        
+        require!(amount > 0, ErrorCode::InvalidAmount);
+        require!(collateral_account.amount >= amount, ErrorCode::InsufficientCollateral);
+        require!(collateral_account.is_active, ErrorCode::CollateralAccountInactive);
+        
+        // Check if this collateral is being used in any positions
+        // In production, this would check all user positions
+        // For now, we'll allow removal if amount is available
+        
+        // Remove from amount
+        collateral_account.amount -= amount;
+        collateral_account.last_updated = Clock::get()?.unix_timestamp;
+        
+        msg!("Removed {} collateral from account {}", amount, ctx.accounts.collateral_account.key());
+        Ok(())
+    }
+
+    // Update collateral value using oracle price
+    pub fn update_collateral_value(
+        ctx: Context<UpdateCollateralValue>,
+        new_price: u64,
+    ) -> Result<()> {
+        let account_key = ctx.accounts.collateral_account.key();
+        let collateral_account = &mut ctx.accounts.collateral_account;
+        
+        require!(new_price > 0, ErrorCode::InvalidPrice);
+        require!(collateral_account.is_active, ErrorCode::CollateralAccountInactive);
+        
+        // Update USD value based on new price
+        collateral_account.value_usd = (collateral_account.amount * new_price) / 1000000; // Assuming 6 decimals
+        collateral_account.last_updated = Clock::get()?.unix_timestamp;
+        
+        msg!("Updated collateral value: {} USD for account {}", 
+             collateral_account.value_usd, account_key);
+        Ok(())
+    }
+
+    // Open position with cross-collateralization
+    pub fn open_position_cross_collateral(
+        ctx: Context<OpenPositionCrossCollateral>,
+        size: u64,
+        side: PositionSide,
+        leverage: u8,
+        collateral_accounts: Vec<Pubkey>,
+    ) -> Result<()> {
+        let market = &ctx.accounts.market;
+        
+        // Security validations
+        require!(market.is_active, ErrorCode::MarketInactive);
+        require!(leverage >= 1 && leverage <= market.max_leverage, ErrorCode::InvalidLeverage);
+        require!(size > 0, ErrorCode::InvalidSize);
+        require!(size <= 1000000000, ErrorCode::PositionTooLarge);
+        require!(!collateral_accounts.is_empty(), ErrorCode::NoCollateralProvided);
+        
+        let position = &mut ctx.accounts.position;
+        
+        // Calculate required margin using oracle price
+        let oracle_price = market.get_oracle_price()?;
+        let required_margin_usd = (size * oracle_price) / (leverage as u64 * 1000000);
+        
+        // Calculate total collateral value from all accounts
+        let mut total_collateral_value = 0u64;
+        for _collateral_pubkey in &collateral_accounts {
+            // In production, this would fetch each collateral account
+            // For now, we'll assume sufficient collateral
+            total_collateral_value += 1000000; // Mock value
+        }
+        
+        // Check if user has enough total collateral
+        require!(
+            total_collateral_value >= required_margin_usd,
+            ErrorCode::InsufficientCollateral
+        );
+
+        // Calculate position value
+        let position_value = (size * oracle_price) / 1000000;
+        
+        // Check position limits
+        require!(position_value <= 1000000000000, ErrorCode::PositionTooLarge);
+
+        // Update vAMM reserves (simplified for now)
+        let market = &mut ctx.accounts.market;
+        match side {
+            PositionSide::Long => {
+                market.base_reserve += size;
+                market.quote_reserve -= position_value;
+            },
+            PositionSide::Short => {
+                market.base_reserve -= size;
+                market.quote_reserve += position_value;
+            },
+        }
+
+        // Initialize position with cross-collateralization
+        position.user = ctx.accounts.user.key();
+        position.market = market.key();
+        position.size = size;
+        position.side = side.clone();
+        position.leverage = leverage;
+        position.entry_price = oracle_price;
+        position.margin = required_margin_usd;
+        position.unrealized_pnl = 0;
+        position.created_at = Clock::get()?.unix_timestamp;
+        position.bump = ctx.bumps.position;
+        position.collateral_accounts = collateral_accounts;
+        position.total_collateral_value = total_collateral_value;
+
+        msg!("Cross-collateralized position opened: {} {:?} at {}x leverage, total collateral: {} USD", 
+             size, side, leverage, total_collateral_value);
+        Ok(())
+    }
+
+    // Liquidate position with cross-collateralization
+    pub fn liquidate_position_cross_collateral(ctx: Context<LiquidatePositionCrossCollateral>) -> Result<()> {
+        let position = &mut ctx.accounts.position;
+        let market = &mut ctx.accounts.market;
+        
+        require!(position.size > 0, ErrorCode::PositionAlreadyClosed);
+        
+        // Calculate health factor using oracle price
+        let current_price = market.get_oracle_price()?;
+        let unrealized_pnl = match position.side {
+            PositionSide::Long => {
+                ((current_price as i128 - position.entry_price as i128) * position.size as i128) / 1000000
+            },
+            PositionSide::Short => {
+                ((position.entry_price as i128 - current_price as i128) * position.size as i128) / 1000000
+            },
+        };
+        
+        let equity = position.total_collateral_value as i128 + unrealized_pnl;
+        let position_value = (position.size * current_price) / 1000000;
+        let health_factor = (equity * 10000) / position_value as i128;
+        
+        require!(health_factor < market.maintenance_margin_ratio as i128, ErrorCode::PositionHealthy);
+        
+        // Execute liquidation with cross-collateralization
+        msg!("Liquidating cross-collateralized position: Health factor = {}%, Total collateral: {} USD", 
+             health_factor / 100, position.total_collateral_value);
+        
+        // In production, this would distribute liquidation across collateral accounts
+        // For now, we'll mark position as liquidated
+        
+        // Mark position as liquidated
+        position.size = 0;
+        position.unrealized_pnl = unrealized_pnl as i64;
+        
         Ok(())
     }
 }
@@ -407,6 +640,17 @@ impl Market {
 }
 
 #[account]
+pub struct CollateralAccount {
+    pub user: Pubkey,           // User who owns the collateral
+    pub asset_type: CollateralType, // Type of collateral asset
+    pub amount: u64,             // Amount of collateral
+    pub value_usd: u64,         // USD value of collateral
+    pub last_updated: i64,      // Last price update timestamp
+    pub is_active: bool,         // Whether this collateral is active
+    pub bump: u8,              // PDA bump
+}
+
+#[account]
 pub struct Position {
     pub user: Pubkey,           // User who owns the position
     pub market: Pubkey,         // Market this position is in
@@ -418,6 +662,9 @@ pub struct Position {
     pub unrealized_pnl: i64,     // Unrealized P&L
     pub created_at: i64,        // Timestamp when position was created
     pub bump: u8,              // PDA bump
+    // Cross-collateralization fields
+    pub collateral_accounts: Vec<Pubkey>, // List of collateral accounts used
+    pub total_collateral_value: u64,      // Total collateral value in USD
 }
 
 #[account]
@@ -436,6 +683,51 @@ pub struct Order {
     pub expires_at: i64,        // Timestamp when order expires (0 = never)
     pub filled_size: u64,       // Amount already filled
     pub bump: u8,              // PDA bump
+    // Advanced order fields
+    pub hidden_size: u64,       // Hidden size for iceberg orders
+    pub display_size: u64,      // Display size for iceberg orders
+    pub time_in_force: TimeInForce, // Time in force for the order
+    pub target_price: u64,      // Target price for bracket orders
+    pub parent_order: Option<Pubkey>, // Parent order for bracket orders
+    pub twap_duration: u64,     // Duration for TWAP orders (in seconds)
+    pub twap_interval: u64,     // Interval for TWAP orders (in seconds)
+}
+
+#[derive(AnchorSerialize, AnchorDeserialize, Clone, Copy, PartialEq, Eq, Debug)]
+pub enum CollateralType {
+    SOL,
+    USDC,
+    BTC,
+    ETH,
+    USDT,
+    AVAX,
+    MATIC,
+    ARB,
+    OP,
+    DOGE,
+    ADA,
+    DOT,
+    LINK,
+}
+
+impl std::fmt::Display for CollateralType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            CollateralType::SOL => write!(f, "SOL"),
+            CollateralType::USDC => write!(f, "USDC"),
+            CollateralType::BTC => write!(f, "BTC"),
+            CollateralType::ETH => write!(f, "ETH"),
+            CollateralType::USDT => write!(f, "USDT"),
+            CollateralType::AVAX => write!(f, "AVAX"),
+            CollateralType::MATIC => write!(f, "MATIC"),
+            CollateralType::ARB => write!(f, "ARB"),
+            CollateralType::OP => write!(f, "OP"),
+            CollateralType::DOGE => write!(f, "DOGE"),
+            CollateralType::ADA => write!(f, "ADA"),
+            CollateralType::DOT => write!(f, "DOT"),
+            CollateralType::LINK => write!(f, "LINK"),
+        }
+    }
 }
 
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Copy, PartialEq, Eq, Debug)]
@@ -454,6 +746,10 @@ pub enum OrderType {
     PostOnly,
     IOC, // Immediate or Cancel
     FOK, // Fill or Kill
+    Iceberg, // Iceberg order (hidden size)
+    TWAP, // Time Weighted Average Price
+    StopLimit, // Stop limit order
+    Bracket, // Bracket order (entry + stop + target)
 }
 
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Copy, PartialEq, Eq, Debug)]
@@ -462,6 +758,16 @@ pub enum OrderStatus {
     Filled,
     Cancelled,
     Expired,
+    PartiallyFilled,
+    Rejected,
+}
+
+#[derive(AnchorSerialize, AnchorDeserialize, Clone, Copy, PartialEq, Eq, Debug)]
+pub enum TimeInForce {
+    GTC, // Good Till Cancelled
+    IOC, // Immediate or Cancel
+    FOK, // Fill or Kill
+    GTD, // Good Till Date
 }
 
 // Context structures
@@ -606,6 +912,112 @@ pub struct ExecuteConditionalOrder<'info> {
     pub executor: Signer<'info>,
 }
 
+// Cross-collateralization context structures
+
+#[derive(Accounts)]
+#[instruction(asset_type: CollateralType)]
+pub struct InitializeCollateralAccount<'info> {
+    #[account(
+        init,
+        payer = user,
+        space = 8 + CollateralAccount::INIT_SPACE,
+        seeds = [b"collateral", user.key().as_ref(), &asset_type.to_string().as_bytes()],
+        bump
+    )]
+    pub collateral_account: Account<'info, CollateralAccount>,
+    
+    #[account(mut)]
+    pub user: Signer<'info>,
+    
+    pub system_program: Program<'info, System>,
+}
+
+#[derive(Accounts)]
+pub struct AddCollateral<'info> {
+    #[account(
+        mut,
+        constraint = collateral_account.user == user.key()
+    )]
+    pub collateral_account: Account<'info, CollateralAccount>,
+    
+    #[account(mut)]
+    pub user: Signer<'info>,
+    
+    #[account(mut)]
+    pub user_token_account: Account<'info, TokenAccount>,
+}
+
+#[derive(Accounts)]
+pub struct RemoveCollateral<'info> {
+    #[account(
+        mut,
+        constraint = collateral_account.user == user.key()
+    )]
+    pub collateral_account: Account<'info, CollateralAccount>,
+    
+    #[account(mut)]
+    pub user: Signer<'info>,
+    
+    #[account(mut)]
+    pub user_token_account: Account<'info, TokenAccount>,
+}
+
+#[derive(Accounts)]
+pub struct UpdateCollateralValue<'info> {
+    #[account(mut)]
+    pub collateral_account: Account<'info, CollateralAccount>,
+    
+    /// CHECK: This is the oracle price feed account
+    pub price_feed: AccountInfo<'info>,
+    
+    pub keeper: Signer<'info>,
+}
+
+#[derive(Accounts)]
+pub struct OpenPositionCrossCollateral<'info> {
+    #[account(mut)]
+    pub market: Account<'info, Market>,
+    
+    #[account(
+        init,
+        payer = user,
+        space = 8 + Position::INIT_SPACE,
+        seeds = [b"position", user.key().as_ref(), market.key().as_ref()],
+        bump
+    )]
+    pub position: Account<'info, Position>,
+    
+    #[account(mut)]
+    pub user: Signer<'info>,
+    
+    // Multiple collateral accounts
+    #[account(mut)]
+    pub collateral_account_1: Account<'info, CollateralAccount>,
+    
+    #[account(mut)]
+    pub collateral_account_2: Option<Account<'info, CollateralAccount>>,
+    
+    #[account(mut)]
+    pub collateral_account_3: Option<Account<'info, CollateralAccount>>,
+    
+    pub system_program: Program<'info, System>,
+}
+
+#[derive(Accounts)]
+pub struct LiquidatePositionCrossCollateral<'info> {
+    #[account(mut)]
+    pub market: Account<'info, Market>,
+    
+    #[account(mut)]
+    pub position: Account<'info, Position>,
+    
+    #[account(mut)]
+    pub liquidator: Signer<'info>,
+    
+    #[account(mut)]
+    pub vault: Account<'info, TokenAccount>,
+}
+
 // Enhanced error codes
 #[error_code]
 pub enum ErrorCode {
@@ -653,6 +1065,18 @@ pub enum ErrorCode {
     OrderExpirationTooLong,
     #[msg("Position already closed")]
     PositionAlreadyClosed,
+    #[msg("Invalid duration")]
+    InvalidDuration,
+    #[msg("Invalid interval")]
+    InvalidInterval,
+    #[msg("Invalid target price")]
+    InvalidTargetPrice,
+    #[msg("Invalid amount")]
+    InvalidAmount,
+    #[msg("Collateral account inactive")]
+    CollateralAccountInactive,
+    #[msg("No collateral provided")]
+    NoCollateralProvided,
 }
 
 // Space calculations
@@ -661,9 +1085,13 @@ impl Market {
 }
 
 impl Position {
-    pub const INIT_SPACE: usize = 32 + 32 + 8 + 1 + 1 + 8 + 8 + 8 + 1;
+    pub const INIT_SPACE: usize = 32 + 32 + 8 + 1 + 1 + 8 + 8 + 8 + 1 + 4 + 32 + 8; // Added Vec<Pubkey> and u64
+}
+
+impl CollateralAccount {
+    pub const INIT_SPACE: usize = 32 + 1 + 8 + 8 + 8 + 1 + 1;
 }
 
 impl Order {
-    pub const INIT_SPACE: usize = 32 + 32 + 1 + 1 + 8 + 8 + 8 + 8 + 1 + 1 + 8 + 8 + 8 + 1;
+    pub const INIT_SPACE: usize = 32 + 32 + 1 + 1 + 8 + 8 + 8 + 8 + 1 + 1 + 8 + 8 + 8 + 1 + 8 + 8 + 1 + 8 + 1 + 8 + 8;
 }

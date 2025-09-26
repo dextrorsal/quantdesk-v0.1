@@ -22,13 +22,29 @@ class PythOracleService {
     ETH: 'JBu1AL4obBcCMqKBBxhpWCNUt136ijcuMZLFvTP7iWdB', // ETH/USD
     SOL: 'H6ARHf6YXhGYeQfUzQNGk6rDNnLBQKrenN712K4AQJEG', // SOL/USD
     USDC: 'Gnt27xtC473ZT2Mw5u8wZ68Z3gULkSTb5DuxJy7eJotD', // USDC/USD
-    USDT: '3vxLXJqLqF3JG5TCbYycbKWRBbCJQLxQmBGCkyqEEefL'  // USDT/USD
+    USDT: '3vxLXJqLqF3JG5TCbYycbKWRBbCJQLxQmBGCkyqEEefL', // USDT/USD
+    AVAX: 'FVb5h1VmHPfVb1RfqZckchq18GpRv4i4F8GFQznz7Fc3', // AVAX/USD
+    MATIC: '7KVswB9vkCgeM3SHP7aGDijvdRAHK8P5wi9JXViCrtYh', // MATIC/USD
+    ARB: '5SSkXsEKQepHHAewytPVwdej4epN1nxgLVM84L4KXgy7', // ARB/USD
+    OP: '4o4CUwzFwLqG5KnbTWMQcyJ4yJkKa7AF3b7C2ufv7w3Z', // OP/USD
+    DOGE: '3NZ9JMVBmGAqocybic2c7LQCJScmgsAZ6vQqTDzcqmJh', // DOGE/USD
+    ADA: '3pyn4S5DunTAm8QivsJczt1WqzeWxAjUKf4y6Jk8sY7n', // ADA/USD
+    DOT: 'EcV1X1gY2yb4kXfHEqfeNhn9JCHfSyXAFU9w6cmHqF8n', // DOT/USD
+    LINK: '8A2v9YoF8VxUY6LPp42Rf7D6wGSDi9jP6gT6n2m3K7Yh' // LINK/USD
   }
 
   private readonly MARKET_SYMBOLS = {
     'BTC-PERP': 'BTC',
     'ETH-PERP': 'ETH', 
-    'SOL-PERP': 'SOL'
+    'SOL-PERP': 'SOL',
+    'AVAX-PERP': 'AVAX',
+    'MATIC-PERP': 'MATIC',
+    'ARB-PERP': 'ARB',
+    'OP-PERP': 'OP',
+    'DOGE-PERP': 'DOGE',
+    'ADA-PERP': 'ADA',
+    'DOT-PERP': 'DOT',
+    'LINK-PERP': 'LINK'
   }
 
   private constructor() {
