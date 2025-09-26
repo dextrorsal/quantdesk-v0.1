@@ -17,7 +17,14 @@ build/
 out/
 
 # Frontend (keep private - competitive advantage)
+src/
 frontend/
+index.html
+vite.config.ts
+tailwind.config.js
+postcss.config.js
+tsconfig.json
+tsconfig.node.json
 
 # Logs
 logs/
