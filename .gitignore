@@ -26,6 +26,12 @@ postcss.config.js
 tsconfig.json
 tsconfig.node.json
 
+# Backend Infrastructure (keep private - competitive advantage)
+backend/
+grafana-dashboard-config.json
+test-*.js
+test-ledger/
+
 # Logs
 logs/
 *.log
