@@ -46,7 +46,7 @@ const Header: React.FC = React.memo(() => {
   return (
     <>
       {/* Debug Info */}
-      {process.env.NODE_ENV === 'development' && (
+      {import.meta.env.DEV && (
         <div style={{
           position: 'fixed',
           top: '50px',

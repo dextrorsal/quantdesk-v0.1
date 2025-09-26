@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom'
-import { WalletProvider } from './providers/WalletProvider'
 import { TradingProvider } from './providers/TradingProvider'
 import Layout from './components/Layout'
 import React from 'react'
@@ -25,43 +24,41 @@ function App() {
   // }, [location.pathname, navigate])
 
   return (
-    <WalletProvider>
-        <TradingProvider>
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            {/* Lite (new) → QuantDesk chrome with Quantify Lite content */}
-            <Route path="/lite" element={
-              <Layout>
-                <React.Suspense fallback={<div className="p-6 text-white">Loading Lite…</div>}>
-                  {React.createElement(React.lazy(() => import('./lite/LiteRouter')))}
-                </React.Suspense>
-              </Layout>
-            } />
-            {/* Pro mode will host the terminal + taskbar shell */}
-            <Route path="/pro" element={
-              <React.Suspense fallback={<div className="p-6 text-white">Loading Pro…</div>}>
-                {React.createElement(React.lazy(() => import('./pro/index')))}
-              </React.Suspense>
-            } />
-            {/* Trading mode - standalone trading interface */}
-            <Route path="/trading" element={
-              <React.Suspense fallback={<div className="p-6 text-white">Loading Trading…</div>}>
-                {React.createElement(React.lazy(() => import('./lite/TradingTab')))}
-              </React.Suspense>
-            } />
-            <Route path="/portfolio" element={
-              <Layout>
-                <PortfolioPage />
-              </Layout>
-            } />
-            <Route path="/markets" element={
-              <Layout>
-                <MarketsPage />
-              </Layout>
-            } />
-          </Routes>
-        </TradingProvider>
-      </WalletProvider>
+    <TradingProvider>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        {/* Lite (new) → QuantDesk chrome with Quantify Lite content */}
+        <Route path="/lite" element={
+          <Layout>
+            <React.Suspense fallback={<div className="p-6 text-white">Loading Lite…</div>}>
+              {React.createElement(React.lazy(() => import('./lite/LiteRouter')))}
+            </React.Suspense>
+          </Layout>
+        } />
+        {/* Pro mode will host the terminal + taskbar shell */}
+        <Route path="/pro" element={
+          <React.Suspense fallback={<div className="p-6 text-white">Loading Pro…</div>}>
+            {React.createElement(React.lazy(() => import('./pro/index')))}
+          </React.Suspense>
+        } />
+        {/* Trading mode - standalone trading interface */}
+        <Route path="/trading" element={
+          <React.Suspense fallback={<div className="p-6 text-white">Loading Trading…</div>}>
+            {React.createElement(React.lazy(() => import('./lite/TradingTab')))}
+          </React.Suspense>
+        } />
+        <Route path="/portfolio" element={
+          <Layout>
+            <PortfolioPage />
+          </Layout>
+        } />
+        <Route path="/markets" element={
+          <Layout>
+            <MarketsPage />
+          </Layout>
+        } />
+      </Routes>
+    </TradingProvider>
   )
 }
 

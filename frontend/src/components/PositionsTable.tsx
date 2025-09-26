@@ -11,11 +11,11 @@ const PositionsTable: React.FC = () => {
 
   useEffect(() => {
     // Load initial positions
-    setPositions(portfolioService.getPositions())
+    setPositions(portfolioService.instance.getPositions())
 
     // Update positions every 2 seconds
     const interval = setInterval(() => {
-      setPositions(portfolioService.getPositions())
+      setPositions(portfolioService.instance.getPositions())
     }, 2000)
 
     return () => clearInterval(interval)

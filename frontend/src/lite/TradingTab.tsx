@@ -14,7 +14,7 @@ const TradingTab: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const symbols = ['BTC', 'ETH', 'SOL', 'ADA', 'DOGE', 'MATIC'];
+  const symbols = ['BTC', 'ETH', 'SOL', 'AVAX', 'MATIC', 'ARB', 'OP', 'DOGE', 'ADA', 'DOT', 'LINK'];
 
   // Close dropdown when clicking outside
   useEffect(() => {

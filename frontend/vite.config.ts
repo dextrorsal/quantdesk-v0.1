@@ -12,9 +12,10 @@ export default defineConfig({
   },
   define: {
     global: 'globalThis',
+    'process.env': 'import.meta.env',
   },
   server: {
-    port: 3000,
+    port: 3001,
     host: true,
     proxy: {
       '/api': {

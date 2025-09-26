@@ -1,11 +1,11 @@
 # QuantDesk Protocol - Open Source Core
 
+> **The Bloomberg Terminal for Crypto** - Professional-grade perpetual DEX protocol
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Solana](https://img.shields.io/badge/Solana-9945FF?logo=solana&logoColor=white)](https://solana.com/)
 [![Anchor](https://img.shields.io/badge/Anchor-000000?logo=anchor&logoColor=white)](https://www.anchor-lang.com/)
-
-> **The Bloomberg Terminal for Crypto** - Professional-grade perpetual DEX protocol with institutional features and advanced analytics.
 
 ## 🎯 **What This Repository Contains**
 

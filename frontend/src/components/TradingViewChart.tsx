@@ -53,11 +53,11 @@ const TradingViewChart: React.FC<TradingViewChartProps> = ({
   const loadRealMarketData = useCallback(async (symbol: string): Promise<CandleData[]> => {
     try {
       // Get price history from our backend (which gets it from Pyth Network)
-      const priceHistory = await marketDataService.getPriceHistory(symbol, 24)
+      const priceHistory = await marketDataService.instance.getPriceHistory(symbol, 24)
       
       if (priceHistory && priceHistory.data.length > 0) {
         // Convert to TradingView format
-        const candles = marketDataService.convertToTradingViewFormat(priceHistory)
+        const candles = marketDataService.instance.convertToTradingViewFormat(priceHistory)
         
         // Convert to CandleData format
         return candles.map(candle => ({
