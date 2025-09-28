@@ -1,128 +1,198 @@
-# QuantDesk Documentation
+# 📚 QuantDesk Documentation
 
-Welcome to QuantDesk - **The Bloomberg Terminal for Crypto**. This comprehensive documentation will guide you through every aspect of our professional-grade decentralized trading platform.
+This directory contains all project documentation organized by category and purpose.
 
-## 🎯 What is QuantDesk?
+## 📁 Directory Structure
 
-QuantDesk is the first institutional-grade decentralized perpetual trading platform that brings the power and sophistication of traditional finance terminals to the crypto ecosystem. Built on Solana, QuantDesk combines the reliability of traditional finance with the innovation of DeFi.
+```
+docs/
+├── api/              # API documentation
+├── architecture/     # System architecture docs
+├── deployment/       # Deployment guides
+├── guides/           # User and developer guides
+├── analytics/        # Analytics documentation
+├── security/         # Security documentation
+├── support/          # Support documentation
+├── trading/          # Trading system documentation
+├── getting-started/  # Getting started guides
+└── README.md         # This file
+```
 
-### Why "Bloomberg Terminal for Crypto"?
+## 🔌 API Documentation (`api/`)
 
-Just as Bloomberg Terminal revolutionized traditional finance by providing real-time data, analytics, and trading capabilities in one unified platform, QuantDesk brings the same level of sophistication to crypto trading:
+- `API.md` - Complete API reference documentation
+- API endpoints, request/response formats
+- Authentication and authorization
+- Rate limiting and error handling
 
-- **Real-time Market Data**: Live price feeds, order book depth, and market analytics
-- **Professional Trading Tools**: Advanced order types, risk management, and portfolio analytics
-- **Institutional Features**: JIT liquidity, professional APIs, and comprehensive monitoring
-- **Enterprise-Grade Infrastructure**: Scalable, secure, and reliable platform architecture
+## 🏗️ Architecture Documentation (`architecture/`)
 
-## 📚 Documentation Structure
+- `overview.md` - System architecture overview
+- Component diagrams and relationships
+- Data flow and system interactions
+- Technology stack documentation
 
-### 🚀 Getting Started
-- [Quick Start Guide](getting-started/quick-start.md) - Get up and running in minutes
-- [Installation Guide](getting-started/installation.md) - Detailed setup instructions
-- [First Trade](getting-started/first-trade.md) - Make your first trade on QuantDesk
+## 🚀 Deployment Documentation (`deployment/`)
 
-### 🏗️ Architecture & Design
-- [System Architecture](architecture/overview.md) - High-level system design
-- [Smart Contracts](architecture/smart-contracts.md) - On-chain program architecture
-- [Backend Services](architecture/backend.md) - API and service architecture
-- [Frontend Design](architecture/frontend.md) - User interface and experience design
+- `DEPLOYMENT_GUIDE.md` - Complete deployment guide
+- `FRONTEND_DEPLOYMENT.md` - Frontend-specific deployment
+- Environment setup and configuration
+- Production deployment procedures
 
-### 💼 Trading Features
-- [Trading Overview](trading/overview.md) - Core trading capabilities
-- [Order Types](trading/order-types.md) - Market, limit, stop-loss, and advanced orders
-- [Risk Management](trading/risk-management.md) - Position sizing, leverage, and liquidation
-- [Portfolio Management](trading/portfolio.md) - Portfolio analytics and management tools
+## 📖 User & Developer Guides (`guides/`)
 
-### 🔧 Developer Resources
-- [API Documentation](api/overview.md) - Complete REST API reference
-- [WebSocket API](api/websocket.md) - Real-time data streams
-- [SDK Libraries](api/sdks.md) - Official SDKs for multiple languages
-- [Smart Contract Integration](api/smart-contracts.md) - Direct blockchain integration
+### Core Guides
+- `GETTING_STARTED.md` - Getting started with QuantDesk
+- `ENVIRONMENT_SETUP.md` - Development environment setup
+- `SECURITY_CHECKLIST.md` - Security best practices
+- `FEATURES.md` - Complete feature documentation
 
-### 📊 Analytics & Monitoring
-- [Market Analytics](analytics/market-data.md) - Real-time market insights
-- [Trading Analytics](analytics/trading-metrics.md) - Performance and risk metrics
-- [System Monitoring](analytics/monitoring.md) - Platform health and performance
-- [Grafana Dashboards](analytics/grafana.md) - Professional monitoring setup
+### Design & UI Guides
+- `MOBILE_STRATEGY.md` - Mobile app development strategy
+- `UI_UX_DESIGN_SYSTEM.md` - Design system documentation
+- `LITE_MODE_COLOR_SCHEME.md` - Lite mode color scheme
+- `CRYPTO_PRO_INTERFACE_GUIDE.md` - Pro interface guide
+- `CRYPTO_COMMANDS_QUICK_REFERENCE.md` - Quick command reference
 
-### 🚀 Deployment & Operations
-- [Development Setup](deployment/development.md) - Local development environment
-- [Staging Deployment](deployment/staging.md) - Testing and staging environments
-- [Production Deployment](deployment/production.md) - Production deployment guide
-- [Monitoring & Maintenance](deployment/monitoring.md) - Operations and maintenance
+### Technical Guides
+- `LIVING_BACKGROUND_CONCEPT.md` - Living background concept
+- `SECURITY_GUIDE.md` - Comprehensive security guide
 
-### 🔒 Security & Compliance
-- [Security Overview](security/overview.md) - Security architecture and measures
-- [Smart Contract Security](security/smart-contracts.md) - On-chain security practices
-- [API Security](security/api.md) - API authentication and authorization
-- [Compliance Guide](security/compliance.md) - Regulatory compliance considerations
+## 📊 Analytics Documentation (`analytics/`)
 
-### 🤝 Community & Support
-- [Contributing Guide](../CONTRIBUTING.md) - How to contribute to QuantDesk
-- [Code of Conduct](../CODE_OF_CONDUCT.md) - Community guidelines
-- [Support & FAQ](support/faq.md) - Frequently asked questions
-- [Community Resources](support/community.md) - Discord, forums, and resources
+- `overview.md` - Analytics system overview
+- Metrics and KPIs documentation
+- Reporting and dashboard guides
 
-## 🎯 Key Features Highlight
+## 🔒 Security Documentation (`security/`)
 
-### Professional Trading Interface
-- **Multi-Monitor Support**: Optimized for professional trading setups
-- **Customizable Layouts**: Drag-and-drop interface customization
-- **Real-time Data**: Sub-second latency market data feeds
-- **Advanced Charts**: Professional-grade charting with technical indicators
+- Security policies and procedures
+- Vulnerability management
+- Security testing and auditing
 
-### Institutional-Grade Infrastructure
-- **High Availability**: 99.9% uptime SLA
-- **Scalable Architecture**: Handles millions of transactions per day
-- **Enterprise APIs**: REST and WebSocket APIs for institutional integration
-- **Professional Support**: Dedicated support for institutional clients
+## 🆘 Support Documentation (`support/`)
 
-### Advanced Risk Management
-- **Real-time Risk Monitoring**: Continuous position and portfolio risk assessment
-- **Automated Liquidation**: Sophisticated liquidation engine
-- **Portfolio Analytics**: Comprehensive portfolio performance metrics
-- **Compliance Tools**: Built-in compliance and reporting features
+- Troubleshooting guides
+- FAQ and common issues
+- Contact information and support channels
 
-## 🚀 Quick Navigation
+## 💹 Trading Documentation (`trading/`)
 
-| Feature | Documentation | API Reference |
-|---------|---------------|---------------|
-| **Trading** | [Trading Guide](trading/overview.md) | [Trading API](api/trading.md) |
-| **Analytics** | [Analytics Guide](analytics/overview.md) | [Analytics API](api/analytics.md) |
-| **Risk Management** | [Risk Guide](trading/risk-management.md) | [Risk API](api/risk.md) |
-| **Portfolio** | [Portfolio Guide](trading/portfolio.md) | [Portfolio API](api/portfolio.md) |
-| **Monitoring** | [Monitoring Guide](analytics/monitoring.md) | [Monitoring API](api/monitoring.md) |
+- `overview.md` - Trading system overview
+- Order types and execution
+- Risk management and compliance
+- Market data and feeds
 
-## 📞 Support & Community
+## 🚀 Getting Started (`getting-started/`)
 
-- **Discord Community**: [Join our Discord](https://discord.gg/quantdesk)
-- **GitHub Issues**: [Report bugs or request features](https://github.com/quantdesk/quantdesk/issues)
-- **Documentation Issues**: [Help improve our docs](https://github.com/quantdesk/quantdesk-docs/issues)
-- **Enterprise Support**: [contact@quantdesk.io](mailto:contact@quantdesk.io)
+- `quick-start.md` - Quick start guide
+- Installation and setup
+- First steps and basic usage
 
-## 🏆 Why Choose QuantDesk?
+## 📋 Documentation Standards
 
-### For Traders
-- **Professional Tools**: Everything you need for serious crypto trading
-- **Real-time Data**: Live market data with institutional-grade latency
-- **Advanced Analytics**: Comprehensive market and portfolio analytics
-- **Risk Management**: Sophisticated risk management tools
+### Writing Guidelines
+1. **Use clear, concise language**
+2. **Include code examples** where applicable
+3. **Add screenshots** for UI documentation
+4. **Keep documentation up-to-date**
+5. **Use consistent formatting**
 
-### For Developers
-- **Open Source**: Fully open source and transparent
-- **Comprehensive APIs**: REST and WebSocket APIs for all features
-- **Multiple SDKs**: Official SDKs for JavaScript, Python, and Rust
-- **Extensive Documentation**: Detailed documentation and examples
+### Markdown Standards
+- Use `#` for main headings
+- Use `##` for section headings
+- Use `###` for subsections
+- Include table of contents for long documents
+- Use code blocks with language specification
 
-### For Institutions
-- **Enterprise Features**: Professional-grade features and support
-- **Compliance Ready**: Built with regulatory compliance in mind
-- **Scalable Infrastructure**: Handles institutional trading volumes
-- **Professional Support**: Dedicated support for enterprise clients
+### File Naming
+- Use `UPPERCASE.md` for main documents
+- Use `lowercase.md` for sub-documents
+- Use descriptive names that indicate content
+- Avoid spaces in filenames
 
----
+## 🔄 Documentation Maintenance
 
-**Ready to get started?** Check out our [Quick Start Guide](getting-started/quick-start.md) or explore our [API Documentation](api/overview.md).
+### Regular Updates
+- **API changes**: Update API documentation immediately
+- **Feature releases**: Update relevant guides
+- **Architecture changes**: Update architecture docs
+- **Security updates**: Update security documentation
 
-**Questions?** Join our [Discord community](https://discord.gg/quantdesk) or [open an issue](https://github.com/quantdesk/quantdesk/issues).
+### Review Process
+1. **Technical review** by development team
+2. **Content review** for clarity and accuracy
+3. **User testing** for usability
+4. **Final approval** before publishing
+
+## 📝 Adding New Documentation
+
+### Documentation Template
+```markdown
+# Document Title
+
+## Overview
+Brief description of the document's purpose.
+
+## Table of Contents
+- [Section 1](#section-1)
+- [Section 2](#section-2)
+
+## Section 1
+Content here...
+
+## Section 2
+Content here...
+
+## Conclusion
+Summary and next steps.
+```
+
+### Guidelines for New Docs
+1. **Choose the right directory** based on content type
+2. **Follow naming conventions** for consistency
+3. **Include table of contents** for long documents
+4. **Add cross-references** to related documentation
+5. **Update this README** when adding new docs
+
+## 🔍 Finding Documentation
+
+### By Category
+- **API Reference**: `docs/api/`
+- **Architecture**: `docs/architecture/`
+- **Deployment**: `docs/deployment/`
+- **User Guides**: `docs/guides/`
+- **Trading**: `docs/trading/`
+
+### By Purpose
+- **Getting Started**: `docs/getting-started/`
+- **Development**: `docs/guides/ENVIRONMENT_SETUP.md`
+- **Security**: `docs/guides/SECURITY_GUIDE.md`
+- **Mobile**: `docs/guides/MOBILE_STRATEGY.md`
+
+## 🚨 Documentation Issues
+
+### Common Issues
+- **Outdated information**: Check last updated date
+- **Missing examples**: Request from development team
+- **Broken links**: Report to documentation maintainer
+- **Unclear content**: Submit improvement suggestions
+
+### Getting Help
+- **Documentation issues**: Create GitHub issue
+- **Content questions**: Contact development team
+- **Contributing**: See `CONTRIBUTING.md`
+
+## 📈 Documentation Metrics
+
+### Goals
+- **Coverage**: 100% of public APIs documented
+- **Accuracy**: Regular review and updates
+- **Usability**: Clear and helpful content
+- **Accessibility**: Easy to find and navigate
+
+### Monitoring
+- **Page views**: Track popular documentation
+- **User feedback**: Collect and act on feedback
+- **Search analytics**: Identify missing content
+- **Update frequency**: Ensure regular maintenance
