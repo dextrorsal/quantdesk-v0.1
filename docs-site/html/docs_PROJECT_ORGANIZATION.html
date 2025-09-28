@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Organization - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/">&larr; Back to Documentation</a>
+        </div>
+        <h1>📁 Project Organization Guide</h1>
+<h2>Overview</h2>
+<p>This document outlines the organized structure of the QuantDesk trading system project. All files have been categorized based on their purpose and use case.</p>
+<h2>📂 Directory Structure</h2>
+<h3>🏠 Root Level</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">QuantDesk</span><span class="o">-</span><span class="mf">1.0</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">README</span><span class="o">.</span><span class="n">md</span><span class="w">              </span><span class="c1"># Main project documentation</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">setup</span><span class="o">.</span><span class="n">py</span><span class="w">               </span><span class="c1"># Package installation script</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">environment</span><span class="o">.</span><span class="n">yml</span><span class="w">        </span><span class="c1"># Conda environment configuration</span>
+<span class="err">├──</span><span class="w"> </span><span class="o">.</span><span class="n">env</span><span class="w">                   </span><span class="c1"># Environment variables</span>
+<span class="err">└──</span><span class="w"> </span><span class="o">.</span><span class="n">gitignore</span><span class="w">            </span><span class="c1"># Git ignore rules</span>
+</code></pre></div>
+
+<h3>📜 Documentation (<code>docs/</code>)</h3>
+<p>All project documentation and guides:
+- <code>AGENT_HANDOFF_SUMMARY.md</code> - AI agent handoff documentation
+- <code>ai-agent-integration.md</code> - AI agent integration guide
+- <code>AUTOMATED_LAG_TRADING_SYSTEM.md</code> - Lag trading system documentation
+- <code>CLEANUP_SUMMARY.md</code> - Project cleanup summary
+- <code>HFT_PROGRESS_SUMMARY.md</code> - High-frequency trading progress
+- <code>HIGH_LEVERAGE_MEME_COIN_STRATEGY.md</code> - Meme coin strategy guide
+- <code>IMPLEMENTATION_CHECKLIST.md</code> - Implementation checklist
+- <code>LIVE_TRADING_READINESS_PLAN.md</code> - Live trading preparation
+- <code>OPTIMIZATION_STATUS.md</code> - Optimization status tracking
+- <code>PHASE_1_COMPLETE_SUMMARY.md</code> - Phase 1 completion summary
+- <code>Project_Overview.md</code> - Project overview
+- <code>TODO.md</code> - Project todo list
+- <code>TRADING_SYSTEM_OVERVIEW.md</code> - Trading system overview
+- <code>summary-update.md</code> - Summary updates</p>
+<h3>🚀 Scripts (<code>scripts/</code>)</h3>
+<p>Main executable scripts for trading, analysis, and system management:</p>
+<h4>Core Trading Scripts</h4>
+<ul>
+<li><code>automated_lag_trading_system.py</code> - Main automated trading system</li>
+<li><code>systematic_multi_timeframe_test.py</code> - Multi-timeframe testing</li>
+<li><code>ultra_aggressive_returns_trader.py</code> - High-performance ML trader</li>
+<li><code>paper_trading_cli.py</code> - Paper trading command interface</li>
+</ul>
+<h4>Analysis &amp; Testing Scripts</h4>
+<ul>
+<li><code>comprehensive_backtest_suite.py</code> - Complete backtesting framework</li>
+<li><code>conservative_validation_test.py</code> - Conservative strategy validation</li>
+<li><code>enhanced_multi_timeframe_optimizer.py</code> - Multi-timeframe optimization</li>
+<li><code>quick_validation_test.py</code> - Quick strategy validation</li>
+<li><code>final_comparison.py</code> - Final strategy comparisons</li>
+<li><code>run_comparison.py</code> - Strategy comparison runner</li>
+</ul>
+<h4>Data &amp; Utility Scripts</h4>
+<ul>
+<li><code>check_data.py</code> - Data availability checker</li>
+<li><code>fetch.py</code> - Data fetching utility</li>
+<li><code>setup_database.py</code> - Database setup</li>
+<li><code>test_db_connection.py</code> - Database connection testing</li>
+<li><code>fetch_all_ohlcv_to_neon.py</code> - OHLCV data fetching</li>
+<li><code>migrate_configs.py</code> - Configuration migration</li>
+<li><code>cleanup_and_refetch.py</code> - Data cleanup and refetch</li>
+<li><code>monitor_fetch_progress.py</code> - Fetch progress monitoring</li>
+<li><code>fix_folder_structure.py</code> - Folder structure fixes</li>
+</ul>
+<h4>Subdirectories</h4>
+<ul>
+<li><code>debug/</code> - Debug scripts (moved from root)</li>
+<li><code>training/</code> - Model training scripts</li>
+<li><code>dashboard/</code> - Dashboard applications</li>
+<li><code>deployment/</code> - Deployment scripts</li>
+</ul>
+<h3>🐛 Debug (<code>debug/</code>)</h3>
+<p>Debug and analysis scripts for troubleshooting:
+- <code>debug_chandelier_signals.py</code> - Chandelier exit signal debugging
+- <code>debug_logistic_signals.py</code> - Logistic regression signal debugging</p>
+<h3>🧪 Tests (<code>tests/</code>)</h3>
+<p>All testing files organized by type:</p>
+<h4>Unit Tests (<code>tests/unit/</code>)</h4>
+<ul>
+<li><code>test_chandelier_exit.py</code> - Chandelier exit unit tests</li>
+<li><code>test_fixed_logistic.py</code> - Fixed logistic regression tests</li>
+<li><code>test_logistic_chandelier.py</code> - Logistic chandelier tests</li>
+<li><code>test_updated_backtest.py</code> - Updated backtest tests</li>
+</ul>
+<h4>Integration Tests (<code>tests/integration/</code>)</h4>
+<ul>
+<li><code>test_fetch_bitget_to_supabase.py</code> - Bitget to Supabase integration</li>
+<li><code>test_lorentzian.py</code> - Lorentzian strategy integration</li>
+</ul>
+<h4>Strategy Tests (<code>tests/strategy_tests/</code>)</h4>
+<ul>
+<li><code>data_loader.py</code> - Strategy data loading tests</li>
+<li><code>quick_strategy_test.py</code> - Quick strategy testing</li>
+<li><code>simple_test_runner.py</code> - Simple test runner</li>
+<li><code>test_all_strategies_leverage.py</code> - Leverage strategy tests</li>
+<li><code>test_fixed_strategy.py</code> - Fixed strategy tests</li>
+<li><code>test_lag_analysis.py</code> - Lag analysis tests</li>
+<li><code>test_logistic_chandelier.py</code> - Logistic chandelier tests</li>
+<li><code>test_runner.py</code> - Main test runner</li>
+</ul>
+<h3>📦 Source Code (<code>src/</code>)</h3>
+<p>Core application source code (well-organized):</p>
+<h4>Core (<code>src/core/</code>)</h4>
+<ul>
+<li><code>config.py</code> - Configuration management</li>
+<li><code>exceptions.py</code> - Custom exceptions</li>
+<li><code>logging.py</code> - Logging setup</li>
+<li><code>models.py</code> - Data models</li>
+<li><code>symbol_mapper.py</code> - Symbol mapping utilities</li>
+<li><code>time_utils.py</code> - Time utilities</li>
+</ul>
+<h4>Data (<code>src/data/</code>)</h4>
+<ul>
+<li><code>csv_storage.py</code> - CSV data storage</li>
+<li><code>data_loader.py</code> - Data loading utilities</li>
+<li><code>database_loader.py</code> - Database loading</li>
+<li><code>bitget_ws_to_supabase.py</code> - Bitget WebSocket to Supabase</li>
+<li><code>providers/</code> - Data providers</li>
+<li><code>pipeline/</code> - Data processing pipeline</li>
+<li><code>processors/</code> - Data processors</li>
+</ul>
+<h4>Exchanges (<code>src/exchanges/</code>)</h4>
+<ul>
+<li><code>base.py</code> - Base exchange handler</li>
+<li><code>binance/</code> - Binance exchange integration</li>
+<li><code>bitget/</code> - Bitget exchange integration</li>
+<li><code>coinbase/</code> - Coinbase exchange integration</li>
+<li><code>jupiter/</code> - Jupiter exchange integration</li>
+<li><code>auth/</code> - Authentication modules</li>
+</ul>
+<h4>Machine Learning (<code>src/ml/</code>)</h4>
+<ul>
+<li><code>features/</code> - Feature engineering</li>
+<li><code>indicators/</code> - Technical indicators</li>
+<li><code>models/</code> - ML models and strategies</li>
+<li><code>paper_trading_framework.py</code> - Paper trading framework</li>
+<li><code>strategy_backtest.py</code> - Strategy backtesting</li>
+</ul>
+<h4>Trading (<code>src/trading/</code>)</h4>
+<ul>
+<li><code>bitget/</code> - Bitget trading</li>
+<li><code>coinbase/</code> - Coinbase trading</li>
+<li><code>devnet/</code> - Devnet trading</li>
+<li><code>jup/</code> - Jupiter trading</li>
+<li><code>mainnet/</code> - Mainnet trading</li>
+<li><code>leverage_manager.py</code> - Leverage management</li>
+<li><code>security/</code> - Security modules</li>
+</ul>
+<h4>Utilities (<code>src/utils/</code>)</h4>
+<ul>
+<li><code>db_connector.py</code> - Database connector</li>
+<li><code>log_setup.py</code> - Logging setup</li>
+<li><code>performance_metrics.py</code> - Performance metrics</li>
+<li><code>position_sizing.py</code> - Position sizing</li>
+<li><code>wallet/</code> - Wallet management</li>
+</ul>
+<h4>CLI (<code>src/cli/</code>)</h4>
+<ul>
+<li><code>base.py</code> - CLI base</li>
+<li><code>data/</code> - Data CLI commands</li>
+<li><code>trading/</code> - Trading CLI commands</li>
+<li><code>utils/</code> - CLI utilities</li>
+<li><code>wallet/</code> - Wallet CLI commands</li>
+</ul>
+<h3>📊 Data (<code>data/</code>)</h3>
+<ul>
+<li><code>historical/</code> - Historical data storage</li>
+<li><code>ohlcv/</code> - OHLCV data</li>
+<li><code>hft_consolidated/</code> - High-frequency trading consolidated data</li>
+<li><code>live.py</code> - Live data handling</li>
+<li><code>processed.py</code> - Processed data</li>
+<li><code>raw.py</code> - Raw data</li>
+</ul>
+<h3>🤖 Models (<code>models/</code>)</h3>
+<ul>
+<li><code>configs/</code> - Model configurations</li>
+<li><code>hft_trained/</code> - High-frequency trading trained models</li>
+</ul>
+<h3>📓 Notebooks (<code>notebooks/</code>)</h3>
+<ul>
+<li><code>analysis/</code> - Analysis notebooks</li>
+<li><code>experiments/</code> - Experimental notebooks</li>
+</ul>
+<h3>📁 Archive (<code>archive/</code>)</h3>
+<p>Archived experimental and redundant scripts:
+- 40+ archived scripts from previous development phases
+- Includes various ML traders, optimizers, and experimental scripts</p>
+<h2>🎯 File Organization Principles</h2>
+<h3>1. <strong>Purpose-Based Organization</strong></h3>
+<ul>
+<li>Files are organized by their primary function</li>
+<li>Clear separation between scripts, tests, debug tools, and documentation</li>
+</ul>
+<h3>2. <strong>Maintainability</strong></h3>
+<ul>
+<li>Related files are grouped together</li>
+<li>Easy to find specific functionality</li>
+<li>Clear naming conventions</li>
+</ul>
+<h3>3. <strong>Developer Experience</strong></h3>
+<ul>
+<li>New developers can quickly understand the project structure</li>
+<li>Clear paths for different types of work (testing, debugging, development)</li>
+</ul>
+<h3>4. <strong>Scalability</strong></h3>
+<ul>
+<li>Structure supports future growth</li>
+<li>Easy to add new categories without disrupting existing organization</li>
+</ul>
+<h2>🔍 Finding Files</h2>
+<h3>For Development:</h3>
+<ul>
+<li><strong>Core logic</strong>: <code>src/</code> directory</li>
+<li><strong>Scripts</strong>: <code>scripts/</code> directory</li>
+<li><strong>Tests</strong>: <code>tests/</code> directory</li>
+</ul>
+<h3>For Debugging:</h3>
+<ul>
+<li><strong>Debug tools</strong>: <code>debug/</code> directory</li>
+<li><strong>Debug scripts</strong>: <code>scripts/debug/</code> directory</li>
+</ul>
+<h3>For Documentation:</h3>
+<ul>
+<li><strong>All docs</strong>: <code>docs/</code> directory</li>
+<li><strong>Main README</strong>: Root level <code>README.md</code></li>
+</ul>
+<h3>For Configuration:</h3>
+<ul>
+<li><strong>Model configs</strong>: <code>models/configs/</code></li>
+<li><strong>Project configs</strong>: <code>configs/</code></li>
+<li><strong>Environment</strong>: Root level <code>.env</code></li>
+</ul>
+<h2>📝 Adding New Files</h2>
+<p>When adding new files, follow these guidelines:</p>
+<ol>
+<li><strong>Scripts</strong> → <code>scripts/</code> (with appropriate subdirectory if needed)</li>
+<li><strong>Tests</strong> → <code>tests/</code> (unit, integration, or strategy_tests)</li>
+<li><strong>Debug tools</strong> → <code>debug/</code> or <code>scripts/debug/</code></li>
+<li><strong>Documentation</strong> → <code>docs/</code></li>
+<li><strong>Core functionality</strong> → <code>src/</code> (appropriate subdirectory)</li>
+<li><strong>Experimental work</strong> → <code>archive/</code> (when no longer needed)</li>
+</ol>
+<h2>🧹 Maintenance</h2>
+<ul>
+<li>Regularly review and archive experimental scripts</li>
+<li>Keep documentation updated with new features</li>
+<li>Maintain clear separation between different types of files</li>
+<li>Use consistent naming conventions </li>
+</ul>
+    </div>
+</body>
+</html>

@@ -5,12 +5,12 @@ Thank you for your interest in contributing to QuantDesk! We welcome contributio
 ## 🤝 **How to Contribute**
 
 ### 1. **Report Issues**
-- Use [GitHub Issues](https://github.com/quantdesk/quantdesk/issues) to report bugs
+- Use [GitHub Issues](https://github.com/dextrorsal/quantdesk/issues) to report bugs
 - Include detailed steps to reproduce the issue
 - Provide system information and error logs
 
 ### 2. **Suggest Features**
-- Use [GitHub Discussions](https://github.com/quantdesk/quantdesk/discussions) for feature requests
+- Use [GitHub Discussions](https://github.com/dextrorsal/quantdesk/discussions) for feature requests
 - Describe the use case and expected behavior
 - Consider the impact on existing users
 
@@ -261,7 +261,7 @@ We recognize contributors in several ways:
 ### Community Channels
 
 - **Discord**: [QuantDesk Discord](https://discord.gg/quantdesk)
-- **GitHub Discussions**: [GitHub Discussions](https://github.com/quantdesk/quantdesk/discussions)
+- **GitHub Discussions**: [GitHub Discussions](https://github.com/dextrorsal/quantdesk/discussions)
 - **Email**: contributors@quantdesk.com
 
 ### Mentorship

@@ -41,7 +41,7 @@ anchor --version  # Should be 0.31+
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/quantdesk/quantdesk.git
+git clone https://github.com/dextrorsal/quantdesk.git
 cd quantdesk
 ```
 
@@ -232,7 +232,7 @@ You've successfully set up QuantDesk! Here's what you've accomplished:
 ## 🆘 Need Help?
 
 - **Discord Community**: [Join our Discord](https://discord.gg/quantdesk)
-- **GitHub Issues**: [Report issues](https://github.com/quantdesk/quantdesk/issues)
+- **GitHub Issues**: [Report issues](https://github.com/dextrorsal/quantdesk/issues)
 - **Documentation**: [Browse all docs](../README.md)
 - **Email Support**: [contact@quantdesk.io](mailto:contact@quantdesk.io)
 

@@ -30,10 +30,10 @@
       }
     },
     "github": {
-      "url": "https://github.com/quantdesk/quantdesk"
+      "url": "https://github.com/dextrorsal/quantdesk"
     },
     "edit-link": {
-      "base": "https://github.com/quantdesk/quantdesk-docs/edit/main",
+      "base": "https://github.com/dextrorsal/quantdesk-docs/edit/main",
       "label": "Edit This Page"
     },
     "sharing": {

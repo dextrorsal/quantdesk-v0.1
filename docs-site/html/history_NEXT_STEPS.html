@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Steps - QuantDesk Documentation</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+        }
+        .container {
+            background: #141414;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #52c41a;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        h1 {
+            border-bottom: 2px solid #52c41a;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            color: #52c41a;
+        }
+        pre {
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #52c41a;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+        }
+        blockquote {
+            border-left: 4px solid #52c41a;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/">&larr; Back to Documentation</a>
+        </div>
+        <h1>Next Steps: Training Your ML Trading Model</h1>
+<p>Now that you have all the components in place, here's how to proceed with training and evaluating your ML trading model:</p>
+<h2>1. Collect Historical Data</h2>
+<p>First, make sure you have enough historical data:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Activate your environment</span>
+conda<span class="w"> </span>activate<span class="w"> </span>ML-torch
+
+<span class="c1"># Run the data collection for historical data (at least 90 days recommended)</span>
+python<span class="w"> </span>src/data/collectors/sol_data_collector.py<span class="w"> </span>--historical<span class="w"> </span>--days<span class="w"> </span><span class="m">90</span>
+</code></pre></div>
+
+<p>This will populate your database with sufficient historical data for training.</p>
+<h2>2. Run Basic Model Training</h2>
+<p>Start with basic model training to ensure everything works:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Run the basic training script</span>
+python<span class="w"> </span>scripts/train_model.py<span class="w"> </span>--data-days<span class="w"> </span><span class="m">30</span><span class="w"> </span>--epochs<span class="w"> </span><span class="m">10</span>
+</code></pre></div>
+
+<p>This will:
+- Fetch 30 days of historical data
+- Calculate technical indicators
+- Train a model for 10 epochs
+- Save the model and metrics to the models/trained directory</p>
+<h2>3. Examine Results</h2>
+<p>Check the output files in the models/trained directory:
+- Look at the metrics JSON file to see performance
+- Check the loss curve to verify training convergence</p>
+<h2>4. Run Walk-Forward Optimization</h2>
+<p>For more robust results:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Run walk-forward optimization</span>
+python<span class="w"> </span>scripts/train_model_walkforward.py<span class="w"> </span>--data-days<span class="w"> </span><span class="m">90</span><span class="w"> </span>--window-size<span class="w"> </span><span class="m">20</span><span class="w"> </span>--test-size<span class="w"> </span><span class="m">5</span>
+</code></pre></div>
+
+<p>This uses a more realistic testing approach that better represents actual trading conditions.</p>
+<h2>5. Visualize Model Performance</h2>
+<p>Launch the dashboard to visualize your results:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Install dashboard requirements</span>
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>scripts/dashboard/requirements-dashboard.txt
+
+<span class="c1"># Run the dashboard</span>
+python<span class="w"> </span>scripts/dashboard/model_dashboard.py
+</code></pre></div>
+
+<p>Visit http://127.0.0.1:8050/ in your browser to see the performance metrics.</p>
+<h2>6. Experiment and Improve</h2>
+<p>Based on the performance metrics, experiment with:</p>
+<ol>
+<li><strong>Different Technical Indicators</strong>: Add or modify indicators in <code>technical_indicators.py</code></li>
+<li><strong>Model Architecture</strong>: Adjust the Lorentzian Classifier architecture in <code>lorentzian_classifier.py</code></li>
+<li><strong>Signal Generation</strong>: Change the signal thresholds in <code>train_model.py</code></li>
+<li><strong>Training Parameters</strong>: Try different learning rates, batch sizes, or epochs</li>
+</ol>
+<h2>7. Deploy the Best Model</h2>
+<p>Once you have a model with satisfactory metrics:</p>
+<ol>
+<li>Save the model configuration</li>
+<li>Implement a real-time inference script</li>
+<li>Set up a paper trading system to validate performance</li>
+</ol>
+<h2>8. Monitor and Adjust</h2>
+<ul>
+<li>Regularly retrain your model as new data becomes available</li>
+<li>Monitor performance metrics over time</li>
+<li>Adjust parameters based on changing market conditions</li>
+</ul>
+<hr />
+<p>Remember to optimize for risk-adjusted metrics like Sharpe Ratio rather than just total returns. This will lead to more sustainable trading performance in various market conditions.</p>
+<p>Follow the detailed <a href="docs/MODEL_TRAINING.html">Model Training Guide</a> for more in-depth information on each step. </p>
+    </div>
+</body>
+</html>

@@ -341,7 +341,7 @@ const ProTerminalWithTaskbar: React.FC = () => {
         break;
       case 'CHAT':
         createWindow('CHAT', 'Community Chat', [
-          { user: 'TraderBot', message: 'Welcome to Quantify Chat!', time: '14:30' },
+          { user: 'TraderBot', message: 'Welcome to QuantDesk Chat!', time: '14:30' },
           { user: 'CryptoKing', message: 'SOL looking bullish today', time: '14:32' },
           { user: 'AlgoTrader', message: 'My bot just triggered a buy signal', time: '14:35' }
         ]);
@@ -484,8 +484,8 @@ const ProTerminalWithTaskbar: React.FC = () => {
         break;
       case 'ACCT':
         createWindow('ACCT', 'Account Management', {
-          user: 'Quantify Trader',
-          email: 'trader@quantify.com',
+          user: 'QuantDesk Trader',
+          email: 'trader@QuantDesk.com',
           plan: 'Professional',
           member_since: '2023-06-15',
           permissions: ['Trading', 'Research', 'Analytics', 'API Access']
@@ -503,7 +503,7 @@ const ProTerminalWithTaskbar: React.FC = () => {
         });
         break;
       case 'CHANGE':
-        createWindow('CHANGE', 'Quantify Terminal Changelog', [
+        createWindow('CHANGE', 'QuantDesk Terminal Changelog', [
           { version: 'v1.0.1', date: '2024-01-15', changes: ['Added Pro Terminal mode', 'Improved window management', 'Enhanced backtick menu'] },
           { version: 'v1.0.0', date: '2024-01-01', changes: ['Initial release', 'Basic trading features', 'Paper trading framework'] }
         ]);
@@ -522,8 +522,8 @@ const ProTerminalWithTaskbar: React.FC = () => {
         createWindow('MARTIN', 'Files & Links', [
           { name: 'Trading Strategies.pdf', type: 'Document', size: '2.3 MB' },
           { name: 'Market Analysis Q4.xlsx', type: 'Spreadsheet', size: '1.8 MB' },
-          { name: 'Risk Management Guide', type: 'Link', url: 'https://quantify.com/risk' },
-          { name: 'API Documentation', type: 'Link', url: 'https://docs.quantify.com' }
+          { name: 'Risk Management Guide', type: 'Link', url: 'https://QuantDesk.com/risk' },
+          { name: 'API Documentation', type: 'Link', url: 'https://docs.QuantDesk.com' }
         ]);
         break;
       case 'NEJM':
@@ -535,7 +535,7 @@ const ProTerminalWithTaskbar: React.FC = () => {
         break;
       case 'GH':
         createWindow('GH', 'GitHub News Feed', [
-          { repo: 'quantify-trading/core', event: 'New release v2.1.0', time: '2 hours ago' },
+          { repo: 'QuantDesk-trading/core', event: 'New release v2.1.0', time: '2 hours ago' },
           { repo: 'microsoft/vscode', event: 'Security update', time: '4 hours ago' },
           { repo: 'openai/gpt-4', event: 'Model improvements', time: '1 day ago' }
         ]);
@@ -556,7 +556,7 @@ const ProTerminalWithTaskbar: React.FC = () => {
       case 'BUG':
       case 'ERR':
         createWindow('ERR', 'Bug Report & Support', {
-          contact: 'support@quantify.com',
+          contact: 'support@QuantDesk.com',
           common_issues: [
             'Window not responding',
             'Data feed disconnected', 
@@ -572,7 +572,7 @@ const ProTerminalWithTaskbar: React.FC = () => {
         break;
       case 'RES':
         createWindow('RES', 'Research Reports', [
-          { title: 'Crypto Market Analysis Q4 2024', author: 'Quantify Research', date: '2024-01-15', rating: 'BUY' },
+          { title: 'Crypto Market Analysis Q4 2024', author: 'QuantDesk Research', date: '2024-01-15', rating: 'BUY' },
           { title: 'DeFi Protocol Valuation Models', author: 'Blockchain Analytics', date: '2024-01-12', rating: 'HOLD' },
           { title: 'Meme Coin Trend Analysis', author: 'Social Trading Desk', date: '2024-01-10', rating: 'SPECULATIVE' }
         ]);
@@ -1842,7 +1842,7 @@ const ProTerminalWithTaskbar: React.FC = () => {
       case 'CHANGE':
         return (
           <div style={{ padding: '10px', height: '100%', overflow: 'auto' }}>
-            <h3 style={{ margin: '0 0 15px 0', fontSize: '14px' }}>Quantify Terminal Changelog</h3>
+            <h3 style={{ margin: '0 0 15px 0', fontSize: '14px' }}>QuantDesk Terminal Changelog</h3>
             {window.content?.map((version: any, idx: number) => (
               <div key={idx} style={{ 
                 marginBottom: '15px', 
@@ -3540,7 +3540,7 @@ const ProTerminalWithTaskbar: React.FC = () => {
           textAlign: 'center',
           color: 'var(--text-muted)'
         }}>
-          <div style={{ fontSize: '24px', marginBottom: '20px' }}>🚀 Quantify Pro Terminal</div>
+          <div style={{ fontSize: '24px', marginBottom: '20px' }}>🚀 QuantDesk Pro Terminal</div>
           <div style={{ fontSize: '16px', marginBottom: '10px' }}>Professional Trading Terminal</div>
           <div style={{ fontSize: '12px' }}>
             Press <span style={{ color: 'var(--success-500)', fontWeight: 'bold' }}>backtick (`)</span> to open command menu

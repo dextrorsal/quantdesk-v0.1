@@ -23,7 +23,7 @@ This open source package provides a **comprehensive foundation** for building in
 
 ### 1. **Clone and Setup**
 ```bash
-git clone https://github.com/quantdesk/quantdesk.git
+git clone https://github.com/dextrorsal/quantdesk.git
 cd quantdesk
 chmod +x setup-demo.sh
 ./setup-demo.sh
@@ -151,8 +151,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🆘 **Support**
 
 - **Documentation**: [GitBook](https://quantdesk.gitbook.io)
-- **Issues**: [GitHub Issues](https://github.com/quantdesk/quantdesk/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/quantdesk/quantdesk/discussions)
+- **Issues**: [GitHub Issues](https://github.com/dextrorsal/quantdesk/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/dextrorsal/quantdesk/discussions)
 - **Discord**: [Community Discord](https://discord.gg/quantdesk)
 
 ## 🗺️ **Roadmap**
