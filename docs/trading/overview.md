@@ -209,7 +209,7 @@ Trade perpetual futures on major crypto assets with up to 100x leverage:
 
 ### Community
 - **Discord**: [Join our trading community](https://discord.gg/quantdesk)
-- **GitHub**: [Report issues and request features](https://github.com/quantdesk/quantdesk/issues)
+- **GitHub**: [Report issues and request features](https://github.com/dextrorsal/quantdesk/issues)
 - **Documentation**: [Browse all documentation](../README.md)
 - **Support**: [contact@quantdesk.io](mailto:contact@quantdesk.io)
 

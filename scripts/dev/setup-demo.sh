@@ -167,9 +167,9 @@ show_next_steps() {
     echo "   - Contributing: CONTRIBUTING.md"
     echo ""
     echo "🆘 Need Help?"
-    echo "   - GitHub Issues: https://github.com/quantdesk/quantdesk/issues"
+    echo "   - GitHub Issues: https://github.com/dextrorsal/quantdesk/issues"
     echo "   - Discord: https://discord.gg/quantdesk"
-    echo "   - Email: support@quantdesk.com"
+    echo "   - Email: contact@quantdesk.app"
     echo ""
     echo "🚀 Welcome to QuantDesk - The Bloomberg Terminal for Crypto!"
 }

@@ -15,7 +15,7 @@ Make sure you have the following installed:
 
 ```bash
 # Clone the repository
-git clone https://github.com/quantdesk/quantdesk.git
+git clone https://github.com/dextrorsal/quantdesk.git
 cd quantdesk
 
 # Install backend dependencies
@@ -231,9 +231,9 @@ ws.onmessage = (event) => {
 ### Getting Help
 
 - **Documentation**: [GitBook](https://quantdesk.gitbook.io)
-- **Issues**: [GitHub Issues](https://github.com/quantdesk/quantdesk/issues)
+- **Issues**: [GitHub Issues](https://github.com/dextrorsal/quantdesk/issues)
 - **Discord**: [Community Discord](https://discord.gg/quantdesk)
-- **Email**: support@quantdesk.com
+- **Email**: contact@quantdesk.app
 
 ## 🎯 **Next Steps**
 
@@ -246,7 +246,7 @@ ws.onmessage = (event) => {
 
 2. **Contribute**
    - Read our [Contributing Guidelines](CONTRIBUTING.md)
-   - Pick up an issue from our [GitHub Issues](https://github.com/quantdesk/quantdesk/issues)
+   - Pick up an issue from our [GitHub Issues](https://github.com/dextrorsal/quantdesk/issues)
    - Submit a pull request
 
 3. **Build Integrations**

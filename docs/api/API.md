@@ -5,7 +5,7 @@ Welcome to the QuantDesk API! This documentation provides comprehensive informat
 ## 🔗 **Base URL**
 
 ```
-Development: https://api-dev.quantdesk.com
+Development: https://api-dev.quantdesk.app
 Production: https://api.quantdesk.com
 Local: http://localhost:3002
 ```
@@ -243,7 +243,7 @@ ws.send(JSON.stringify({
 ### Test Environment
 Use our test environment for development:
 ```
-Base URL: https://api-test.quantdesk.com
+Base URL: https://api-test.quantdesk.app
 Testnet: Solana Devnet
 ```
 
@@ -252,10 +252,10 @@ Testnet: Solana Devnet
 #### Using cURL
 ```bash
 # Get markets
-curl -X GET "https://api-dev.quantdesk.com/api/supabase-oracle/markets"
+curl -X GET "https://api-dev.quantdesk.app/api/supabase-oracle/markets"
 
 # Place order
-curl -X POST "https://api-dev.quantdesk.com/api/orders" \
+curl -X POST "https://api-dev.quantdesk.app/api/orders" \
   -H "Authorization: Bearer your_token" \
   -H "Content-Type: application/json" \
   -d '{
@@ -269,7 +269,7 @@ curl -X POST "https://api-dev.quantdesk.com/api/orders" \
 
 #### Using JavaScript
 ```javascript
-const response = await fetch('https://api-dev.quantdesk.com/api/orders', {
+const response = await fetch('https://api-dev.quantdesk.app/api/orders', {
   method: 'POST',
   headers: {
     'Authorization': 'Bearer your_token',
@@ -358,9 +358,9 @@ Content-Type: application/json
 ## 📞 **Support**
 
 - **Documentation**: [GitBook](https://quantdesk.gitbook.io)
-- **API Status**: [Status Page](https://status.quantdesk.com)
+- **API Status**: [Status Page](https://status.quantdesk.app)
 - **Support**: [Discord](https://discord.gg/quantdesk)
-- **Issues**: [GitHub Issues](https://github.com/quantdesk/quantdesk/issues)
+- **Issues**: [GitHub Issues](https://github.com/dextrorsal/quantdesk/issues)
 
 ---
 

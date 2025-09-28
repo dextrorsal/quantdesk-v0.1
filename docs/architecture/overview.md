@@ -299,7 +299,7 @@ QuantDesk is built with institutional-grade architecture, designed to handle the
 
 ### Community
 - **Discord**: [Join our developer community](https://discord.gg/quantdesk)
-- **GitHub**: [Report issues and request features](https://github.com/quantdesk/quantdesk/issues)
+- **GitHub**: [Report issues and request features](https://github.com/dextrorsal/quantdesk/issues)
 - **Documentation**: [Browse all documentation](../README.md)
 - **Support**: [contact@quantdesk.io](mailto:contact@quantdesk.io)
 

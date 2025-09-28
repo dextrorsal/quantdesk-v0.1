@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Readme - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/">&larr; Back to Documentation</a>
+        </div>
+        <h1>📚 Project Documentation</h1>
+<p>This directory contains the technical documentation for the QuantDesk trading system. All documentation here is current and actionable for developers and users.</p>
+<h2>📂 Documentation Structure</h2>
+<h3><strong>🤖 AI &amp; Integration</strong></h3>
+<ul>
+<li><code>ai-agent-integration.md</code> - AI agent integration guide</li>
+<li><code>AGENT_HANDOFF_SUMMARY.md</code> - AI agent handoff documentation</li>
+</ul>
+<h3><strong>📊 Trading Strategies</strong></h3>
+<ul>
+<li><code>ml-trading-strat.md</code> - Machine learning trading strategies</li>
+<li><code>lag-based.md</code> - Lag-based trading strategies</li>
+<li><code>HIGH_LEVERAGE_MEME_COIN_STRATEGY.md</code> - High leverage meme coin strategies</li>
+<li><code>TECHNICAL_STRATEGY.md</code> - Technical analysis strategies</li>
+<li><code>TRADING_PHILOSOPHY.md</code> - Trading philosophy and approach</li>
+</ul>
+<h3><strong>🏗️ System Architecture</strong></h3>
+<ul>
+<li><code>TRADING_SYSTEM_OVERVIEW.md</code> - Overall system architecture</li>
+<li><code>AUTOMATED_LAG_TRADING_SYSTEM.md</code> - Automated lag trading system</li>
+<li><code>PAPER_TRADING_FRAMEWORK.md</code> - Paper trading framework</li>
+<li><code>portfolio-manager.md</code> - Portfolio management system</li>
+</ul>
+<h3><strong>🔧 Technical Implementation</strong></h3>
+<ul>
+<li><code>ML_MODEL.md</code> - Machine learning model documentation</li>
+<li><code>ML_MODEL_STRUCTURE.md</code> - ML model structure details</li>
+<li><code>MODEL_TRAINING.md</code> - Model training procedures</li>
+<li><code>INDICATORS.md</code> - Technical indicators documentation</li>
+<li><code>TRADING_SIGNALS_FIX.md</code> - Trading signals implementation</li>
+</ul>
+<h3><strong>💾 Data &amp; Storage</strong></h3>
+<ul>
+<li><code>CSV_STORAGE_SYSTEM.md</code> - CSV storage system documentation</li>
+<li><code>DATABASE_GUIDE.md</code> - Database setup and usage</li>
+<li><code>NEON_PIPELINE.md</code> - Neon database pipeline</li>
+</ul>
+<h3><strong>🖥️ Infrastructure</strong></h3>
+<ul>
+<li><code>cross-platform-gpu.md</code> - Cross-platform GPU support</li>
+<li><code>RUN_DASHBOARD.md</code> - Dashboard running instructions</li>
+</ul>
+<h3><strong>📋 Implementation Guides</strong></h3>
+<ul>
+<li><code>IMPLEMENTATION_CHECKLIST.md</code> - Implementation checklist</li>
+<li><code>LIVE_TRADING_READINESS_PLAN.md</code> - Live trading preparation</li>
+<li><code>high-frequency-trading-gameplan.md</code> - HFT implementation plan</li>
+</ul>
+<h3><strong>📖 Reference</strong></h3>
+<ul>
+<li><code>INDEX.md</code> - Documentation index</li>
+<li><code>OLD_SCRIPTS_README.md</code> - Legacy scripts documentation</li>
+<li><code>TROUBLESHOOTING.md</code> - Troubleshooting guide</li>
+</ul>
+<h2>🎯 Purpose</h2>
+<p>This documentation is designed to be:
+- <strong>Current</strong> - Always up-to-date with the latest system
+- <strong>Actionable</strong> - Provides clear instructions for users
+- <strong>Technical</strong> - Focused on implementation and usage
+- <strong>Organized</strong> - Easy to navigate and find information</p>
+<h2>📝 Usage Guidelines</h2>
+<h3><strong>For Developers:</strong></h3>
+<ul>
+<li>Start with <code>TRADING_SYSTEM_OVERVIEW.md</code> for system understanding</li>
+<li>Use <code>IMPLEMENTATION_CHECKLIST.md</code> for setup</li>
+<li>Reference <code>TROUBLESHOOTING.md</code> for common issues</li>
+</ul>
+<h3><strong>For Users:</strong></h3>
+<ul>
+<li>Begin with <code>PAPER_TRADING_FRAMEWORK.md</code> for getting started</li>
+<li>Use <code>RUN_DASHBOARD.md</code> for dashboard operation</li>
+<li>Check <code>DATABASE_GUIDE.md</code> for data setup</li>
+</ul>
+<h3><strong>For Strategy Development:</strong></h3>
+<ul>
+<li>Review <code>ml-trading-strat.md</code> for ML strategies</li>
+<li>Check <code>lag-based.md</code> for lag strategies</li>
+<li>Use <code>INDICATORS.md</code> for technical indicators</li>
+</ul>
+<h2>🔄 Maintenance</h2>
+<h3><strong>Documentation Standards:</strong></h3>
+<ul>
+<li>Keep all documentation current with code changes</li>
+<li>Update when new features are added</li>
+<li>Remove obsolete information promptly</li>
+<li>Use clear, concise language</li>
+</ul>
+<h3><strong>Adding New Documentation:</strong></h3>
+<ul>
+<li>Place in appropriate category</li>
+<li>Update this README with new additions</li>
+<li>Follow existing naming conventions</li>
+<li>Include practical examples</li>
+</ul>
+<h3><strong>Historical Information:</strong></h3>
+<ul>
+<li>Project evolution and summaries are in <code>../project_history/</code></li>
+<li>This directory contains only current, actionable documentation</li>
+</ul>
+<p>This clean separation ensures that developers can quickly find the information they need to use and contribute to the system effectively! 🚀 </p>
+    </div>
+</body>
+</html>
