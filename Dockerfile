@@ -1,4 +1,4 @@
-# Railway Dockerfile - handle missing backend gracefully
+# Railway Dockerfile - handle npm-force-resolutions
 FROM node:20-bookworm-slim
 
 WORKDIR /app
@@ -20,12 +20,14 @@ COPY . .
 RUN ls -la
 RUN ls -la backend/ || echo "Backend directory not found"
 
-# Try to install dependencies if backend exists
-RUN if [ -d "backend" ]; then \
-        cd backend && npm install --only=production; \
-    else \
-        echo "Backend directory not found, skipping npm install"; \
-    fi
+# Install dependencies in backend directory
+WORKDIR /app/backend
+
+# Install npm-force-resolutions globally first
+RUN npm install -g npm-force-resolutions
+
+# Then install project dependencies
+RUN npm install --only=production
 
 # Set environment variables
 ENV NODE_ENV=production
