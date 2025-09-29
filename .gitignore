@@ -19,6 +19,7 @@ out/
 # Frontend (keep private - competitive advantage)
 src/
 frontend/
+admin-dashboard/
 index.html
 vite.config.ts
 tailwind.config.js
@@ -189,3 +190,12 @@ target/
 *.test
 *.out
 go.work
+
+# Deployment files (keep private)
+Dockerfile
+.dockerignore
+.railwayignore
+railway.json
+backend/Procfile
+backend/start-backend.sh
+backend/kill-backend.sh
