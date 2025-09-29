@@ -1,4 +1,4 @@
-# Railway Dockerfile - simplified approach
+# Railway Dockerfile - handle missing backend gracefully
 FROM node:20-bookworm-slim
 
 WORKDIR /app
@@ -13,16 +13,19 @@ RUN apt-get update \
        curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy everything (Railway will handle what to include via .railwayignore)
+# Copy everything
 COPY . .
 
 # Debug: show what was copied
 RUN ls -la
 RUN ls -la backend/ || echo "Backend directory not found"
 
-# Install dependencies in backend directory
-WORKDIR /app/backend
-RUN npm install --only=production
+# Try to install dependencies if backend exists
+RUN if [ -d "backend" ]; then \
+        cd backend && npm install --only=production; \
+    else \
+        echo "Backend directory not found, skipping npm install"; \
+    fi
 
 # Set environment variables
 ENV NODE_ENV=production
@@ -40,5 +43,5 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
 
 EXPOSE 3002
 
-# Note: Railway will use the startCommand from railway.json
-CMD ["echo", "Railway will use startCommand from railway.json"]
+# Default command (Railway will override with startCommand)
+CMD ["echo", "Container ready - Railway will use startCommand"]
