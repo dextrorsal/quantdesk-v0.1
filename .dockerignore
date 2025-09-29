@@ -1,0 +1,12 @@
+**
+!src/
+!package*.json
+!tsconfig.json
+!Dockerfile
+!railway.json
+!.dockerignore
+node_modules
+dist
+*.log
+**/*.test.ts
+**/*.spec.ts
