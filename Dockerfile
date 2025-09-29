@@ -16,12 +16,15 @@ RUN apt-get update \
 # Copy everything first to see what's available
 COPY . .
 
-# Check if backend directory exists
+# Check if backend directory exists and what's in it
 RUN ls -la
+RUN ls -la backend/ || echo "Backend directory not found"
 
 # Move to backend directory and install dependencies
 WORKDIR /app/backend
-RUN npm ci --only=production
+
+# Use npm install instead of npm ci to handle missing package-lock.json
+RUN npm install --only=production
 
 # Set environment variables
 ENV NODE_ENV=production
