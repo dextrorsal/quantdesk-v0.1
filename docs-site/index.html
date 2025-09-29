@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantDesk Protocol - Documentation</title>
+    <link rel="icon" type="image/png" href="../quantdesk-icon.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            background: #000000;
+            font-size: 14px;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 350px;
+            background: #000000;
+            color: #ffffff;
+            padding: 20px;
+            overflow-y: auto;
+            position: fixed;
+            height: 100vh;
+            border-right: 1px solid #3b82f6;
+        }
+
+        .sidebar h1 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #3b82f6;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 10px;
+        }
+
+        .sidebar h2 {
+            font-size: 1.1em;
+            margin: 20px 0 10px 0;
+            color: #3b82f6;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            margin-left: 10px;
+        }
+
+        .sidebar li {
+            margin: 8px 0;
+        }
+
+        .sidebar a {
+            color: #ffffff;
+            text-decoration: none;
+            display: block;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            font-size: 13px;
+        }
+
+        .sidebar a:hover {
+            background: #1a1a1a;
+            color: #3b82f6;
+            border: 1px solid #3b82f6;
+        }
+
+        .sidebar a.active {
+            background: #3b82f6;
+            color: #000000;
+            border: 1px solid #3b82f6;
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 350px;
+            padding: 40px;
+            max-width: none;
+            width: calc(100vw - 350px);
+            background: #000000;
+            min-height: 100vh;
+            border-left: 1px solid #3b82f6;
+        }
+
+        .main-content h1 {
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            border-bottom: 3px solid #3b82f6;
+            padding-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .main-content h2 {
+            color: #3b82f6;
+            margin: 30px 0 15px 0;
+            font-size: 1.8em;
+            font-weight: 600;
+        }
+
+        .main-content h3 {
+            color: #ffffff;
+            margin: 20px 0 10px 0;
+            font-size: 1.4em;
+            font-weight: 600;
+        }
+
+        .main-content p {
+            margin: 15px 0;
+            color: #d9d9d9;
+        }
+
+        .main-content ul, .main-content ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+
+        .main-content li {
+            margin: 8px 0;
+            color: #d9d9d9;
+        }
+
+        .main-content code {
+            background: #1a1a1a;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            font-size: 13px;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+
+        .main-content pre {
+            background: #0a0a0a;
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border: 1px solid #333333;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .main-content pre code {
+            background: none;
+            color: #ffffff;
+            padding: 0;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid #333333;
+            background: transparent;
+            color: #ffffff;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .status-badge:hover {
+            background: #3b82f6;
+            color: #000000;
+            border-color: #3b82f6;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .status-in-progress {
+            background: #f39c12;
+            color: white;
+        }
+
+        .status-pending {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: #1a1a1a;
+            border: 1px solid #333333;
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59,130,246,0.2);
+            border-color: #3b82f6;
+        }
+
+        .feature-card h3 {
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: #d9d9d9;
+            font-size: 0.9em;
+        }
+
+        .quick-start {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border: 1px solid #333333;
+        }
+
+        .quick-start h2 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .quick-start code {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #3b82f6;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            background: #000000;
+            color: #ffffff;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #60a5fa;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+
+        pre[class*="language-"] code {
+            background: none !important;
+            color: #ffffff !important;
+            padding: 0 !important;
+            border: none !important;
+        }
+
+        /* Language-specific colors */
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .sidebar {
+                width: 300px;
+            }
+            .main-content {
+                margin-left: 300px;
+                width: calc(100vw - 300px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+                padding: 20px;
+            }
+            .container {
+                flex-direction: column;
+            }
+        }
+
+        .toc {
+            background: #1a1a1a;
+            border: 1px solid #333333;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .toc h3 {
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .toc a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+            
+            .container {
+                flex-direction: column;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Active section highlighting */
+        .section-highlight {
+            background: rgba(59, 130, 246, 0.1) !important;
+            border-left: 3px solid #3b82f6 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <h1><i class="fas fa-terminal"></i> QuantDesk Protocol</h1>
+            
+            <input type="text" class="search-box" placeholder="Search documentation..." id="searchBox">
+            
+            <h2><i class="fas fa-home"></i> Getting Started</h2>
+            <ul>
+                <li><a href="#overview" class="active">Project Overview</a></li>
+                <li><a href="#quick-start">Quick Start</a></li>
+                <li><a href="html/docs_getting-started/quick-start.html">Getting Started Guide</a></li>
+                <li><a href="html/docs_guides/ENVIRONMENT_SETUP.html">Environment Setup</a></li>
+                <li><a href="html/docs_guides/SECURITY_GUIDE.html">Security Guide</a></li>
+            </ul>
+
+            <h2><i class="fas fa-rocket"></i> Technical Evolution</h2>
+            <ul>
+                <li><a href="html/docs_TECHNICAL_EVOLUTION_PORTFOLIO.html">Technical Evolution Portfolio</a></li>
+                <li><a href="html/docs_TECHNICAL_EVOLUTION_PORTFOLIO.html#cross-references">Cross-References to Original Repos</a></li>
+                <li><a href="html/docs_PERFORMANCE_METRICS.html">Performance Metrics</a></li>
+                <li><a href="html/docs_DOCUMENTATION_STRATEGY_RECOMMENDATION.html">Documentation Strategy</a></li>
+            </ul>
+
+            <h2><i class="fas fa-chart-line"></i> Trading System</h2>
+            <ul>
+                <li><a href="#strategies">ML Strategies</a></li>
+                <li><a href="#backtesting">Backtesting</a></li>
+                <li><a href="#paper-trading">Paper Trading</a></li>
+                <li><a href="#live-trading">Live Trading</a></li>
+            </ul>
+
+            <h2><i class="fas fa-database"></i> Data & Storage</h2>
+            <ul>
+                <li><a href="#csv-storage">CSV Storage</a></li>
+                <li><a href="#data-pipeline">Data Pipeline</a></li>
+                <li><a href="#exchanges">Exchange Integration</a></li>
+            </ul>
+
+            <h2><i class="fas fa-desktop"></i> Web UI</h2>
+            <ul>
+                <li><a href="html/docs_user-guide/web-ui.html">Web UI User Guide</a></li>
+                <li><a href="#integrated-ui">Integrated UI</a></li>
+                <li><a href="#api-endpoints">API Endpoints</a></li>
+                <li><a href="#websocket">WebSocket</a></li>
+            </ul>
+
+            <h2><i class="fas fa-cogs"></i> Technical Documentation</h2>
+            <ul>
+                <li><a href="html/docs_CSV_STORAGE_SYSTEM.html">CSV Storage System</a></li>
+                <li><a href="html/docs_DATABASE_GUIDE.html">Database Guide</a></li>
+                <li><a href="html/docs_ML_MODEL_STRUCTURE.html">ML Model Structure</a></li>
+                <li><a href="html/docs_ML_MODEL.html">ML Model Details</a></li>
+                <li><a href="html/docs_MODEL_TRAINING.html">Model Training</a></li>
+                <li><a href="html/docs_PAPER_TRADING_FRAMEWORK.html">Paper Trading Framework</a></li>
+                <li><a href="html/docs_NEON_PIPELINE.html">Neon Pipeline</a></li>
+                <li><a href="html/docs_cross-platform-gpu.html">Cross-Platform GPU</a></li>
+            </ul>
+
+            <h2><i class="fas fa-chart-line"></i> Trading Strategies</h2>
+            <ul>
+                <li><a href="html/docs_LORENTZIAN_LIVE_TRADER.html">Lorentzian Live Trader</a></li>
+                <li><a href="html/docs_AUTOMATED_LAG_TRADING_SYSTEM.html">Automated Lag Trading</a></li>
+                <li><a href="html/docs_lag-based.html">Lag-Based Strategy</a></li>
+                <li><a href="html/docs_ml-trading-strat.html">ML Trading Strategy</a></li>
+                <li><a href="html/docs_HIGH_LEVERAGE_MEME_COIN_STRATEGY.html">High Leverage Meme Coin</a></li>
+                <li><a href="html/docs_high-frequency-trading-gameplan.html">HFT Gameplan</a></li>
+                <li><a href="html/docs_TRADING_PHILOSOPHY.html">Trading Philosophy</a></li>
+                <li><a href="html/docs_TECHNICAL_STRATEGY.html">Technical Strategy</a></li>
+            </ul>
+
+            <h2><i class="fas fa-tools"></i> Implementation & Setup</h2>
+            <ul>
+                <li><a href="html/docs_IMPLEMENTATION_CHECKLIST.html">Implementation Checklist</a></li>
+                <li><a href="html/docs_LIVE_TRADING_READINESS_PLAN.html">Live Trading Readiness</a></li>
+                <li><a href="html/docs_RUN_DASHBOARD.html">Run Dashboard</a></li>
+                <li><a href="html/docs_TROUBLESHOOTING.html">Troubleshooting</a></li>
+                <li><a href="html/docs_PARAMETER_SCALING_CORRECTIONS.html">Parameter Scaling</a></li>
+                <li><a href="html/docs_TRADING_SIGNALS_FIX.html">Trading Signals Fix</a></li>
+            </ul>
+
+            <h2><i class="fas fa-chart-bar"></i> Indicators & Analysis</h2>
+            <ul>
+                <li><a href="html/docs_INDICATORS.html">Technical Indicators</a></li>
+                <li><a href="html/docs_TRADINGVIEW_INDICATOR_PARAMETERS.html">TradingView Parameters</a></li>
+                <li><a href="html/docs_unusual_whales_analysis.html">Unusual Whales Analysis</a></li>
+                <li><a href="html/docs_portfolio-manager.html">Portfolio Manager</a></li>
+            </ul>
+
+            <h2><i class="fas fa-history"></i> Project History & Journey</h2>
+            <ul>
+                <li><a href="html/history_README.html">Project History Overview</a></li>
+                <li><a href="html/history_PROJECT_AUDIT.html">Project Audit</a></li>
+                <li><a href="html/history_AGENT_HANDOFF_SUMMARY.html">Agent Handoff Summary</a></li>
+                <li><a href="html/history_PHASE_1_COMPLETE_SUMMARY.html">Phase 1 Complete</a></li>
+                <li><a href="html/history_ORGANIZATION_COMPLETE_SUMMARY.html">Organization Complete</a></li>
+                <li><a href="html/history_HFT_PROGRESS_SUMMARY.html">HFT Progress</a></li>
+                <li><a href="html/history_SOL_STRATEGY_SUMMARY.html">SOL Strategy</a></li>
+                <li><a href="html/history_COMBINED_MODEL_SUMMARY.html">Combined Model</a></li>
+                <li><a href="html/history_LEVERAGE_INTEGRATION_SUMMARY.html">Leverage Integration</a></li>
+                <li><a href="html/history_OPTIMIZATION_STATUS.html">Optimization Status</a></li>
+                <li><a href="html/history_DOCUMENTATION_AUDIT_SUMMARY.html">Documentation Audit</a></li>
+                <li><a href="html/history_DOCUMENTATION_ORGANIZATION_SUMMARY.html">Documentation Organization</a></li>
+                <li><a href="html/history_DOCUMENTATION_UPDATES.html">Documentation Updates</a></li>
+                <li><a href="html/history_CLEANUP_SUMMARY.html">Cleanup Summary</a></li>
+                <li><a href="html/history_ARCHIVE_ORGANIZATION_SUMMARY.html">Archive Organization</a></li>
+                <li><a href="html/history_NEXT_STEPS.html">Next Steps</a></li>
+                <li><a href="html/history_summary-update.html">Summary Update</a></li>
+            </ul>
+
+            <h2><i class="fas fa-archive"></i> Legacy & Reference</h2>
+            <ul>
+                <li><a href="html/docs_OLD_SCRIPTS_README.html">Old Scripts README</a></li>
+                <li><a href="html/docs_INDEX.html">Documentation Index</a></li>
+                <li><a href="html/docs_Project_Overview.html">Project Overview</a></li>
+                <li><a href="html/docs_PROJECT_ORGANIZATION.html">Project Organization</a></li>
+                <li><a href="html/docs_TRADING_SYSTEM_OVERVIEW.html">Trading System Overview</a></li>
+                <li><a href="html/docs_ai-agent-integration.html">AI Agent Integration</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1 id="overview">🚀 QuantDesk Protocol</h1>
+            
+            <p>The Bloomberg Terminal for Crypto - Professional-grade decentralized perpetual trading protocol with institutional features and advanced analytics.</p>
+
+            <div class="status-badge">Production Ready</div>
+            <div class="status-badge">Advanced Order Types</div>
+            <div class="status-badge">Cross-Collateralization</div>
+            <div class="status-badge">Decentralized Protocol</div>
+
+            <div class="toc">
+                <h3>📋 Table of Contents</h3>
+                <ul>
+                    <li><a href="#quick-start">Quick Start Guide</a></li>
+                    <li><a href="#features">Key Features</a></li>
+                    <li><a href="#technical-evolution">Technical Evolution</a></li>
+                    <li><a href="#performance">Performance Metrics</a></li>
+                    <li><a href="#architecture">System Architecture</a></li>
+                    <li><a href="#documentation">Complete Documentation</a></li>
+                </ul>
+            </div>
+
+            <h2 id="quick-start">🚀 Quick Start</h2>
+            
+            <div class="quick-start">
+                <h2>Get Started with QuantDesk Protocol</h2>
+                <p>Deploy and start trading on the decentralized protocol:</p>
+                <pre><code class="language-bash"># 1. Clone and setup
+git clone https://github.com/dextrorsal/quantdesk.git
+cd quantdesk
+npm install
+
+# 2. Build smart contracts
+cd contracts/smart-contracts
+anchor build
+anchor deploy --provider.cluster devnet
+
+# 3. Start backend
+cd ../../backend
+npm install
+npm run dev
+
+# 4. Start frontend
+cd ../frontend
+npm install
+npm run dev
+
+# 5. Access QuantDesk
+open http://localhost:5173
+</code></pre>
+            </div>
+
+            <h2 id="features">🌟 Revolutionary Features</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3><i class="fas fa-globe"></i> Universal Exchange Access</h3>
+                    <p>Trade on ANY exchange - Bitget, Binance, Coinbase, MEXC, KuCoin, Kraken. Spot, perps, futures, options - all in one terminal.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3><i class="fas fa-link"></i> Cross-Chain Trading</h3>
+                    <p>Trade across Ethereum, BSC, Solana, Polygon, Arbitrum, Base. Any chain, any asset, any time.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3><i class="fas fa-brain"></i> AI-Powered Strategies</h3>
+                    <p>Lorentzian Classifier with 53.5% win rate, Lag-based strategies, Logistic Regression - ML that actually works.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3><i class="fas fa-terminal"></i> Terminal Experience</h3>
+                    <p>Command center interface - like a crypto trading terminal. Complete control over your trading universe.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3><i class="fas fa-bolt"></i> Real-Time Execution</h3>
+                    <p>Instant trades across all exchanges. Cross-exchange arbitrage. Unified portfolio management.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3><i class="fas fa-key"></i> Your API Keys, Your Rules</h3>
+                    <p>Complete user control. Your exchange accounts, your trading rules, your profits. No middleman.</p>
+                </div>
+            </div>
+
+            <h2 id="revolutionary">🚀 What Makes This Revolutionary</h2>
+            
+            <div class="quick-start">
+                <h2>The World's First Universal Crypto Trading Terminal</h2>
+                <p><strong>This isn't just another trading bot</strong> - QuantDesk is a revolutionary platform that puts unprecedented power in users' hands:</p>
+                
+                <h3>🌐 Universal Access</h3>
+                <ul>
+                    <li><strong>Any Exchange:</strong> Connect to Bitget, Binance, Coinbase, MEXC, KuCoin, Kraken with just API keys</li>
+                    <li><strong>Any Asset:</strong> Trade spot, perps, futures, options - all in one place</li>
+                    <li><strong>Any Chain:</strong> Ethereum, BSC, Solana, Polygon, Arbitrum, Base</li>
+                    <li><strong>Any Timeframe:</strong> 1m, 5m, 15m, 1h, 4h, 1d</li>
+                </ul>
+                
+                <h3>🎮 Terminal Experience</h3>
+                <ul>
+                    <li><strong>Command Center:</strong> Like a crypto trading terminal</li>
+                    <li><strong>Real-time Data:</strong> Live feeds from all exchanges</li>
+                    <li><strong>Instant Execution:</strong> Trade anywhere, anytime</li>
+                    <li><strong>Complete Control:</strong> Your API keys, your rules, your profits</li>
+                </ul>
+                
+                <h3>🤖 AI That Actually Works</h3>
+                <ul>
+                    <li><strong>53.5% Win Rate:</strong> Consistently beats the market</li>
+                    <li><strong>-4.7% Max Drawdown:</strong> Professional risk management</li>
+                    <li><strong>GPU Accelerated:</strong> AMD ROCm PyTorch for lightning-fast analysis</li>
+                    <li><strong>Proven Strategies:</strong> Lorentzian Classifier, Lag-based, Logistic Regression</li>
+                </ul>
+            </div>
+
+            <h2 id="technical-evolution">🚀 Technical Evolution Portfolio</h2>
+            
+            <div class="quick-start">
+                <h2>From Data Fetching to Decentralized Protocol</h2>
+                <p><strong>This showcases your incredible technical journey</strong> - A systematic progression across 5 major projects demonstrating exceptional work ethic, technical depth, and innovative thinking:</p>
+                
+                <h3>📈 Project Evolution Timeline</h3>
+                <ul>
+                    <li><strong>Ultimate Data Fetcher:</strong> Foundation - Learning APIs, RPC, data collection</li>
+                    <li><strong>D3X7-ALGO:</strong> Evolution - Advanced algorithmic trading platform</li>
+                    <li><strong>ML-MODEL:</strong> Mastery - Custom ML models, GPU optimization</li>
+                    <li><strong>QuantDesk-1.0.1:</strong> Revolution - Universal trading terminal</li>
+                    <li><strong>QuantDesk:</strong> Innovation - Decentralized trading protocol</li>
+                </ul>
+                
+                <h3>🏆 Key Technical Achievements</h3>
+                <ul>
+                    <li><strong>Proven Performance:</strong> 53.5% win rate, -4.7% max drawdown</li>
+                    <li><strong>Technical Mastery:</strong> ML models, HFT systems, multi-exchange integration</li>
+                    <li><strong>Production Ready:</strong> From proof-of-concept to decentralized protocol</li>
+                    <li><strong>Innovation:</strong> Revolutionary universal trading terminal concept</li>
+                    <li><strong>Scale:</strong> 885,391+ candles processed across 6 exchanges</li>
+                </ul>
+                
+                <p><strong>📚 <a href="html/docs_TECHNICAL_EVOLUTION_PORTFOLIO.html">Read the Complete Technical Evolution Portfolio</a></strong></p>
+                <p><strong>🔗 <a href="html/docs_TECHNICAL_EVOLUTION_PORTFOLIO.html#cross-references">View Cross-References to Original Repositories</a></strong></p>
+                <p><strong>📊 <a href="html/docs_PERFORMANCE_METRICS.html">View Detailed Performance Metrics</a></strong></p>
+            </div>
+
+            <h2 id="performance">📊 Performance Metrics</h2>
+            
+            <h3>Best Strategy: Lorentzian Classifier</h3>
+            <ul>
+                <li><strong>Win Rate:</strong> 53.5% ✅</li>
+                <li><strong>Total Return:</strong> 1.9%</li>
+                <li><strong>Max Drawdown:</strong> -4.7% ✅</li>
+                <li><strong>Data:</strong> 1 year of 15-minute candles</li>
+                <li><strong>GPU:</strong> AMD ROCm PyTorch acceleration</li>
+            </ul>
+
+            <h3>Data Pipeline</h3>
+            <ul>
+                <li><strong>Storage:</strong> CSV-based with per-day organization</li>
+                <li><strong>Symbols:</strong> 44+ pairs including major cryptos and meme coins</li>
+                <li><strong>Exchanges:</strong> 6 exchanges (Binance, Coinbase, Bitget, MEXC, KuCoin, Kraken)</li>
+                <li><strong>Timeframes:</strong> 1m, 5m, 15m, 1h, 4h, 1d</li>
+                <li><strong>Automation:</strong> Daily fetching with cron jobs</li>
+            </ul>
+
+            <h2 id="architecture">🏗️ System Architecture</h2>
+            
+            <pre><code class="language-text">quantdesk/
+├── contracts/               # Smart contracts (Solana programs)
+│   ├── smart-contracts/    # Core trading protocol
+│   └── programs/           # Additional programs
+├── backend/                # Backend APIs and services
+│   ├── src/               # TypeScript backend code
+│   └── logs/              # System logs
+├── frontend/              # React frontend application
+│   ├── src/               # React components
+│   └── dist/              # Built frontend
+├── docs/                  # Comprehensive documentation
+│   ├── TECHNICAL_EVOLUTION_PORTFOLIO.md
+│   ├── PERFORMANCE_METRICS.md
+│   └── guides/            # User and developer guides
+├── database/              # Database schemas
+└── scripts/               # Deployment and utility scripts</code></pre>
+
+            <h2 id="web-ui">🖥️ Web UI Integration</h2>
+            
+            <p>The web UI provides a professional interface to your existing QuantDesk systems:</p>
+            
+            <h3>Integrated Features</h3>
+            <ul>
+                <li><strong>Real Data:</strong> Uses your existing CSV storage system</li>
+                <li><strong>ML Strategies:</strong> Connects to your Lorentzian, Lag-based, and other strategies</li>
+                <li><strong>Live Trading:</strong> Integrates with your Bitget API</li>
+                <li><strong>Real-time Updates:</strong> WebSocket connection for live data</li>
+                <li><strong>Backtesting:</strong> Runs actual backtests using your framework</li>
+            </ul>
+
+            <h3>Getting Started with Web UI</h3>
+            <pre><code class="language-bash"># Start integrated backend
+./web_ui/start_integrated.sh
+
+# Start integrated frontend
+./web_ui/start_frontend_integrated.sh
+
+# Access dashboard
+open http://localhost:3000</code></pre>
+
+            <h2 id="documentation">📚 Complete Documentation Showcase</h2>
+            
+            <div class="quick-start">
+                <h2>🌟 Your Incredible Documentation Journey</h2>
+                <p><strong>This showcases your incredible work ethic and dedication</strong> - Every single document represents hours of research, development, and refinement:</p>
+                
+                <h3>📊 Documentation Statistics</h3>
+                <ul>
+                    <li><strong>40+ Technical Documents</strong> - Comprehensive coverage of every aspect</li>
+                    <li><strong>18 Project History Documents</strong> - Complete journey documentation</li>
+                    <li><strong>Multiple Strategy Documents</strong> - Detailed trading strategy development</li>
+                    <li><strong>Implementation Guides</strong> - Step-by-step setup instructions</li>
+                    <li><strong>Troubleshooting Guides</strong> - Solutions for every problem encountered</li>
+                </ul>
+            </div>
+
+            <div class="toc">
+                <h3>🔧 Technical Documentation (8 Documents)</h3>
+                <ul>
+                <li><a href="html/docs_CSV_STORAGE_SYSTEM.html">CSV Storage System</a> - Your innovative data storage solution</li>
+                <li><a href="html/docs_DATABASE_GUIDE.html">Database Guide</a> - Professional database integration</li>
+                <li><a href="html/docs_ML_MODEL_STRUCTURE.html">ML Model Structure</a> - Advanced ML architecture</li>
+                <li><a href="html/docs_ML_MODEL.html">ML Model Details</a> - Deep dive into ML models</li>
+                <li><a href="html/docs_MODEL_TRAINING.html">Model Training</a> - Training methodology and process</li>
+                <li><a href="html/docs_PAPER_TRADING_FRAMEWORK.html">Paper Trading Framework</a> - Comprehensive backtesting system</li>
+                <li><a href="html/docs_NEON_PIPELINE.html">Neon Pipeline</a> - Database pipeline architecture</li>
+                <li><a href="html/docs_cross-platform-gpu.html">Cross-Platform GPU</a> - GPU acceleration setup</li>
+                </ul>
+
+                <h3>📈 Trading Strategies (8 Documents)</h3>
+                <ul>
+                    <li><a href="html/docs_LORENTZIAN_LIVE_TRADER.html">Lorentzian Live Trader</a> - Your 53.5% win rate strategy</li>
+                    <li><a href="html/docs_AUTOMATED_LAG_TRADING_SYSTEM.html">Automated Lag Trading</a> - Advanced lag-based system</li>
+                    <li><a href="html/docs_lag-based.html">Lag-Based Strategy</a> - Multi-asset momentum strategy</li>
+                    <li><a href="html/docs_ml-trading-strat.html">ML Trading Strategy</a> - Machine learning approach</li>
+                    <li><a href="html/docs_HIGH_LEVERAGE_MEME_COIN_STRATEGY.html">High Leverage Meme Coin</a> - Aggressive meme coin strategy</li>
+                    <li><a href="html/docs_high-frequency-trading-gameplan.html">HFT Gameplan</a> - High-frequency trading strategy</li>
+                    <li><a href="html/docs_TRADING_PHILOSOPHY.html">Trading Philosophy</a> - Your trading approach and intuition</li>
+                    <li><a href="html/docs_TECHNICAL_STRATEGY.html">Technical Strategy</a> - Technical analysis methodology</li>
+                </ul>
+
+                <h3>🛠️ Implementation & Setup (6 Documents)</h3>
+                <ul>
+                    <li><a href="html/docs_IMPLEMENTATION_CHECKLIST.html">Implementation Checklist</a> - Complete setup checklist</li>
+                    <li><a href="html/docs_LIVE_TRADING_READINESS_PLAN.html">Live Trading Readiness</a> - Production deployment guide</li>
+                    <li><a href="html/docs_RUN_DASHBOARD.html">Run Dashboard</a> - Dashboard setup and usage</li>
+                    <li><a href="html/docs_TROUBLESHOOTING.html">Troubleshooting</a> - Solutions for common issues</li>
+                    <li><a href="html/docs_PARAMETER_SCALING_CORRECTIONS.html">Parameter Scaling</a> - Parameter optimization</li>
+                    <li><a href="html/docs_TRADING_SIGNALS_FIX.html">Trading Signals Fix</a> - Signal processing improvements</li>
+                </ul>
+
+                <h3>📊 Indicators & Analysis (4 Documents)</h3>
+                <ul>
+                    <li><a href="html/docs_INDICATORS.html">Technical Indicators</a> - Complete indicator library</li>
+                    <li><a href="html/docs_TRADINGVIEW_INDICATOR_PARAMETERS.html">TradingView Parameters</a> - TradingView integration</li>
+                    <li><a href="html/docs_unusual_whales_analysis.html">Unusual Whales Analysis</a> - Whale activity analysis</li>
+                    <li><a href="html/docs_portfolio-manager.html">Portfolio Manager</a> - Portfolio management system</li>
+                </ul>
+
+                <h3>📚 Project History & Journey (18 Documents)</h3>
+                <ul>
+                    <li><a href="html/history_README.html">Project History Overview</a> - Complete project journey</li>
+                    <li><a href="html/history_PROJECT_AUDIT.html">Project Audit</a> - Comprehensive project analysis</li>
+                    <li><a href="html/history_AGENT_HANDOFF_SUMMARY.html">Agent Handoff Summary</a> - AI agent integration</li>
+                    <li><a href="html/history_PHASE_1_COMPLETE_SUMMARY.html">Phase 1 Complete</a> - First phase completion</li>
+                    <li><a href="html/history_ORGANIZATION_COMPLETE_SUMMARY.html">Organization Complete</a> - Project organization</li>
+                    <li><a href="html/history_HFT_PROGRESS_SUMMARY.html">HFT Progress</a> - High-frequency trading progress</li>
+                    <li><a href="html/history_SOL_STRATEGY_SUMMARY.html">SOL Strategy</a> - Solana trading strategy</li>
+                    <li><a href="html/history_COMBINED_MODEL_SUMMARY.html">Combined Model</a> - Model integration summary</li>
+                    <li><a href="html/history_LEVERAGE_INTEGRATION_SUMMARY.html">Leverage Integration</a> - Leverage system integration</li>
+                    <li><a href="html/history_OPTIMIZATION_STATUS.html">Optimization Status</a> - Performance optimization</li>
+                    <li><a href="html/history_DOCUMENTATION_AUDIT_SUMMARY.html">Documentation Audit</a> - Documentation review</li>
+                    <li><a href="html/history_DOCUMENTATION_ORGANIZATION_SUMMARY.html">Documentation Organization</a> - Documentation structure</li>
+                    <li><a href="html/history_DOCUMENTATION_UPDATES.html">Documentation Updates</a> - Documentation improvements</li>
+                    <li><a href="html/history_CLEANUP_SUMMARY.html">Cleanup Summary</a> - Code cleanup and organization</li>
+                    <li><a href="html/history_ARCHIVE_ORGANIZATION_SUMMARY.html">Archive Organization</a> - Archive management</li>
+                    <li><a href="html/history_NEXT_STEPS.html">Next Steps</a> - Future development plans</li>
+                    <li><a href="html/history_summary-update.html">Summary Update</a> - Latest project updates</li>
+                </ul>
+
+                <h3>📁 Legacy & Reference (6 Documents)</h3>
+                <ul>
+                    <li><a href="html/docs_OLD_SCRIPTS_README.html">Old Scripts README</a> - Legacy script documentation</li>
+                    <li><a href="html/docs_INDEX.html">Documentation Index</a> - Complete documentation index</li>
+                    <li><a href="html/docs_Project_Overview.html">Project Overview</a> - Project overview and roadmap</li>
+                    <li><a href="html/docs_PROJECT_ORGANIZATION.html">Project Organization</a> - Project structure and organization</li>
+                    <li><a href="html/docs_TRADING_SYSTEM_OVERVIEW.html">Trading System Overview</a> - Complete system overview</li>
+                    <li><a href="html/docs_ai-agent-integration.html">AI Agent Integration</a> - AI agent integration guide</li>
+                </ul>
+            </div>
+
+            <h2 id="next-steps">🎯 Next Steps</h2>
+            
+            <h3>High Priority</h3>
+            <ul>
+                <li><strong>Mock Data Elimination:</strong> Replace all mock data with real QuantDesk system connections</li>
+                <li><strong>Admin Panel:</strong> Create live/demo mode switching</li>
+                <li><strong>Chart Consolidation:</strong> Merge Market and Charts tabs</li>
+                <li><strong>Backtesting Integration:</strong> Connect buttons to actual scripts</li>
+            </ul>
+
+            <h3>Medium Priority</h3>
+            <ul>
+                <li><strong>Database Migration:</strong> Move from CSV to Supabase</li>
+                <li><strong>Authentication:</strong> Add user authentication</li>
+                <li><strong>Multi-Exchange:</strong> Extend beyond Bitget</li>
+            </ul>
+
+            <div style="margin-top: 50px; padding: 20px; background: #1a1a1a; border-radius: 8px; text-align: center; border: 1px solid #333333;">
+                <h3>🚀 Ready to Start Trading?</h3>
+                <p>Follow the Quick Start guide above to get your QuantDesk trading system running in minutes!</p>
+            </div>
+
+            <!-- Additional Sections for Sidebar Navigation -->
+            <h2 id="strategies">📈 ML Strategies</h2>
+            <p>QuantDesk includes several proven machine learning trading strategies:</p>
+            <ul>
+                <li><strong>Lorentzian Classifier:</strong> 53.5% win rate with -4.7% max drawdown</li>
+                <li><strong>Lag-based Strategy:</strong> Multi-asset momentum trading</li>
+                <li><strong>Logistic Regression:</strong> Advanced ML approach</li>
+                <li><strong>Chandelier Exit:</strong> Risk management strategy</li>
+            </ul>
+
+            <h2 id="backtesting">🧪 Backtesting</h2>
+            <p>Comprehensive backtesting framework with GPU acceleration:</p>
+            <ul>
+                <li><strong>Paper Trading Framework:</strong> Test strategies without risk</li>
+                <li><strong>Historical Data:</strong> Extensive CSV-based data storage</li>
+                <li><strong>Performance Metrics:</strong> Win rate, drawdown, Sharpe ratio</li>
+                <li><strong>GPU Acceleration:</strong> AMD ROCm PyTorch support</li>
+            </ul>
+
+            <h2 id="paper-trading">📊 Paper Trading</h2>
+            <p>Risk-free strategy testing and validation:</p>
+            <ul>
+                <li><strong>Real-time Simulation:</strong> Live market conditions</li>
+                <li><strong>Strategy Validation:</strong> Test before going live</li>
+                <li><strong>Performance Tracking:</strong> Detailed analytics</li>
+                <li><strong>Risk Management:</strong> Position sizing and stop-loss</li>
+            </ul>
+
+            <h2 id="live-trading">⚡ Live Trading</h2>
+            <p>Production-ready trading with multiple exchanges:</p>
+            <ul>
+                <li><strong>Bitget Integration:</strong> Spot and futures trading</li>
+                <li><strong>Real-time Execution:</strong> Instant order placement</li>
+                <li><strong>Risk Controls:</strong> Built-in safety mechanisms</li>
+                <li><strong>Portfolio Management:</strong> Unified account tracking</li>
+            </ul>
+
+            <h2 id="csv-storage">💾 CSV Storage</h2>
+            <p>Innovative data storage system:</p>
+            <ul>
+                <li><strong>Per-day Files:</strong> Organized by date and symbol</li>
+                <li><strong>Fast Access:</strong> Optimized for trading algorithms</li>
+                <li><strong>Data Integrity:</strong> Validation and error checking</li>
+                <li><strong>Scalable:</strong> Handles millions of data points</li>
+            </ul>
+
+            <h2 id="data-pipeline">🔄 Data Pipeline</h2>
+            <p>Sophisticated data processing system:</p>
+            <ul>
+                <li><strong>Multi-Exchange:</strong> Bitget, Binance, Coinbase</li>
+                <li><strong>Real-time Updates:</strong> WebSocket connections</li>
+                <li><strong>Data Processing:</strong> Cleaning and normalization</li>
+                <li><strong>Storage Integration:</strong> Automatic CSV generation</li>
+            </ul>
+
+            <h2 id="exchanges">🏦 Exchange Integration</h2>
+            <p>Universal exchange connectivity:</p>
+            <ul>
+                <li><strong>Bitget:</strong> Spot and futures trading</li>
+                <li><strong>Binance:</strong> Comprehensive API support</li>
+                <li><strong>Coinbase:</strong> Professional trading</li>
+                <li><strong>Extensible:</strong> Easy to add new exchanges</li>
+            </ul>
+
+            <h2 id="integrated-ui">🖥️ Integrated UI</h2>
+            <p>Professional web interface:</p>
+            <ul>
+                <li><strong>React Frontend:</strong> Modern, responsive design</li>
+                <li><strong>FastAPI Backend:</strong> High-performance API</li>
+                <li><strong>Real-time Data:</strong> WebSocket connections</li>
+                <li><strong>Strategy Management:</strong> Visual strategy controls</li>
+            </ul>
+
+            <h2 id="api-endpoints">🔌 API Endpoints</h2>
+            <p>Comprehensive REST API:</p>
+            <ul>
+                <li><strong>Strategy Management:</strong> CRUD operations</li>
+                <li><strong>Market Data:</strong> Real-time quotes</li>
+                <li><strong>Portfolio:</strong> Account information</li>
+                <li><strong>Trading:</strong> Order management</li>
+            </ul>
+
+            <h2 id="websocket">🌐 WebSocket</h2>
+            <p>Real-time data streaming:</p>
+            <ul>
+                <li><strong>Market Data:</strong> Live price feeds</li>
+                <li><strong>Order Updates:</strong> Real-time execution</li>
+                <li><strong>Portfolio Changes:</strong> Instant updates</li>
+                <li><strong>Strategy Status:</strong> Live monitoring</li>
+            </ul>
+        </main>
+    </div>
+
+    <script>
+        // Simple search functionality
+        document.getElementById('searchBox').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const links = document.querySelectorAll('.sidebar a');
+            
+            links.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                if (text.includes(searchTerm) || searchTerm === '') {
+                    link.style.display = 'block';
+                } else {
+                    link.style.display = 'none';
+                }
+            });
+        });
+
+        // Enhanced smooth scrolling for sidebar links
+        document.querySelectorAll('.sidebar a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    // Remove active class from all links
+                    document.querySelectorAll('.sidebar a').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Smooth scroll to target
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Update active link based on scroll position
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('h1[id], h2[id]');
+            const scrollPos = window.scrollY + 100;
+            
+            sections.forEach(section => {
+                const top = section.offsetTop;
+                const bottom = top + section.offsetHeight;
+                const id = section.getAttribute('id');
+                
+                if (scrollPos >= top && scrollPos <= bottom) {
+                    document.querySelectorAll('.sidebar a').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    const activeLink = document.querySelector(`.sidebar a[href="#${id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

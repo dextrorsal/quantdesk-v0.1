@@ -4,38 +4,25 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Environment variables
+# Environment variables (NEVER commit these)
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+.env.staging
+.env.production
 
 # Build outputs
 dist/
 build/
 out/
 
-# Frontend (keep private - competitive advantage)
-src/
-frontend/
-admin-dashboard/
-index.html
-vite.config.ts
-tailwind.config.js
-postcss.config.js
-tsconfig.json
-tsconfig.node.json
-
-# Backend Infrastructure (keep private - competitive advantage)
-backend/
-grafana-dashboard-config.json
-test-*.js
-test-ledger/
-
 # Logs
 logs/
 *.log
+backend/logs/
+backend/*.log
 
 # Runtime data
 pids/
@@ -115,10 +102,6 @@ test-ledger/
 target/
 **/*.rs.bk
 
-# Backend logs
-backend/logs/
-backend/*.log
-
 # Test results
 test-results.log
 
@@ -131,24 +114,28 @@ test-results.log
 tmp/
 temp/
 
-# Private keys and sensitive data
+# Private keys and sensitive data (NEVER commit these)
 *.key
 *.pem
 *.p12
 *.pfx
 wallet.json
 id.json
+keypair.json
+*.keypair
 
-# API keys and secrets
+# API keys and secrets (NEVER commit these)
 secrets/
 keys/
 credentials/
+config/secrets/
+config/keys/
 
-# Production configs
+# Production configs with sensitive data
 config/production/
 config/staging/
 
-# Monitoring and analytics
+# Monitoring and analytics (may contain sensitive data)
 monitoring/
 analytics/
 
@@ -191,11 +178,97 @@ target/
 *.out
 go.work
 
-# Deployment files (keep private)
-Dockerfile
-.dockerignore
-.railwayignore
-railway.json
-backend/Procfile
-backend/start-backend.sh
-backend/kill-backend.sh
+# Deployment files (keep these in repo for Railway)
+# Dockerfile - KEEP IN REPO
+# railway.json - KEEP IN REPO
+# .dockerignore - KEEP IN REPO
+
+# But ignore deployment-specific sensitive files
+docker-compose.override.yml
+docker-compose.prod.yml
+k8s/secrets/
+k8s/prod/
+
+# Railway specific
+.railway/
+
+# Local development files
+.local/
+local/
+dev/
+development/
+
+# Editor and IDE specific
+.vscode/settings.json
+.vscode/launch.json
+.vscode/extensions.json
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries/
+.idea/shelf/
+
+# OS specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Security scanning results
+security-scan-results/
+vulnerability-reports/
+
+# Performance testing results
+performance-tests/
+load-test-results/
+
+# Local configuration overrides
+config.local.js
+config.local.json
+config.local.ts
+
+# Environment-specific files
+.env.development
+.env.test
+.env.staging
+.env.production
+.env.local
+.env.*.local
+
+# Lock files (keep package-lock.json, ignore others)
+yarn.lock
+pnpm-lock.yaml
+
+# TypeScript build info
+*.tsbuildinfo
+
+# ESLint cache
+.eslintcache
+
+# Prettier cache
+.prettiercache
+
+# Stylelint cache
+.stylelintcache
+
+# Jest cache
+.jest/
+
+# Cypress
+cypress/videos/
+cypress/screenshots/
+
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Storybook
+storybook-static/
+
+# Temporary folders
+.tmp/
+.temp/
