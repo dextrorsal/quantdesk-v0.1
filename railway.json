@@ -9,6 +9,5 @@
     "healthcheckTimeout": 100,
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10,
-    "startCommand": "cd backend && node -r ts-node/register/transpile-only -r tsconfig-paths/register src/server.ts"
   }
 }
