@@ -1,4 +1,4 @@
-# Railway Dockerfile - works from root directory
+# Railway Dockerfile - simplified approach
 FROM node:20-bookworm-slim
 
 WORKDIR /app
@@ -13,17 +13,15 @@ RUN apt-get update \
        curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy everything first to see what's available
+# Copy everything (Railway will handle what to include via .railwayignore)
 COPY . .
 
-# Check if backend directory exists and what's in it
+# Debug: show what was copied
 RUN ls -la
 RUN ls -la backend/ || echo "Backend directory not found"
 
-# Move to backend directory and install dependencies
+# Install dependencies in backend directory
 WORKDIR /app/backend
-
-# Use npm install instead of npm ci to handle missing package-lock.json
 RUN npm install --only=production
 
 # Set environment variables
@@ -42,5 +40,5 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
 
 EXPOSE 3002
 
-# Start the application
-CMD ["node", "-r", "ts-node/register/transpile-only", "-r", "tsconfig-paths/register", "src/server.ts"]
+# Note: Railway will use the startCommand from railway.json
+CMD ["echo", "Railway will use startCommand from railway.json"]
