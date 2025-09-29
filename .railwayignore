@@ -17,8 +17,6 @@ examples/
 sdk/
 logs/
 
-!backend/
-
 .env
 **/.env*
 

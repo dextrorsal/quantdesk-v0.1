@@ -1,4 +1,4 @@
-# Simple Dockerfile for Railway deployment
+# Railway Dockerfile - works from root directory
 FROM node:20-bookworm-slim
 
 WORKDIR /app
@@ -13,16 +13,15 @@ RUN apt-get update \
        curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy package files
-COPY package*.json ./
-COPY backend/package*.json ./backend/
+# Copy everything first to see what's available
+COPY . .
 
-# Install dependencies
+# Check if backend directory exists
+RUN ls -la
+
+# Move to backend directory and install dependencies
 WORKDIR /app/backend
 RUN npm ci --only=production
-
-# Copy backend source code
-COPY backend/ ./
 
 # Set environment variables
 ENV NODE_ENV=production
