@@ -1,0 +1,28 @@
+{
+  "name": "quantdesk",
+  "version": "1.0.0",
+  "description": "QuantDesk - Professional Perpetual Trading Platform",
+  "private": true,
+  "scripts": {
+    "build": "npm run build",
+    "start": "npm run start",
+    "dev": "npm run dev",
+    "install:backend": "cd backend && npm install",
+    "install:frontend": "cd frontend && npm install",
+    "install:admin": "cd admin-dashboard && npm install",
+    "install:all": "npm run install:backend && npm run install:frontend && npm run install:admin"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "solana",
+    "defi",
+    "perpetual",
+    "trading",
+    "dex",
+    "quantdesk"
+  ],
+  "author": "QuantDesk Team",
+  "license": "MIT"
+}
