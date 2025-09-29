@@ -1,6 +1,176 @@
-# System Architecture - Enterprise-Grade Infrastructure
+# QuantDesk Perpetual Trading Platform - Complete System Architecture
+
+## 🚀 Professional Visual Architecture
 
 QuantDesk is built with institutional-grade architecture, designed to handle the demands of professional trading with the reliability and performance that institutions expect.
+
+### 🎯 **System Overview Diagram**
+
+```mermaid
+graph TB
+    %% User Layer
+    subgraph "👥 USER LAYER"
+        U1[👤 Individual Traders]
+        U2[📱 Mobile Apps]
+        U3[🖥️ Desktop Apps]
+        U4[🏢 Institutional Clients]
+    end
+
+    %% Frontend Layer
+    subgraph "🎨 FRONTEND LAYER (Port 3001)"
+        F1[React Trading Interface]
+        F2[TradingView Charts]
+        F3[Order Management]
+        F4[Portfolio Dashboard]
+        F5[WebSocket Client]
+        F6[Wallet Integration]
+    end
+
+    %% API Gateway
+    subgraph "🚀 API GATEWAY (Port 3002)"
+        A1[Express.js Server]
+        A2[Authentication Middleware]
+        A3[Rate Limiting]
+        A4[REST API Routes]
+        A5[WebSocket Server]
+    end
+
+    %% Service Layer
+    subgraph "🔧 SERVICE LAYER"
+        S1[Pyth Oracle Service]
+        S2[Solana Service]
+        S3[Database Service]
+        S4[Order Service]
+        S5[Risk Management]
+        S6[JIT Liquidity]
+        S7[Metrics & Monitoring]
+    end
+
+    %% Blockchain Layer
+    subgraph "⛓️ BLOCKCHAIN LAYER"
+        B1[Solana Smart Contracts]
+        B2[Market Management]
+        B3[Position Management]
+        B4[Order Management]
+        B5[Cross-Collateralization]
+        B6[Liquidation Engine]
+    end
+
+    %% Data Layer
+    subgraph "💾 DATA LAYER"
+        D1[Supabase PostgreSQL]
+        D2[TimescaleDB]
+        D3[User Data]
+        D4[Trading History]
+        D5[Price Feeds]
+        D6[Analytics]
+    end
+
+    %% External Integrations
+    subgraph "🌐 EXTERNAL INTEGRATIONS"
+        E1[Pyth Network]
+        E2[CoinGecko API]
+        E3[TradingView]
+        E4[Solana RPC]
+    end
+
+    %% Data Flow Connections
+    U1 --> F1
+    U2 --> F1
+    U3 --> F1
+    U4 --> F1
+
+    F1 --> A1
+    F2 --> A1
+    F3 --> A1
+    F4 --> A1
+    F5 --> A5
+    F6 --> A1
+
+    A1 --> S1
+    A1 --> S2
+    A1 --> S3
+    A1 --> S4
+    A1 --> S5
+    A1 --> S6
+    A1 --> S7
+
+    S1 --> B1
+    S2 --> B1
+    S4 --> B1
+    S5 --> B1
+    S6 --> B1
+
+    B1 --> D1
+    B2 --> D1
+    B3 --> D1
+    B4 --> D1
+    B5 --> D1
+    B6 --> D1
+
+    S1 --> E1
+    S1 --> E2
+    F2 --> E3
+    S2 --> E4
+
+    %% Styling - Terminal Theme
+    classDef userLayer fill:#1a1a1a,stroke:#3b82f6,stroke-width:2px,color:#ffffff
+    classDef frontendLayer fill:#0a0a0a,stroke:#3b82f6,stroke-width:2px,color:#ffffff
+    classDef apiLayer fill:#1a1a1a,stroke:#3b82f6,stroke-width:2px,color:#ffffff
+    classDef serviceLayer fill:#0a0a0a,stroke:#3b82f6,stroke-width:2px,color:#ffffff
+    classDef blockchainLayer fill:#1a1a1a,stroke:#3b82f6,stroke-width:2px,color:#ffffff
+    classDef dataLayer fill:#0a0a0a,stroke:#3b82f6,stroke-width:2px,color:#ffffff
+    classDef externalLayer fill:#1a1a1a,stroke:#3b82f6,stroke-width:2px,color:#ffffff
+
+    class U1,U2,U3,U4 userLayer
+    class F1,F2,F3,F4,F5,F6 frontendLayer
+    class A1,A2,A3,A4,A5 apiLayer
+    class S1,S2,S3,S4,S5,S6,S7 serviceLayer
+    class B1,B2,B3,B4,B5,B6 blockchainLayer
+    class D1,D2,D3,D4,D5,D6 dataLayer
+    class E1,E2,E3,E4 externalLayer
+```
+
+### 📊 **Data Flow Architecture**
+
+```mermaid
+sequenceDiagram
+    participant U as 👤 User
+    participant F as 🎨 Frontend
+    participant A as 🚀 API Gateway
+    participant S as 🔧 Services
+    participant B as ⛓️ Blockchain
+    participant D as 💾 Database
+    participant E as 🌐 External APIs
+
+    %% Price Data Flow
+    Note over E,D: 📊 PRICE DATA FLOW
+    E->>S: Pyth Price Updates
+    S->>D: Store Price Data
+    S->>A: Broadcast Price Updates
+    A->>F: WebSocket Price Stream
+    F->>U: Display Live Prices
+
+    %% Order Execution Flow
+    Note over U,B: 💰 ORDER EXECUTION FLOW
+    U->>F: Place Order
+    F->>A: Submit Order Request
+    A->>S: Process Order
+    S->>B: Execute on Blockchain
+    B->>D: Update Position Data
+    B->>A: Order Confirmation
+    A->>F: Order Status Update
+    F->>U: Show Order Status
+
+    %% Risk Management Flow
+    Note over S,B: 🛡️ RISK MANAGEMENT FLOW
+    S->>D: Monitor Position Health
+    S->>B: Check Liquidation Conditions
+    B->>S: Liquidation Trigger
+    S->>A: Broadcast Liquidation
+    A->>F: Notify User
+    F->>U: Display Liquidation Alert
+```
 
 ## 🏗️ Architecture Overview
 
