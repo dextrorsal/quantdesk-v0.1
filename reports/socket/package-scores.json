@@ -1,0 +1,552 @@
+{
+  "audit_date": "2024-01-20",
+  "total_packages": 35,
+  "overall_grade": "A-",
+  "summary": {
+    "critical_vulnerabilities": 0,
+    "high_vulnerabilities": 0,
+    "medium_vulnerabilities": 0,
+    "low_vulnerabilities": 0,
+    "packages_requiring_attention": 8,
+    "average_maintenance_score": 87.4,
+    "average_quality_score": 94.2,
+    "average_supply_chain_score": 97.1,
+    "average_vulnerability_score": 99.1
+  },
+  "packages": {
+    "backend": {
+      "express": {
+        "version": "4.18.2",
+        "scores": {
+          "license": 100,
+          "maintenance": 85,
+          "quality": 100,
+          "supplyChain": 97,
+          "vulnerability": 92
+        },
+        "risk_level": "low"
+      },
+      "typescript": {
+        "version": "5.3.2",
+        "scores": {
+          "license": 90,
+          "maintenance": 99,
+          "quality": 90,
+          "supplyChain": 99,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      },
+      "bcrypt": {
+        "version": "6.0.0",
+        "scores": {
+          "license": 100,
+          "maintenance": 83,
+          "quality": 100,
+          "supplyChain": 100,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      },
+      "bcryptjs": {
+        "version": "2.4.3",
+        "scores": {
+          "license": 80,
+          "maintenance": 80,
+          "quality": 100,
+          "supplyChain": 100,
+          "vulnerability": 100
+        },
+        "risk_level": "medium",
+        "recommendation": "Consider using bcrypt instead"
+      },
+      "jsonwebtoken": {
+        "version": "9.0.2",
+        "scores": {
+          "license": 100,
+          "maintenance": 81,
+          "quality": 100,
+          "supplyChain": 99,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      },
+      "helmet": {
+        "version": "7.1.0",
+        "scores": {
+          "license": 100,
+          "maintenance": 80,
+          "quality": 100,
+          "supplyChain": 100,
+          "vulnerability": 100
+        },
+        "risk_level": "medium",
+        "recommendation": "Monitor for updates"
+      },
+      "pg": {
+        "version": "8.11.3",
+        "scores": {
+          "license": 100,
+          "maintenance": 84,
+          "quality": 97,
+          "supplyChain": 98,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      },
+      "redis": {
+        "version": "4.6.10",
+        "scores": {
+          "license": 100,
+          "maintenance": 95,
+          "quality": 100,
+          "supplyChain": 99,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      },
+      "ioredis": {
+        "version": "5.3.0",
+        "scores": {
+          "license": 100,
+          "maintenance": 92,
+          "quality": 100,
+          "supplyChain": 98,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      },
+      "@solana/web3.js": {
+        "version": "1.87.0",
+        "scores": {
+          "license": 100,
+          "maintenance": 86,
+          "quality": 100,
+          "supplyChain": 96,
+          "vulnerability": 84
+        },
+        "risk_level": "medium",
+        "recommendation": "Monitor for updates"
+      },
+      "@solana/spl-token": {
+        "version": "0.4.0",
+        "scores": {
+          "license": 100,
+          "maintenance": 86,
+          "quality": 99,
+          "supplyChain": 99,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      },
+      "@pythnetwork/client": {
+        "version": "2.22.1",
+        "scores": {
+          "license": 100,
+          "maintenance": 83,
+          "quality": 95,
+          "supplyChain": 97,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      },
+      "@pythnetwork/hermes-client": {
+        "version": "2.0.0",
+        "scores": {
+          "license": 100,
+          "maintenance": 85,
+          "quality": 99,
+          "supplyChain": 92,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      },
+      "@pythnetwork/pyth-sdk-js": {
+        "version": "1.2.0",
+        "scores": {
+          "license": 100,
+          "maintenance": 80,
+          "quality": 70,
+          "supplyChain": 74,
+          "vulnerability": 100
+        },
+        "risk_level": "high",
+        "recommendation": "Update immediately - low quality and supply chain scores"
+      },
+      "axios": {
+        "version": "1.12.2",
+        "scores": {
+          "license": 100,
+          "maintenance": 97,
+          "quality": 100,
+          "supplyChain": 99,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      },
+      "cors": {
+        "version": "2.8.5",
+        "scores": {
+          "license": 100,
+          "maintenance": 81,
+          "quality": 100,
+          "supplyChain": 99,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      },
+      "dotenv": {
+        "version": "16.3.1",
+        "scores": {
+          "license": 100,
+          "maintenance": 94,
+          "quality": 100,
+          "supplyChain": 99,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      },
+      "compression": {
+        "version": "1.7.4",
+        "scores": {
+          "license": 100,
+          "maintenance": 83,
+          "quality": 100,
+          "supplyChain": 99,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      },
+      "express-rate-limit": {
+        "version": "7.1.5",
+        "scores": {
+          "license": 100,
+          "maintenance": 86,
+          "quality": 93,
+          "supplyChain": 99,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      },
+      "express-slow-down": {
+        "version": "2.0.1",
+        "scores": {
+          "license": 100,
+          "maintenance": 86,
+          "quality": 100,
+          "supplyChain": 99,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      },
+      "morgan": {
+        "version": "1.10.0",
+        "scores": {
+          "license": 100,
+          "maintenance": 80,
+          "quality": 100,
+          "supplyChain": 99,
+          "vulnerability": 100
+        },
+        "risk_level": "medium",
+        "recommendation": "Monitor for updates"
+      },
+      "joi": {
+        "version": "17.11.0",
+        "scores": {
+          "license": 100,
+          "maintenance": 88,
+          "quality": 78,
+          "supplyChain": 99,
+          "vulnerability": 100
+        },
+        "risk_level": "medium",
+        "recommendation": "Consider alternatives like zod"
+      },
+      "uuid": {
+        "version": "9.0.1",
+        "scores": {
+          "license": 100,
+          "maintenance": 90,
+          "quality": 100,
+          "supplyChain": 100,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      },
+      "winston": {
+        "version": "3.11.0",
+        "scores": {
+          "license": 100,
+          "maintenance": 86,
+          "quality": 100,
+          "supplyChain": 98,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      },
+      "socket.io": {
+        "version": "4.7.4",
+        "scores": {
+          "license": 100,
+          "maintenance": 80,
+          "quality": 100,
+          "supplyChain": 99,
+          "vulnerability": 100
+        },
+        "risk_level": "medium",
+        "recommendation": "Monitor for updates"
+      },
+      "ws": {
+        "version": "8.18.3",
+        "scores": {
+          "license": 100,
+          "maintenance": 84,
+          "quality": 100,
+          "supplyChain": 99,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      },
+      "@supabase/supabase-js": {
+        "version": "2.58.0",
+        "scores": {
+          "license": 100,
+          "maintenance": 100,
+          "quality": 100,
+          "supplyChain": 99,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      }
+    },
+    "frontend": {
+      "react": {
+        "version": "18.3.1",
+        "scores": {
+          "license": 100,
+          "maintenance": 97,
+          "quality": 84,
+          "supplyChain": 100,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      },
+      "bootstrap": {
+        "version": "5.3.1",
+        "scores": {
+          "license": 100,
+          "maintenance": 88,
+          "quality": 100,
+          "supplyChain": 99,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      },
+      "react-bootstrap": {
+        "version": "2.8.0",
+        "scores": {
+          "license": 80,
+          "maintenance": 87,
+          "quality": 96,
+          "supplyChain": 98,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      },
+      "sass": {
+        "version": "1.77.6",
+        "scores": {
+          "license": 100,
+          "maintenance": 96,
+          "quality": 100,
+          "supplyChain": 100,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      },
+      "react-router-dom": {
+        "version": "6.27.0",
+        "scores": {
+          "license": 100,
+          "maintenance": 97,
+          "quality": 74,
+          "supplyChain": 98,
+          "vulnerability": 100
+        },
+        "risk_level": "medium",
+        "recommendation": "Consider updating"
+      },
+      "react-router": {
+        "version": "6.27.0",
+        "scores": {
+          "license": 100,
+          "maintenance": 97,
+          "quality": 77,
+          "supplyChain": 97,
+          "vulnerability": 100
+        },
+        "risk_level": "medium",
+        "recommendation": "Consider updating"
+      },
+      "react-feather": {
+        "version": "2.0.10",
+        "scores": {
+          "license": 100,
+          "maintenance": 77,
+          "quality": 90,
+          "supplyChain": 99,
+          "vulnerability": 100
+        },
+        "risk_level": "medium",
+        "recommendation": "Consider alternative icon libraries"
+      },
+      "vite": {
+        "version": "5.4.9",
+        "scores": {
+          "license": 100,
+          "maintenance": 98,
+          "quality": 82,
+          "supplyChain": 95,
+          "vulnerability": 85
+        },
+        "risk_level": "medium",
+        "recommendation": "Monitor for updates"
+      }
+    },
+    "data-ingestion": {
+      "bull": {
+        "version": "4.12.0",
+        "scores": {
+          "license": 100,
+          "maintenance": 79,
+          "quality": 100,
+          "supplyChain": 99,
+          "vulnerability": 100
+        },
+        "risk_level": "medium",
+        "recommendation": "Monitor for updates"
+      },
+      "concurrently": {
+        "version": "8.2.0",
+        "scores": {
+          "license": 100,
+          "maintenance": 85,
+          "quality": 100,
+          "supplyChain": 98,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      },
+      "node-cron": {
+        "version": "3.0.3",
+        "scores": {
+          "license": 100,
+          "maintenance": 85,
+          "quality": 100,
+          "supplyChain": 100,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      },
+      "xml2js": {
+        "version": "0.6.2",
+        "scores": {
+          "license": 100,
+          "maintenance": 77,
+          "quality": 100,
+          "supplyChain": 100,
+          "vulnerability": 100
+        },
+        "risk_level": "medium",
+        "recommendation": "Consider modern alternatives"
+      }
+    },
+    "development": {
+      "jest": {
+        "version": "29.7.0",
+        "scores": {
+          "license": 100,
+          "maintenance": 96,
+          "quality": 68,
+          "supplyChain": 99,
+          "vulnerability": 100
+        },
+        "risk_level": "medium",
+        "recommendation": "Consider updating or alternatives"
+      },
+      "ts-jest": {
+        "version": "29.1.1",
+        "scores": {
+          "license": 100,
+          "maintenance": 93,
+          "quality": 93,
+          "supplyChain": 97,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      },
+      "supertest": {
+        "version": "6.3.3",
+        "scores": {
+          "license": 100,
+          "maintenance": 86,
+          "quality": 100,
+          "supplyChain": 99,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      },
+      "nodemon": {
+        "version": "3.0.2",
+        "scores": {
+          "license": 100,
+          "maintenance": 80,
+          "quality": 100,
+          "supplyChain": 97,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      },
+      "ts-node": {
+        "version": "10.9.1",
+        "scores": {
+          "license": 100,
+          "maintenance": 80,
+          "quality": 100,
+          "supplyChain": 96,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      },
+      "eslint": {
+        "version": "8.54.0",
+        "scores": {
+          "license": 100,
+          "maintenance": 94,
+          "quality": 100,
+          "supplyChain": 96,
+          "vulnerability": 100
+        },
+        "risk_level": "low"
+      }
+    }
+  },
+  "recommendations": {
+    "immediate": [
+      "Update @pythnetwork/pyth-sdk-js - Low quality (70) and supply chain (74) scores",
+      "Consider replacing bcryptjs with bcrypt - Better maintenance score",
+      "Update react-router packages - Low quality scores"
+    ],
+    "medium_term": [
+      "Monitor helmet, morgan, nodemon - Maintenance scores at 80",
+      "Consider alternatives to joi - Quality score 78",
+      "Update jest - Quality score 68"
+    ],
+    "long_term": [
+      "Regular dependency audits - Monthly reviews",
+      "Automated security scanning - CI/CD integration",
+      "Dependency monitoring - Set up alerts for updates"
+    ]
+  }
+}

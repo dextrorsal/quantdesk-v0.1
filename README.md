@@ -5,7 +5,7 @@
 [![Solana](https://img.shields.io/badge/Solana-9945FF?logo=solana&logoColor=white)](https://solana.com/)
 [![Anchor](https://img.shields.io/badge/Anchor-000000?logo=anchor&logoColor=white)](https://www.anchor-lang.com/)
 
-> **The Bloomberg Terminal for Crypto** - Professional-grade perpetual DEX protocol with enterprise-grade infrastructure and advanced trading features.
+> **The Bloomberg Terminal for Crypto** - Professional-grade perpetual DEX protocol with enterprise-grade infrastructure and advanced trading features. Built by a **solo developer** with AI-powered trading capabilities and comprehensive quantitative analysis tools.
 
 ## 🚀 **Key Features**
 

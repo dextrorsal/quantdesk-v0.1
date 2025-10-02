@@ -21,7 +21,7 @@
     "@pythnetwork/client": "^2.22.1",
     "@pythnetwork/hermes-client": "^2.0.0",
     "@pythnetwork/pyth-sdk-js": "^1.2.0",
-    "@solana/spl-token": "^0.4.0",
+    "@solana/spl-token": "^0.1.8",
     "@solana/web3.js": "^1.87.0",
     "@supabase/supabase-js": "^2.58.0",
     "@types/bcrypt": "^6.0.0",

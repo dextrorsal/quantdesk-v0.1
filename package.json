@@ -10,7 +10,11 @@
     "install:backend": "cd backend && npm install",
     "install:frontend": "cd frontend && npm install",
     "install:admin": "cd admin-dashboard && npm install",
-    "install:all": "npm run install:backend && npm run install:frontend && npm run install:admin"
+    "install:all": "npm run install:backend && npm run install:frontend && npm run install:admin",
+    "env:scan": "./scripts/env-scanner.sh",
+    "env:validate": "node scripts/validate-env.js",
+    "env:lint": "dotenv-linter",
+    "env:check": "npm run env:scan && npm run env:validate"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -24,5 +28,8 @@
     "quantdesk"
   ],
   "author": "QuantDesk Team",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "eslint-plugin-env": "^0.0.3"
+  }
 }

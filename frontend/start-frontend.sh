@@ -18,7 +18,7 @@ if ! command -v npm &> /dev/null; then
 fi
 
 # Navigate to frontend directory
-cd "$(dirname "$0")/frontend" || exit 1
+cd "$(dirname "$0")" || exit 1
 
 echo "📦 Installing dependencies..."
 if [ ! -d "node_modules" ]; then
@@ -32,8 +32,8 @@ else
 fi
 
 echo "🚀 Starting development server..."
-echo "📍 Frontend will be available at: http://localhost:3000"
-echo "📍 Make sure backend is running at: http://localhost:8000"
+echo "📍 Frontend will be available at: http://localhost:3001"
+echo "📍 Make sure backend is running at: http://localhost:3002"
 echo ""
 echo "Press Ctrl+C to stop the server"
 echo ""

@@ -183,8 +183,8 @@ def serve_docs(port=8080):
             print(f"⏹️  Press Ctrl+C to stop")
             print("-" * 50)
             
-            # Open browser
-            webbrowser.open(f'http://localhost:{port}')
+            # Open browser (disabled for showcase)
+            # webbrowser.open(f'http://localhost:{port}')
             
             # Start serving
             httpd.serve_forever()
