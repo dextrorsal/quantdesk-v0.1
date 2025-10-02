@@ -10,7 +10,7 @@ const logger = new Logger();
 router.get('/', asyncHandler(async (_req: Request, res: Response) => {
   try {
     // Get markets from Supabase using the standard client
-    const { data: markets, error: marketsError } = await supabaseService.client
+    const { data: markets, error: marketsError } = await supabaseService.getClient()
       .from('markets')
       .select('*')
       .eq('is_active', true)
@@ -33,7 +33,7 @@ router.get('/', asyncHandler(async (_req: Request, res: Response) => {
     }
 
     // Get latest oracle prices
-    const { data: oraclePrices, error: pricesError } = await supabaseService.client
+    const { data: oraclePrices, error: pricesError } = await supabaseService.getClient()
       .from('oracle_prices')
       .select('*')
       .order('created_at', { ascending: false });
@@ -111,7 +111,7 @@ router.get('/:symbol', asyncHandler(async (req: Request, res: Response) => {
   const { symbol } = req.params;
 
   try {
-    const { data: market, error: marketError } = await supabaseService.client
+    const { data: market, error: marketError } = await supabaseService.getClient()
       .from('markets')
       .select('*')
       .eq('symbol', symbol)
@@ -127,7 +127,7 @@ router.get('/:symbol', asyncHandler(async (req: Request, res: Response) => {
     }
 
     // Get latest price for this market
-    const { data: oraclePrice } = await supabaseService.client
+    const { data: oraclePrice } = await supabaseService.getClient()
       .from('oracle_prices')
       .select('*')
       .eq('market_id', market.id)
@@ -189,7 +189,7 @@ router.get('/:symbol/price', asyncHandler(async (req: Request, res: Response) =>
 
   try {
     // First get the market
-    const { data: market } = await supabaseService.client
+    const { data: market } = await supabaseService.getClient()
       .from('markets')
       .select('id')
       .eq('symbol', symbol)
@@ -205,7 +205,7 @@ router.get('/:symbol/price', asyncHandler(async (req: Request, res: Response) =>
     }
 
     // Get latest price
-    const { data: oraclePrice } = await supabaseService.client
+    const { data: oraclePrice } = await supabaseService.getClient()
       .from('oracle_prices')
       .select('price, confidence, created_at')
       .eq('market_id', market.id)
@@ -248,7 +248,7 @@ router.get('/:symbol/price-history', asyncHandler(async (req: Request, res: Resp
     const startTime = new Date(Date.now() - hoursInt * 60 * 60 * 1000);
 
     // First get the market
-    const { data: market } = await supabaseService.client
+    const { data: market } = await supabaseService.getClient()
       .from('markets')
       .select('id')
       .eq('symbol', symbol)
@@ -264,7 +264,7 @@ router.get('/:symbol/price-history', asyncHandler(async (req: Request, res: Resp
     }
 
     // Get price history
-    const { data: history, error } = await supabaseService.client
+    const { data: history, error } = await supabaseService.getClient()
       .from('oracle_prices')
       .select('price, created_at')
       .eq('market_id', market.id)
@@ -331,7 +331,7 @@ router.get('/:symbol/funding', asyncHandler(async (req: Request, res: Response) 
   const { symbol } = req.params;
 
   try {
-    const { data: market, error } = await supabaseService.client
+    const { data: market, error } = await supabaseService.getClient()
       .from('markets')
       .select('current_funding_rate, funding_interval, last_funding_time')
       .eq('symbol', symbol)

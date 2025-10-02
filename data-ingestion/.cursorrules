@@ -1,0 +1,46 @@
+# QuantDesk Monorepo Context Rules
+
+## Project Structure Awareness
+This is a **monorepo** containing multiple QuantDesk components. Always consider the full project structure, not just the current folder.
+
+### Key Directories:
+- `/home/dex/Desktop/quantdesk/` - Root monorepo directory
+- `/home/dex/Desktop/quantdesk/data-ingestion/` - Current data ingestion pipeline
+- `/home/dex/Desktop/quantdesk/backend/` - Main backend API server
+- `/home/dex/Desktop/quantdesk/frontend/` - Frontend application
+- `/home/dex/Desktop/quantdesk/` - Other components (check structure)
+
+### Important Guidelines:
+1. **Always check the full monorepo structure** when working on any component
+2. **Look for existing implementations** in other directories before creating new ones
+3. **Consider cross-component dependencies** and shared configurations
+4. **Use absolute paths** when referencing files across the monorepo
+5. **Check for shared environment variables** and configuration files
+6. **Look for existing services** that might already solve the problem
+
+### Data Ingestion Pipeline Context:
+- **Purpose**: Collect real-time price data for QuantDesk trading platform
+- **Components**: Price collectors, news scrapers, whale monitors, analytics writers
+- **Data Flow**: External APIs → Redis Streams → PostgreSQL (Supabase)
+
+### When Working on This Project:
+- Always explore the full `/home/dex/Desktop/quantdesk/` directory structure
+- Check if similar functionality exists in `/backend/` or other components
+- Consider how changes affect the entire trading platform ecosystem
+- Look for shared configurations, environment variables, and utilities
+- Verify that solutions work across the entire monorepo, not just this component
+
+### Example Commands to Explore Structure:
+```bash
+# Check full monorepo structure
+ls -la /home/dex/Desktop/quantdesk/
+
+# Look for similar implementations
+find /home/dex/Desktop/quantdesk/ -name "*.js" -o -name "*.ts" | grep -i pyth
+find /home/dex/Desktop/quantdesk/ -name "*.js" -o -name "*.ts" | grep -i price
+
+# Check for shared configs
+find /home/dex/Desktop/quantdesk/ -name "*.env*" -o -name "config.*"
+```
+
+Remember: This is a **trading platform monorepo** - always think about the bigger picture!

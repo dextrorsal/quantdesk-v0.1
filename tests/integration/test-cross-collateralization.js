@@ -12,7 +12,7 @@ const BASE_URL = 'http://localhost:3002';
 // Mock user data for testing
 const testUser = {
   id: 'test-user-cross-collateral',
-  email: 'trader@quantdesk.com'
+  email: 'trader@quantdesk.app'
 };
 
 // Test collateral accounts

@@ -3,10 +3,92 @@ import { DatabaseService } from '../services/database';
 import { Logger } from '../utils/logger';
 import { asyncHandler } from '../middleware/errorHandler';
 import { AuthenticatedRequest } from '../middleware/auth';
+import { transactionVerificationService } from '../services/transactionVerificationService';
 
 const router = express.Router();
 const logger = new Logger();
 const db = DatabaseService.getInstance();
+
+// Verify account creation transaction
+router.post('/verify-creation', asyncHandler(async (req: AuthenticatedRequest, res) => {
+  const { transactionSignature, accountIndex } = req.body;
+  const userId = req.user!.id;
+
+  if (!transactionSignature) {
+    return res.status(400).json({
+      error: 'Transaction signature is required',
+      code: 'MISSING_SIGNATURE'
+    });
+  }
+
+  try {
+    // Get user wallet address
+    const userResult = await db.query(
+      `SELECT wallet_address FROM users WHERE id = $1`,
+      [userId]
+    );
+
+    if (userResult.rows.length === 0) {
+      return res.status(404).json({
+        error: 'User not found',
+        code: 'USER_NOT_FOUND'
+      });
+    }
+
+    const userWallet = userResult.rows[0].wallet_address;
+
+    // Verify account creation transaction
+    logger.info(`🔍 Verifying account creation transaction: ${transactionSignature}`);
+    
+    const verificationResult = await transactionVerificationService.verifyAccountCreationTransaction(
+      transactionSignature,
+      {
+        userWallet,
+        accountIndex: accountIndex || 0,
+        expectedProgramId: process.env.QUANTDESK_PROGRAM_ID
+      }
+    );
+
+    if (!verificationResult.isValid) {
+      logger.error(`❌ Account creation verification failed: ${verificationResult.error}`);
+      return res.status(400).json({
+        error: 'Account creation verification failed',
+        details: verificationResult.error,
+        code: 'ACCOUNT_CREATION_VERIFICATION_FAILED'
+      });
+    }
+
+    logger.info(`✅ Account creation verified successfully: ${transactionSignature}`);
+
+    // Update user's account state in database
+    await db.query(
+      `UPDATE users SET 
+        account_created = true, 
+        account_created_at = NOW(),
+        last_activity = NOW()
+       WHERE id = $1`,
+      [userId]
+    );
+
+    res.json({
+      success: true,
+      message: 'Account creation verified successfully',
+      transactionSignature,
+      verificationDetails: {
+        accounts: verificationResult.accounts,
+        logs: verificationResult.logs,
+        programIds: verificationResult.programIds
+      }
+    });
+
+  } catch (error) {
+    logger.error('Error verifying account creation:', error);
+    res.status(500).json({
+      error: 'Failed to verify account creation',
+      code: 'VERIFICATION_ERROR'
+    });
+  }
+}));
 
 // Get user's trading accounts
 router.get('/trading-accounts', asyncHandler(async (req: AuthenticatedRequest, res) => {

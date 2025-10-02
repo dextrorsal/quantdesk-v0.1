@@ -16,11 +16,11 @@ export const DOCS_CONFIG = {
   
   // Production (when deployed)
   production: {
-    baseUrl: 'https://docs.quantdesk.app',
-    technicalPortfolio: 'https://docs.quantdesk.app/html/docs_TECHNICAL_EVOLUTION_PORTFOLIO.html',
-    performanceMetrics: 'https://docs.quantdesk.app/html/docs_PERFORMANCE_METRICS.html',
-    gettingStarted: 'https://docs.quantdesk.app/html/docs_getting-started/README.html',
-    apiDocs: 'https://docs.quantdesk.app/html/docs_api/API.html',
+    baseUrl: 'https://quantdesk.app/docs',
+    technicalPortfolio: 'https://quantdesk.app/html/docs_TECHNICAL_EVOLUTION_PORTFOLIO.html',
+    performanceMetrics: 'https://quantdesk.app/html/docs_PERFORMANCE_METRICS.html',
+    gettingStarted: 'https://quantdesk.app/html/docs_getting-started/README.html',
+    apiDocs: 'https://quantdesk.app/html/docs_api/API.html',
   }
 }
 

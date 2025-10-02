@@ -40,7 +40,7 @@ export class MCPSupabaseService {
   private readonly PROJECT_ID: string;
 
   private constructor() {
-    this.PROJECT_ID = process.env.SUPABASE_PROJECT_ID || 'vabqtnsrmvccgegzvztv';
+    this.PROJECT_ID = process.env.SUPABASE_PROJECT_ID || 'your-project-id';
   }
 
   public static getInstance(): MCPSupabaseService {
@@ -69,7 +69,7 @@ export class MCPSupabaseService {
    * Note: This is a placeholder - in a real implementation, you'd need to
    * integrate with the MCP Supabase tools directly
    */
-  private async executeQuery(sql: string, params?: any[]): Promise<any> {
+  public async executeQuery(sql: string, params?: any[]): Promise<any> {
     // This would be replaced with actual MCP tool calls
     // For now, we'll use a mock implementation
     logger.info(`Executing SQL: ${sql}`);

@@ -17,7 +17,19 @@ export interface PythPriceData {
 }
 
 export interface PythResponse {
-  [key: string]: PythPriceData;
+  binary?: {
+    encoding: string;
+    data: string[];
+  };
+  parsed?: PythPriceData[];
+}
+
+export interface PythApiResponse {
+  binary?: {
+    encoding: string;
+    data: string[];
+  };
+  parsed?: PythPriceData[];
 }
 
 export class PythService {
@@ -25,11 +37,12 @@ export class PythService {
   private readonly PYTH_BENCHMARKS_URL = 'https://benchmarks.pyth.network/v1/updates/price/latest';
   
   // Pyth price feed IDs for major assets
+  // Note: Only BTC ID is currently working - other IDs need to be found
   private readonly PRICE_FEED_IDS = {
-    BTC: 'HovQMDrbAgAYPCmHVSrezcSmkMtXSSUsLDFANExrZh2J', // BTC/USD
-    ETH: 'JBu1AL4obBcCMqKBBxhpWCNUt136ijcuMZLFvTP7iWdB', // ETH/USD
-    SOL: 'H6ARHf6YXhGYeQfUzQNGk6rDNnLBQKrenN712K4AQJEG', // SOL/USD
-    USDC: 'Gnt27xtC473ZT2Mw5u8wZ68Z3gULkSTb5DuxJy7eJotD', // USDC/USD
+    BTC: 'e62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43', // BTC/USD (working ID)
+    // ETH: 'JBu1AL4obBcCMqKBBxhpWCNUt136ijcuMZLFvTP7iWdB', // ETH/USD (incorrect ID)
+    // SOL: 'H6ARHf6YXhGYeQfUzQNGk6rDNnLBQKrenN712K4AQJEG', // SOL/USD (incorrect ID)
+    // USDC: 'Gnt27xtC473ZT2Mw5u8wZ68Z3gULkSTb5DuxJy7eJotD', // USDC/USD (incorrect ID)
   };
 
   /**
@@ -37,14 +50,32 @@ export class PythService {
    */
   async getLatestPrices(): Promise<PythResponse> {
     try {
-      const response = await axios.get(this.PYTH_API_URL, {
-        params: {
-          ids: Object.values(this.PRICE_FEED_IDS).join(',')
-        },
-        timeout: 10000
-      });
-
-      return response.data;
+      const ids = Object.values(this.PRICE_FEED_IDS);
+      const allParsedData: PythPriceData[] = [];
+      
+      // Make individual requests for each price feed ID
+      for (const id of ids) {
+        try {
+          const response = await axios.get(this.PYTH_API_URL, {
+            params: {
+              'ids[]': id
+            },
+            timeout: 10000
+          });
+          
+          // Extract parsed data from response
+          if (response.data.parsed && Array.isArray(response.data.parsed)) {
+            allParsedData.push(...response.data.parsed);
+          }
+        } catch (error) {
+          console.error(`Failed to fetch price for ID ${id}:`, error);
+          // Continue with other IDs even if one fails
+        }
+      }
+      
+      return {
+        parsed: allParsedData
+      };
     } catch (error) {
       console.error('Error fetching Pyth prices:', error);
       throw new Error('Failed to fetch price data from Pyth Network');
@@ -56,9 +87,14 @@ export class PythService {
    */
   async getAssetPrice(asset: keyof typeof this.PRICE_FEED_IDS): Promise<number> {
     try {
-      const prices = await this.getLatestPrices();
+      const response = await this.getLatestPrices();
       const feedId = this.PRICE_FEED_IDS[asset];
-      const priceData = prices[feedId];
+      
+      if (!response.parsed) {
+        throw new Error(`No parsed data available`);
+      }
+
+      const priceData = response.parsed.find(item => item.id === feedId);
 
       if (!priceData) {
         throw new Error(`Price data not found for ${asset}`);
@@ -79,11 +115,15 @@ export class PythService {
    */
   async getAllPrices(): Promise<Record<string, number>> {
     try {
-      const prices = await this.getLatestPrices();
+      const response = await this.getLatestPrices();
       const result: Record<string, number> = {};
 
+      if (!response.parsed) {
+        return result;
+      }
+
       for (const [asset, feedId] of Object.entries(this.PRICE_FEED_IDS)) {
-        const priceData = prices[feedId];
+        const priceData = response.parsed.find(item => item.id === feedId);
         if (priceData) {
           const price = parseFloat(priceData.price.price) * Math.pow(10, priceData.price.expo);
           result[asset] = price;

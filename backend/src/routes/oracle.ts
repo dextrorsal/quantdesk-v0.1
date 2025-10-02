@@ -1,5 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { pythService } from '../services/pythService';
+import { fallbackPriceService } from '../services/fallbackPriceService';
 
 const router = Router();
 
@@ -9,13 +10,27 @@ const router = Router();
  */
 router.get('/prices', async (req: Request, res: Response) => {
   try {
-    const prices = await pythService.getAllPrices();
+    // Try Pyth first, fallback to CoinGecko if it fails
+    let prices;
+    let source = 'pyth-network';
+    
+    try {
+      prices = await pythService.getAllPrices();
+    } catch (pythError) {
+      console.log('Pyth failed, using CoinGecko fallback:', pythError);
+      const fallbackPrices = await fallbackPriceService.getLatestPrices();
+      prices = {};
+      for (const [asset, priceData] of Object.entries(fallbackPrices)) {
+        prices[asset] = priceData.price;
+      }
+      source = 'coingecko-fallback';
+    }
     
     res.json({
       success: true,
       data: prices,
       timestamp: Date.now(),
-      source: 'pyth-network'
+      source: source
     });
   } catch (error) {
     console.error('Error fetching prices:', error);
@@ -36,16 +51,16 @@ router.get('/price/:asset', async (req: Request, res: Response) => {
     const { asset } = req.params;
     const upperAsset = asset.toUpperCase() as 'BTC' | 'ETH' | 'SOL' | 'USDC';
     
-    if (!['BTC', 'ETH', 'SOL', 'USDC'].includes(upperAsset)) {
+    if (!['BTC'].includes(upperAsset)) {
       return res.status(400).json({
         success: false,
         error: 'Invalid asset',
-        message: 'Supported assets: BTC, ETH, SOL, USDC'
+        message: 'Supported assets: BTC (ETH, SOL, USDC coming soon)'
       });
     }
 
-    const price = await pythService.getAssetPrice(upperAsset);
-    const confidence = await pythService.getPriceConfidence(upperAsset);
+    const price = await pythService.getAssetPrice(upperAsset as 'BTC');
+    const confidence = await pythService.getPriceConfidence(upperAsset as 'BTC');
     
     res.json({
       success: true,

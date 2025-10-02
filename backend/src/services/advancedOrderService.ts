@@ -250,7 +250,7 @@ export class AdvancedOrderService {
 
       query += ` ORDER BY created_at DESC`;
 
-      const orders = await this.db.query(query, params);
+      const orders = await this.db.executeQuery(query, params);
       return orders.map(this.mapDbOrderToAdvancedOrder);
 
     } catch (error) {
@@ -264,7 +264,7 @@ export class AdvancedOrderService {
    */
   public async getOrderById(orderId: string): Promise<AdvancedOrder | null> {
     try {
-      const orders = await this.db.query(
+      const orders = await this.db.executeQuery(
         'SELECT * FROM advanced_orders WHERE id = $1',
         [orderId]
       );
@@ -324,7 +324,7 @@ export class AdvancedOrderService {
 
   private async getCurrentMarketPrice(marketId: string): Promise<number> {
     try {
-      const prices = await this.db.query(`
+      const prices = await this.db.executeQuery(`
         SELECT price FROM oracle_prices 
         WHERE market_id = $1 
         ORDER BY created_at DESC 
@@ -349,7 +349,7 @@ export class AdvancedOrderService {
 
   private async validateUserBalance(userId: string, requiredMargin: number): Promise<void> {
     try {
-      const user = await this.db.query(
+      const user = await this.db.executeQuery(
         'SELECT balance FROM users WHERE id = $1',
         [userId]
       );
@@ -371,7 +371,7 @@ export class AdvancedOrderService {
 
   private async createOrderInDatabase(order: AdvancedOrder): Promise<AdvancedOrder> {
     try {
-      const result = await this.db.query(`
+      const result = await this.db.executeQuery(`
         INSERT INTO advanced_orders (
           user_id, market_id, order_type, side, size, price, stop_price,
           trailing_distance, leverage, status, created_at, expires_at,
@@ -399,7 +399,7 @@ export class AdvancedOrderService {
 
   private async getConditionalOrders(marketId: string): Promise<AdvancedOrder[]> {
     try {
-      const orders = await this.db.query(`
+      const orders = await this.db.executeQuery(`
         SELECT * FROM advanced_orders 
         WHERE market_id = $1 
         AND status = 'pending'
@@ -441,7 +441,7 @@ export class AdvancedOrderService {
       await this.updateOrderStatus(order.id, OrderStatus.FILLED);
       
       // Update order with execution details
-      await this.db.query(`
+      await this.db.executeQuery(`
         UPDATE advanced_orders 
         SET execution_price = $1, execution_time = NOW(), filled_size = size
         WHERE id = $2
@@ -464,7 +464,7 @@ export class AdvancedOrderService {
 
   private async getTWAPOrders(): Promise<AdvancedOrder[]> {
     try {
-      const orders = await this.db.query(`
+      const orders = await this.db.executeQuery(`
         SELECT * FROM advanced_orders 
         WHERE order_type = 'twap' 
         AND status = 'pending'
@@ -515,7 +515,7 @@ export class AdvancedOrderService {
 
   private async updateOrderStatus(orderId: string, status: OrderStatus): Promise<void> {
     try {
-      await this.db.query(
+      await this.db.executeQuery(
         'UPDATE advanced_orders SET status = $1 WHERE id = $2',
         [status, orderId]
       );

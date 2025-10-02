@@ -390,7 +390,7 @@ export class SolanaService {
   public async getClusterInfo(): Promise<any> {
     try {
       const info = await this.rpcLoadBalancer.executeWithRetry(async (connection) => {
-        return await connection.getClusterInfo();
+        return await connection.getClusterNodes();
       });
       return info;
     } catch (error) {
