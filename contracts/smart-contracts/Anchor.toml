@@ -4,15 +4,16 @@ package_manager = "yarn"
 [features]
 resolution = true
 skip-lint = false
+init-if-needed = true
 
 [programs.localnet]
-quantdesk_perp_dex = "G7isTpCkw8TWhPhozSuZMbUjTEF8Jf8xxAguZyL39L8J"
+quantdesk_perp_dex = "GcpEyGMJg9AvEx8LgAyzyUNTPWFxovHxtmQ4vVWuWu3a"
 
 [programs.devnet]
-quantdesk_perp_dex = "G7isTpCkw8TWhPhozSuZMbUjTEF8Jf8xxAguZyL39L8J"
+quantdesk_perp_dex = "GcpEyGMJg9AvEx8LgAyzyUNTPWFxovHxtmQ4vVWuWu3a"
 
 [programs.testnet]
-quantdesk_perp_dex = "G7isTpCkw8TWhPhozSuZMbUjTEF8Jf8xxAguZyL39L8J"
+quantdesk_perp_dex = "GcpEyGMJg9AvEx8LgAyzyUNTPWFxovHxtmQ4vVWuWu3a"
 
 [registry]
 url = "https://api.apr.dev"

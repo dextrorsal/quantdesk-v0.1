@@ -3,7 +3,7 @@
 ## 🎯 **Industry Best Practices for Admin Access**
 
 ### **1. Separate Admin Interface (Recommended)**
-- **Separate URL**: `/admin` or `admin.quantdesk.com`
+- **Separate URL**: `/admin` or `admin.quantdesk.app`
 - **Separate Authentication**: Admin-only login system
 - **IP Whitelisting**: Restrict access to specific IP addresses
 - **VPN Required**: Force VPN connection for admin access
@@ -44,7 +44,7 @@
 
 ### **Option 1: Hidden Admin Route (Current)**
 ```
-https://quantdesk.com/admin
+https://quantdesk.app/admin
 ```
 - **Pros**: Simple, no additional infrastructure
 - **Cons**: Discoverable, less secure
@@ -52,7 +52,7 @@ https://quantdesk.com/admin
 
 ### **Option 2: Subdomain Admin (Recommended)**
 ```
-https://admin.quantdesk.com
+https://admin.quantdesk.app
 ```
 - **Pros**: Separate infrastructure, better security
 - **Cons**: Requires DNS setup, SSL certificates
@@ -60,7 +60,7 @@ https://admin.quantdesk.com
 
 ### **Option 3: Internal Network Only**
 ```
-http://admin.internal.quantdesk.com
+http://admin.internal.quantdesk.app
 ```
 - **Pros**: Maximum security, not publicly accessible
 - **Cons**: Requires VPN, complex setup
@@ -173,18 +173,6 @@ http://admin.internal.quantdesk.com
 - Permission changes
 - Security incidents
 - System updates
-
-## 📞 **Contact Information**
-
-### **Admin Support**
-- **Email**: admin-support@quantdesk.com
-- **Phone**: +1-555-ADMIN-01
-- **Slack**: #admin-support
-
-### **Emergency Contacts**
-- **On-call Admin**: +1-555-EMERGENCY
-- **Security Team**: security@quantdesk.com
-- **Legal Team**: legal@quantdesk.com
 
 ---
 

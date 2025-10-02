@@ -182,7 +182,7 @@ You should see the QuantDesk trading interface with:
 
 If you have Grafana configured:
 
-1. Navigate to **http://localhost:3000**
+1. Navigate to **http://localhost:3100**
 2. Login to Grafana
 3. Import the QuantDesk dashboard
 4. View real-time trading metrics

@@ -5,8 +5,8 @@ Welcome to the QuantDesk API! This documentation provides comprehensive informat
 ## 🔗 **Base URL**
 
 ```
-Development: https://api-dev.quantdesk.app
-Production: https://api.quantdesk.com
+Development: https://localhost:3001
+Production: https://quantdesk.app
 Local: http://localhost:3002
 ```
 
