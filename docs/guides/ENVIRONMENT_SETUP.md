@@ -128,6 +128,6 @@ For the backend and smart contracts, we'll use the same simple approach unless y
 
 1. **Run the setup script**: `./setup.sh`
 2. **Start frontend**: `cd frontend && npm run dev`
-3. **Open browser**: `http://localhost:3000`
+3. **Open browser**: `http://localhost:3001`
 
 That's it! No conda or complex environment management needed for now. 🚀

@@ -1,0 +1,1231 @@
+{
+  "info": {
+    "name": "QuantDesk Complete Trading Platform",
+    "description": "Complete QuantDesk trading platform API collection. Combines backend APIs (Express/Solana/Supabase) with data pipeline APIs (9 services + Redis + Analytics Writer + MIKEY-AI).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "2.0.0"
+  },
+  "variable": [
+    {
+      "key": "BACKEND_BASE_URL",
+      "value": "http://localhost:3002",
+      "type": "string"
+    },
+    {
+      "key": "BACKEND_WS_URL",
+      "value": "ws://localhost:3002",
+      "type": "string"
+    },
+    {
+      "key": "SOLANA_RPC_URL",
+      "value": "https://api.devnet.solana.com",
+      "type": "string"
+    },
+    {
+      "key": "SOLANA_WS_URL",
+      "value": "wss://api.devnet.solana.com",
+      "type": "string"
+    },
+    {
+      "key": "PROGRAM_ID",
+      "value": "GcpEyGMJg9AvEx8LgAyzyUNTPWFxovHxtmQ4vVWuWu3a",
+      "type": "string"
+    },
+    {
+      "key": "SUPABASE_URL",
+      "value": "https://your-project.supabase.co",
+      "type": "string"
+    },
+    {
+      "key": "SUPABASE_REST_URL",
+      "value": "https://your-project.supabase.co/rest/v1",
+      "type": "string"
+    },
+    {
+      "key": "SUPABASE_ANON_KEY",
+      "value": "{{SUPABASE_ANON_KEY}}",
+      "type": "secret"
+    },
+    {
+      "key": "PYTH_BASE_URL",
+      "value": "https://hermes.pyth.network",
+      "type": "string"
+    },
+    {
+      "key": "PYTH_WS_URL",
+      "value": "wss://hermes.pyth.network/ws",
+      "type": "string"
+    },
+    {
+      "key": "JUPITER_TOKENS_URL",
+      "value": "https://tokens.jup.ag/tokens",
+      "type": "string"
+    },
+    {
+      "key": "JUPITER_QUOTE_URL",
+      "value": "https://quote-api.jup.ag/v6/quote",
+      "type": "string"
+    },
+    {
+      "key": "WALLET_PUBKEY",
+      "value": "{{WALLET_PUBKEY}}",
+      "type": "string"
+    },
+    {
+      "key": "AI_BASE_URL",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "REDIS_URL",
+      "value": "redis://localhost:6379",
+      "type": "string"
+    },
+    {
+      "key": "BIRDEYE_API_KEY",
+      "value": "{{BIRDEYE_API_KEY}}",
+      "type": "secret"
+    },
+    {
+      "key": "COINGECKO_API_KEY",
+      "value": "{{COINGECKO_API_KEY}}",
+      "type": "secret"
+    },
+    {
+      "key": "DUNE_API_KEY",
+      "value": "{{DUNE_API_KEY}}",
+      "type": "secret"
+    },
+    {
+      "key": "ARTEMIS_API_KEY",
+      "value": "{{ARTEMIS_API_KEY}}",
+      "type": "secret"
+    },
+    {
+      "key": "COINALYZE_API_KEY",
+      "value": "{{COINALYZE_API_KEY}}",
+      "type": "secret"
+    }
+  ],
+  "item": [
+    {
+      "name": "🏥 Health & Status",
+      "description": "Health checks for all QuantDesk services",
+      "item": [
+        {
+          "name": "Backend Health",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/health",
+              "host": ["{{BACKEND_BASE_URL}}"],
+              "path": ["health"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "MIKEY-AI Health",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{AI_BASE_URL}}/health",
+              "host": ["{{AI_BASE_URL}}"],
+              "path": ["health"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Redis Health",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/rpc-stats/health",
+              "host": ["{{BACKEND_BASE_URL}}"],
+              "path": ["api", "rpc-stats", "health"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🔐 Authentication",
+      "description": "QuantDesk authentication endpoints",
+      "item": [
+        {
+          "name": "Authenticate",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@quantdesk.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/auth/authenticate",
+              "host": ["{{BACKEND_BASE_URL}}"],
+              "path": ["api", "auth", "authenticate"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{AUTH_TOKEN}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"{{REFRESH_TOKEN}}\"\n}"
+            },
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/auth/refresh",
+              "host": ["{{BACKEND_BASE_URL}}"],
+              "path": ["api", "auth", "refresh"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{AUTH_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/auth/profile",
+              "host": ["{{BACKEND_BASE_URL}}"],
+              "path": ["api", "auth", "profile"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "💰 Account Management",
+      "description": "QuantDesk account and balance management",
+      "item": [
+        {
+          "name": "Get Account State",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{AUTH_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/account/state",
+              "host": ["{{BACKEND_BASE_URL}}"],
+              "path": ["api", "account", "state"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Account Summary",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{AUTH_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/account/summary",
+              "host": ["{{BACKEND_BASE_URL}}"],
+              "path": ["api", "account", "summary"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Balances",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{AUTH_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/account/balances",
+              "host": ["{{BACKEND_BASE_URL}}"],
+              "path": ["api", "account", "balances"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Trading Accounts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{AUTH_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/account/trading-accounts",
+              "host": ["{{BACKEND_BASE_URL}}"],
+              "path": ["api", "account", "trading-accounts"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "📊 Markets & Prices",
+      "description": "Market data from QuantDesk backend and data pipeline",
+      "item": [
+        {
+          "name": "Get Supabase Markets",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{AUTH_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/real-supabase-markets",
+              "host": ["{{BACKEND_BASE_URL}}"],
+              "path": ["api", "real-supabase-markets"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Market Price",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{AUTH_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/real-supabase-markets/SOLUSDT/price",
+              "host": ["{{BACKEND_BASE_URL}}"],
+              "path": ["api", "real-supabase-markets", "SOLUSDT", "price"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Price History",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{AUTH_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/real-supabase-markets/SOLUSDT/price-history",
+              "host": ["{{BACKEND_BASE_URL}}"],
+              "path": ["api", "real-supabase-markets", "SOLUSDT", "price-history"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Funding Rates",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{AUTH_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/real-supabase-markets/SOLUSDT/funding",
+              "host": ["{{BACKEND_BASE_URL}}"],
+              "path": ["api", "real-supabase-markets", "SOLUSDT", "funding"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Pyth Prices",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/prices",
+              "host": ["{{BACKEND_BASE_URL}}"],
+              "path": ["api", "prices"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "📈 Data Pipeline APIs",
+      "description": "QuantDesk data pipeline services and analytics",
+      "item": [
+        {
+          "name": "Get QuantDesk Signals",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{AI_BASE_URL}}/api/v1/signals",
+              "host": ["{{AI_BASE_URL}}"],
+              "path": ["api", "v1", "signals"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get QuantDesk Alerts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{AI_BASE_URL}}/api/v1/alerts",
+              "host": ["{{AI_BASE_URL}}"],
+              "path": ["api", "v1", "alerts"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get QuantDesk Reports",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{AI_BASE_URL}}/api/v1/reports",
+              "host": ["{{AI_BASE_URL}}"],
+              "path": ["api", "v1", "reports"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Market Prices (Data Pipeline)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{AI_BASE_URL}}/api/v1/market/prices?symbols=BTC,ETH,SOL",
+              "host": ["{{AI_BASE_URL}}"],
+              "path": ["api", "v1", "market", "prices"],
+              "query": [
+                {
+                  "key": "symbols",
+                  "value": "BTC,ETH,SOL",
+                  "description": "Comma-separated symbols"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Market Sentiment",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{AI_BASE_URL}}/api/v1/market/sentiment?symbol=SOL",
+              "host": ["{{AI_BASE_URL}}"],
+              "path": ["api", "v1", "market", "sentiment"],
+              "query": [
+                {
+                  "key": "symbol",
+                  "value": "SOL",
+                  "description": "Symbol to analyze"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🤖 MIKEY-AI Integration",
+      "description": "AI-powered trading intelligence and analysis",
+      "item": [
+        {
+          "name": "AI Query",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{QUANTDESK_API_KEY}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"What are the current market signals for SOL?\",\n  \"context\": {\n    \"symbols\": [\"SOL\"],\n    \"timeframe\": \"1h\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{AI_BASE_URL}}/api/v1/ai/query",
+              "host": ["{{AI_BASE_URL}}"],
+              "path": ["api", "v1", "ai", "query"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Analyze Wallet",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{QUANTDESK_API_KEY}}"
+              }
+            ],
+            "url": {
+              "raw": "{{AI_BASE_URL}}/api/v1/wallets/{{WALLET_PUBKEY}}/analysis",
+              "host": ["{{AI_BASE_URL}}"],
+              "path": ["api", "v1", "wallets", "{{WALLET_PUBKEY}}", "analysis"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Wallet Transactions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{QUANTDESK_API_KEY}}"
+              }
+            ],
+            "url": {
+              "raw": "{{AI_BASE_URL}}/api/v1/wallets/{{WALLET_PUBKEY}}/transactions?limit=50",
+              "host": ["{{AI_BASE_URL}}"],
+              "path": ["api", "v1", "wallets", "{{WALLET_PUBKEY}}", "transactions"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Number of transactions to return"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Liquidations",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{QUANTDESK_API_KEY}}"
+              }
+            ],
+            "url": {
+              "raw": "{{AI_BASE_URL}}/api/v1/trading/liquidations?protocol=all&timeframe=24h",
+              "host": ["{{AI_BASE_URL}}"],
+              "path": ["api", "v1", "trading", "liquidations"],
+              "query": [
+                {
+                  "key": "protocol",
+                  "value": "all",
+                  "description": "Protocol filter"
+                },
+                {
+                  "key": "timeframe",
+                  "value": "24h",
+                  "description": "Timeframe filter"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Whale Activities",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{QUANTDESK_API_KEY}}"
+              }
+            ],
+            "url": {
+              "raw": "{{AI_BASE_URL}}/api/v1/trading/whales?threshold=100000&timeframe=24h",
+              "host": ["{{AI_BASE_URL}}"],
+              "path": ["api", "v1", "trading", "whales"],
+              "query": [
+                {
+                  "key": "threshold",
+                  "value": "100000",
+                  "description": "Minimum transaction value"
+                },
+                {
+                  "key": "timeframe",
+                  "value": "24h",
+                  "description": "Timeframe filter"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Technical Analysis",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{QUANTDESK_API_KEY}}"
+              }
+            ],
+            "url": {
+              "raw": "{{AI_BASE_URL}}/api/v1/trading/analysis?symbol=SOL&indicators=RSI,MACD,BB",
+              "host": ["{{AI_BASE_URL}}"],
+              "path": ["api", "v1", "trading", "analysis"],
+              "query": [
+                {
+                  "key": "symbol",
+                  "value": "SOL",
+                  "description": "Symbol to analyze"
+                },
+                {
+                  "key": "indicators",
+                  "value": "RSI,MACD,BB",
+                  "description": "Technical indicators"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "📋 Orders & Trading",
+      "description": "QuantDesk order management and trading operations",
+      "item": [
+        {
+          "name": "Get Orders",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{AUTH_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/orders",
+              "host": ["{{BACKEND_BASE_URL}}"],
+              "path": ["api", "orders"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{AUTH_TOKEN}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"symbol\": \"SOLUSDT\",\n  \"side\": \"buy\",\n  \"type\": \"market\",\n  \"quantity\": 1.0,\n  \"price\": null\n}"
+            },
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/orders",
+              "host": ["{{BACKEND_BASE_URL}}"],
+              "path": ["api", "orders"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cancel Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{AUTH_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/orders/{{ORDER_ID}}/cancel",
+              "host": ["{{BACKEND_BASE_URL}}"],
+              "path": ["api", "orders", "{{ORDER_ID}}", "cancel"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Trades",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{AUTH_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/trades",
+              "host": ["{{BACKEND_BASE_URL}}"],
+              "path": ["api", "trades"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "💳 Deposits & Withdrawals",
+      "description": "QuantDesk deposit and withdrawal operations",
+      "item": [
+        {
+          "name": "Get Deposit Balances",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{AUTH_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/deposits/balances",
+              "host": ["{{BACKEND_BASE_URL}}"],
+              "path": ["api", "deposits", "balances"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Deposit",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{AUTH_TOKEN}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 100.0,\n  \"currency\": \"USDC\",\n  \"method\": \"bank_transfer\"\n}"
+            },
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/deposits/deposit",
+              "host": ["{{BACKEND_BASE_URL}}"],
+              "path": ["api", "deposits", "deposit"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Confirm Deposit",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{AUTH_TOKEN}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"depositId\": \"{{DEPOSIT_ID}}\",\n  \"confirmationCode\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/deposits/deposit/confirm",
+              "host": ["{{BACKEND_BASE_URL}}"],
+              "path": ["api", "deposits", "deposit", "confirm"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Withdrawal",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{AUTH_TOKEN}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 50.0,\n  \"currency\": \"USDC\",\n  \"address\": \"{{WALLET_PUBKEY}}\"\n}"
+            },
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/deposits/withdraw",
+              "host": ["{{BACKEND_BASE_URL}}"],
+              "path": ["api", "deposits", "withdraw"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Transaction History",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{AUTH_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/deposits/history",
+              "host": ["{{BACKEND_BASE_URL}}"],
+              "path": ["api", "deposits", "history"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🔗 Solana RPC",
+      "description": "Direct Solana blockchain interactions",
+      "item": [
+        {
+          "name": "Get Latest Blockhash",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"getLatestBlockhash\",\n  \"params\": [{\"commitment\": \"confirmed\"}]\n}"
+            },
+            "url": {
+              "raw": "{{SOLANA_RPC_URL}}",
+              "host": ["{{SOLANA_RPC_URL}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Balance",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"getBalance\",\n  \"params\": [\"{{WALLET_PUBKEY}}\", {\"commitment\": \"confirmed\"}]\n}"
+            },
+            "url": {
+              "raw": "{{SOLANA_RPC_URL}}",
+              "host": ["{{SOLANA_RPC_URL}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Program Accounts",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"getProgramAccounts\",\n  \"params\": [\"{{PROGRAM_ID}}\", {\"encoding\": \"base64\"}]\n}"
+            },
+            "url": {
+              "raw": "{{SOLANA_RPC_URL}}",
+              "host": ["{{SOLANA_RPC_URL}}"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "📊 External Data Sources",
+      "description": "External APIs integrated with QuantDesk data pipeline",
+      "item": [
+        {
+          "name": "Pyth Price Feed",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{PYTH_BASE_URL}}/v2/updates/price/latest?ids[]=ef0d8b6fda2ceba41da15d4095d1da392a0d2f8ed0c6c7bc0f4cfac8c280b56d",
+              "host": ["{{PYTH_BASE_URL}}"],
+              "path": ["v2", "updates", "price", "latest"],
+              "query": [
+                {
+                  "key": "ids[]",
+                  "value": "ef0d8b6fda2ceba41da15d4095d1da392a0d2f8ed0c6c7bc0f4cfac8c280b56d",
+                  "description": "SOL price feed ID"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Jupiter Token List",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{JUPITER_TOKENS_URL}}",
+              "host": ["{{JUPITER_TOKENS_URL}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Jupiter Quote",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{JUPITER_QUOTE_URL}}?inputMint=So11111111111111111111111111111111111111112&outputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&amount=1000000&slippageBps=50",
+              "host": ["{{JUPITER_QUOTE_URL}}"],
+              "query": [
+                {
+                  "key": "inputMint",
+                  "value": "So11111111111111111111111111111111111111112",
+                  "description": "SOL mint address"
+                },
+                {
+                  "key": "outputMint",
+                  "value": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+                  "description": "USDC mint address"
+                },
+                {
+                  "key": "amount",
+                  "value": "1000000",
+                  "description": "Amount in smallest unit"
+                },
+                {
+                  "key": "slippageBps",
+                  "value": "50",
+                  "description": "Slippage in basis points"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🛠️ Admin & Monitoring",
+      "description": "QuantDesk admin panel and monitoring tools",
+      "item": [
+        {
+          "name": "Admin Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"admin123\"\n}"
+            },
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/admin/login",
+              "host": ["{{BACKEND_BASE_URL}}"],
+              "path": ["api", "admin", "login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Admin Stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ADMIN_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/admin/stats",
+              "host": ["{{BACKEND_BASE_URL}}"],
+              "path": ["api", "admin", "stats"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Admin Health",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ADMIN_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/admin/health",
+              "host": ["{{BACKEND_BASE_URL}}"],
+              "path": ["api", "admin", "health"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get RPC Stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/rpc-stats/stats",
+              "host": ["{{BACKEND_BASE_URL}}"],
+              "path": ["api", "rpc-stats", "stats"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get RPC Providers",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/rpc-stats/providers",
+              "host": ["{{BACKEND_BASE_URL}}"],
+              "path": ["api", "rpc-stats", "providers"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// QuantDesk Complete Platform - Pre-request Script",
+          "console.log('🚀 QuantDesk API Request:', pm.request.name);",
+          "console.log('📊 Endpoint:', pm.request.url.toString());",
+          "",
+          "// Add timestamp to all requests",
+          "pm.globals.set('timestamp', new Date().toISOString());",
+          "",
+          "// Auto-refresh auth token if needed",
+          "if (pm.request.headers.has('Authorization') && pm.request.headers.get('Authorization').includes('{{AUTH_TOKEN}}')) {",
+          "    const authToken = pm.environment.get('AUTH_TOKEN');",
+          "    if (!authToken) {",
+          "        console.log('⚠️ No auth token found, please authenticate first');",
+          "    }",
+          "}",
+          "",
+          "// Log request type",
+          "const requestType = pm.request.url.toString().includes('/api/v1/') ? 'Data Pipeline' : 'Backend';",
+          "console.log('🔧 Request Type:', requestType);"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// QuantDesk Complete Platform - Response Tests",
+          "pm.test('Response time is acceptable', function () {",
+          "    pm.expect(pm.response.responseTime).to.be.below(10000);",
+          "});",
+          "",
+          "pm.test('Response status is successful', function () {",
+          "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
+          "});",
+          "",
+          "pm.test('Response has valid content', function () {",
+          "    pm.expect(pm.response.text()).to.not.be.empty;",
+          "});",
+          "",
+          "// Log response details",
+          "console.log('✅ QuantDesk Response:', pm.response.status);",
+          "console.log('📊 Response Time:', pm.response.responseTime + 'ms');",
+          "console.log('📏 Response Size:', pm.response.responseSize + ' bytes');",
+          "",
+          "// Store response data for debugging",
+          "if (pm.response.json && pm.response.json()) {",
+          "    pm.globals.set('last_response', JSON.stringify(pm.response.json()));",
+          "}",
+          "",
+          "// Auto-extract tokens from auth responses",
+          "if (pm.request.name.includes('Authenticate') && pm.response.code === 200) {",
+          "    const response = pm.response.json();",
+          "    if (response.token) {",
+          "        pm.environment.set('AUTH_TOKEN', response.token);",
+          "        console.log('🔑 Auth token saved to environment');",
+          "    }",
+          "    if (response.refreshToken) {",
+          "        pm.environment.set('REFRESH_TOKEN', response.refreshToken);",
+          "        console.log('🔄 Refresh token saved to environment');",
+          "    }",
+          "}",
+          "",
+          "// Performance monitoring",
+          "if (pm.response.responseTime > 5000) {",
+          "    console.log('⚠️ Slow response detected:', pm.response.responseTime + 'ms');",
+          "}"
+        ]
+      }
+    }
+  ]
+}

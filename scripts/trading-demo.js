@@ -23,7 +23,7 @@ const DEMO_WALLET = 'DemoWallet123456789012345678901234567890';
 const DEMO_USER = {
   walletAddress: DEMO_WALLET,
   username: 'DemoTrader',
-  email: 'demo@quantdesk.com'
+  email: 'demo@quantdesk.app'
 };
 
 // Demo trading data

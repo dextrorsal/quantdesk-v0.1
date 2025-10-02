@@ -14,7 +14,7 @@ import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets'
 async function basicTradingExample() {
   // Initialize client
   const client = new QuantDeskClient(
-    'https://api.quantdesk.com',
+    'https://api.quantdesk.app',
     'https://api.mainnet-beta.solana.com',
     new PhantomWalletAdapter()
   )

@@ -16,7 +16,7 @@ The QuantDesk Web UI is your command center for managing your AI trading system.
 ```
 
 ### First Time Setup
-1. **Open Dashboard**: Go to http://localhost:3000
+1. **Open Dashboard**: Go to http://localhost:3001
 2. **Check Connection**: Look for "WebSocket: Connected" status
 3. **Verify Data**: See your available exchanges and symbols
 4. **Test Strategies**: View your ML strategies and performance

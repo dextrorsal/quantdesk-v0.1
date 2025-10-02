@@ -170,7 +170,7 @@ curl http://localhost:8000/health
 
 ## 🎉 You're Ready!
 
-Congratulations! You now have a professional AI trading system running. The dashboard at http://localhost:3000 is your command center for:
+Congratulations! You now have a professional AI trading system running. The dashboard at http://localhost:3001 is your command center for:
 
 - Monitoring market data
 - Running ML strategies  

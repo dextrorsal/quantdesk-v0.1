@@ -12,6 +12,9 @@ yarn-error.log*
 .env.production.local
 .env.staging
 .env.production
+.env.*
+.env-bckup*
+.env.backup*
 
 # Build outputs
 dist/
@@ -23,6 +26,7 @@ logs/
 *.log
 backend/logs/
 backend/*.log
+data-ingestion/logs/
 
 # Runtime data
 pids/
@@ -123,6 +127,7 @@ wallet.json
 id.json
 keypair.json
 *.keypair
+*-keypair.json
 
 # API keys and secrets (NEVER commit these)
 secrets/
@@ -272,3 +277,55 @@ storybook-static/
 # Temporary folders
 .tmp/
 .temp/
+
+# =============================================================================
+# QUANTDESK SECURITY - PROPRIETARY COMPONENTS
+# =============================================================================
+
+# Core proprietary components (keep private)
+/frontend/src/
+/backend/src/
+/MIKEY-AI/src/
+/data-ingestion/src/
+
+# Admin dashboard (proprietary)
+/admin-dashboard/src/
+
+# Smart contracts (keep private)
+/contracts/smart-contracts/programs/
+/contracts/smart-contracts/target/
+
+# SDK implementation (keep private)
+/sdk/typescript/src/
+
+# Test files with sensitive data
+/tests/integration/
+/tests/e2e/
+/tests/performance/
+
+# Archive with sensitive data
+/archive/
+
+# =============================================================================
+# PUBLIC-FRIENDLY COMPONENTS (these will be visible)
+# =============================================================================
+
+# Documentation (public)
+# /docs/ - KEEP IN REPO
+# /README.md - KEEP IN REPO
+# /LICENSE - KEEP IN REPO
+
+# Demo scripts (public)
+# /examples/ - KEEP IN REPO
+# /scripts/demo-* - KEEP IN REPO
+
+# Configuration templates (public)
+# /env.example - KEEP IN REPO
+# /package.json - KEEP IN REPO
+
+# Database schema (public)
+# /database/schema.sql - KEEP IN REPO
+
+# Docker and deployment (public)
+# /Dockerfile - KEEP IN REPO
+# /docker-compose.yml - KEEP IN REPO
