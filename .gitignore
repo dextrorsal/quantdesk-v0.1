@@ -12,9 +12,14 @@ yarn-error.log*
 .env.production.local
 .env.staging
 .env.production
-.env.*
+.env.development
+.env.test
+.env.*.local
 .env-bckup*
 .env.backup*
+
+# Allow .env.example files (safe templates)
+!.env.example
 
 # Build outputs
 dist/
