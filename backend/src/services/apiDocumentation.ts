@@ -14,7 +14,7 @@ export function generateOpenAPISpec(): any {
       contact: {
         name: 'QuantDesk Support',
         email: 'contact@quantdesk.app',
-        url: 'https://quantdesk.com'
+        url: 'https://quantdesk.app'
       },
       license: {
         name: 'MIT',
@@ -23,7 +23,7 @@ export function generateOpenAPISpec(): any {
     },
     servers: [
       {
-        url: 'https://api.quantdesk.com',
+        url: 'https://api.quantdesk.app',
         description: 'Production server'
       },
       {

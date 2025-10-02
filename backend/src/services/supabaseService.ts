@@ -202,7 +202,7 @@ export class SupabaseService {
 // Create singleton instance
 const supabaseConfig: SupabaseConfig = {
   url: process.env.SUPABASE_URL || '',
-  anonKey: process.env.SUPABASE_ANON_KEY || ''
+  anonKey: process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || ''
 };
 
 export const supabaseService = new SupabaseService(supabaseConfig);

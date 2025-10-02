@@ -485,7 +485,7 @@ const ProTerminalWithTaskbar: React.FC = () => {
       case 'ACCT':
         createWindow('ACCT', 'Account Management', {
           user: 'QuantDesk Trader',
-          email: 'trader@QuantDesk.com',
+          email: 'trader@QuantDesk.app',
           plan: 'Professional',
           member_since: '2023-06-15',
           permissions: ['Trading', 'Research', 'Analytics', 'API Access']
@@ -522,8 +522,8 @@ const ProTerminalWithTaskbar: React.FC = () => {
         createWindow('MARTIN', 'Files & Links', [
           { name: 'Trading Strategies.pdf', type: 'Document', size: '2.3 MB' },
           { name: 'Market Analysis Q4.xlsx', type: 'Spreadsheet', size: '1.8 MB' },
-          { name: 'Risk Management Guide', type: 'Link', url: 'https://QuantDesk.com/risk' },
-          { name: 'API Documentation', type: 'Link', url: 'https://docs.QuantDesk.com' }
+          { name: 'Risk Management Guide', type: 'Link', url: 'https://QuantDesk.app/risk' },
+          { name: 'API Documentation', type: 'Link', url: 'https://QuantDesk.app' }
         ]);
         break;
       case 'NEJM':
@@ -556,7 +556,7 @@ const ProTerminalWithTaskbar: React.FC = () => {
       case 'BUG':
       case 'ERR':
         createWindow('ERR', 'Bug Report & Support', {
-          contact: 'support@QuantDesk.com',
+          contact: 'contact@QuantDesk.app',
           common_issues: [
             'Window not responding',
             'Data feed disconnected', 

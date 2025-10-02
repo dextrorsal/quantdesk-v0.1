@@ -37,6 +37,7 @@ import advancedRiskManagementRoutes from './routes/advancedRiskManagement';
 import jitLiquidityRoutes from './routes/jitLiquidity';
 import depositsRoutes from './routes/deposits';
 import accountsRoutes from './routes/accounts';
+import accountStateRoutes from './routes/accountState';
 import rpcStatsRoutes from './routes/rpcStats';
 
 // Import API improvements
@@ -209,6 +210,7 @@ app.use('/api/risk', authMiddleware, advancedRiskManagementRoutes);
 app.use('/api/jit-liquidity', authMiddleware, jitLiquidityRoutes);
 app.use('/api/deposits', authMiddleware, depositsRoutes);
 app.use('/api/accounts', authMiddleware, accountsRoutes);
+app.use('/api/account-state', authMiddleware, accountStateRoutes);
 app.use('/api/rpc', rpcStatsRoutes); // Public for testing
 
 // API improvements routes

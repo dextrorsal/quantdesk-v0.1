@@ -1,6 +1,7 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import { AdminUserService } from '../services/adminUserService';
+import { DatabaseService } from '../services/database';
 import { Logger } from '../utils/logger';
 import { asyncHandler } from '../middleware/errorHandler';
 import { AuthenticatedRequest, authMiddleware } from '../middleware/auth';
@@ -8,6 +9,7 @@ import { AuthenticatedRequest, authMiddleware } from '../middleware/auth';
 const router = express.Router();
 const logger = new Logger();
 const adminUserService = AdminUserService.getInstance();
+const db = DatabaseService.getInstance();
 
 // System mode management
 let systemMode: 'demo' | 'live' = 'demo';

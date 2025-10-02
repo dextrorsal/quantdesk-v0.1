@@ -761,7 +761,7 @@ const ProTerminalWithTaskbar: React.FC = () => {
       case 'ACCT':
         createWindow('ACCT', 'Account Management', {
           user: 'QuantDesk Trader',
-          email: 'trader@quantdesk.com',
+          email: 'trader@quantdesk.app',
           plan: 'Professional',
           member_since: '2023-06-15',
           permissions: ['Trading', 'Research', 'Analytics', 'API Access']
@@ -798,8 +798,8 @@ const ProTerminalWithTaskbar: React.FC = () => {
         createWindow('MARTIN', 'Files & Links', [
           { name: 'Trading Strategies.pdf', type: 'Document', size: '2.3 MB' },
           { name: 'Market Analysis Q4.xlsx', type: 'Spreadsheet', size: '1.8 MB' },
-          { name: 'Risk Management Guide', type: 'Link', url: 'https://quantdesk.com/risk' },
-          { name: 'API Documentation', type: 'Link', url: 'https://docs.quantdesk.com' }
+          { name: 'Risk Management Guide', type: 'Link', url: 'https://quantdesk.app/risk' },
+          { name: 'API Documentation', type: 'Link', url: 'https://quantdesk.app/docs' }
         ]);
         break;
       case 'NEJM':

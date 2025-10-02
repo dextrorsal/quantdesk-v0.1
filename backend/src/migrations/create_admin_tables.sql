@@ -86,7 +86,7 @@ ON CONFLICT (name) DO NOTHING;
 
 -- Create default admin user (password: admin123)
 INSERT INTO admin_users (email, password_hash, role, is_active) VALUES
-('admin@quantdesk.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'super_admin', true)
+('admin@quantdesk.app', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'super_admin', true)
 ON CONFLICT (email) DO NOTHING;
 
 -- Create indexes for better performance

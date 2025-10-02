@@ -12,7 +12,7 @@ const BASE_URL = 'http://localhost:3002';
 // Mock user data for testing
 const testUser = {
   id: 'test-user-123',
-  email: 'test@quantdesk.com'
+  email: 'test@quantdesk.app'
 };
 
 // Mock market data

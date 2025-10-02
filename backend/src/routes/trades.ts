@@ -25,7 +25,7 @@ router.get('/', asyncHandler(async (req: AuthenticatedRequest, res) => {
         side: trade.side,
         size: trade.size,
         price: trade.price,
-        value: trade.value,
+        value: trade.size * trade.price,
         fees: trade.fees,
         pnl: trade.pnl,
         timestamp: trade.created_at

@@ -486,7 +486,7 @@ export class CrossCollateralService {
 
   private async createCollateralAccountInDatabase(accountData: Partial<CollateralAccount>): Promise<CollateralAccount> {
     try {
-      const result = await this.db.query(`
+      const result = await this.db.executeQuery(`
         INSERT INTO collateral_accounts (
           user_id, asset_type, amount, value_usd, last_updated, is_active,
           price_usd, utilization_rate, available_amount
@@ -507,9 +507,9 @@ export class CrossCollateralService {
     }
   }
 
-  private async getCollateralAccountById(accountId: string): Promise<CollateralAccount | null> {
+  public async getCollateralAccountById(accountId: string): Promise<CollateralAccount | null> {
     try {
-      const accounts = await this.db.query(
+      const accounts = await this.db.executeQuery(
         'SELECT * FROM collateral_accounts WHERE id = $1',
         [accountId]
       );
@@ -528,7 +528,7 @@ export class CrossCollateralService {
 
   private async getUserCollateralAccounts(userId: string): Promise<CollateralAccount[]> {
     try {
-      const accounts = await this.db.query(
+      const accounts = await this.db.executeQuery(
         'SELECT * FROM collateral_accounts WHERE user_id = $1 AND is_active = true ORDER BY asset_type',
         [userId]
       );
@@ -543,7 +543,7 @@ export class CrossCollateralService {
 
   private async getUserCollateralAccountByAsset(userId: string, assetType: CollateralType): Promise<CollateralAccount | null> {
     try {
-      const accounts = await this.db.query(
+      const accounts = await this.db.executeQuery(
         'SELECT * FROM collateral_accounts WHERE user_id = $1 AND asset_type = $2 AND is_active = true',
         [userId, assetType]
       );
@@ -562,7 +562,7 @@ export class CrossCollateralService {
 
   private async getAllCollateralAccounts(): Promise<CollateralAccount[]> {
     try {
-      const accounts = await this.db.query(
+      const accounts = await this.db.executeQuery(
         'SELECT * FROM collateral_accounts WHERE is_active = true'
       );
 
@@ -576,7 +576,7 @@ export class CrossCollateralService {
 
   private async updateCollateralAccount(accountId: string, updates: Partial<CollateralAccount>): Promise<CollateralAccount> {
     try {
-      const result = await this.db.query(`
+      const result = await this.db.executeQuery(`
         UPDATE collateral_accounts 
         SET amount = COALESCE($1, amount),
             value_usd = COALESCE($2, value_usd),

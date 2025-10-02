@@ -290,9 +290,9 @@ class PythOracleService {
           // Parse the price data from the price feed
           if (priceFeed.price && priceFeed.price.price) {
             const price = parseFloat(priceFeed.price.price)
-            const confidence = parseFloat(priceFeed.price.conf || '0')
-            const exponent = parseInt(priceFeed.price.expo || '0')
-            const publishTime = parseInt(priceFeed.price.publish_time || '0')
+            const confidence = parseFloat(priceFeed.price.conf?.toString() || '0')
+            const exponent = parseInt(priceFeed.price.expo?.toString() || '0')
+            const publishTime = parseInt(priceFeed.price.publish_time?.toString() || '0')
             
             // Apply exponent to get actual price
             const actualPrice = price * Math.pow(10, exponent)
@@ -396,7 +396,7 @@ class PythOracleService {
   /**
    * Parse Pyth price data
    */
-  private parsePythPrice(priceData: any): PythPriceData | null {
+  private parsePythPrice(priceData: any, symbol: string): PythPriceData | null {
     try {
       const price = parseFloat(priceData.price)
       const confidence = parseFloat(priceData.conf)
@@ -412,7 +412,8 @@ class PythOracleService {
         confidence: actualConfidence,
         exponent,
         publishTime,
-        timestamp: Date.now()
+        timestamp: Date.now(),
+        symbol
       }
     } catch (error) {
       this.logger.error('Error parsing Pyth price data:', error)
@@ -465,7 +466,7 @@ class PythOracleService {
       const symbol = this.MARKET_SYMBOLS[marketSymbol as keyof typeof this.MARKET_SYMBOLS]
       if (!symbol) return null
 
-      const priceData = await this.db.query(
+      const priceData = await this.db.executeQuery(
         `SELECT price FROM oracle_prices 
          WHERE market_id = (
            SELECT id FROM markets WHERE symbol = $1
@@ -512,7 +513,7 @@ class PythOracleService {
    */
   public async getPriceHistory(marketSymbol: string, hours: number = 24): Promise<Array<{price: number, timestamp: string}>> {
     try {
-      const priceHistory = await this.db.query(
+      const priceHistory = await this.db.executeQuery(
         `SELECT price, created_at as timestamp FROM oracle_prices 
          WHERE market_id = (
            SELECT id FROM markets WHERE symbol = $1

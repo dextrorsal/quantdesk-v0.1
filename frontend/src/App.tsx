@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import { TradingProvider } from './providers/TradingProvider'
 import { PriceProvider } from './contexts/PriceContext'
+import { AccountProvider } from './contexts/AccountContext'
 import Layout from './components/Layout'
 import React from 'react'
 import PortfolioPage from './pages/PortfolioPage'
@@ -28,8 +29,9 @@ function App() {
   return (
     <PriceProvider websocketUrl="http://localhost:3002" fallbackApiUrl="/api/prices">
       <TradingProvider>
-        <Routes>
-        <Route path="/" element={<LandingPage />} />
+        <AccountProvider>
+          <Routes>
+          <Route path="/" element={<LandingPage />} />
         {/* Lite (new) → QuantDesk chrome with QuantDesk Lite content */}
         <Route path="/lite" element={
           <Layout>
@@ -69,6 +71,7 @@ function App() {
         {/* Catch-all route for unknown paths */}
         <Route path="*" element={<LandingPage />} />
         </Routes>
+        </AccountProvider>
       </TradingProvider>
     </PriceProvider>
   )

@@ -3,7 +3,7 @@ import { DatabaseService } from '../services/database';
 import { Logger } from '../utils/logger';
 import { asyncHandler } from '../middleware/errorHandler';
 import { AuthenticatedRequest } from '../middleware/auth';
-import { Connection, PublicKey, Transaction } from '@solana/web3.js';
+import { transactionVerificationService } from '../services/transactionVerificationService';
 
 const router = express.Router();
 const logger = new Logger();
@@ -196,8 +196,29 @@ router.post('/deposit/confirm', asyncHandler(async (req: AuthenticatedRequest, r
 
     const deposit = depositResult.rows[0];
 
-    // TODO: Verify transaction on Solana blockchain
-    // For now, we'll assume the transaction is valid
+    // Verify transaction on Solana blockchain
+    logger.info(`🔍 Verifying deposit transaction: ${transactionSignature}`);
+    
+    const verificationResult = await transactionVerificationService.verifyDepositTransaction(
+      transactionSignature,
+      {
+        userWallet: req.user!.wallet_address,
+        amount: deposit.amount,
+        asset: deposit.asset,
+        expectedProgramId: process.env.QUANTDESK_PROGRAM_ID // Optional: verify specific program
+      }
+    );
+
+    if (!verificationResult.isValid) {
+      logger.error(`❌ Deposit transaction verification failed: ${verificationResult.error}`);
+      return res.status(400).json({
+        error: 'Transaction verification failed',
+        details: verificationResult.error,
+        code: 'TRANSACTION_VERIFICATION_FAILED'
+      });
+    }
+
+    logger.info(`✅ Deposit transaction verified successfully: ${transactionSignature}`);
 
     // Update deposit status and user balance in a transaction
     await db.transaction(async (client) => {

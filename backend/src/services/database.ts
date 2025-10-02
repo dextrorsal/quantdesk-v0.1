@@ -121,11 +121,7 @@ export class DatabaseService {
 
     this.pool = new Pool({
       connectionString: process.env['DATABASE_URL'],
-      ssl: process.env['NODE_ENV'] === 'production' ? { 
-        rejectUnauthorized: true,
-        // Add CA certificate if available
-        ...(process.env['DATABASE_CA_CERT'] && { ca: process.env['DATABASE_CA_CERT'] })
-      } : false,
+      ssl: false, // Disable SSL for development
       max: 20,
       idleTimeoutMillis: 30000,
       connectionTimeoutMillis: 5000,
@@ -134,20 +130,11 @@ export class DatabaseService {
       keepAlive: true,
       keepAliveInitialDelayMillis: 10000,
       application_name: 'quantdesk-backend',
-      // @ts-expect-error: lookup is supported by pg ClientConfig
       lookup: ipv4Lookup,
     } as any);
 
     this.pool.on('error', (err) => {
-      logger.error('Database pool error:', err);
-    });
-
-    this.pool.on('connect', () => {
-      logger.info('Database connection established');
-    });
-
-    this.pool.on('remove', () => {
-      logger.info('Database connection removed');
+      logger.error('Unexpected error on idle client', err);
     });
   }
 
@@ -212,11 +199,13 @@ export class DatabaseService {
 
   // User operations
   public async getUserByWalletAddress(walletAddress: string): Promise<User | null> {
-    const result = await this.query(
-      'SELECT * FROM users WHERE wallet_address = $1',
-      [walletAddress]
-    );
-    return result.rows[0] || null;
+    try {
+      const users = await supabaseService.select('users', '*', { wallet_address: walletAddress });
+      return users?.[0] || null;
+    } catch (error) {
+      logger.error('Error getting user by wallet address:', error);
+      return null;
+    }
   }
 
   public async getUserById(id: string): Promise<User | null> {
@@ -228,31 +217,39 @@ export class DatabaseService {
   }
 
   public async createUser(walletAddress: string, username?: string, email?: string): Promise<User> {
-    const result = await this.query(
-      `INSERT INTO users (wallet_address, username, email) 
-       VALUES ($1, $2, $3) 
-       RETURNING *`,
-      [walletAddress, username, email]
-    );
-    return result.rows[0];
+    try {
+      const userData = {
+        wallet_address: walletAddress,
+        username: username || null,
+        email: email || null
+      };
+      const result = await supabaseService.insert('users', userData);
+      return result[0];
+    } catch (error) {
+      logger.error('Error creating user:', error);
+      throw error;
+    }
   }
 
   public async updateUser(id: string, updates: Partial<User>): Promise<User> {
-    const fields = Object.keys(updates).filter(key => key !== 'id');
-    const values = fields.map((field, index) => `${field} = $${index + 2}`);
-    
-    const result = await this.query(
-      `UPDATE users SET ${values.join(', ')}, updated_at = NOW() 
-       WHERE id = $1 RETURNING *`,
-      [id, ...Object.values(updates)]
-    );
-    return result.rows[0];
+    try {
+      const result = await supabaseService.update('users', updates, { id });
+      return result[0];
+    } catch (error) {
+      logger.error('Error updating user:', error);
+      throw error;
+    }
   }
 
   // Market operations
   public async getMarkets(): Promise<Market[]> {
-    const result = await this.query('SELECT * FROM markets WHERE is_active = true ORDER BY symbol');
-    return result.rows;
+    try {
+      const markets = await supabaseService.select('markets', '*', { is_active: true });
+      return markets || [];
+    } catch (error) {
+      logger.error('Error getting markets:', error);
+      return [];
+    }
   }
 
   public async getMarketBySymbol(symbol: string): Promise<Market | null> {

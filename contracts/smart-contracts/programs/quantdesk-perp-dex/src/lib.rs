@@ -1,7 +1,16 @@
 use anchor_lang::prelude::*;
-use anchor_spl::token::TokenAccount;
+use anchor_spl::token::{self, Token, TokenAccount, Mint, Transfer};
+use anchor_spl::associated_token::AssociatedToken;
 
-declare_id!("G7isTpCkw8TWhPhozSuZMbUjTEF8Jf8xxAguZyL39L8J");
+mod user_accounts;
+mod token_operations;
+mod pda_utils;
+
+use user_accounts::*;
+use token_operations::*;
+use pda_utils::*;
+
+declare_id!("GcpEyGMJg9AvEx8LgAyzyUNTPWFxovHxtmQ4vVWuWu3a");
 
 #[program]
 pub mod quantdesk_perp_dex {
@@ -584,6 +593,249 @@ pub mod quantdesk_perp_dex {
         
         Ok(())
     }
+
+    // Token Operations - Following Solana Cookbook patterns
+    
+    /// Initialize a token vault for protocol deposits
+    pub fn initialize_token_vault(
+        ctx: Context<InitializeTokenVault>,
+        mint_address: Pubkey,
+    ) -> Result<()> {
+        token_operations::initialize_token_vault(ctx, mint_address)
+    }
+    
+    /// Deposit tokens into protocol vault
+    pub fn deposit_tokens(
+        ctx: Context<DepositTokens>,
+        amount: u64,
+    ) -> Result<()> {
+        token_operations::deposit_tokens(ctx, amount)
+    }
+    
+    /// Withdraw tokens from protocol vault
+    pub fn withdraw_tokens(
+        ctx: Context<WithdrawTokens>,
+        amount: u64,
+    ) -> Result<()> {
+        token_operations::withdraw_tokens(ctx, amount)
+    }
+    
+    /// Create user token account if needed
+    pub fn create_user_token_account(
+        ctx: Context<CreateUserTokenAccount>,
+    ) -> Result<()> {
+        token_operations::create_user_token_account(ctx)
+    }
+
+    /// Initialize protocol SOL vault
+    pub fn initialize_protocol_sol_vault(ctx: Context<InitializeProtocolSolVault>) -> Result<()> {
+        let vault = &mut ctx.accounts.protocol_vault;
+        
+        // Initialize vault with zero balance
+        vault.total_deposits = 0;
+        vault.total_withdrawals = 0;
+        vault.is_active = true;
+        vault.bump = ctx.bumps.protocol_vault;
+        
+        msg!("Protocol SOL vault initialized");
+        Ok(())
+    }
+
+    /// Deposit native SOL to user account
+    pub fn deposit_native_sol(ctx: Context<DepositNativeSol>, amount: u64) -> Result<()> {
+        let user_account = &mut ctx.accounts.user_account;
+        let protocol_vault = &mut ctx.accounts.protocol_vault;
+        let collateral_account = &mut ctx.accounts.collateral_account;
+        
+        // Validate amount
+        require!(amount > 0, TokenError::InvalidAmount);
+        
+        // Update user account with SOL deposit
+        user_account.total_collateral += amount;
+        user_account.last_activity = Clock::get()?.unix_timestamp;
+        
+        // Update protocol vault statistics
+        protocol_vault.total_deposits += amount;
+        
+        // Update or initialize SOL collateral account
+        if collateral_account.amount == 0 {
+            // Initialize collateral account if it's new
+            collateral_account.user = ctx.accounts.user.key();
+            collateral_account.asset_type = CollateralType::SOL;
+            collateral_account.amount = amount;
+            collateral_account.value_usd = amount; // SOL value in lamports (1:1 for now)
+            collateral_account.last_updated = Clock::get()?.unix_timestamp;
+            collateral_account.is_active = true;
+            collateral_account.bump = ctx.bumps.collateral_account;
+            
+            msg!("SOL collateral account initialized with {} lamports", amount);
+        } else {
+            // Add to existing collateral account
+            collateral_account.amount += amount;
+            collateral_account.value_usd += amount;
+            collateral_account.last_updated = Clock::get()?.unix_timestamp;
+            
+            msg!("Added {} lamports to existing SOL collateral account", amount);
+        }
+        
+        // Transfer SOL to protocol vault
+        let transfer_instruction = anchor_lang::system_program::Transfer {
+            from: ctx.accounts.user.to_account_info(),
+            to: ctx.accounts.protocol_vault.to_account_info(),
+        };
+        
+        anchor_lang::system_program::transfer(
+            CpiContext::new(
+                ctx.accounts.system_program.to_account_info(),
+                transfer_instruction,
+            ),
+            amount,
+        )?;
+        
+        msg!("Native SOL deposited: {} lamports by user: {}", amount, ctx.accounts.user.key());
+        
+        Ok(())
+    }
+
+    /// Withdraw native SOL from user account
+    pub fn withdraw_native_sol(ctx: Context<WithdrawNativeSol>, amount: u64) -> Result<()> {
+        let user_account = &mut ctx.accounts.user_account;
+        let protocol_vault = &mut ctx.accounts.protocol_vault;
+        let collateral_account = &mut ctx.accounts.collateral_account;
+        
+        // Validate amount
+        require!(amount > 0, TokenError::InvalidAmount);
+        require!(collateral_account.amount >= amount, TokenError::InsufficientVaultBalance);
+        
+        // Update user account
+        user_account.total_collateral -= amount;
+        user_account.last_activity = Clock::get()?.unix_timestamp;
+        
+        // Update protocol vault statistics
+        protocol_vault.total_withdrawals += amount;
+        
+        // Update collateral account
+        collateral_account.amount -= amount;
+        collateral_account.value_usd -= amount;
+        collateral_account.last_updated = Clock::get()?.unix_timestamp;
+        
+        // Transfer SOL from protocol vault to user
+        let transfer_instruction = anchor_lang::system_program::Transfer {
+            from: ctx.accounts.protocol_vault.to_account_info(),
+            to: ctx.accounts.user.to_account_info(),
+        };
+        
+        anchor_lang::system_program::transfer(
+            CpiContext::new(
+                ctx.accounts.system_program.to_account_info(),
+                transfer_instruction,
+            ),
+            amount,
+        )?;
+        
+        msg!("Native SOL withdrawn: {} lamports by user: {}", amount, ctx.accounts.user.key());
+        
+        Ok(())
+    }
+
+    // User Account Management Functions
+
+    // Create a new user account
+    pub fn create_user_account(
+        ctx: Context<CreateUserAccount>,
+        account_index: u16,
+    ) -> Result<()> {
+        let user_account = &mut ctx.accounts.user_account;
+        
+        // Initialize the user account
+        user_account.initialize(
+            ctx.accounts.authority.key(),
+            account_index,
+            ctx.bumps.user_account,
+        )?;
+        
+        msg!("User account created: {} for user {}", 
+             account_index, ctx.accounts.authority.key());
+        Ok(())
+    }
+
+    // Update user account (called when positions/orders change)
+    pub fn update_user_account(
+        ctx: Context<UpdateUserAccount>,
+        total_collateral: Option<u64>,
+        total_positions: Option<u16>,
+        total_orders: Option<u16>,
+        account_health: Option<u16>,
+        liquidation_price: Option<u64>,
+    ) -> Result<()> {
+        let user_account = &mut ctx.accounts.user_account;
+        
+        // Update fields if provided
+        if let Some(collateral) = total_collateral {
+            user_account.total_collateral = collateral;
+        }
+        
+        if let Some(positions) = total_positions {
+            user_account.total_positions = positions;
+        }
+        
+        if let Some(orders) = total_orders {
+            user_account.total_orders = orders;
+        }
+        
+        if let Some(health) = account_health {
+            user_account.update_account_health(health)?;
+        }
+        
+        if let Some(price) = liquidation_price {
+            user_account.update_liquidation_price(price)?;
+        }
+        
+        // Always update activity timestamp
+        user_account.update_activity()?;
+        
+        msg!("User account updated: {}", ctx.accounts.user_account.key());
+        Ok(())
+    }
+
+    // Close user account (only if no positions/orders)
+    pub fn close_user_account(ctx: Context<CloseUserAccount>) -> Result<()> {
+        let user_account = &mut ctx.accounts.user_account;
+        
+        // Deactivate the account
+        user_account.deactivate()?;
+        
+        msg!("User account closed: {}", ctx.accounts.user_account.key());
+        Ok(())
+    }
+
+    // Check if user can perform specific actions
+    pub fn check_user_permissions(
+        ctx: Context<UpdateUserAccount>,
+        action: UserAction,
+    ) -> Result<()> {
+        let user_account = &ctx.accounts.user_account;
+        
+        match action {
+            UserAction::Deposit => {
+                require!(user_account.can_deposit(), UserAccountError::AccountInactive);
+            },
+            UserAction::Withdraw => {
+                require!(user_account.can_withdraw(), UserAccountError::AccountInactive);
+            },
+            UserAction::Trade => {
+                require!(user_account.can_trade(), UserAccountError::AccountInactive);
+            },
+            UserAction::CreatePosition => {
+                require!(user_account.can_trade(), UserAccountError::AccountInactive);
+            },
+            UserAction::ClosePosition => {
+                require!(user_account.is_active, UserAccountError::AccountInactive);
+            },
+        }
+        
+        Ok(())
+    }
 }
 
 // Enhanced account structures
@@ -769,6 +1021,17 @@ pub enum TimeInForce {
     FOK, // Fill or Kill
     GTD, // Good Till Date
 }
+
+#[derive(AnchorSerialize, AnchorDeserialize, Clone, Copy, PartialEq, Eq, Debug)]
+pub enum UserAction {
+    Deposit,
+    Withdraw,
+    Trade,
+    CreatePosition,
+    ClosePosition,
+}
+
+// Token Operations Context Structures are defined in token_operations.rs
 
 // Context structures
 #[derive(Accounts)]
@@ -1077,7 +1340,45 @@ pub enum ErrorCode {
     CollateralAccountInactive,
     #[msg("No collateral provided")]
     NoCollateralProvided,
+    // User Account Management Errors
+    #[msg("No positions to remove")]
+    NoPositionsToRemove,
+    #[msg("No orders to remove")]
+    NoOrdersToRemove,
+    #[msg("Invalid health value")]
+    InvalidHealthValue,
+    #[msg("Account has open positions")]
+    AccountHasPositions,
+    #[msg("Account has active orders")]
+    AccountHasOrders,
+    #[msg("Account is not active")]
+    AccountInactive,
+    #[msg("Account already exists")]
+    AccountAlreadyExists,
+    #[msg("Account not found")]
+    AccountNotFound,
+    // Token-specific error codes
+    #[msg("Invalid token amount")]
+    InvalidTokenAmount,
+    #[msg("Vault is inactive")]
+    VaultInactive,
+    #[msg("Insufficient vault balance")]
+    InsufficientVaultBalance,
+    #[msg("Unauthorized token authority")]
+    UnauthorizedTokenAuthority,
+    #[msg("Unauthorized token user")]
+    UnauthorizedTokenUser,
+    #[msg("Token account not found")]
+    TokenAccountNotFound,
+    #[msg("Invalid mint address")]
+    InvalidMintAddress,
+    #[msg("PDA derivation failed")]
+    PdaDerivationFailed,
+    #[msg("Invalid PDA owner")]
+    InvalidPdaOwner,
 }
+
+// TokenVault is defined in token_operations.rs
 
 // Space calculations
 impl Market {
@@ -1094,4 +1395,35 @@ impl CollateralAccount {
 
 impl Order {
     pub const INIT_SPACE: usize = 32 + 32 + 1 + 1 + 8 + 8 + 8 + 8 + 1 + 1 + 8 + 8 + 8 + 1 + 8 + 8 + 1 + 8 + 1 + 8 + 8;
+}
+
+// Protocol SOL Vault Account Structure
+#[account]
+pub struct ProtocolSolVault {
+    pub total_deposits: u64,       // Total SOL deposited
+    pub total_withdrawals: u64,    // Total SOL withdrawn
+    pub is_active: bool,           // Whether vault is active
+    pub bump: u8,                 // PDA bump
+}
+
+impl ProtocolSolVault {
+    pub const INIT_SPACE: usize = 8 + 8 + 1 + 1;
+}
+
+// Initialize Protocol SOL Vault Context
+#[derive(Accounts)]
+pub struct InitializeProtocolSolVault<'info> {
+    #[account(
+        init,
+        payer = authority,
+        space = 8 + ProtocolSolVault::INIT_SPACE,
+        seeds = [b"protocol_sol_vault"],
+        bump
+    )]
+    pub protocol_vault: Account<'info, ProtocolSolVault>,
+    
+    #[account(mut)]
+    pub authority: Signer<'info>,
+    
+    pub system_program: Program<'info, System>,
 }
