@@ -48,6 +48,30 @@
 - **Real-time Updates**: Live market data and position tracking
 - **Multi-Account UI**: Intuitive account management interface
 
+## 🚀 **CI/CD Pipeline**
+
+QuantDesk features a comprehensive CI/CD pipeline with **17 automated workflows**:
+
+- **🧪 Testing & Quality**: Unit tests, integration tests, code quality checks
+- **🐳 Docker & Build**: Multi-platform Docker builds, container orchestration
+- **🚀 Deployment**: Automated staging and production deployments
+- **🔒 Security**: Vulnerability scanning, dependency audits
+- **📊 Monitoring**: Health checks, performance monitoring, alerting
+
+### Quick Start
+```bash
+# Test workflows locally
+./test-workflows.sh
+
+# Simulate execution
+./dry-run-test.sh
+
+# Check status
+./check-workflow-status.sh
+```
+
+📚 **Complete CI/CD Documentation**: See [`docs/README.md`](./docs/README.md) for comprehensive guides, troubleshooting, and architecture diagrams.
+
 ### Blockchain
 - **Solana Devnet**: Production-ready for Mainnet deployment
 - **Anchor Framework**: Rust smart contracts with TypeScript integration

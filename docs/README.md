@@ -1,93 +1,103 @@
-# 📚 Project Documentation
-
-This directory contains the technical documentation for the QuantDesk trading system. All documentation here is current and actionable for developers and users.
+# 📚 QuantDesk Documentation
 
 ## 📂 Documentation Structure
 
-### **🤖 AI & Integration**
-- `ai-agent-integration.md` - AI agent integration guide
-- `AGENT_HANDOFF_SUMMARY.md` - AI agent handoff documentation
+### 🚀 CI/CD Pipeline
+- [CI/CD Comprehensive Guide](./ci-cd/CI_CD_COMPREHENSIVE_GUIDE.md)
+- [CI/CD Quick Reference](./ci-cd/CI_CD_QUICK_REFERENCE.md)
+- [CI/CD Troubleshooting](./ci-cd/CI_CD_TROUBLESHOOTING.md)
+- [CI/CD Architecture Diagrams](./ci-cd/CI_CD_ARCHITECTURE_DIAGRAMS.md)
 
-### **📊 Trading Strategies**
-- `ml-trading-strat.md` - Machine learning trading strategies
-- `lag-based.md` - Lag-based trading strategies
-- `HIGH_LEVERAGE_MEME_COIN_STRATEGY.md` - High leverage meme coin strategies
-- `TECHNICAL_STRATEGY.md` - Technical analysis strategies
-- `TRADING_PHILOSOPHY.md` - Trading philosophy and approach
+### 🏗️ Architecture
+- [Architecture Overview](./architecture/overview.md)
+- [Complete Architecture](./architecture/complete-arch.md)
+- [Professional Diagrams Guide](./architecture/PROFESSIONAL_DIAGRAMS_GUIDE.md)
 
-### **🏗️ System Architecture**
-- `TRADING_SYSTEM_OVERVIEW.md` - Overall system architecture
-- `AUTOMATED_LAG_TRADING_SYSTEM.md` - Automated lag trading system
-- `PAPER_TRADING_FRAMEWORK.md` - Paper trading framework
-- `portfolio-manager.md` - Portfolio management system
+### 🔌 API Documentation
+- [API Reference](./api/API.md)
+- [Postman Documentation](./api/postman-doc.md)
 
-### **🔧 Technical Implementation**
-- `ML_MODEL.md` - Machine learning model documentation
-- `ML_MODEL_STRUCTURE.md` - ML model structure details
-- `MODEL_TRAINING.md` - Model training procedures
-- `INDICATORS.md` - Technical indicators documentation
-- `TRADING_SIGNALS_FIX.md` - Trading signals implementation
+### 📖 Guides
+- [Account Lifecycle Implementation](./guides/ACCOUNT_LIFECYCLE_IMPLEMENTATION.md)
+- [Crypto Pro Interface Guide](./guides/CRYPTO_PRO_INTERFACE_GUIDE.md)
+- [CSV Storage System](./guides/CSV_STORAGE_SYSTEM.md)
+- [Database Guide](./guides/DATABASE_GUIDE.md)
+- [Smart Contract Integration Guide](./guides/SMART_CONTRACT_INTEGRATION_GUIDE.md)
+- [Technical Strategy](./guides/TECHNICAL_STRATEGY.md)
+- [Backend Optimization Guide](./guides/BACKEND_OPTIMIZATION_GUIDE.md)
+- [Comprehensive Data Strategy](./guides/COMPREHENSIVE_DATA_STRATEGY.md)
+- [Documentation Strategy Recommendation](./guides/DOCUMENTATION_STRATEGY_RECOMMENDATION.md)
+- [Implementation Checklist](./guides/IMPLEMENTATION_CHECKLIST.md)
+- [Implementation Summary](./guides/IMPLEMENTATION_SUMMARY.md)
+- [Project Organization](./guides/PROJECT_ORGANIZATION.md)
+- [Technical Implementation Plan](./guides/TECHNICAL_IMPLEMENTATION_PLAN.md)
 
-### **💾 Data & Storage**
-- `CSV_STORAGE_SYSTEM.md` - CSV storage system documentation
-- `DATABASE_GUIDE.md` - Database setup and usage
-- `NEON_PIPELINE.md` - Neon database pipeline
+### 🚀 Deployment
+- [Deployment Guide](./deployment/DEPLOYMENT_GUIDE.md)
+- [Frontend Deployment](./deployment/FRONTEND_DEPLOYMENT.md)
 
-### **🖥️ Infrastructure**
-- `cross-platform-gpu.md` - Cross-platform GPU support
-- `RUN_DASHBOARD.md` - Dashboard running instructions
+### 💹 Trading
+- [Trading System Overview](./trading/TRADING_SYSTEM_OVERVIEW.md)
+- [Trading Philosophy](./trading/TRADING_PHILOSOPHY.md)
+- [Technical Strategy](./trading/TECHNICAL_STRATEGY.md)
+- [Indicators](./trading/INDICATORS.md)
+- [ML Model](./trading/ML_MODEL.md)
+- [ML Model Structure](./trading/ML_MODEL_STRUCTURE.md)
+- [Model Training](./trading/MODEL_TRAINING.md)
+- [Live Trading Readiness Plan](./trading/LIVE_TRADING_READINESS_PLAN.md)
+- [High Leverage Meme Coin Strategy](./trading/HIGH_LEVERAGE_MEME_COIN_STRATEGY.md)
+- [Automated Lag Trading System](./trading/AUTOMATED_LAG_TRADING_SYSTEM.md)
+- [Lorentzian Live Trader](./trading/LORENTZIAN_LIVE_TRADER.md)
+- [Paper Trading Framework](./trading/PAPER_TRADING_FRAMEWORK.md)
+- [Technical Evolution Portfolio](./trading/TECHNICAL_EVOLUTION_PORTFOLIO.md)
+- [TradingView Indicator Parameters](./trading/TRADINGVIEW_INDICATOR_PARAMETERS.md)
+- [Trading Signals Fix](./trading/TRADING_SIGNALS_FIX.md)
+- [High Frequency Trading Gameplan](./trading/high-frequency-trading-gameplan.md)
+- [ML Trading Strategy](./trading/ml-trading-strat.md)
 
-### **📋 Implementation Guides**
-- `IMPLEMENTATION_CHECKLIST.md` - Implementation checklist
-- `LIVE_TRADING_READINESS_PLAN.md` - Live trading preparation
-- `high-frequency-trading-gameplan.md` - HFT implementation plan
+### 👥 Admin
+- [Admin Dashboard Access](./admin/ADMIN_DASHBOARD_ACCESS.md)
+- [Admin User Management](./admin/ADMIN_USER_MANAGEMENT.md)
 
-### **📖 Reference**
-- `INDEX.md` - Documentation index
-- `OLD_SCRIPTS_README.md` - Legacy scripts documentation
-- `TROUBLESHOOTING.md` - Troubleshooting guide
+### 🔒 Security
+- [Security Guide](./security/)
+- [Security Checklist](./security/)
 
-## 🎯 Purpose
+### 📊 Performance
+- [Performance Metrics](./performance/PERFORMANCE_METRICS.md)
+- [Performance Optimization](./performance/)
 
-This documentation is designed to be:
-- **Current** - Always up-to-date with the latest system
-- **Actionable** - Provides clear instructions for users
-- **Technical** - Focused on implementation and usage
-- **Organized** - Easy to navigate and find information
+### 🚀 Getting Started
+- [Quick Start Guide](./getting-started/quick-start.md)
+- [Installation Guide](./getting-started/installation.md)
+- [Configuration Guide](./getting-started/configuration.md)
+- [Environment Variables](./getting-started/ENVIRONMENT_VARIABLES.md)
+- [Crypto Commands Quick Reference](./getting-started/CRYPTO_COMMANDS_QUICK_REFERENCE.md)
 
-## 📝 Usage Guidelines
+## 🗂️ Archived Documentation
 
-### **For Developers:**
-- Start with `TRADING_SYSTEM_OVERVIEW.md` for system understanding
-- Use `IMPLEMENTATION_CHECKLIST.md` for setup
-- Reference `TROUBLESHOOTING.md` for common issues
+Outdated and historical documentation has been moved to the `archive/docs/` directory:
+- `project_history/` - Historical project documentation
+- `deprecated/` - Deprecated features and guides
+- `legacy/` - Legacy system documentation
+- `old_scripts/` - Outdated scripts and tools
 
-### **For Users:**
-- Begin with `PAPER_TRADING_FRAMEWORK.md` for getting started
-- Use `RUN_DASHBOARD.md` for dashboard operation
-- Check `DATABASE_GUIDE.md` for data setup
+## 🔍 Finding Documentation
 
-### **For Strategy Development:**
-- Review `ml-trading-strat.md` for ML strategies
-- Check `lag-based.md` for lag strategies
-- Use `INDICATORS.md` for technical indicators
+Use the search function in your editor or IDE to quickly find specific documentation:
+- **CI/CD**: Search for "CI_CD" or "workflow"
+- **API**: Search for "API" or "endpoint"
+- **Trading**: Search for "trading" or "strategy"
+- **Security**: Search for "security" or "audit"
 
-## 🔄 Maintenance
+## 📝 Contributing to Documentation
 
-### **Documentation Standards:**
-- Keep all documentation current with code changes
-- Update when new features are added
-- Remove obsolete information promptly
-- Use clear, concise language
+When adding new documentation:
+1. Place files in the appropriate category directory
+2. Update this README.md with links to new docs
+3. Follow the naming convention: `CATEGORY_DESCRIPTION.md`
+4. Include a brief description in the file header
 
-### **Adding New Documentation:**
-- Place in appropriate category
-- Update this README with new additions
-- Follow existing naming conventions
-- Include practical examples
+---
 
-### **Historical Information:**
-- Project evolution and summaries are in `../project_history/`
-- This directory contains only current, actionable documentation
-
-This clean separation ensures that developers can quickly find the information they need to use and contribute to the system effectively! 🚀 
+**📚 This documentation is organized for easy navigation and maintenance.**

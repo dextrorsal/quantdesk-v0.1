@@ -1,210 +1,231 @@
-# 🏗️ QuantDesk Project Organization
+# 📁 Project Organization Guide
 
-This document outlines the organized structure of the QuantDesk trading platform project.
+## Overview
+This document outlines the organized structure of the QuantDesk trading system project. All files have been categorized based on their purpose and use case.
 
-## 📁 Project Structure Overview
+## 📂 Directory Structure
 
+### 🏠 Root Level
 ```
-quantdesk/
-├── 📁 archive/              # Backup files and old versions
-├── 📁 backend/              # Backend server and API
-├── 📁 contracts/            # Smart contracts and blockchain code
-├── 📁 database/             # Database schemas and migrations
-├── 📁 docs/                 # 📚 All documentation (organized)
-├── 📁 examples/             # Code examples and demos
-├── 📁 frontend/             # React frontend application
-├── 📁 scripts/              # 🛠️ All shell scripts (organized)
-├── 📁 sdk/                  # Software development kit
-├── 📁 tests/                # 🧪 All test files (organized)
-├── 📁 test-ledger/          # Test ledger data
-├── 📄 README.md             # Main project README
-├── 📄 LICENSE               # Project license
-└── 📄 TODO.md               # Project todo list
+QuantDesk-1.0.1/
+├── README.md              # Main project documentation
+├── setup.py               # Package installation script
+├── environment.yml        # Conda environment configuration
+├── .env                   # Environment variables
+└── .gitignore            # Git ignore rules
 ```
 
-## 🗂️ Organized Directories
+### 📜 Documentation (`docs/`)
+All project documentation and guides:
+- `AGENT_HANDOFF_SUMMARY.md` - AI agent handoff documentation
+- `ai-agent-integration.md` - AI agent integration guide
+- `AUTOMATED_LAG_TRADING_SYSTEM.md` - Lag trading system documentation
+- `CLEANUP_SUMMARY.md` - Project cleanup summary
+- `HFT_PROGRESS_SUMMARY.md` - High-frequency trading progress
+- `HIGH_LEVERAGE_MEME_COIN_STRATEGY.md` - Meme coin strategy guide
+- `IMPLEMENTATION_CHECKLIST.md` - Implementation checklist
+- `LIVE_TRADING_READINESS_PLAN.md` - Live trading preparation
+- `OPTIMIZATION_STATUS.md` - Optimization status tracking
+- `PHASE_1_COMPLETE_SUMMARY.md` - Phase 1 completion summary
+- `Project_Overview.md` - Project overview
+- `TODO.md` - Project todo list
+- `TRADING_SYSTEM_OVERVIEW.md` - Trading system overview
+- `summary-update.md` - Summary updates
 
-### 📚 Documentation (`docs/`)
-```
-docs/
-├── api/                     # API documentation
-├── architecture/            # System architecture
-├── deployment/             # Deployment guides
-├── guides/                 # User and developer guides
-├── analytics/              # Analytics documentation
-├── security/               # Security documentation
-├── support/                # Support documentation
-├── trading/                # Trading system docs
-└── getting-started/        # Getting started guides
-```
+### 🚀 Scripts (`scripts/`)
+Main executable scripts for trading, analysis, and system management:
 
-### 🛠️ Scripts (`scripts/`)
-```
-scripts/
-├── dev/                    # Development scripts
-├── deploy/                 # Deployment scripts
-├── maintenance/            # Maintenance scripts
-└── README.md              # Scripts documentation
-```
+#### Core Trading Scripts
+- `automated_lag_trading_system.py` - Main automated trading system
+- `systematic_multi_timeframe_test.py` - Multi-timeframe testing
+- `ultra_aggressive_returns_trader.py` - High-performance ML trader
+- `paper_trading_cli.py` - Paper trading command interface
+
+#### Analysis & Testing Scripts
+- `comprehensive_backtest_suite.py` - Complete backtesting framework
+- `conservative_validation_test.py` - Conservative strategy validation
+- `enhanced_multi_timeframe_optimizer.py` - Multi-timeframe optimization
+- `quick_validation_test.py` - Quick strategy validation
+- `final_comparison.py` - Final strategy comparisons
+- `run_comparison.py` - Strategy comparison runner
+
+#### Data & Utility Scripts
+- `check_data.py` - Data availability checker
+- `fetch.py` - Data fetching utility
+- `setup_database.py` - Database setup
+- `test_db_connection.py` - Database connection testing
+- `fetch_all_ohlcv_to_neon.py` - OHLCV data fetching
+- `migrate_configs.py` - Configuration migration
+- `cleanup_and_refetch.py` - Data cleanup and refetch
+- `monitor_fetch_progress.py` - Fetch progress monitoring
+- `fix_folder_structure.py` - Folder structure fixes
+
+#### Subdirectories
+- `debug/` - Debug scripts (moved from root)
+- `training/` - Model training scripts
+- `dashboard/` - Dashboard applications
+- `deployment/` - Deployment scripts
+
+### 🐛 Debug (`debug/`)
+Debug and analysis scripts for troubleshooting:
+- `debug_chandelier_signals.py` - Chandelier exit signal debugging
+- `debug_logistic_signals.py` - Logistic regression signal debugging
 
 ### 🧪 Tests (`tests/`)
-```
-tests/
-├── integration/            # Integration tests
-├── unit/                   # Unit tests
-├── e2e/                    # End-to-end tests
-├── performance/            # Performance tests
-└── README.md              # Tests documentation
-```
+All testing files organized by type:
 
-## 📋 File Organization Summary
+#### Unit Tests (`tests/unit/`)
+- `test_chandelier_exit.py` - Chandelier exit unit tests
+- `test_fixed_logistic.py` - Fixed logistic regression tests
+- `test_logistic_chandelier.py` - Logistic chandelier tests
+- `test_updated_backtest.py` - Updated backtest tests
 
-### ✅ **Organized Files**
+#### Integration Tests (`tests/integration/`)
+- `test_fetch_bitget_to_supabase.py` - Bitget to Supabase integration
+- `test_lorentzian.py` - Lorentzian strategy integration
 
-#### Test Scripts → `tests/integration/`
-- `test-advanced-orders.js`
-- `test-advanced-risk-management.js`
-- `test-api-improvements.js`
-- `test-backend-websocket.js`
-- `test-cross-collateralization.js`
-- `test-frontend-price-system.js`
-- `test-jit-liquidity.js`
-- `test-new-markets.js`
-- `test-portfolio-analytics.js`
-- `test-pyth-fix.js`
-- `debug-pyth-connection.js`
-- `scrape-drift-orderbook.js`
-- All backend test files (`test-hermes-*.js`, `test-oracle-*.js`)
+#### Strategy Tests (`tests/strategy_tests/`)
+- `data_loader.py` - Strategy data loading tests
+- `quick_strategy_test.py` - Quick strategy testing
+- `simple_test_runner.py` - Simple test runner
+- `test_all_strategies_leverage.py` - Leverage strategy tests
+- `test_fixed_strategy.py` - Fixed strategy tests
+- `test_lag_analysis.py` - Lag analysis tests
+- `test_logistic_chandelier.py` - Logistic chandelier tests
+- `test_runner.py` - Main test runner
 
-#### Shell Scripts → `scripts/dev/`
-- `run-frontend.sh`
-- `run-tests.sh`
-- `run-all-debug-tests.sh`
-- `kill-all.sh`
-- `kill-frontend.sh`
-- `kill-backend.sh`
-- `start-backend.sh`
-- `security-check.sh`
-- `setup-demo.sh`
-- All smart contract scripts (`auto-test.sh`, `fix-and-test.sh`, etc.)
+### 📦 Source Code (`src/`)
+Core application source code (well-organized):
 
-#### Deployment Scripts → `scripts/deploy/`
-- `deploy.sh`
+#### Core (`src/core/`)
+- `config.py` - Configuration management
+- `exceptions.py` - Custom exceptions
+- `logging.py` - Logging setup
+- `models.py` - Data models
+- `symbol_mapper.py` - Symbol mapping utilities
+- `time_utils.py` - Time utilities
 
-#### Documentation → `docs/`
-- **API Docs**: `API.md` → `docs/api/`
-- **Deployment**: `DEPLOYMENT_GUIDE.md`, `FRONTEND_DEPLOYMENT.md` → `docs/deployment/`
-- **Guides**: `ENVIRONMENT_SETUP.md`, `GETTING_STARTED.md`, `SECURITY_CHECKLIST.md`, `FEATURES.md` → `docs/guides/`
-- **Design**: `MOBILE_STRATEGY.md`, `UI_UX_DESIGN_SYSTEM.md`, `LITE_MODE_COLOR_SCHEME.md` → `docs/guides/`
-- **Security**: `SECURITY_GUIDE.md` → `docs/guides/`
+#### Data (`src/data/`)
+- `csv_storage.py` - CSV data storage
+- `data_loader.py` - Data loading utilities
+- `database_loader.py` - Database loading
+- `bitget_ws_to_supabase.py` - Bitget WebSocket to Supabase
+- `providers/` - Data providers
+- `pipeline/` - Data processing pipeline
+- `processors/` - Data processors
 
-## 🎯 Benefits of This Organization
+#### Exchanges (`src/exchanges/`)
+- `base.py` - Base exchange handler
+- `binance/` - Binance exchange integration
+- `bitget/` - Bitget exchange integration
+- `coinbase/` - Coinbase exchange integration
+- `jupiter/` - Jupiter exchange integration
+- `auth/` - Authentication modules
 
-### ✅ **Improved Maintainability**
-- **Clear separation** of concerns
-- **Easy to find** specific files
-- **Consistent structure** across project
-- **Reduced clutter** in root directory
+#### Machine Learning (`src/ml/`)
+- `features/` - Feature engineering
+- `indicators/` - Technical indicators
+- `models/` - ML models and strategies
+- `paper_trading_framework.py` - Paper trading framework
+- `strategy_backtest.py` - Strategy backtesting
 
-### ✅ **Better Development Experience**
-- **Logical grouping** of related files
-- **Clear documentation** for each directory
-- **Standardized naming** conventions
-- **Easy navigation** for new developers
+#### Trading (`src/trading/`)
+- `bitget/` - Bitget trading
+- `coinbase/` - Coinbase trading
+- `devnet/` - Devnet trading
+- `jup/` - Jupiter trading
+- `mainnet/` - Mainnet trading
+- `leverage_manager.py` - Leverage management
+- `security/` - Security modules
 
-### ✅ **Enhanced Testing**
-- **Organized test suites** by type
-- **Clear test documentation**
-- **Easy test execution** with proper paths
-- **Better test coverage** tracking
+#### Utilities (`src/utils/`)
+- `db_connector.py` - Database connector
+- `log_setup.py` - Logging setup
+- `performance_metrics.py` - Performance metrics
+- `position_sizing.py` - Position sizing
+- `wallet/` - Wallet management
 
-### ✅ **Streamlined Deployment**
-- **Separate deployment** scripts
-- **Environment-specific** configurations
-- **Clear deployment** documentation
-- **Automated deployment** processes
+#### CLI (`src/cli/`)
+- `base.py` - CLI base
+- `data/` - Data CLI commands
+- `trading/` - Trading CLI commands
+- `utils/` - CLI utilities
+- `wallet/` - Wallet CLI commands
 
-## 🚀 Quick Start Commands
+### 📊 Data (`data/`)
+- `historical/` - Historical data storage
+- `ohlcv/` - OHLCV data
+- `hft_consolidated/` - High-frequency trading consolidated data
+- `live.py` - Live data handling
+- `processed.py` - Processed data
+- `raw.py` - Raw data
 
-### Development
-```bash
-# Start frontend
-./scripts/dev/run-frontend.sh
+### 🤖 Models (`models/`)
+- `configs/` - Model configurations
+- `hft_trained/` - High-frequency trading trained models
 
-# Start backend
-./scripts/dev/start-backend.sh
+### 📓 Notebooks (`notebooks/`)
+- `analysis/` - Analysis notebooks
+- `experiments/` - Experimental notebooks
 
-# Run tests
-./scripts/dev/run-tests.sh
+### 📁 Archive (`archive/`)
+Archived experimental and redundant scripts:
+- 40+ archived scripts from previous development phases
+- Includes various ML traders, optimizers, and experimental scripts
 
-# Kill all processes
-./scripts/dev/kill-all.sh
-```
+## 🎯 File Organization Principles
 
-### Testing
-```bash
-# Run integration tests
-node tests/integration/test-hermes-client.js
+### 1. **Purpose-Based Organization**
+- Files are organized by their primary function
+- Clear separation between scripts, tests, debug tools, and documentation
 
-# Run specific test category
-npm run test:integration
+### 2. **Maintainability**
+- Related files are grouped together
+- Easy to find specific functionality
+- Clear naming conventions
 
-# Debug connections
-node tests/integration/debug-pyth-connection.js
-```
+### 3. **Developer Experience**
+- New developers can quickly understand the project structure
+- Clear paths for different types of work (testing, debugging, development)
 
-### Deployment
-```bash
-# Deploy frontend
-./scripts/deploy/deploy.sh
+### 4. **Scalability**
+- Structure supports future growth
+- Easy to add new categories without disrupting existing organization
 
-# Security check
-./scripts/maintenance/security-check.sh
-```
+## 🔍 Finding Files
 
-## 📖 Documentation Access
+### For Development:
+- **Core logic**: `src/` directory
+- **Scripts**: `scripts/` directory
+- **Tests**: `tests/` directory
 
-### Quick Reference
-- **API Documentation**: `docs/api/API.md`
-- **Getting Started**: `docs/guides/GETTING_STARTED.md`
-- **Deployment Guide**: `docs/deployment/DEPLOYMENT_GUIDE.md`
-- **Mobile Strategy**: `docs/guides/MOBILE_STRATEGY.md`
-- **Security Guide**: `docs/guides/SECURITY_GUIDE.md`
+### For Debugging:
+- **Debug tools**: `debug/` directory
+- **Debug scripts**: `scripts/debug/` directory
 
-### Directory-Specific Docs
-- **Scripts**: `scripts/README.md`
-- **Tests**: `tests/README.md`
-- **Documentation**: `docs/README.md`
+### For Documentation:
+- **All docs**: `docs/` directory
+- **Main README**: Root level `README.md`
 
-## 🔄 Maintenance Guidelines
+### For Configuration:
+- **Model configs**: `models/configs/`
+- **Project configs**: `configs/`
+- **Environment**: Root level `.env`
 
-### Adding New Files
-1. **Choose appropriate directory** based on file type
-2. **Follow naming conventions** for consistency
-3. **Update relevant README** files
-4. **Add to this organization** document if needed
+## 📝 Adding New Files
 
-### File Naming Conventions
-- **Scripts**: `action-purpose.sh` (e.g., `run-frontend.sh`)
-- **Tests**: `test-feature-name.js` (e.g., `test-hermes-client.js`)
-- **Docs**: `UPPERCASE.md` for main docs, `lowercase.md` for subsections
-- **Configs**: `purpose.config.js` (e.g., `vite.config.ts`)
+When adding new files, follow these guidelines:
 
-### Directory Updates
-- **Keep README files** up-to-date
-- **Document new directories** when created
-- **Maintain consistent** structure
-- **Review organization** quarterly
+1. **Scripts** → `scripts/` (with appropriate subdirectory if needed)
+2. **Tests** → `tests/` (unit, integration, or strategy_tests)
+3. **Debug tools** → `debug/` or `scripts/debug/`
+4. **Documentation** → `docs/`
+5. **Core functionality** → `src/` (appropriate subdirectory)
+6. **Experimental work** → `archive/` (when no longer needed)
 
-## 🎉 Project Organization Complete!
+## 🧹 Maintenance
 
-The QuantDesk project is now well-organized with:
-
-✅ **Clear directory structure**  
-✅ **Organized test files**  
-✅ **Consolidated shell scripts**  
-✅ **Structured documentation**  
-✅ **Comprehensive README files**  
-✅ **Easy navigation and maintenance**  
-
-This organization will make development, testing, and maintenance much more efficient and enjoyable! 🚀
+- Regularly review and archive experimental scripts
+- Keep documentation updated with new features
+- Maintain clear separation between different types of files
+- Use consistent naming conventions 

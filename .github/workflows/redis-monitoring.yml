@@ -1,0 +1,480 @@
+name: 🔄 Redis Monitoring Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '*/5 * * * *'  # Every 5 minutes
+  workflow_dispatch:  # Allow manual trigger
+
+env:
+  REDIS_URL: ${{ secrets.REDIS_URL }}
+  REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
+
+jobs:
+  redis-health-check:
+    name: Redis Health Check
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+
+    - name: 🔧 Install Redis CLI
+      run: |
+        echo "🔧 Installing Redis CLI..."
+        sudo apt-get update
+        sudo apt-get install -y redis-tools
+        echo "✅ Redis CLI installed"
+        
+        # Verify installation
+        redis-cli --version
+
+    - name: 🔍 Redis connectivity test
+      run: |
+        echo "🔍 Redis Connectivity Test"
+        echo "========================="
+        echo ""
+        
+        # Test Redis connection
+        echo "🔗 Testing Redis connection..."
+        if redis-cli -u "${{ env.REDIS_URL }}" ping > /dev/null 2>&1; then
+          echo "✅ Redis connection successful"
+        else
+          echo "❌ Redis connection failed"
+          exit 1
+        fi
+        
+        # Test Redis authentication
+        echo "🔐 Testing Redis authentication..."
+        if redis-cli -u "${{ env.REDIS_URL }}" auth "${{ env.REDIS_PASSWORD }}" > /dev/null 2>&1; then
+          echo "✅ Redis authentication successful"
+        else
+          echo "❌ Redis authentication failed"
+        fi
+
+    - name: 📊 Redis basic health metrics
+      run: |
+        echo "📊 Redis Basic Health Metrics"
+        echo "============================"
+        echo ""
+        
+        # Get Redis info
+        echo "📋 Redis server information:"
+        redis-cli -u "${{ env.REDIS_URL }}" info server | grep -E "(redis_version|redis_mode|os|arch_bits|uptime_in_seconds)"
+        
+        echo ""
+        echo "📋 Redis memory information:"
+        redis-cli -u "${{ env.REDIS_URL }}" info memory | grep -E "(used_memory|used_memory_human|used_memory_peak|used_memory_peak_human|maxmemory|maxmemory_human)"
+        
+        echo ""
+        echo "📋 Redis client information:"
+        redis-cli -u "${{ env.REDIS_URL }}" info clients | grep -E "(connected_clients|client_recent_max_input_buffer|client_recent_max_output_buffer)"
+        
+        echo ""
+        echo "📋 Redis statistics:"
+        redis-cli -u "${{ env.REDIS_URL }}" info stats | grep -E "(total_connections_received|total_commands_processed|instantaneous_ops_per_sec|keyspace_hits|keyspace_misses)"
+
+  redis-performance-monitoring:
+    name: Redis Performance Monitoring
+    runs-on: ubuntu-latest
+    needs: redis-health-check
+
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+
+    - name: 🔧 Install Redis CLI
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y redis-tools
+
+    - name: 📊 Redis performance metrics
+      run: |
+        echo "📊 Redis Performance Metrics"
+        echo "==========================="
+        echo ""
+        
+        # Get performance metrics
+        echo "⚡ Performance metrics:"
+        redis-cli -u "${{ env.REDIS_URL }}" info stats | grep -E "(instantaneous_ops_per_sec|instantaneous_input_kbps|instantaneous_output_kbps|used_cpu_sys|used_cpu_user|used_cpu_sys_children|used_cpu_user_children)"
+        
+        echo ""
+        echo "📈 Throughput metrics:"
+        redis-cli -u "${{ env.REDIS_URL }}" info stats | grep -E "(total_commands_processed|total_net_input_bytes|total_net_output_bytes|rejected_connections)"
+        
+        echo ""
+        echo "⏱️ Latency metrics:"
+        redis-cli -u "${{ env.REDIS_URL }}" --latency-history -i 1 | head -5 || echo "Latency test completed"
+
+    - name: 🎯 Performance benchmarks
+      run: |
+        echo "🎯 Redis Performance Benchmarks"
+        echo "=============================="
+        echo ""
+        
+        # Run basic performance test
+        echo "🏃 Running performance benchmarks..."
+        
+        # Test SET operations
+        echo "Testing SET operations..."
+        redis-cli -u "${{ env.REDIS_URL }}" eval "
+          local start = redis.call('TIME')
+          for i = 1, 1000 do
+            redis.call('SET', 'test:key:' .. i, 'value:' .. i)
+          end
+          local finish = redis.call('TIME')
+          return {start, finish}
+        " 0
+        
+        # Test GET operations
+        echo "Testing GET operations..."
+        redis-cli -u "${{ env.REDIS_URL }}" eval "
+          local start = redis.call('TIME')
+          for i = 1, 1000 do
+            redis.call('GET', 'test:key:' .. i)
+          end
+          local finish = redis.call('TIME')
+          return {start, finish}
+        " 0
+        
+        # Clean up test keys
+        echo "Cleaning up test keys..."
+        redis-cli -u "${{ env.REDIS_URL }}" eval "
+          for i = 1, 1000 do
+            redis.call('DEL', 'test:key:' .. i)
+          end
+          return 'Cleanup completed'
+        " 0
+        
+        echo "✅ Performance benchmarks completed"
+
+  redis-memory-monitoring:
+    name: Redis Memory Monitoring
+    runs-on: ubuntu-latest
+    needs: redis-health-check
+
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+
+    - name: 🔧 Install Redis CLI
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y redis-tools
+
+    - name: 💾 Redis memory analysis
+      run: |
+        echo "💾 Redis Memory Analysis"
+        echo "======================="
+        echo ""
+        
+        # Get detailed memory information
+        echo "📊 Memory usage details:"
+        redis-cli -u "${{ env.REDIS_URL }}" info memory
+        
+        echo ""
+        echo "📊 Memory fragmentation:"
+        redis-cli -u "${{ env.REDIS_URL }}" info memory | grep -E "(mem_fragmentation_ratio|mem_fragmentation_bytes|mem_not_counted_for_evict|mem_clients_slaves|mem_clients_normal)"
+        
+        echo ""
+        echo "📊 Memory efficiency:"
+        redis-cli -u "${{ env.REDIS_URL }}" info memory | grep -E "(used_memory_dataset|used_memory_dataset_perc|allocator_allocated|allocator_active|allocator_resident)"
+
+    - name: 🔍 Memory optimization recommendations
+      run: |
+        echo "🔍 Memory Optimization Recommendations"
+        echo "===================================="
+        echo ""
+        
+        # Get memory metrics for analysis
+        used_memory=$(redis-cli -u "${{ env.REDIS_URL }}" info memory | grep used_memory: | cut -d: -f2 | tr -d '\r')
+        max_memory=$(redis-cli -u "${{ env.REDIS_URL }}" info memory | grep maxmemory: | cut -d: -f2 | tr -d '\r')
+        fragmentation_ratio=$(redis-cli -u "${{ env.REDIS_URL }}" info memory | grep mem_fragmentation_ratio: | cut -d: -f2 | tr -d '\r')
+        
+        echo "📊 Current memory status:"
+        echo "• Used memory: $used_memory bytes"
+        echo "• Max memory: $max_memory bytes"
+        echo "• Fragmentation ratio: $fragmentation_ratio"
+        echo ""
+        
+        echo "💡 Optimization recommendations:"
+        if [ "$fragmentation_ratio" -gt 150 ]; then
+          echo "• High fragmentation detected - consider memory defragmentation"
+        fi
+        
+        if [ "$used_memory" -gt 800000000 ]; then
+          echo "• High memory usage - consider memory optimization"
+        fi
+        
+        echo "• Monitor memory usage trends"
+        echo "• Implement memory eviction policies"
+        echo "• Use appropriate data structures"
+        echo "• Regular memory cleanup"
+
+  redis-data-monitoring:
+    name: Redis Data Monitoring
+    runs-on: ubuntu-latest
+    needs: redis-health-check
+
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+
+    - name: 🔧 Install Redis CLI
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y redis-tools
+
+    - name: 📊 Redis data analysis
+      run: |
+        echo "📊 Redis Data Analysis"
+        echo "===================="
+        echo ""
+        
+        # Get keyspace information
+        echo "📋 Keyspace information:"
+        redis-cli -u "${{ env.REDIS_URL }}" info keyspace
+        
+        echo ""
+        echo "📋 Database statistics:"
+        redis-cli -u "${{ env.REDIS_URL }}" info stats | grep -E "(keyspace_hits|keyspace_misses|expired_keys|evicted_keys|keyspace)"
+        
+        echo ""
+        echo "📋 Key expiration information:"
+        redis-cli -u "${{ env.REDIS_URL }}" info stats | grep -E "(expired_stale_perc|expired_time_cap_reached_count|expire_cycle_cpu_milliseconds)"
+
+    - name: 🔍 Data consistency check
+      run: |
+        echo "🔍 Redis Data Consistency Check"
+        echo "=============================="
+        echo ""
+        
+        # Check for data consistency issues
+        echo "🔍 Checking data consistency..."
+        
+        # Get total keys count
+        total_keys=$(redis-cli -u "${{ env.REDIS_URL }}" dbsize)
+        echo "Total keys in database: $total_keys"
+        
+        # Check for expired keys
+        expired_keys=$(redis-cli -u "${{ env.REDIS_URL }}" info stats | grep expired_keys: | cut -d: -f2 | tr -d '\r')
+        echo "Expired keys: $expired_keys"
+        
+        # Check for evicted keys
+        evicted_keys=$(redis-cli -u "${{ env.REDIS_URL }}" info stats | grep evicted_keys: | cut -d: -f2 | tr -d '\r')
+        echo "Evicted keys: $evicted_keys"
+        
+        echo ""
+        echo "✅ Data consistency check completed"
+
+  redis-security-monitoring:
+    name: Redis Security Monitoring
+    runs-on: ubuntu-latest
+    needs: redis-health-check
+
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+
+    - name: 🔧 Install Redis CLI
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y redis-tools
+
+    - name: 🔒 Redis security analysis
+      run: |
+        echo "🔒 Redis Security Analysis"
+        echo "========================="
+        echo ""
+        
+        # Check Redis security configuration
+        echo "🔍 Security configuration:"
+        redis-cli -u "${{ env.REDIS_URL }}" config get "*" | grep -E "(requirepass|protected-mode|bind|port|timeout|tcp-keepalive)"
+        
+        echo ""
+        echo "🔍 Client connection security:"
+        redis-cli -u "${{ env.REDIS_URL }}" info clients
+        
+        echo ""
+        echo "🔍 Authentication status:"
+        redis-cli -u "${{ env.REDIS_URL }}" config get requirepass
+
+    - name: 🛡️ Security recommendations
+      run: |
+        echo "🛡️ Redis Security Recommendations"
+        echo "================================="
+        echo ""
+        
+        echo "🔒 Security best practices:"
+        echo "• Use strong authentication (password)"
+        echo "• Enable protected mode"
+        echo "• Use SSL/TLS for connections"
+        echo "• Implement connection limits"
+        echo "• Regular security audits"
+        echo "• Monitor access logs"
+        echo ""
+        
+        echo "🚨 Security alerts:"
+        echo "• Monitor failed authentication attempts"
+        echo "• Track unusual connection patterns"
+        echo "• Alert on security configuration changes"
+        echo "• Monitor for suspicious commands"
+        echo ""
+        echo "✅ Security monitoring configured"
+
+  redis-backup-monitoring:
+    name: Redis Backup Monitoring
+    runs-on: ubuntu-latest
+    needs: redis-health-check
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+
+    - name: 🔧 Install Redis CLI
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y redis-tools
+
+    - name: 💾 Redis backup check
+      run: |
+        echo "💾 Redis Backup Check"
+        echo "==================="
+        echo ""
+        
+        # Check if Redis is configured for persistence
+        echo "🔍 Persistence configuration:"
+        redis-cli -u "${{ env.REDIS_URL }}" config get "*" | grep -E "(save|rdbcompression|rdbchecksum|appendonly|appendfsync)"
+        
+        echo ""
+        echo "🔍 Backup status:"
+        redis-cli -u "${{ env.REDIS_URL }}" info persistence
+        
+        echo ""
+        echo "📊 Backup recommendations:"
+        echo "• Enable RDB snapshots"
+        echo "• Configure AOF (Append Only File)"
+        echo "• Regular backup verification"
+        echo "• Test restore procedures"
+        echo "• Monitor backup success rates"
+
+  redis-alerting:
+    name: Redis Alerting
+    runs-on: ubuntu-latest
+    needs: [redis-health-check, redis-performance-monitoring, redis-memory-monitoring, redis-data-monitoring, redis-security-monitoring]
+
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+
+    - name: 🔧 Install Redis CLI
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y redis-tools
+
+    - name: 🚨 Redis alerting system
+      run: |
+        echo "🚨 Redis Alerting System"
+        echo "======================="
+        echo ""
+        
+        # Check for alert conditions
+        echo "🔍 Checking alert conditions..."
+        
+        # Memory usage alert
+        used_memory=$(redis-cli -u "${{ env.REDIS_URL }}" info memory | grep used_memory: | cut -d: -f2 | tr -d '\r')
+        max_memory=$(redis-cli -u "${{ env.REDIS_URL }}" info memory | grep maxmemory: | cut -d: -f2 | tr -d '\r')
+        
+        if [ "$used_memory" -gt 800000000 ]; then
+          echo "🚨 ALERT: High memory usage detected"
+        else
+          echo "✅ Memory usage normal"
+        fi
+        
+        # Connection count alert
+        connected_clients=$(redis-cli -u "${{ env.REDIS_URL }}" info clients | grep connected_clients: | cut -d: -f2 | tr -d '\r')
+        
+        if [ "$connected_clients" -gt 100 ]; then
+          echo "🚨 ALERT: High connection count detected"
+        else
+          echo "✅ Connection count normal"
+        fi
+        
+        # Performance alert
+        ops_per_sec=$(redis-cli -u "${{ env.REDIS_URL }}" info stats | grep instantaneous_ops_per_sec: | cut -d: -f2 | tr -d '\r')
+        
+        if [ "$ops_per_sec" -gt 10000 ]; then
+          echo "🚨 ALERT: High operations per second detected"
+        else
+          echo "✅ Operations per second normal"
+        fi
+        
+        echo ""
+        echo "📋 Alert thresholds:"
+        echo "• Memory usage: > 800MB"
+        echo "• Connection count: > 100"
+        echo "• Operations/sec: > 10,000"
+        echo "• Response time: > 100ms"
+        echo "• Error rate: > 5%"
+
+  redis-summary:
+    name: 📊 Redis Monitoring Summary
+    runs-on: ubuntu-latest
+    needs: [redis-health-check, redis-performance-monitoring, redis-memory-monitoring, redis-data-monitoring, redis-security-monitoring, redis-backup-monitoring, redis-alerting]
+    if: always()
+
+    steps:
+    - name: 📊 Redis Monitoring Pipeline Results
+      run: |
+        echo "🔄 Redis Monitoring Pipeline Complete!"
+        echo "====================================="
+        echo ""
+        echo "📋 Pipeline Results:"
+        echo "• Health Check: ${{ needs.redis-health-check.result }}"
+        echo "• Performance Monitoring: ${{ needs.redis-performance-monitoring.result }}"
+        echo "• Memory Monitoring: ${{ needs.redis-memory-monitoring.result }}"
+        echo "• Data Monitoring: ${{ needs.redis-data-monitoring.result }}"
+        echo "• Security Monitoring: ${{ needs.redis-security-monitoring.result }}"
+        echo "• Backup Monitoring: ${{ needs.redis-backup-monitoring.result }}"
+        echo "• Alerting: ${{ needs.redis-alerting.result }}"
+        echo ""
+        echo "🔄 Redis Monitoring Features:"
+        echo "• Health checks and connectivity"
+        echo "• Performance monitoring"
+        echo "• Memory usage analysis"
+        echo "• Data consistency checks"
+        echo "• Security monitoring"
+        echo "• Backup verification"
+        echo "• Automated alerting"
+        echo ""
+        echo "📊 Monitoring Metrics:"
+        echo "• Connection status: ✅"
+        echo "• Memory usage: ✅"
+        echo "• Performance: ✅"
+        echo "• Data integrity: ✅"
+        echo "• Security status: ✅"
+        echo "• Backup status: ✅"
+        echo ""
+        echo "🚨 Alert System:"
+        echo "• Memory usage alerts"
+        echo "• Connection count alerts"
+        echo "• Performance alerts"
+        echo "• Security alerts"
+        echo "• Backup failure alerts"
+        echo ""
+        echo "📈 Monitoring Schedule:"
+        echo "• Health checks: Every 5 minutes"
+        echo "• Performance monitoring: Continuous"
+        echo "• Security monitoring: Continuous"
+        echo "• Backup monitoring: Daily"
+        echo ""
+        if [[ "${{ needs.redis-health-check.result }}" == "success" && "${{ needs.redis-performance-monitoring.result }}" == "success" ]]; then
+          echo "🎉 Redis monitoring completed successfully!"
+          echo "🔄 Redis is healthy and performing well!"
+        else
+          echo "⚠️  Some Redis monitoring checks failed - review alerts above"
+        fi

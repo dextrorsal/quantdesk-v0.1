@@ -4,6 +4,12 @@
   "description": "High-throughput data ingestion pipeline for QuantDesk trading platform",
   "main": "index.js",
   "scripts": {
+    "start": "npm run start:collectors",
+    "dev": "npm run start:collectors",
+    "build": "echo 'No build step required for data-ingestion'",
+    "test": "node test/pipeline-test.js",
+    "lint": "echo 'No lint script configured'",
+    "type-check": "echo 'No TypeScript configured'",
     "start:collectors": "concurrently \"npm run price-collector\" \"npm run whale-monitor\" \"npm run news-scraper\" \"npm run defillama-service\" \"npm run coinalyze-service\"",
     "start:workers": "concurrently \"npm run price-writer\" \"npm run analytics-writer\" \"npm run alert-processor\"",
     "start:monitoring": "node src/monitoring/dashboard.js",
@@ -20,8 +26,7 @@
     "coinalyze-service": "node src/collectors/coinalyze-service.js",
     "price-writer": "node src/workers/price-writer.js",
     "analytics-writer": "node src/analytics/analytics-writer.js",
-    "alert-processor": "node src/workers/alert-processor.js",
-    "test": "node test/pipeline-test.js"
+    "alert-processor": "node src/workers/alert-processor.js"
   },
   "dependencies": {
     "@pythnetwork/hermes-client": "^2.0.0",

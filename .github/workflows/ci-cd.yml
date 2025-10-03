@@ -1,0 +1,240 @@
+name: 🚀 CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: '20'
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  # Code Quality Checks
+  quality-check:
+    name: 🔍 Code Quality
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 📦 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+        
+    - name: 📥 Install dependencies
+      run: |
+        npm run install:all
+        
+    - name: 🔍 TypeScript type check
+      run: |
+        cd backend && npm run type-check
+        cd ../frontend && npm run type-check
+        cd ../admin-dashboard && npm run type-check
+        
+    - name: 🧹 Lint code
+      run: |
+        cd backend && npm run lint
+        cd ../frontend && npm run lint
+        cd ../admin-dashboard && npm run lint
+
+  # Security Audit
+  security-audit:
+    name: 🛡️ Security Audit
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 📦 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+        
+    - name: 📥 Install dependencies
+      run: |
+        npm run install:all
+        
+    - name: 🔒 Run security audit
+      run: |
+        cd backend && npm audit --audit-level=moderate
+        cd ../frontend && npm audit --audit-level=moderate
+        cd ../admin-dashboard && npm audit --audit-level=moderate
+
+  # Build and Test
+  build-test:
+    name: 🏗️ Build & Test
+    runs-on: ubuntu-latest
+    needs: [quality-check, security-audit]
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: quantdesk_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+          
+      redis:
+        image: redis:7-alpine
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 📦 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+        
+    - name: 📥 Install dependencies
+      run: |
+        npm run install:all
+        
+    - name: 🧪 Run tests
+      run: |
+        cd backend && npm test -- --coverage --watchAll=false
+        cd ../frontend && npm run build:check
+        cd ../admin-dashboard && npm run build
+        
+    - name: 📊 Upload coverage
+      uses: codecov/codecov-action@v3
+      with:
+        file: backend/coverage/lcov.info
+        flags: backend
+        name: backend-coverage
+
+  # Docker Build and Push
+  docker-build:
+    name: 🐳 Docker Build
+    runs-on: ubuntu-latest
+    needs: [build-test]
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
+    
+    permissions:
+      contents: read
+      packages: write
+      
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 🔐 Login to Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: 🏗️ Build and push Backend
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./Dockerfile.backend
+        push: true
+        tags: |
+          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend:latest
+          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend:${{ github.sha }}
+          
+    - name: 🏗️ Build and push Frontend
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./Dockerfile.frontend
+        push: true
+        tags: |
+          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:latest
+          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:${{ github.sha }}
+          
+    - name: 🏗️ Build and push Admin Dashboard
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./Dockerfile.admin
+        push: true
+        tags: |
+          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-admin:latest
+          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-admin:${{ github.sha }}
+          
+    - name: 🏗️ Build and push Data Ingestion
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./Dockerfile.data-ingestion
+        push: true
+        tags: |
+          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-data-ingestion:latest
+          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-data-ingestion:${{ github.sha }}
+
+  # Deploy to Staging
+  deploy-staging:
+    name: 🚀 Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: [docker-build]
+    if: github.ref == 'refs/heads/develop'
+    environment: staging
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 🚀 Deploy to staging
+      run: |
+        echo "Deploying to staging environment..."
+        # Add your staging deployment commands here
+        # Example: kubectl apply -f k8s/staging/
+        # Example: docker-compose -f docker-compose.staging.yml up -d
+
+  # Deploy to Production
+  deploy-production:
+    name: 🚀 Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [docker-build]
+    if: github.ref == 'refs/heads/main'
+    environment: production
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 🚀 Deploy to production
+      run: |
+        echo "Deploying to production environment..."
+        # Add your production deployment commands here
+        # Example: kubectl apply -f k8s/production/
+        # Example: docker-compose -f docker-compose.prod.yml up -d
+
+  # Notify on completion
+  notify:
+    name: 📢 Notify
+    runs-on: ubuntu-latest
+    needs: [deploy-staging, deploy-production]
+    if: always()
+    
+    steps:
+    - name: 📢 Notify completion
+      run: |
+        echo "CI/CD Pipeline completed!"
+        echo "Status: ${{ needs.deploy-staging.result || needs.deploy-production.result }}"
