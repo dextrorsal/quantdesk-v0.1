@@ -56,8 +56,5 @@
     "quantdesk"
   ],
   "author": "QuantDesk Team",
-  "license": "MIT",
-  "devDependencies": {
-    "eslint-plugin-env": "^0.0.3"
-  }
+  "license": "MIT"
 }

@@ -9,7 +9,9 @@
     "build:check": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint . --ext ts,tsx --fix",
     "type-check": "tsc --noEmit",
+    "test": "echo 'No tests configured for frontend'",
     "kill": "./kill-frontend.sh"
   },
   "dependencies": {
@@ -18,7 +20,7 @@
     "@solana/wallet-adapter-base": "^0.9.23",
     "@solana/wallet-adapter-react": "^0.15.39",
     "@solana/wallet-adapter-react-ui": "^0.9.39",
-    "@solana/wallet-adapter-wallets": "^0.19.37",
+    "@solana/wallet-adapter-wallets": "^0.19.33",
     "@solana/web3.js": "^1.98.4",
     "@supabase/supabase-js": "^2.58.0",
     "@types/ws": "^8.18.1",

@@ -1,0 +1,4 @@
+---
+description: Rule 5. Security and Best Practices Rules. Rule 5.1 Private Key Handling Acknowledge that agents hold private keys—restrict actions to prevent unauthorized transfers (e.g., no open transfer commands). Use base58 encoding and environment isolation. Rule 5.2 RPC and Performance Use paid RPC endpoints (e.g., Helius) to avoid rate limits. Implement priority fees, retries, and congestion handling for actions. Rule 5.3 Monitoring and Safety Monitor agent activities for malicious behavior or user tricks. Test extensively on devnet before mainnet deployment. Rule 5.4 Testing and Contributions Add integration tests for custom actions. Contribute to repos like Solana Agent Kit (e.g., fix failing actions like balance requests). Rule 5.5 Iterative Development Start with basic functionality (e.g., balance checks), then add complex tasks (e.g., NFT minting). Deploy web chats (e.g., React on Vercel) for user interaction.
+alwaysApply: false
+---

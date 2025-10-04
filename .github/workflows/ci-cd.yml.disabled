@@ -1,5 +1,14 @@
 name: 🚀 CI/CD Pipeline
 
+
+# Security: Explicit permissions for GITHUB_TOKEN
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+  checks: write
+  statuses: write
+
 on:
   push:
     branches: [ main, develop ]
