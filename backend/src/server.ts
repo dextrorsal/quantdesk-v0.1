@@ -52,6 +52,7 @@ import { LiquidationBot } from './services/liquidationBot';
 import { metricsCollector } from './services/metricsCollector';
 import { orderScheduler } from './services/orderScheduler';
 import { Logger } from './utils/logger';
+import { getSystemMonitor } from './services/systemMonitor';
 
 // Load environment variables
 dotenv.config();
@@ -106,6 +107,23 @@ const NODE_ENV = process.env['NODE_ENV'] || 'development';
 // Initialize logger
 const logger = new Logger();
 
+// Initialize system monitoring
+const systemMonitor = getSystemMonitor(logger);
+systemMonitor.startMonitoring(5000); // Update every 5 seconds
+
+// Add monitoring middleware
+app.use((req, res, next) => {
+  const startTime = Date.now();
+  
+  res.on('finish', () => {
+    const latency = Date.now() - startTime;
+    const isError = res.statusCode >= 400;
+    systemMonitor.recordRequest(latency, isError);
+  });
+  
+  next();
+});
+
 // Security middleware
 app.use(requestIdMiddleware);
 app.use(responseTimeMiddleware);
@@ -116,8 +134,23 @@ app.use(helmet({
       styleSrc: ["'self'", "'unsafe-inline'"],
       scriptSrc: ["'self'"],
       imgSrc: ["'self'", "data:", "https:"],
+      connectSrc: ["'self'", "wss:", "https:"],
+      fontSrc: ["'self'", "https:", "data:"],
+      objectSrc: ["'none'"],
+      mediaSrc: ["'self'"],
+      frameSrc: ["'none'"],
     },
   },
+  hsts: {
+    maxAge: 31536000,
+    includeSubDomains: true,
+    preload: true,
+  },
+  noSniff: true,
+  xssFilter: true,
+  referrerPolicy: { policy: "strict-origin-when-cross-origin" },
+  frameguard: { action: "deny" },
+  hidePoweredBy: true,
 }));
 
 // CORS configuration
@@ -274,3 +307,4 @@ server.listen(PORT, () => {
 });
 
 export default app;
+

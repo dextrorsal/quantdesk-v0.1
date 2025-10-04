@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantDesk IDL Space Setup Guide</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .step {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+        .step h3 {
+            color: #ffd700;
+            margin-top: 0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            margin: 10px 5px;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            color: white;
+            text-decoration: none;
+        }
+        .btn-primary {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+        }
+        .file-path {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            word-break: break-all;
+        }
+        .program-id {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            word-break: break-all;
+        }
+        .warning {
+            background: rgba(255, 193, 7, 0.2);
+            border: 1px solid rgba(255, 193, 7, 0.5);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        .success {
+            background: rgba(40, 167, 69, 0.2);
+            border: 1px solid rgba(40, 167, 69, 0.5);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        .code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 QuantDesk IDL Space Setup Guide</h1>
+        
+        <div class="step">
+            <h3>📋 Step 1: Access IDL Space</h3>
+            <p>IDL Space is a web-based tool for testing and debugging Solana programs. It's like Postman but for Solana!</p>
+            <a href="https://idl.space" target="_blank" class="btn btn-primary">Open IDL Space</a>
+            <p><strong>What you'll see:</strong> A landing page with an "Enter App" button</p>
+        </div>
+
+        <div class="step">
+            <h3>🔧 Step 2: Prepare Your IDL File</h3>
+            <p>Your IDL file is already generated! Here's where to find it:</p>
+            <div class="file-path">📁 /home/dex/Desktop/quantdesk/contracts/smart-contracts/target/idl/quantdesk_perp_dex.json</div>
+            
+            <div class="success">
+                <strong>✅ Your IDL file is ready!</strong><br>
+                Program: quantdesk_perp_dex<br>
+                Program ID: <span class="program-id">GcpEyGMJg9AvEx8LgAyzyUNTPWFxovHxtmQ4vVWuWu3a</span><br>
+                Instructions: 26 available<br>
+                Account Types: 7 different structures
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>📤 Step 3: Upload Your IDL to IDL Space</h3>
+            <p>Once you're in IDL Space:</p>
+            <ol>
+                <li>Click the <strong>"Enter App"</strong> button</li>
+                <li>Look for an <strong>"Import IDL"</strong> or <strong>"Upload IDL"</strong> option</li>
+                <li>Select your IDL file: <code>quantdesk_perp_dex.json</code></li>
+                <li>Wait for it to load your program interface</li>
+            </ol>
+            
+            <div class="warning">
+                <strong>⚠️ Note:</strong> If you can't find the upload option, look for:
+                <ul>
+                    <li>A file upload icon (📁)</li>
+                    <li>"Import" or "Load" buttons</li>
+                    <li>A drag-and-drop area</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>🎯 Step 4: Explore Your Program</h3>
+            <p>Once your IDL is loaded, you'll have access to:</p>
+            <ul>
+                <li><strong>📄 Instructions:</strong> All 26 of your program's functions</li>
+                <li><strong>🏦 Account Types:</strong> 7 different account structures</li>
+                <li><strong>🔍 PDA Finder:</strong> Derive Program Derived Addresses</li>
+                <li><strong>🔨 Transaction Builder:</strong> Build and test transactions</li>
+                <li><strong>👁️ Account Viewer:</strong> Inspect account states</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h3>💡 Step 5: Start Testing!</h3>
+            <p>Try these common workflows:</p>
+            
+            <h4>Create a User Account:</h4>
+            <div class="code">1. Find "create_user_account" instruction<br>
+2. Set authority: your wallet address<br>
+3. Set account_index: 0<br>
+4. Build and test the transaction</div>
+
+            <h4>Initialize a Market:</h4>
+            <div class="code">1. Find "initialize_market" instruction<br>
+2. Set base_asset: "BTC"<br>
+3. Set quote_asset: "USDT"<br>
+4. Set initial_price: 50000000000 (50000 USDT)<br>
+5. Set max_leverage: 10<br>
+6. Set margin ratios: 1000, 500</div>
+
+            <h4>Deposit SOL:</h4>
+            <div class="code">1. Find "deposit_native_sol" instruction<br>
+2. Set amount: 1000000000 (1 SOL in lamports)<br>
+3. Connect your wallet<br>
+4. Build and execute</div>
+        </div>
+
+        <div class="step">
+            <h3>🔗 Quick Links</h3>
+            <a href="https://idl.space" target="_blank" class="btn">Open IDL Space</a>
+            <a href="https://solana.com/developers" target="_blank" class="btn">Solana Docs</a>
+            <a href="https://anchor-lang.com" target="_blank" class="btn">Anchor Docs</a>
+        </div>
+
+        <div class="step">
+            <h3>📚 Your Program's Key Instructions</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+                <div style="background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px;">
+                    <strong>create_user_account</strong><br>
+                    <small>Create user account</small>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px;">
+                    <strong>initialize_market</strong><br>
+                    <small>Create trading market</small>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px;">
+                    <strong>deposit_native_sol</strong><br>
+                    <small>Deposit SOL</small>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px;">
+                    <strong>open_position</strong><br>
+                    <small>Open trading position</small>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px;">
+                    <strong>place_order</strong><br>
+                    <small>Place trading order</small>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px;">
+                    <strong>close_position</strong><br>
+                    <small>Close position</small>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <p style="opacity: 0.8;">
+                💡 <strong>Pro Tip:</strong> Connect your Phantom wallet to IDL Space for seamless testing!
+            </p>
+        </div>
+    </div>
+</body>
+</html>

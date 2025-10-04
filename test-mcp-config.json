@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "test-solana": {
+      "command": "npx",
+      "args": ["@expertvagabond/solana-mcp-server"],
+      "env": {
+        "SOLANA_NETWORK": "devnet",
+        "SOLANA_RPC_URL": "https://api.devnet.solana.com"
+      }
+    }
+  }
+}
