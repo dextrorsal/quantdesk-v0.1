@@ -1,0 +1,15 @@
+# Railway Configuration for QuantDesk Monorepo
+# This tells Railway to use the backend directory as the root for deployment
+
+build:
+  builder: DOCKERFILE
+  dockerfilePath: backend/Dockerfile
+
+deploy:
+  healthcheckPath: /health
+  healthcheckTimeout: 100
+  restartPolicyType: ON_FAILURE
+  restartPolicyMaxRetries: 10
+
+# Root directory for deployment
+rootDirectory: backend

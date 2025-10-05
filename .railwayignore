@@ -1,39 +1,28 @@
-# Ignore everything except backend files
-/*
-!backend/
-!backend/**
-!Dockerfile.backend
-!railway.json
-
-# Ignore these specific files/folders
+# Railway ignore file to force Docker deployment
+package.json
+package-lock.json
 node_modules/
-.git/
-.gitignore
-README.md
-docs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore everything except Dockerfile and source code
+!backend/
+!backend/Dockerfile
+!backend/package.json
+!backend/package-lock.json
+!backend/src/
+!backend/tsconfig.json
+
+# Ignore other directories
 frontend/
 admin-dashboard/
-data-ingestion/
 MIKEY-AI/
-contracts/
-database/
-examples/
-logs/
-public-demo/
-reports/
+docs/
 scripts/
-sdk/
-tests/
+test-ledger/
 WSL/
 *.md
-*.json
-*.sh
-*.html
-*.js
-*.py
-*.sql
-*.toml
-*.yaml
-*.yml
-*.lock
-*.log
+*.txt
+.env*
+!.env.example

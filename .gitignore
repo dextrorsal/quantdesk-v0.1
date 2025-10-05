@@ -334,3 +334,9 @@ storybook-static/
 # Docker and deployment (public)
 # /Dockerfile - KEEP IN REPO
 # /docker-compose.yml - KEEP IN REPOarchive/
+
+# Proprietary (local-only)
+backend/
+frontend/
+MIKEY-AI/
+admin-dashboard/
