@@ -1,0 +1,426 @@
+# ===================================================================
+# 🔒 QUANTDESK OPEN SOURCE .GITIGNORE (BALANCED VERSION)
+# ===================================================================
+# This .gitignore balances open source value with proprietary protection
+# Keeps valuable components for community while protecting sensitive code
+# ===================================================================
+
+# ===================================================================
+# 🚨 CRITICAL: Secrets, Keys, and Environment Variables
+# ===================================================================
+# NEVER COMMIT THESE - Contains API keys, private keys, and sensitive data
+.env*
+!.env.example
+!.env.template
+!.env.sample
+
+# Private keys and wallet files
+*.key
+*.pem
+*.p12
+*.pfx
+*.keypair
+*-keypair.json
+wallet.json
+id.json
+keypair.json
+solana-keypair.json
+mainnet-keypair.json
+devnet-keypair.json
+
+# Sensitive directories
+secrets/
+keys/
+credentials/
+private/
+config/secrets/
+config/keys/
+config/private/
+k8s/secrets/
+ssl/
+certs/
+
+# ===================================================================
+# 🔒 PROPRIETARY CODE PROTECTION (Selective)
+# ===================================================================
+# Core trading algorithms and proprietary business logic
+/frontend/src/components/trading/
+/frontend/src/hooks/trading/
+/frontend/src/services/trading/
+/frontend/src/utils/trading/
+/frontend/src/store/trading/
+
+/backend/src/services/trading/
+/backend/src/controllers/trading/
+/backend/src/middleware/trading/
+/backend/src/utils/trading/
+/backend/src/strategies/
+
+/MIKEY-AI/src/agents/trading/
+/MIKEY-AI/src/strategies/
+/MIKEY-AI/src/models/
+/MIKEY-AI/src/algorithms/
+
+/data-ingestion/src/processors/trading/
+/data-ingestion/src/analyzers/
+/data-ingestion/src/strategies/
+
+/admin-dashboard/src/components/trading/
+/admin-dashboard/src/services/trading/
+
+# Smart contract source code (proprietary trading logic)
+/contracts/smart-contracts/programs/
+/contracts/programs/
+
+# Integration tests with real data
+/tests/integration/
+/tests/e2e/
+/tests/performance/
+
+# Archive and backup files
+/archive/
+*.backup
+*.bak
+
+# ===================================================================
+# 🌐 OPEN SOURCE COMPONENTS (KEEP THESE)
+# ===================================================================
+# Keep these folders/files for open source value:
+# /frontend/src/components/ui/          # UI components
+# /frontend/src/components/common/      # Common components
+# /frontend/src/hooks/common/           # Common hooks
+# /frontend/src/services/api/           # API service layer
+# /frontend/src/utils/common/            # Common utilities
+# /frontend/src/types/                  # TypeScript types
+# /frontend/src/constants/              # Constants
+# /frontend/public/                     # Public assets
+
+# /backend/src/services/api/             # API services
+# /backend/src/controllers/api/         # API controllers
+# /backend/src/middleware/common/       # Common middleware
+# /backend/src/utils/common/             # Common utilities
+# /backend/src/types/                   # TypeScript types
+# /backend/src/constants/                # Constants
+# /backend/src/routes/                   # API routes
+
+# /MIKEY-AI/src/agents/common/           # Common AI agents
+# /MIKEY-AI/src/utils/                  # Common utilities
+# /MIKEY-AI/src/types/                  # TypeScript types
+# /MIKEY-AI/src/constants/              # Constants
+
+# /data-ingestion/src/processors/common/ # Common processors
+# /data-ingestion/src/utils/             # Common utilities
+# /data-ingestion/src/types/             # TypeScript types
+
+# /admin-dashboard/src/components/ui/    # UI components
+# /admin-dashboard/src/components/common/ # Common components
+# /admin-dashboard/src/services/api/     # API services
+# /admin-dashboard/src/utils/            # Common utilities
+
+# ===================================================================
+# 📦 DEPENDENCIES & PACKAGE MANAGERS
+# ===================================================================
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Package manager lock files (keep pnpm-lock.yaml for reproducibility)
+yarn.lock
+package-lock.json
+# Keep: pnpm-lock.yaml (for reproducible builds)
+
+# Python virtual environments
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+.env/
+
+# Rust dependencies
+target/
+Cargo.lock
+# Note: Keep Cargo.toml for dependency specification
+
+# ===================================================================
+# 🏗️ BUILD OUTPUTS & COMPILED CODE
+# ===================================================================
+# General build outputs
+dist/
+build/
+out/
+*.tgz
+*.tar.gz
+
+# Framework-specific builds
+.next/
+.nuxt/
+.vuepress/dist/
+.serverless/
+.fusebox/
+.dynamodb/
+.railway/
+.vercel/
+.vite/
+.supabase/
+
+# TypeScript build info
+*.tsbuildinfo
+.tsbuildinfo
+
+# Compiled binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Solana specific
+test-ledger/
+.anchor/
+deployed_program.so
+target/
+
+# ===================================================================
+# 🗄️ DATABASES & DATA FILES
+# ===================================================================
+# Local database files
+*.db
+*.sqlite
+*.sqlite3
+*.mdb
+*.accdb
+
+# Database dumps and exports
+*.sql.dump
+*.dump
+database-backup/
+db-backup/
+
+# ===================================================================
+# 📊 LOGS & RUNTIME DATA
+# ===================================================================
+# Log files
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+test-results.log
+error.log
+access.log
+combined.log
+
+# Runtime data
+pids/
+.pids/
+*.pid
+*.seed
+*.pid.lock
+
+# ===================================================================
+# 🧪 TESTING & COVERAGE
+# ===================================================================
+# Test outputs
+coverage/
+*.lcov
+.nyc_output/
+test-results/
+playwright-report/
+playwright/.cache/
+test-results.xml
+
+# Cypress outputs
+cypress/videos/
+cypress/screenshots/
+cypress/downloads/
+
+# Jest outputs
+.jest/
+jest-results/
+
+# ===================================================================
+# 🔧 DEVELOPMENT TOOLS & CACHES
+# ===================================================================
+# Caches
+.cache/
+.parcel-cache/
+.npm/
+.yarn-integrity
+.eslintcache
+.prettiercache
+.stylelintcache
+.turbo/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.tern-port
+.vscode-test/
+.node_repl_history
+
+# ===================================================================
+# 🖥️ OPERATING SYSTEM FILES
+# ===================================================================
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+.TemporaryItems
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+ehthumbs.db
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ===================================================================
+# 📁 TEMPORARY & LOCAL FILES
+# ===================================================================
+# Temporary files
+tmp/
+.tmp/
+temp/
+.temp/
+*.tmp
+*.temp
+
+# Local configuration overrides
+config.local.js
+config.local.json
+config.local.ts
+config.local.yml
+config.local.yaml
+
+# Local development directories
+.local/
+local/
+dev/
+development/
+scratch/
+
+# ===================================================================
+# 📈 MONITORING & ANALYTICS
+# ===================================================================
+# Monitoring data (may contain sensitive metrics)
+monitoring/
+analytics/
+metrics/
+stats/
+performance-data/
+
+# Security scan results
+security-scan-results/
+vulnerability-reports/
+audit-reports/
+penetration-test-results/
+
+# ===================================================================
+# 🚀 DEPLOYMENT & INFRASTRUCTURE
+# ===================================================================
+# Production deployment configs
+docker-compose.override.yml
+docker-compose.prod.yml
+docker-compose.staging.yml
+k8s/prod/
+k8s/staging/
+config/production/
+config/staging/
+
+# Terraform state files
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# ===================================================================
+# 📚 DOCUMENTATION BUILDS
+# ===================================================================
+# Generated documentation
+docs/_build/
+docs/build/
+docs-site/html/
+site/
+_site/
+
+# ===================================================================
+# 🔍 OPEN SOURCE SPECIFIC INCLUSIONS
+# ===================================================================
+# ALWAYS KEEP these files for open source (DO NOT IGNORE):
+# - README.md
+# - LICENSE
+# - package.json
+# - pnpm-lock.yaml
+# - docs/ (documentation)
+# - examples/ (demo code)
+# - scripts/ (utility scripts)
+# - sdk/ (public SDK)
+# - database/schema.sql (database schema)
+# - contracts/docs/ (smart contract documentation)
+# - /frontend/src/components/ui/ (UI components)
+# - /frontend/src/services/api/ (API services)
+# - /backend/src/routes/ (API routes)
+# - /backend/src/services/api/ (API services)
+# - /MIKEY-AI/src/utils/ (AI utilities)
+# - /data-ingestion/src/processors/common/ (data processors)
+
+# ===================================================================
+# 🎯 PROJECT-SPECIFIC EXCLUSIONS
+# ===================================================================
+# QuantDesk specific files to ignore
+quantdesk-*.png
+test-*.js
+weekly-update-*.md
+weekly-update-*.html
+
+# MCP and AI specific
+.playwright-mcp/
+mcp-cache/
+ai-models/
+fine-tuned-models/
+
+# Trading specific (sensitive)
+trading-strategies/
+algorithms/
+backtest-results/
+portfolio-data/
+user-data/
+transaction-logs/
+
+# ===================================================================
+# ✅ END OF .GITIGNORE
+# ===================================================================
+# This .gitignore ensures:
+# 1. 🔒 Proprietary trading algorithms stay private
+# 2. 🔑 Secrets and keys are never committed
+# 3. 🌐 Open source components remain accessible
+# 4. 🧹 Repository stays clean and professional
+# 5. 📚 Community gets valuable code samples and utilities
+# ===================================================================

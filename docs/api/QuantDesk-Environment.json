@@ -1,0 +1,109 @@
+{
+  "id": "quantdesk-trading-intelligence-env",
+  "name": "QuantDesk Trading Intelligence Environment",
+  "values": [
+    {
+      "key": "BIRDEYE_API_KEY",
+      "value": "YOUR_BIRDEYE_API_KEY",
+      "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "COINGECKO_API_KEY",
+      "value": "YOUR_COINGECKO_API_KEY",
+      "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "DUNE_API_KEY",
+      "value": "YOUR_DUNE_API_KEY",
+      "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "ARTEMIS_API_KEY",
+      "value": "YOUR_ARTEMIS_API_KEY",
+      "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "COINALYZE_API_KEY",
+      "value": "YOUR_COINALYZE_API_KEY",
+      "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "QUANTDESK_API_KEY",
+      "value": "YOUR_QUANTDESK_API_KEY",
+      "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "base_url_pyth",
+      "value": "https://hermes.pyth.network/v2/updates/price/latest",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "base_url_birdeye",
+      "value": "https://public-api.birdeye.so/public/v1",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "base_url_coingecko",
+      "value": "https://api.coingecko.com/api/v3",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "base_url_defillama",
+      "value": "https://api.llama.fi",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "base_url_dune",
+      "value": "https://api.dune.com/api/v1",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "base_url_artemis",
+      "value": "https://api.artemis.xyz",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "base_url_coinpaprika",
+      "value": "https://api.coinpaprika.com/v1",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "base_url_coinalyze",
+      "value": "https://api.coinalyze.net/v1",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "quantdesk_redis_url",
+      "value": "redis://localhost:6379",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "quantdesk_api_port",
+      "value": "3000",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "quantdesk_analytics_port",
+      "value": "8080",
+      "type": "default",
+      "enabled": true
+    }
+  ],
+  "_postman_variable_scope": "environment"
+}

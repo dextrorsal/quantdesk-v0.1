@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solana Smart Contracts Architecture - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/">&larr; Back to Documentation</a>
+        </div>
+        <h1>Solana Smart Contracts Architecture for Perpetual DEX</h1>
+<h2>Overview</h2>
+<p>This document outlines the critical Solana smart contract architecture that powers perpetual DEX platforms like Drift Protocol. The key components are <strong>Solana Programs</strong> (smart contracts) and <strong>Program Derived Addresses (PDAs)</strong>.</p>
+<h2>Core Concepts</h2>
+<h3>1. Solana Programs (Smart Contracts)</h3>
+<p>Solana programs are the equivalent of smart contracts on other blockchains. They:
+- Execute on-chain logic
+- Manage state and data
+- Handle user interactions
+- Enforce business rules
+- Manage account creation and permissions</p>
+<h3>2. Program Derived Addresses (PDAs)</h3>
+<p>PDAs are unique addresses generated deterministically by programs that:
+- <strong>Have no private keys</strong> - cannot sign transactions themselves
+- <strong>Are derived from seeds</strong> - deterministic based on input data
+- <strong>Are controlled by programs</strong> - only the deriving program can sign for them
+- <strong>Enable account management</strong> - store user data and assets securely</p>
+<h2>Drift Protocol Architecture</h2>
+<h3>Account Creation Flow with PDAs</h3>
+<div class="codehilite"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="n">connects</span><span class="w"> </span><span class="n">wallet</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="mf">.</span><span class="n">g</span><span class="mf">.</span><span class="p">,</span><span class="w"> </span><span class="n">Phantom</span><span class="p">)</span>
+<span class="mf">2.</span><span class="w"> </span><span class="n">Frontend</span><span class="w"> </span><span class="n">checks</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="n">Drift</span><span class="w"> </span><span class="n">account</span><span class="w"> </span><span class="n">exists</span>
+<span class="mf">3.</span><span class="w"> </span><span class="kr">If</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="n">account</span><span class="w"> </span><span class="n">exists</span><span class="p">:</span>
+<span class="w">   </span><span class="o">-</span><span class="w"> </span><span class="n">Program</span><span class="w"> </span><span class="n">derives</span><span class="w"> </span><span class="n">PDA</span><span class="w"> </span><span class="n">using</span><span class="w"> </span><span class="n">user</span><span class="err">&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">wallet</span><span class="w"> </span><span class="n">address</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">seed</span>
+<span class="w">   </span><span class="o">-</span><span class="w"> </span><span class="n">Creates</span><span class="w"> </span><span class="n">account</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="n">PDA</span><span class="w"> </span><span class="n">address</span>
+<span class="w">   </span><span class="o">-</span><span class="w"> </span><span class="n">Initializes</span><span class="w"> </span><span class="n">account</span><span class="w"> </span><span class="n">state</span>
+<span class="mf">4.</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">now</span><span class="w"> </span><span class="n">deposit</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">trade</span>
+</code></pre></div>
+
+<h3>PDA Derivation Pattern</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Example PDA derivation for user accounts</span>
+<span class="kd">let</span><span class="w"> </span><span class="p">(</span><span class="n">user_account_pda</span><span class="p">,</span><span class="w"> </span><span class="n">bump</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Pubkey</span>::<span class="n">find_program_address</span><span class="p">(</span>
+<span class="w">    </span><span class="o">&amp;</span><span class="p">[</span>
+<span class="w">        </span><span class="s">b&quot;user_account&quot;</span><span class="p">,</span><span class="w">           </span><span class="c1">// Seed: &quot;user_account&quot;</span>
+<span class="w">        </span><span class="n">user_wallet</span><span class="p">.</span><span class="n">as_ref</span><span class="p">(),</span><span class="w">      </span><span class="c1">// Seed: User&#39;s wallet address</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="n">program_id</span><span class="p">,</span><span class="w">                   </span><span class="c1">// Program ID</span>
+<span class="p">);</span>
+</code></pre></div>
+
+<h2>Smart Contract Components</h2>
+<h3>1. User Account Program</h3>
+<p><strong>Purpose</strong>: Manages individual user accounts and their state</p>
+<p><strong>Key Functions</strong>:
+- <code>create_user_account()</code> - Initialize new user account
+- <code>update_user_account()</code> - Modify account settings
+- <code>close_user_account()</code> - Close account and reclaim rent</p>
+<p><strong>Account Structure</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">UserAccount</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">authority</span>: <span class="nc">Pubkey</span><span class="p">,</span><span class="w">        </span><span class="c1">// User&#39;s wallet address</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">account_index</span>: <span class="kt">u16</span><span class="p">,</span><span class="w">       </span><span class="c1">// Account number (for sub-accounts)</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">collateral</span>: <span class="kt">u64</span><span class="p">,</span><span class="w">          </span><span class="c1">// Total collateral deposited</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">positions</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Position</span><span class="o">&gt;</span><span class="p">,</span><span class="w">  </span><span class="c1">// Open positions</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">orders</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Order</span><span class="o">&gt;</span><span class="p">,</span><span class="w">        </span><span class="c1">// Active orders</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">last_funding_payment</span>: <span class="kt">i64</span><span class="p">,</span><span class="w"> </span><span class="c1">// Last funding payment timestamp</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">bump</span>: <span class="kt">u8</span><span class="p">,</span><span class="w">                 </span><span class="c1">// PDA bump seed</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3>2. Collateral Vault Program</h3>
+<p><strong>Purpose</strong>: Manages deposits, withdrawals, and collateral calculations</p>
+<p><strong>Key Functions</strong>:
+- <code>deposit_collateral()</code> - Deposit assets as collateral
+- <code>withdraw_collateral()</code> - Withdraw collateral
+- <code>calculate_margin()</code> - Calculate available margin
+- <code>liquidate_position()</code> - Execute liquidation</p>
+<p><strong>Account Structure</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">CollateralVault</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">user_account</span>: <span class="nc">Pubkey</span><span class="p">,</span><span class="w">     </span><span class="c1">// Associated user account</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">asset_mint</span>: <span class="nc">Pubkey</span><span class="p">,</span><span class="w">      </span><span class="c1">// Token mint (USDC, SOL, etc.)</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">amount</span>: <span class="kt">u64</span><span class="p">,</span><span class="w">             </span><span class="c1">// Amount deposited</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">locked_amount</span>: <span class="kt">u64</span><span class="p">,</span><span class="w">       </span><span class="c1">// Amount locked in positions</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">available_amount</span>: <span class="kt">u64</span><span class="p">,</span><span class="w">     </span><span class="c1">// Available for trading</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">bump</span>: <span class="kt">u8</span><span class="p">,</span><span class="w">                </span><span class="c1">// PDA bump seed</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3>3. Trading Program</h3>
+<p><strong>Purpose</strong>: Handles order matching, position management, and trade execution</p>
+<p><strong>Key Functions</strong>:
+- <code>place_order()</code> - Submit new order
+- <code>cancel_order()</code> - Cancel existing order
+- <code>execute_trade()</code> - Execute matched orders
+- <code>update_position()</code> - Update position after trade</p>
+<p><strong>Account Structure</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">Order</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">user_account</span>: <span class="nc">Pubkey</span><span class="p">,</span><span class="w">     </span><span class="c1">// User who placed order</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">market</span>: <span class="nc">Pubkey</span><span class="p">,</span><span class="w">          </span><span class="c1">// Market being traded</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">side</span>: <span class="nc">OrderSide</span><span class="p">,</span><span class="w">         </span><span class="c1">// Buy or Sell</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">order_type</span>: <span class="nc">OrderType</span><span class="p">,</span><span class="w">    </span><span class="c1">// Market, Limit, Stop, etc.</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">size</span>: <span class="kt">u64</span><span class="p">,</span><span class="w">               </span><span class="c1">// Order size</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">price</span>: <span class="kt">u64</span><span class="p">,</span><span class="w">              </span><span class="c1">// Order price (for limit orders)</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">leverage</span>: <span class="kt">u8</span><span class="p">,</span><span class="w">            </span><span class="c1">// Leverage multiplier</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">status</span>: <span class="nc">OrderStatus</span><span class="p">,</span><span class="w">     </span><span class="c1">// Active, Filled, Cancelled</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">created_at</span>: <span class="kt">i64</span><span class="p">,</span><span class="w">         </span><span class="c1">// Timestamp</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3>4. Oracle Program</h3>
+<p><strong>Purpose</strong>: Manages price feeds and market data</p>
+<p><strong>Key Functions</strong>:
+- <code>update_price()</code> - Update asset prices
+- <code>get_price()</code> - Retrieve current price
+- <code>validate_price()</code> - Ensure price is within acceptable range</p>
+<p><strong>Account Structure</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">OracleAccount</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">asset</span>: <span class="nb">String</span><span class="p">,</span><span class="w">           </span><span class="c1">// Asset symbol (BTC, ETH, etc.)</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">price</span>: <span class="kt">u64</span><span class="p">,</span><span class="w">             </span><span class="c1">// Current price</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">confidence</span>: <span class="kt">u64</span><span class="p">,</span><span class="w">        </span><span class="c1">// Price confidence interval</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">last_updated</span>: <span class="kt">i64</span><span class="p">,</span><span class="w">       </span><span class="c1">// Last update timestamp</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">source</span>: <span class="nc">OracleSource</span><span class="p">,</span><span class="w">    </span><span class="c1">// Price source (Pyth, Switchboard, etc.)</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2>Implementation Architecture</h2>
+<h3>Program Structure</h3>
+<div class="codehilite"><pre><span></span><code>quantdesk_programs/
+├── user_accounts/          # User account management
+│   ├── lib.rs
+│   ├── instructions/
+│   │   ├── create_account.rs
+│   │   ├── update_account.rs
+│   │   └── close_account.rs
+│   └── state/
+│       └── user_account.rs
+├── collateral_vault/        # Collateral management
+│   ├── lib.rs
+│   ├── instructions/
+│   │   ├── deposit.rs
+│   │   ├── withdraw.rs
+│   │   └── liquidate.rs
+│   └── state/
+│       └── vault.rs
+├── trading/               # Trading engine
+│   ├── lib.rs
+│   ├── instructions/
+│   │   ├── place_order.rs
+│   │   ├── cancel_order.rs
+│   │   └── execute_trade.rs
+│   └── state/
+│       ├── order.rs
+│       └── position.rs
+└── oracle/               # Price feeds
+    ├── lib.rs
+    ├── instructions/
+    │   ├── update_price.rs
+    │   └── get_price.rs
+    └── state/
+        └── oracle.rs
+</code></pre></div>
+
+<h3>PDA Seeds Strategy</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">// User Account PDA</span>
+<span class="kd">let</span><span class="w"> </span><span class="p">(</span><span class="n">user_account_pda</span><span class="p">,</span><span class="w"> </span><span class="n">bump</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Pubkey</span>::<span class="n">find_program_address</span><span class="p">(</span>
+<span class="w">    </span><span class="o">&amp;</span><span class="p">[</span><span class="s">b&quot;user_account&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">user_wallet</span><span class="p">.</span><span class="n">as_ref</span><span class="p">()],</span>
+<span class="w">    </span><span class="n">program_id</span><span class="p">,</span>
+<span class="p">);</span>
+
+<span class="c1">// Collateral Vault PDA</span>
+<span class="kd">let</span><span class="w"> </span><span class="p">(</span><span class="n">vault_pda</span><span class="p">,</span><span class="w"> </span><span class="n">bump</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Pubkey</span>::<span class="n">find_program_address</span><span class="p">(</span>
+<span class="w">    </span><span class="o">&amp;</span><span class="p">[</span><span class="s">b&quot;vault&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">user_wallet</span><span class="p">.</span><span class="n">as_ref</span><span class="p">(),</span><span class="w"> </span><span class="n">asset_mint</span><span class="p">.</span><span class="n">as_ref</span><span class="p">()],</span>
+<span class="w">    </span><span class="n">program_id</span><span class="p">,</span>
+<span class="p">);</span>
+
+<span class="c1">// Order PDA</span>
+<span class="kd">let</span><span class="w"> </span><span class="p">(</span><span class="n">order_pda</span><span class="p">,</span><span class="w"> </span><span class="n">bump</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Pubkey</span>::<span class="n">find_program_address</span><span class="p">(</span>
+<span class="w">    </span><span class="o">&amp;</span><span class="p">[</span><span class="s">b&quot;order&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">user_wallet</span><span class="p">.</span><span class="n">as_ref</span><span class="p">(),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">order_id</span><span class="p">.</span><span class="n">to_le_bytes</span><span class="p">()],</span>
+<span class="w">    </span><span class="n">program_id</span><span class="p">,</span>
+<span class="p">);</span>
+
+<span class="c1">// Position PDA</span>
+<span class="kd">let</span><span class="w"> </span><span class="p">(</span><span class="n">position_pda</span><span class="p">,</span><span class="w"> </span><span class="n">bump</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Pubkey</span>::<span class="n">find_program_address</span><span class="p">(</span>
+<span class="w">    </span><span class="o">&amp;</span><span class="p">[</span><span class="s">b&quot;position&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">user_wallet</span><span class="p">.</span><span class="n">as_ref</span><span class="p">(),</span><span class="w"> </span><span class="n">market</span><span class="p">.</span><span class="n">as_ref</span><span class="p">()],</span>
+<span class="w">    </span><span class="n">program_id</span><span class="p">,</span>
+<span class="p">);</span>
+</code></pre></div>
+
+<h2>Account State Management</h2>
+<h3>State Transitions</h3>
+<div class="codehilite"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">Wallet</span><span class="w"> </span><span class="n">Connected</span><span class="w"> </span><span class="p">(</span><span class="n">No</span><span class="w"> </span><span class="n">Drift</span><span class="w"> </span><span class="n">Account</span><span class="p">)</span>
+<span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">Check</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">PDA</span><span class="w"> </span><span class="n">exists</span>
+<span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">If</span><span class="w"> </span><span class="ow">not</span><span class="p">,</span><span class="w"> </span><span class="n">show</span><span class="w"> </span><span class="s2">&quot;Create Account&quot;</span><span class="w"> </span><span class="n">button</span>
+<span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">If</span><span class="w"> </span><span class="n">exists</span><span class="p">,</span><span class="w"> </span><span class="nb">load</span><span class="w"> </span><span class="n">account</span><span class="w"> </span><span class="n">state</span>
+
+<span class="mf">2.</span><span class="w"> </span><span class="n">Account</span><span class="w"> </span><span class="n">Created</span><span class="w"> </span><span class="p">(</span><span class="n">No</span><span class="w"> </span><span class="n">Deposits</span><span class="p">)</span>
+<span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">Show</span><span class="w"> </span><span class="n">account</span><span class="w"> </span><span class="n">info</span>
+<span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">Show</span><span class="w"> </span><span class="s2">&quot;Deposit&quot;</span><span class="w"> </span><span class="n">button</span>
+<span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">Display</span><span class="w"> </span><span class="o">$</span><span class="mf">0.00</span><span class="w"> </span><span class="n">balance</span>
+
+<span class="mf">3.</span><span class="w"> </span><span class="n">Account</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">Deposits</span><span class="w"> </span><span class="p">(</span><span class="n">Ready</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">Trade</span><span class="p">)</span>
+<span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">Show</span><span class="w"> </span><span class="n">balances</span>
+<span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">Show</span><span class="w"> </span><span class="n">trading</span><span class="w"> </span><span class="n">interface</span>
+<span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">Enable</span><span class="w"> </span><span class="n">order</span><span class="w"> </span><span class="n">placement</span>
+
+<span class="mf">4.</span><span class="w"> </span><span class="n">Active</span><span class="w"> </span><span class="n">Trading</span>
+<span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">Show</span><span class="w"> </span><span class="n">positions</span>
+<span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">Show</span><span class="w"> </span><span class="n">orders</span>
+<span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">Show</span><span class="w"> </span><span class="n">P</span><span class="o">&amp;</span><span class="n">L</span>
+<span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">Risk</span><span class="w"> </span><span class="n">management</span>
+</code></pre></div>
+
+<h3>Frontend Integration</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Check if user has Drift account</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">checkUserAccount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">walletAddress</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">userAccountPda</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">PublicKey</span><span class="p">.</span><span class="nx">findProgramAddress</span><span class="p">(</span>
+<span class="w">    </span><span class="p">[</span><span class="nx">Buffer</span><span class="p">.</span><span class="kr">from</span><span class="p">(</span><span class="s2">&quot;user_account&quot;</span><span class="p">),</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">PublicKey</span><span class="p">(</span><span class="nx">walletAddress</span><span class="p">).</span><span class="nx">toBuffer</span><span class="p">()],</span>
+<span class="w">    </span><span class="nx">programId</span>
+<span class="w">  </span><span class="p">);</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">accountInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">connection</span><span class="p">.</span><span class="nx">getAccountInfo</span><span class="p">(</span><span class="nx">userAccountPda</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">accountInfo</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Create user account</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">createUserAccount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">wallet</span><span class="o">:</span><span class="w"> </span><span class="kt">Wallet</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">userAccountPda</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">PublicKey</span><span class="p">.</span><span class="nx">findProgramAddress</span><span class="p">(</span>
+<span class="w">    </span><span class="p">[</span><span class="nx">Buffer</span><span class="p">.</span><span class="kr">from</span><span class="p">(</span><span class="s2">&quot;user_account&quot;</span><span class="p">),</span><span class="w"> </span><span class="nx">wallet</span><span class="p">.</span><span class="nx">publicKey</span><span class="p">.</span><span class="nx">toBuffer</span><span class="p">()],</span>
+<span class="w">    </span><span class="nx">programId</span>
+<span class="w">  </span><span class="p">);</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">transaction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Transaction</span><span class="p">().</span><span class="nx">add</span><span class="p">(</span>
+<span class="w">    </span><span class="ow">new</span><span class="w"> </span><span class="nx">TransactionInstruction</span><span class="p">({</span>
+<span class="w">      </span><span class="nx">keys</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nx">pubkey</span><span class="o">:</span><span class="w"> </span><span class="kt">wallet.publicKey</span><span class="p">,</span><span class="w"> </span><span class="nx">isSigner</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span><span class="w"> </span><span class="nx">isWritable</span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nx">pubkey</span><span class="o">:</span><span class="w"> </span><span class="kt">userAccountPda</span><span class="p">,</span><span class="w"> </span><span class="nx">isSigner</span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="p">,</span><span class="w"> </span><span class="nx">isWritable</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nx">pubkey</span><span class="o">:</span><span class="w"> </span><span class="kt">SystemProgram.programId</span><span class="p">,</span><span class="w"> </span><span class="nx">isSigner</span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="p">,</span><span class="w"> </span><span class="nx">isWritable</span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="w"> </span><span class="p">},</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nx">programId</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="kt">Buffer.from</span><span class="p">([</span><span class="mf">0</span><span class="p">]),</span><span class="w"> </span><span class="c1">// Create account instruction</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">  </span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">await</span><span class="w"> </span><span class="nx">wallet</span><span class="p">.</span><span class="nx">sendTransaction</span><span class="p">(</span><span class="nx">transaction</span><span class="p">,</span><span class="w"> </span><span class="nx">connection</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div>
+
+<h2>Security Considerations</h2>
+<h3>PDA Security</h3>
+<ul>
+<li><strong>Deterministic</strong>: Same inputs always produce same PDA</li>
+<li><strong>Program-controlled</strong>: Only the deriving program can sign</li>
+<li><strong>No private keys</strong>: Eliminates key management risks</li>
+<li><strong>Collision-resistant</strong>: Extremely unlikely to have collisions</li>
+</ul>
+<h3>Account Security</h3>
+<ul>
+<li><strong>Authority checks</strong>: Verify user owns the account</li>
+<li><strong>State validation</strong>: Ensure account state is valid</li>
+<li><strong>Permission checks</strong>: Verify user can perform action</li>
+<li><strong>Reentrancy protection</strong>: Prevent recursive calls</li>
+</ul>
+<h2>Performance Optimizations</h2>
+<h3>Account Size Management</h3>
+<ul>
+<li><strong>Minimize account size</strong>: Only store necessary data</li>
+<li><strong>Use discriminators</strong>: Distinguish account types</li>
+<li><strong>Optimize data layout</strong>: Pack data efficiently</li>
+</ul>
+<h3>Transaction Optimization</h3>
+<ul>
+<li><strong>Batch operations</strong>: Combine multiple operations</li>
+<li><strong>Use lookup tables</strong>: Reduce transaction size</li>
+<li><strong>Optimize instruction data</strong>: Minimize data transfer</li>
+</ul>
+<h2>Integration with Backend</h2>
+<h3>Hybrid Architecture</h3>
+<div class="codehilite"><pre><span></span><code>Frontend (React) ↔ Backend API ↔ Solana Programs
+     ↓                    ↓              ↓
+   UI State          Database        On-chain State
+   Wallet Conn.      User Data       Account Data
+   Trading UI        Order History   Positions
+   Portfolio         Analytics       Balances
+</code></pre></div>
+
+<h3>Data Synchronization</h3>
+<ul>
+<li><strong>On-chain</strong>: Account state, positions, orders, balances</li>
+<li><strong>Off-chain</strong>: User preferences, analytics, order history</li>
+<li><strong>Real-time</strong>: Price feeds, position updates, notifications</li>
+</ul>
+<h2>Development Workflow</h2>
+<h3>1. Smart Contract Development</h3>
+<ul>
+<li>Write Solana programs using Anchor framework</li>
+<li>Implement PDA derivation and account management</li>
+<li>Add instruction handlers and state management</li>
+<li>Test with Solana test validator</li>
+</ul>
+<h3>2. Frontend Integration</h3>
+<ul>
+<li>Connect to Solana programs</li>
+<li>Implement wallet connection</li>
+<li>Handle account creation and management</li>
+<li>Integrate with backend API</li>
+</ul>
+<h3>3. Backend Integration</h3>
+<ul>
+<li>Sync on-chain data with database</li>
+<li>Provide API endpoints for frontend</li>
+<li>Handle off-chain operations</li>
+<li>Manage user sessions and preferences</li>
+</ul>
+<h2>Next Steps</h2>
+<ol>
+<li><strong>Implement Solana Programs</strong></li>
+<li>User account program</li>
+<li>Collateral vault program</li>
+<li>Trading program</li>
+<li>
+<p>Oracle integration</p>
+</li>
+<li>
+<p><strong>Frontend Integration</strong></p>
+</li>
+<li>Wallet connection</li>
+<li>Account creation flow</li>
+<li>Deposit/withdrawal</li>
+<li>
+<p>Trading interface</p>
+</li>
+<li>
+<p><strong>Backend Synchronization</strong></p>
+</li>
+<li>On-chain data sync</li>
+<li>API endpoints</li>
+<li>Real-time updates</li>
+<li>Analytics and reporting</li>
+</ol>
+<hr />
+<p><em>This architecture ensures a secure, efficient, and scalable perpetual DEX platform on Solana.</em></p>
+    </div>
+</body>
+</html>

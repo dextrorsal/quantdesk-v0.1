@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postman-Doc - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/">&larr; Back to Documentation</a>
+        </div>
+        <p>QuantDesk Postman Guide (Envs, APIs, Requests)</p>
+<p>1) Environments (variables)</p>
+<ul>
+<li>Core (dev)</li>
+<li>BACKEND_BASE_URL = http://localhost:3002</li>
+<li>BACKEND_WS_URL = ws://localhost:3002</li>
+<li>SOLANA_RPC_URL = https://api.devnet.solana.com</li>
+<li>SOLANA_WS_URL = wss://api.devnet.solana.com</li>
+<li>PROGRAM_ID = GcpEyGMJg9AvEx8LgAyzyUNTPWFxovHxtmQ4vVWuWu3a</li>
+<li>IDL_HOST_URL = (optional) https://cdn.quantdesk.com/idl/quantdesk_perp_dex.json</li>
+<li>SUPABASE_URL = https://<project>.supabase.co</li>
+<li>SUPABASE_REST_URL = https://<project>.supabase.co/rest/v1</li>
+<li>SUPABASE_ANON_KEY = (secret)</li>
+<li>SUPABASE_SERVICE_ROLE_KEY = (server-only secret)</li>
+<li>REDIS_URL = redis://localhost:6379 (local)</li>
+<li>PYTH_BASE_URL = https://hermes.pyth.network</li>
+<li>PYTH_WS_URL = wss://hermes.pyth.network/ws</li>
+<li>JUPITER_TOKENS_URL = https://tokens.jup.ag/tokens</li>
+<li>JUPITER_QUOTE_URL = https://quote-api.jup.ag/v6/quote</li>
+<li>WALLET_PUBKEY = <your_dev_wallet></li>
+<li>
+<p>GRAFANA_URL = http://localhost:3100</p>
+</li>
+<li>
+<p>RPC providers (optional / LB)</p>
+</li>
+<li>HELIUS_RPC_URL = https://devnet.helius-rpc.com</li>
+<li>QUICKNODE_RPC_URL = https://solana-devnet.g.alchemy.com/v2/demo</li>
+<li>ALCHEMY_RPC_URL = https://solana-devnet.g.alchemy.com/v2/demo</li>
+<li>SYNDICA_RPC_URL = https://solana-api.syndica.io/access-token/demo</li>
+<li>
+<p>CHAINSTACK_RPC_URL = https://solana-devnet.core.chainstack.com/demo</p>
+</li>
+<li>
+<p>Social/notifications (optional)</p>
+</li>
+<li>TWITTER_API_BASE = https://api.twitter.com/2</li>
+<li>TELEGRAM_BOT_BASE = https://api.telegram.org/bot<token>/</li>
+<li>
+<p>DISCORD_API_BASE = https://discord.com/api</p>
+</li>
+<li>
+<p>AI/ML (Mikey AI)</p>
+</li>
+<li>AI_BASE_URL = https://ai.quantdesk.com</li>
+<li>OPENAI_API_BASE = https://api.openai.com/v1</li>
+<li>ANTHROPIC_API_BASE = https://api.anthropic.com/v1</li>
+<li>GOOGLE_AI_BASE = https://generativelanguage.googleapis.com</li>
+</ul>
+<p>2) Backend API endpoints (Express)</p>
+<ul>
+<li>Health</li>
+<li>
+<p>GET {{BACKEND_BASE_URL}}/health</p>
+</li>
+<li>
+<p>Auth</p>
+</li>
+<li>POST {{BACKEND_BASE_URL}}/api/auth/authenticate</li>
+<li>POST {{BACKEND_BASE_URL}}/api/auth/refresh</li>
+<li>
+<p>GET  {{BACKEND_BASE_URL}}/api/auth/profile</p>
+</li>
+<li>
+<p>Auth (SIWS)</p>
+</li>
+<li>POST {{BACKEND_BASE_URL}}/api/siws/nonce</li>
+<li>
+<p>POST {{BACKEND_BASE_URL}}/api/siws/verify</p>
+</li>
+<li>
+<p>Referrals</p>
+</li>
+<li>GET {{BACKEND_BASE_URL}}/api/referrals/summary?wallet={{WALLET_PUBKEY}}</li>
+<li>
+<p>POST {{BACKEND_BASE_URL}}/api/referrals/activate</p>
+</li>
+<li>
+<p>Chat</p>
+</li>
+<li>GET {{BACKEND_BASE_URL}}/api/chat/history?channel=global</li>
+<li>POST {{BACKEND_BASE_URL}}/api/chat/token</li>
+<li>
+<p>POST {{BACKEND_BASE_URL}}/api/chat/send</p>
+</li>
+<li>
+<p>Account state</p>
+</li>
+<li>GET {{BACKEND_BASE_URL}}/api/account/state</li>
+<li>GET {{BACKEND_BASE_URL}}/api/account/summary</li>
+<li>POST {{BACKEND_BASE_URL}}/api/account/can-perform</li>
+<li>GET {{BACKEND_BASE_URL}}/api/account/trading-accounts</li>
+<li>GET {{BACKEND_BASE_URL}}/api/account/balances</li>
+<li>GET {{BACKEND_BASE_URL}}/api/account/health</li>
+<li>
+<p>GET {{BACKEND_BASE_URL}}/api/account/trading-accounts/:accountId/state</p>
+</li>
+<li>
+<p>Accounts (management)</p>
+</li>
+<li>POST {{BACKEND_BASE_URL}}/api/accounts/verify-creation</li>
+<li>GET  {{BACKEND_BASE_URL}}/api/accounts/trading-accounts</li>
+<li>POST {{BACKEND_BASE_URL}}/api/accounts/trading-accounts</li>
+<li>PUT  {{BACKEND_BASE_URL}}/api/accounts/sub-accounts/:id</li>
+<li>DELETE {{BACKEND_BASE_URL}}/api/accounts/sub-accounts/:id</li>
+<li>GET  {{BACKEND_BASE_URL}}/api/accounts/delegates</li>
+<li>POST {{BACKEND_BASE_URL}}/api/accounts/delegates</li>
+<li>PUT  {{BACKEND_BASE_URL}}/api/accounts/delegates/:id</li>
+<li>DELETE {{BACKEND_BASE_URL}}/api/accounts/delegates/:id</li>
+<li>GET  {{BACKEND_BASE_URL}}/api/accounts/balances</li>
+<li>
+<p>POST {{BACKEND_BASE_URL}}/api/accounts/transfer</p>
+</li>
+<li>
+<p>Deposits / Withdrawals</p>
+</li>
+<li>GET  {{BACKEND_BASE_URL}}/api/deposits/balances</li>
+<li>POST {{BACKEND_BASE_URL}}/api/deposits/deposit</li>
+<li>POST {{BACKEND_BASE_URL}}/api/deposits/deposit/confirm</li>
+<li>POST {{BACKEND_BASE_URL}}/api/deposits/withdraw</li>
+<li>POST {{BACKEND_BASE_URL}}/api/deposits/withdraw/confirm</li>
+<li>
+<p>GET  {{BACKEND_BASE_URL}}/api/deposits/history</p>
+</li>
+<li>
+<p>Orders / Trades</p>
+</li>
+<li>GET  {{BACKEND_BASE_URL}}/api/orders</li>
+<li>GET  {{BACKEND_BASE_URL}}/api/orders/:id</li>
+<li>POST {{BACKEND_BASE_URL}}/api/orders</li>
+<li>POST {{BACKEND_BASE_URL}}/api/orders/:id/cancel</li>
+<li>
+<p>GET  {{BACKEND_BASE_URL}}/api/trades</p>
+</li>
+<li>
+<p>Markets</p>
+</li>
+<li>GET {{BACKEND_BASE_URL}}/api/real-supabase-markets</li>
+<li>GET {{BACKEND_BASE_URL}}/api/real-supabase-markets/:symbol</li>
+<li>GET {{BACKEND_BASE_URL}}/api/real-supabase-markets/:symbol/price</li>
+<li>GET {{BACKEND_BASE_URL}}/api/real-supabase-markets/:symbol/price-history</li>
+<li>GET {{BACKEND_BASE_URL}}/api/real-supabase-markets/:symbol/funding</li>
+<li>GET {{BACKEND_BASE_URL}}/api/supabase-oracle/markets</li>
+<li>GET {{BACKEND_BASE_URL}}/api/supabase-oracle/prices</li>
+<li>
+<p>GET {{BACKEND_BASE_URL}}/api/prices (simple Pyth proxy)</p>
+</li>
+<li>
+<p>RPC health &amp; testing</p>
+</li>
+<li>POST {{BACKEND_BASE_URL}}/api/rpc-testing/test</li>
+<li>POST {{BACKEND_BASE_URL}}/api/rpc-testing/stress-test</li>
+<li>GET  {{BACKEND_BASE_URL}}/api/rpc-testing/metrics</li>
+<li>GET  {{BACKEND_BASE_URL}}/api/rpc-stats/stats</li>
+<li>GET  {{BACKEND_BASE_URL}}/api/rpc-stats/health</li>
+<li>
+<p>GET  {{BACKEND_BASE_URL}}/api/rpc-stats/providers</p>
+</li>
+<li>
+<p>Admin</p>
+</li>
+<li>POST {{BACKEND_BASE_URL}}/api/admin/login</li>
+<li>GET  {{BACKEND_BASE_URL}}/api/admin/verify</li>
+<li>GET  {{BACKEND_BASE_URL}}/api/admin/users</li>
+<li>POST {{BACKEND_BASE_URL}}/api/admin/users</li>
+<li>PUT  {{BACKEND_BASE_URL}}/api/admin/users/:id</li>
+<li>DELETE {{BACKEND_BASE_URL}}/api/admin/users/:id</li>
+<li>GET  {{BACKEND_BASE_URL}}/api/admin/audit-logs</li>
+<li>GET  {{BACKEND_BASE_URL}}/api/admin/mode</li>
+<li>POST {{BACKEND_BASE_URL}}/api/admin/mode</li>
+<li>GET  {{BACKEND_BASE_URL}}/api/admin/stats</li>
+<li>GET  {{BACKEND_BASE_URL}}/api/admin/health</li>
+<li>GET  {{BACKEND_BASE_URL}}/api/admin/metrics</li>
+<li>GET  {{BACKEND_BASE_URL}}/api/admin/logs</li>
+<li>POST {{BACKEND_BASE_URL}}/api/admin/emergency-stop</li>
+</ul>
+<p>3) Solana JSON-RPC (cluster)</p>
+<ul>
+<li>POST {{SOLANA_RPC_URL}}</li>
+<li>getLatestBlockhash</li>
+<li>getBalance (params: ["{{WALLET_PUBKEY}}", {"commitment":"confirmed"}])</li>
+<li>getProgramAccounts (params: ["{{PROGRAM_ID}}", {"encoding":"base64"}])</li>
+<li>sendTransaction (raw tx base64)</li>
+</ul>
+<p>4) Pyth Network</p>
+<ul>
+<li>REST</li>
+<li>GET {{PYTH_BASE_URL}}/v2/updates/price/latest?ids[]=<PYTH_PRICE_ID></li>
+<li>WebSocket</li>
+<li>{{PYTH_WS_URL}}</li>
+</ul>
+<p>5) Jupiter</p>
+<ul>
+<li>Tokens</li>
+<li>GET {{JUPITER_TOKENS_URL}}</li>
+<li>Quotes</li>
+<li>GET {{JUPITER_QUOTE_URL}}?inputMint=<MINT>&amp;outputMint=<MINT>&amp;amount=1000000&amp;slippageBps=50</li>
+</ul>
+<p>6) Supabase REST</p>
+<ul>
+<li>Base</li>
+<li>{{SUPABASE_REST_URL}}</li>
+<li>Example</li>
+<li>GET {{SUPABASE_REST_URL}}/profiles?select=*&amp;limit=10<ul>
+<li>Headers: apikey={{SUPABASE_ANON_KEY}}, Authorization=Bearer {{SUPABASE_ANON_KEY}}</li>
+</ul>
+</li>
+</ul>
+<p>7) Social (optional)</p>
+<ul>
+<li>X/Twitter</li>
+<li>{{TWITTER_API_BASE}}</li>
+<li>Telegram Bot</li>
+<li>{{TELEGRAM_BOT_BASE}}sendMessage</li>
+<li>Discord</li>
+<li>{{DISCORD_API_BASE}}</li>
+</ul>
+<p>8) AI/ML (Mikey AI + providers)</p>
+<ul>
+<li>Mikey AI gateway</li>
+<li>{{AI_BASE_URL}}/infer, /embed, /classify (custom)</li>
+<li>OpenAI / Anthropic / Google</li>
+<li>{{OPENAI_API_BASE}}, {{ANTHROPIC_API_BASE}}, {{GOOGLE_AI_BASE}}</li>
+</ul>
+<p>9) Tips (from Solana Cookbook)</p>
+<ul>
+<li>Use devnet/testnet/localnet for testing; airdrop SOL when needed.</li>
+<li>For token balances, use getParsedTokenAccountsByOwner (programId: TOKEN_PROGRAM_ID) or filter by mint.</li>
+<li>Native SOL vs SPL: native uses SystemProgram.transfer; tokens use SPL Token Program.</li>
+</ul>
+<p>10) Postman collection structure (recommended)</p>
+<ul>
+<li>Folders: Backend, Solana RPC, Supabase, Pyth, Jupiter, Admin, RPC Tools, AI, Social</li>
+<li>All requests parametrize base URLs with {{VAR}} from environments.</li>
+</ul>
+<h3>Base URLs and where they come from (with file refs)</h3>
+<ul>
+<li>Backend API</li>
+<li>Default: http://localhost:3002</li>
+<li>Source: <code>backend/src/server.ts</code> (PORT env) and <code>backend/Dockerfile</code> (PORT=3002)</li>
+<li>Solana RPC</li>
+<li>Backend: <code>process.env.SOLANA_RPC_URL || https://api.devnet.solana.com</code><ul>
+<li>Source: <code>backend/src/services/transactionVerificationService.ts</code></li>
+</ul>
+</li>
+<li>Frontend: <code>process.env.REACT_APP_SOLANA_RPC_URL || https://api.devnet.solana.com</code><ul>
+<li>Source: <code>frontend/src/services/smartContractService.ts</code>, <code>frontend/src/services/balanceService.ts</code></li>
+</ul>
+</li>
+<li>RPC Load Balancer (optional providers): <code>backend/src/services/rpcLoadBalancer.ts</code></li>
+<li>Program ID</li>
+<li><code>process.env.QUANTDESK_PROGRAM_ID</code> (backend routes reference)<ul>
+<li>Source: <code>backend/src/routes/deposits.ts</code>, <code>backend/src/routes/accounts.ts</code></li>
+</ul>
+</li>
+<li>Frontend uses IDL address (<code>contracts/smart-contracts/target/idl/quantdesk_perp_dex.json</code>)</li>
+<li>Supabase</li>
+<li>Backend: <code>SUPABASE_URL</code>, <code>SUPABASE_ANON_KEY</code>, <code>SUPABASE_SERVICE_ROLE_KEY</code><ul>
+<li>Source: <code>backend/src/services/supabaseService.ts</code>, <code>backend/src/config/environment.ts</code>, <code>env.example</code></li>
+</ul>
+</li>
+<li>Frontend: <code>VITE_SUPABASE_URL</code>, <code>VITE_SUPABASE_ANON_KEY</code><ul>
+<li>Source: <code>frontend/src/utils/supabase.ts</code></li>
+</ul>
+</li>
+<li>Pyth Network</li>
+<li>REST: <code>https://hermes.pyth.network</code></li>
+<li>WS: <code>wss://hermes.pyth.network/ws</code></li>
+<li>Source: <code>backend/src/services/pythOracleService.ts</code></li>
+<li>Jupiter</li>
+<li>Token list: <code>https://tokens.jup.ag/tokens</code></li>
+<li>Quote: <code>https://quote-api.jup.ag/v6/quote</code></li>
+<li>Source: used client-side in token logic (config/services)</li>
+<li>Backend feature endpoints (for Postman collection)</li>
+<li>Accounts: <code>backend/src/routes/accounts.ts</code>, <code>backend/src/routes/accountState.ts</code></li>
+<li>Deposits/Withdrawals: <code>backend/src/routes/deposits.ts</code></li>
+<li>Orders/Trades: <code>backend/src/routes/orders.ts</code>, <code>backend/src/routes/trades.ts</code></li>
+<li>Markets: <code>backend/src/routes/realSupabaseMarkets.ts</code>, <code>backend/src/routes/supabaseMarkets.ts</code></li>
+<li>Auth: <code>backend/src/routes/auth.ts</code></li>
+<li>Admin: <code>backend/src/routes/admin.ts</code></li>
+<li>RPC test/health: <code>backend/src/routes/rpcTesting.ts</code>, <code>backend/src/routes/rpcStats.ts</code></li>
+</ul>
+<h3>Postman environments (suggested variables)</h3>
+<ul>
+<li>Common</li>
+<li>BACKEND_BASE_URL = http://localhost:3002</li>
+<li>SOLANA_RPC_URL = https://api.devnet.solana.com</li>
+<li>PROGRAM_ID = GcpEyGMJg9AvEx8LgAyzyUNTPWFxovHxtmQ4vVWuWu3a</li>
+<li>SUPABASE_REST_URL = https://your-project.supabase.co</li>
+<li>SUPABASE_ANON_KEY = (secret)</li>
+<li>PYTH_BASE_URL = https://hermes.pyth.network</li>
+<li>PYTH_WS_URL = wss://hermes.pyth.network/ws</li>
+<li>JUPITER_BASE_URL = https://quote-api.jup.ag</li>
+<li>WALLET_PUBKEY = (your test pubkey)</li>
+</ul>
+<h3>I can expand your <code>postman-doc.md</code> with this API inventory</h3>
+<ul>
+<li>Crypto/on-chain: Solana RPC, Program ID, Pyth REST/WS, Jupiter tokens/quote</li>
+<li>Backend: Accounts, Deposits/Withdrawals, Orders/Trades, Markets, Auth, Admin, RPC stats</li>
+<li>Data: Supabase REST (profiles, balances)</li>
+<li>Social (future): X/Twitter, Telegram Bot API, Discord</li>
+<li>ML/AI (Mikey AI): add <code>AI_BASE_URL</code> if you have a gateway; plus OpenAI/Anthropic/Google endpoints if used</li>
+</ul>
+<p>Want me to:
+- create the Postman environments with these variables, and
+- generate a collection with all the key requests pre-wired to <code>{{VAR}}</code>?</p>
+    </div>
+</body>
+</html>

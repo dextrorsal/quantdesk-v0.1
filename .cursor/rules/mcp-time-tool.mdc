@@ -1,0 +1,56 @@
+# MCP Time Tool Rule
+
+## 🕐 **AUTOMATIC TIME ACCURACY ENFORCEMENT**
+
+**Purpose**: Automatically trigger MCP time tool when agents need current dates/times for documentation, research, or status updates.
+
+## Agent Instructions
+
+**CRITICAL**: When you encounter temporal references, automatically use the MCP time tool:
+
+### **ALWAYS Use MCP Time Tool For:**
+- `"Last Updated:"`, `"As of:"`, `"Current Status:"`
+- `"Searching for current"`, `"Live data"`, `"Real-time"`
+- `"Status Report:"`, `"Today:"`, `"Now:"`
+- Any documentation updates or current information
+
+### **SKIP MCP Time Tool For:**
+- `"In 2024"`, `"Last year"`, `"Previously"`
+- `"Historical data"`, `"Legacy system"`
+- Clear historical references
+
+## Implementation
+
+```yaml
+# Auto-trigger MCP time tool
+when: "temporal_reference_detected"
+action: "mcp_time_get_current_time"
+timezone: "America/Toronto"
+```
+
+## Examples
+
+**✅ CORRECT (Use MCP Tool):**
+```
+"Last Updated: [MCP_TIME_RESULT]"
+"Current status as of [MCP_TIME_RESULT]"
+"Searching for live data [MCP_TIME_RESULT]"
+```
+
+**❌ SKIP (Historical Reference):**
+```
+"In 2024, the system was developed"
+"Historical data from last year"
+"Legacy system from 2023"
+```
+
+## Success Target
+- **Accuracy**: 85%+ correct temporal tool usage
+- **False Positives**: <10% (avoid triggering for historical references)
+- **Context Efficiency**: Minimal context consumption
+
+---
+**Rule Status**: Active - Automatic Temporal Enforcement  
+**Activation**: Auto-trigger on temporal patterns  
+**Tool**: mcp_time_get_current_time  
+**Timezone**: America/Toronto

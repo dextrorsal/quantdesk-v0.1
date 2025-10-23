@@ -1,0 +1,6 @@
+packages:
+  - 'backend'
+  - 'frontend'
+  - 'MIKEY-AI'
+  - 'data-ingestion'
+  - 'contracts'

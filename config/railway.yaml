@@ -1,0 +1,32 @@
+# Railway Configuration for QuantDesk Monorepo
+# Multi-service deployment configuration
+
+services:
+  backend:
+    source: backend
+    buildCommand: pnpm install && pnpm run build
+    startCommand: pnpm start
+    env:
+      PORT: 3002
+      NODE_ENV: production
+    healthcheck:
+      path: /health
+      interval: 30s
+
+  mikey-ai:
+    source: MIKEY-AI
+    buildCommand: pnpm install && pnpm run build
+    startCommand: pnpm start
+    env:
+      PORT: 3000
+      NODE_ENV: production
+    healthcheck:
+      path: /health
+      interval: 30s
+
+  data-ingestion:
+    source: data-ingestion
+    buildCommand: pnpm install
+    startCommand: pnpm start
+    env:
+      NODE_ENV: production

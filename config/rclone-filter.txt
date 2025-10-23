@@ -1,0 +1,271 @@
+# Rclone Filter File for QuantDesk Project
+# Lines starting with '-' exclude patterns
+# Use '**' to match directory contents recursively
+
+# Build Artifacts & Dependencies (saves ~10GB)
+- node_modules/**
+- **/node_modules/**
+- target/**
+- **/target/**
+- test-ledger/**
+- .anchor/**
+- **/.anchor/**
+- dist/**
+- **/dist/**
+- build/**
+- **/build/**
+- out/**
+- **/out/**
+
+# Generated/Cached Files
+- logs/**
+- **/logs/**
+- *.log
+- **/*.log
+- .cache/**
+- **/.cache/**
+- .parcel-cache/**
+- **/.parcel-cache/**
+- .next/**
+- **/.next/**
+- .nuxt/**
+- **/.nuxt/**
+- *.tsbuildinfo
+- **/*.tsbuildinfo
+- .eslintcache
+- **/.eslintcache
+- .prettiercache
+- **/.prettiercache
+- coverage/**
+- **/coverage/**
+- test-results/**
+- **/test-results/**
+- playwright-report/**
+- **/playwright-report/**
+- storybook-static/**
+- **/storybook-static/**
+- .nyc_output/**
+- **/.nyc_output/**
+
+# IDE & OS Files
+- .vscode/**
+- **/.vscode/**
+- .idea/**
+- **/.idea/**
+- .DS_Store
+- **/.DS_Store
+- .DS_Store?
+- **/.DS_Store?
+- ._*
+- **/._*
+- .Spotlight-V100
+- **/.Spotlight-V100
+- .Trashes
+- **/.Trashes
+- ehthumbs.db
+- **/ehthumbs.db
+- Thumbs.db
+- **/Thumbs.db
+- desktop.ini
+- **/desktop.ini
+- *.swp
+- *.swo
+- *~
+- **/*~
+
+# Compiled Documentation
+- docs-site/html/**
+- docs/_build/**
+- **/docs/_build/**
+- docs/build/**
+- **/docs/build/**
+
+# Version Control
+- .git/**
+- **/.git/**
+
+# Temporary Files
+- tmp/**
+- **/tmp/**
+- temp/**
+- **/temp/**
+- .tmp/**
+- **/.tmp/**
+- .temp/**
+- **/.temp/**
+
+# Runtime Data
+- pids/**
+- **/pids/**
+- .pids/**
+- **/.pids/**
+- *.pid
+- **/*.pid
+- *.seed
+- **/*.seed
+- *.pid.lock
+- **/*.pid.lock
+
+# Database Files
+- *.db
+- **/*.db
+- *.sqlite
+- **/*.sqlite
+- *.sqlite3
+- **/*.sqlite3
+
+# Private Keys and Sensitive Data
+- *.key
+- **/*.key
+- *.pem
+- **/*.pem
+- *.p12
+- **/*.p12
+- *.pfx
+- **/*.pfx
+- wallet.json
+- **/wallet.json
+- id.json
+- **/id.json
+- keypair.json
+- **/keypair.json
+- *.keypair
+- **/*.keypair
+- *-keypair.json
+- **/*-keypair.json
+
+# API Keys and Secrets
+- secrets/**
+- **/secrets/**
+- keys/**
+- **/keys/**
+- credentials/**
+- **/credentials/**
+- config/secrets/**
+- **/config/secrets/**
+- config/keys/**
+- **/config/keys/**
+
+# Production Configs with Sensitive Data
+- config/production/**
+- **/config/production/**
+- config/staging/**
+- **/config/staging/**
+
+# Monitoring and Analytics
+- monitoring/**
+- **/monitoring/**
+- analytics/**
+- **/analytics/**
+
+# Backup Files
+- *.bak
+- **/*.bak
+- *.backup
+- **/*.backup
+- *.old
+- **/*.old
+
+# Environment Files (keep .env.example)
+- .env
+- **/.env
+- .env.local
+- **/.env.local
+- .env.development.local
+- **/.env.development.local
+- .env.test.local
+- **/.env.test.local
+- .env.production.local
+- **/.env.production.local
+- .env.staging
+- **/.env.staging
+- .env.production
+- **/.env.production
+- .env.development
+- **/.env.development
+- .env.test
+- **/.env.test
+- .env.*.local
+- **/.env.*.local
+- .env-bckup*
+- **/.env-bckup*
+- .env.backup*
+- **/.env.backup*
+
+# Lock Files (keeping these as requested)
+# Note: pnpm-lock.yaml, package-lock.json, Cargo.lock, yarn.lock are NOT excluded
+# This ensures exact dependency versions can be restored
+
+# Railway Specific
+- .railway/**
+- **/.railway/**
+
+# Local Development Files
+- .local/**
+- **/.local/**
+- local/**
+- **/local/**
+- dev/**
+- **/dev/**
+- development/**
+- **/development/**
+
+# Security Scanning Results
+- security-scan-results/**
+- **/security-scan-results/**
+- vulnerability-reports/**
+- **/vulnerability-reports/**
+
+# Performance Testing Results
+- performance-tests/**
+- **/performance-tests/**
+- load-test-results/**
+- **/load-test-results/**
+
+# Local Configuration Overrides
+- config.local.js
+- **/config.local.js
+- config.local.json
+- **/config.local.json
+- config.local.ts
+- **/config.local.ts
+
+# Docker Override Files
+- docker-compose.override.yml
+- **/docker-compose.override.yml
+- docker-compose.prod.yml
+- **/docker-compose.prod.yml
+- k8s/secrets/**
+- **/k8s/secrets/**
+- k8s/prod/**
+- **/k8s/prod/**
+
+# Jest Cache
+- .jest/**
+- **/.jest/**
+
+# Cypress
+- cypress/videos/**
+- **/cypress/videos/**
+- cypress/screenshots/**
+- **/cypress/screenshots/**
+
+# Playwright
+- playwright/.cache/**
+- **/playwright/.cache/**
+
+# Editor Specific
+- .vscode/settings.json
+- **/.vscode/settings.json
+- .vscode/launch.json
+- **/.vscode/launch.json
+- .vscode/extensions.json
+- **/.vscode/extensions.json
+- .idea/workspace.xml
+- **/.idea/workspace.xml
+- .idea/tasks.xml
+- **/.idea/tasks.xml
+- .idea/dictionaries/**
+- **/.idea/dictionaries/**
+- .idea/shelf/**
+- **/.idea/shelf/**

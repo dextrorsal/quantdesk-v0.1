@@ -1,0 +1,40 @@
+# BMAD Flatten Ignore File
+# This file specifies directories and files to exclude when flattening the codebase for AI agents
+
+# Public-facing documentation (not needed for AI agent context)
+public_docs/
+
+# Generated documentation site
+docs-site/
+
+# Node modules and build artifacts
+node_modules/
+dist/
+build/
+
+# Logs and temporary files
+logs/
+*.log
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Git and version control
+.git/
+.gitignore
+
+# Environment and config files
+.env
+.env.local
+.env.production
+
+# Test coverage and reports
+coverage/
+test-results/

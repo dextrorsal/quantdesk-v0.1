@@ -1,0 +1,4 @@
+---
+description: Rule 6. Deployment and Scaling Rules.  Rule 6.1 Running the Agent Use npx tsx agent.ts for local testing. For production, host on Vercel with Eliza for multi-client support (e.g., Twitter, Telegram). Rule 6.2 Hugging Face Deployment Push fine-tuned models to Hugging Face Hub and deploy via Inference Endpoints. Integrate with Solana kits for hybrid on/off-chain agents. Rule 6.3 Future-Proofing Watch for updates like Solana Agent Kit's Eliza integration. Open PRs for new frameworks or actions.
+alwaysApply: false
+---

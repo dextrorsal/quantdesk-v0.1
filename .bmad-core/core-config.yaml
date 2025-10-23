@@ -1,0 +1,45 @@
+# <!-- Powered by BMAD™ Core -->
+markdownExploder: true
+qa:
+  qaLocation: docs/qa
+prd:
+  prdFile: docs/prd.md
+  prdVersion: v4
+  prdSharded: true
+  prdShardedLocation: docs/prd
+  epicFilePattern: epic-{n}*.md
+architecture:
+  architectureFile: docs/architecture.md
+  architectureVersion: v4
+  architectureSharded: true
+  architectureShardedLocation: docs/architecture
+customTechnicalDocuments: 
+  - docs/departments/frontend-architecture.md
+  - docs/departments/backend-architecture.md  
+  - docs/departments/smart-contracts-architecture.md
+  - docs/departments/database-architecture.md
+  - docs/departments/caching-architecture.md
+  - docs/departments/oracle-architecture.md
+  - docs/departments/mikey-ai-architecture.md
+  - docs/departments/data-ingestion-architecture.md
+  - docs/departments/analytics-architecture.md
+  - docs/departments/trading-systems-architecture.md
+devLoadAlwaysFiles:
+  - docs/architecture/coding-standards.md
+  - docs/architecture/tech-stack.md
+  - docs/architecture/source-tree.md
+  - docs/departments/frontend-architecture.md
+  - docs/departments/backend-architecture.md
+  - docs/departments/smart-contracts-architecture.md
+  - docs/departments/database-architecture.md
+  - docs/departments/caching-architecture.md
+  - docs/departments/oracle-architecture.md
+  - docs/departments/mikey-ai-architecture.md
+  - docs/departments/data-ingestion-architecture.md
+  - docs/departments/analytics-architecture.md
+  - docs/departments/trading-systems-architecture.md
+  - docs/departments/department-gateways.md
+  - CLI-BMAT-Quick-Reference.md  # CLI tool integration guide
+devDebugLog: .ai/debug-log.md
+devStoryLocation: docs/stories
+slashPrefix: BMad

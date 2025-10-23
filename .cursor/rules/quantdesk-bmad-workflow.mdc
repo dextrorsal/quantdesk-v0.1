@@ -1,0 +1,273 @@
+---
+description: QuantDesk BMAD Method Workflow Guide - Your personal assistant for navigating complex multi-department development
+globs: []
+alwaysApply: false
+---
+
+# 🚀 QuantDesk BMAD Method Workflow Guide
+
+**Welcome to your QuantDesk BMAD assistant!** This rule helps you navigate the BMAD Method for agile AI-driven development across your sophisticated perpetual trading platform.
+
+## 🎯 **Current Task Analysis Workflow**
+
+When you have a task or feature request, I'll guide you through:
+
+### Step 1: Task Assessment & Planning
+```
+## Task Analysis for: [Task Description]
+
+🏗️ **Department Assessment:**
+- Frontend (React/TypeScript): [scope/components needed]
+- Backend (Node.js/Express): [scope/routes/services needed]  
+- MIKEY-AI (LangChain): [scope/AI integration needed]
+- Smart Contracts (Anchor/Solana): [scope/contract logic needed]
+- Data Ingestion: [scope/data collectors needed]
+
+🎯 **Complexity Level:** [Simple/Medium/Complex/Hyper-Complex]
+🤖 **Risk Level:** [Low/Medium/High/Critical for trading]
+📋 **Estimated Timeline:** [hours/days/weeks]
+```
+
+### Step 2: Determine BMAD Execution Strategy
+
+#### **Simple Tasks (under 2 hours):**
+```
+🔧 **Direct Implementation Strategy:**
+→ Use @dev for immediate implementation
+→ Use @qa *quick for basic validation
+→ Complete in single session
+```
+
+#### **Medium Tasks (2-8 hours):**
+```
+📋 **Structured Implementation Strategy:**
+1. @architect - Initial system design (5-10 min)
+2. @dev - Core implementation with context (main duration)
+3. @qa *risk & *design - Risk assessment (10-15 min)
+4. @qa *review - Quality validation (5-10 min)
+5. Implement fixes + @qa *gate update
+```
+
+#### **Complex Tasks (8+ hours):**
+```
+🎭 **Full BMAD Workflow Strategy:**
+1. **Planning Phase:**
+   - @analyst (optional quick research)
+   - @pm - Create/update PRD for complex features
+   - @architect - Detailed architecture design
+   - @qa *risk - Early risk assessment
+
+2. **Implementation Phase:**
+   - @sm - Create story from epic + architecture
+   - @dev - Implementation with department coordination
+   - @qa *trace or *nfr - Mid-development checks
+   - @qa *review - Comprehensive quality assessment
+
+3. **Quality Assurance:**
+   - Implement fixes based on feedback
+   - @qa *gate - Update quality decision
+
+**🚨 Important:** Consider starting a new chat for very complex tasks to maintain clean context
+```
+
+## 🎛 **Agent Selection Guide**
+
+### **@architect** - When to Use:
+- **System design**: New features requiring multiple department coordination
+- **Architecture decisions**: Major structural changes or cross-service integration
+- **Technology recommendations**: Choosing between approaches or optimisation strategies
+- **Complex integrations**: MIKEY-AI + Backend, Smart Contracts + Frontend
+- **High-impact decisions**: Changes affecting multiple departments
+
+### **@pm (Product Manager)** - When to Use:
+- **Feature planning**: New major features or epics
+- **Requirements gathering**: Detailed requirements definition
+- **User stories**: Breaking down complex features into manageable stories
+- **Prioritization**: Deciding what to work on next
+- **Business impact**: Understanding user value and business requirements
+
+### **@sm (Scrum Master)** - When to Use:
+- **Story creation**: Converting architecture into actionable development stories
+- **Task coordination**: Managing dependencies between departments
+- **Sprint planning**: Organizing work sequences
+- **Progress tracking**: Reviewing previous work and planning next steps
+- **Blocking issues**: Identifying and resolving development blockers
+
+### **@dev (Full Stack Developer)** - When to Use:
+- **Implementation**: Writing actual code for features
+- **Technical implementation**: Building components, APIs, databases, contracts
+- **Bug fixes**: Resolving technical issues across all departments
+- **Code refactoring**: Optimizing existing code based on patterns
+- **Integration work**: Connecting different systems and services
+
+### **@qa (Test Architect - Quinn)** - When to Use:
+- **Risk assessment**: `@qa *risk {story}` - Identify risks before development
+- **Test strategy**: `@qa *design {story}` - Create comprehensive test plans
+- **Quality validation**: `@qa *review {story}` - Full quality assessment
+- **Requirements tracing**: `@qa *trace {story}` - Ensure complete test coverage
+- **NFR validation**: `@qa *nfr {story}` - Check quality attributes
+- **Quality gates**: `@qa *gate {story}` - Update quality decisions
+
+### **@bmad-master** - When to Use:
+- **Quick switching**: When you don't want to switch agents
+- **Complex orchestration**: Tasks requiring multiple roles sequentially
+- **Context summary**: When you need to compact and restart conversation
+- **BMAD questions**: When you need help understanding BMad Method itself
+- **Multi-department oversight**: When overseeing complex cross-functional work
+
+## 🔧 **Department-Specific Guidance**
+
+### **Frontend (45 React Components):**
+```
+🎨 **Frontend Consideration:**
+→ Check existing components in `/frontend/src/components/` before creating new ones
+→ Use Zustand for state management (Redux alternatives if complex)
+→ Follow established patterns in PortfolioDashboard, DexTradingInterface
+→ Implement TypeScript with proper typing from component libraries
+→ Consider real-time updates via Socket.io-client
+→ Test with Playwright (configured in package.json)
+```
+
+### **Backend (34 Routes + 25 Services):**
+```
+🔧 **Backend Consideration:**
+→ Leverage existing services in `/backend/src/services/` before creating new ones
+→ Follow authentication patterns in auth.ts and siws.ts (JWT + SIWS)
+→ Use SupabaseDatabase abstraction for database operations
+→ Implement proper error handling in errorHandling middleware
+→ Add comprehensive logging with Winston
+→ Consider real-time WebSocket support in websocket.ts
+```
+
+### **Smart Contracts (11 Modules):**
+```
+⚡ **Smart Contract Consideration:**
+→ Work with Anchor 0.32.1 and program ID: HsSzXVuSwiqGQvocT2zMX8zc86KQ9TYfZFZcfmmejzso
+→ Follow patterns in existing modules (positions.rs, markets.rs, orders.rs)
+- → Implement multi-oracle support (Pyth + FixedPrice for devnet)
+→ Use SPL token operations via anchor-spl
+→ Test thoroughly before devnet deployment
+→ Consider gas efficiency and security audits
+```
+
+### **MIKEY-AI (LangChain + Multi-LLM):**
+```
+🤖 **AI Consideration:**
+→ Integrate with existing services in `/MIKEY-AI/src/services/`
+→ Use MultiLLMRouter for cost optimization
+→ Leverage QuantDeskTools for API integration
+→ Follow TradingAgent patterns for query processing
+→ Consider real-time data integration with Data Ingestion
+→ Test with different LLM providers for reliability
+```
+
+### **Data Ingestion (11 Collectors):**
+```
+📊 **Data Consideration:**
+→ Add new collectors alongside existing in `/data-ingestion/src/collectors/`
+- → Follow patterns in price-collector.js for Pyth integration
+→ Use Redis Streams and ioredis established in config.js
+→ Implement proper error handling with Winston logging
+→ Consider rate limiting and queue management
+→ Test data quality and validation logic
+```
+
+## 📋 **Sample Planning Templates**
+
+### **Template for New Feature Request:**
+```markdown
+## Feature: [Feature Name]
+
+### 1. Assessment Analysis
+🏗️ **Departments Involved:** [list departments]
+🤖 **Complexity:** [complexity level]  
+📋 **Estimated Timeline:** [timeframe]
+⚠️ **Risk Level:** [risk level]
+
+### 2. BMAD Strategy
+**Recommended Approach:** [direct/structured/full-bmad]
+**Key Agents:** [@agents in sequence]
+**Critical Dependencies:** [list cross-department dependencies]
+
+### 3. Implementation Plan
+**Phase 1:** [planning or implementation details]
+**Phase 2:** [additional phases if complex]
+**Phase 3:** [q&a and validation phases]
+
+### 4. Success Criteria
+[specific measurable outcomes]
+```
+
+## 🚀 **Chat Management Strategy**
+
+### **When to Start New Chat:**
+- **Complex multi-department features** (8+ hours)
+- **Architectural decisions** affecting core platform
+- **Context becomes bloated** (after 3-5 stories)
+- **Major refactoring** involving system restructure
+- **Learning/BMad questions** requiring full context reset
+
+### **When to Stay in Same Chat:**
+- **Small-medium features** (under 4 hours)
+- **Bug fixes and quick iterations**
+- **Code reviews and minor enhancements**
+- **Sequential story work** within same epic
+- **Quick BMAD questions** or minor guidance needs
+
+### **Context Compaction Commands:**
+```bash
+"Please compact the conversation summary: what we've accomplished, current status, and next steps. Start fresh with this summary."
+```
+
+## 🎯 **Decision Trees**
+
+### **New Feature Request Decision Tree:**
+```
+🤔 **Is this a trading-critical feature?**
+   ├─ Yes → Use Full BMAD Workflow (@pm → @architect → @sm → @dev → @qa)
+   └─ No → Use Direct (@dev) or Quick Assessment (@architect then @dev)
+
+🔍 **Does it span multiple departments?**
+   ├─ Yes → Use BMad Workflow (@architect → @sm → @dev)
+   └─ No → Use Single-Agent Approach (@dev)
+
+🔎 **Is context becoming overwhelming?**
+   ├─ Yes → Compact and start new chat
+   └─ No → Continue in current session
+```
+
+## 📚 **Quick Reference Commands**
+
+### **Emergency Commands:**
+```bash
+# Quick context reset
+"Compact conversation and restart with current work summary"
+
+# Agent switching
+"Switch to @architect for system design perspective"
+"Switch to @qa for quality assessment"
+```
+
+### **Quality Gates Critical for QuantDesk:**
+```bash
+# Pre-development (mandatory for trading features)
+@qa *risk {feature-name}            # Critical: Identify financial risks
+@qa *design {feature-name}           # Critical: Test strategy for trading logic
+
+# Post-development  
+@qa *review {feature-name}           # Critical: Full quality assessment for trading systems
+@qa *gate {feature-name}             # Critical: Quality gate decision
+```
+
+## 🎉 **Your BMAD Journey Starts Here!**
+
+**Ready for your first task?** Just tell me what you want to work on, and I'll:
+1. **Assess the scope** across all your sophisticated departments
+2. **Select the optimal BMAD workflow** 
+3. **Create the implementation plan**
+4. **Guide you through execution** with the right agents at the right time
+
+**Your QuantDesk platform deserves the best AI-assisted development workflow available!** 🚀
+
+---
+*This workflow guide integrates BMAD with your actual QuantDesk architecture for maximum effectiveness*

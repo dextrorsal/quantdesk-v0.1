@@ -1,0 +1,65 @@
+schema: 1
+story: "2.2"
+story_title: "Program Splitting Strategy Implementation"
+gate: CONCERNS
+status_reason: "Excellent architectural planning with comprehensive program splitting strategy but requires implementation of major architectural changes"
+reviewer: "Quinn (Test Architect)"
+updated: "2025-10-19T23:59:04-04:00Z"
+
+# Always present but only active when WAIVED
+waiver: { active: false }
+
+# Issues (if any) - Use fixed severity: low | medium | high
+top_issues:
+  - id: "ARCH-001"
+    severity: high
+    finding: "Major architectural changes required - monolithic program needs splitting"
+    suggested_action: "Implement program splitting into 5 specialized programs"
+  - id: "CPI-001"
+    severity: medium
+    finding: "Cross-program invocations need implementation"
+    suggested_action: "Implement CPI calls between programs with proper account ownership"
+
+# Risk summary (from risk-profile task if run)
+risk_summary:
+  totals: { critical: 0, high: 1, medium: 1, low: 0 }
+  recommendations:
+    must_fix: ["Program splitting implementation", "CPI architecture"]
+    monitor: ["Performance impact of architectural changes"]
+
+# Extended fields
+quality_score: 80
+expires: "2025-02-10T00:00:00Z"
+
+evidence:
+  tests_reviewed: 0
+  risks_identified: 2
+  trace:
+    ac_covered: [1, 2, 3, 4, 5, 6]
+    ac_gaps: []
+
+nfr_validation:
+  security:
+    status: PASS
+    notes: "CPI calls preserve account ownership, program separation maintains security"
+  performance:
+    status: CONCERNS
+    notes: "Performance requirements defined but not yet implemented"
+  reliability:
+    status: CONCERNS
+    notes: "Comprehensive testing planned but not yet implemented"
+  maintainability:
+    status: PASS
+    notes: "Clear domain boundaries and modular architecture planned"
+
+recommendations:
+  immediate:
+    - action: "Create 5 specialized program directories"
+      refs: ["contracts/programs/quantdesk-core", "contracts/programs/quantdesk-trading", "contracts/programs/quantdesk-collateral", "contracts/programs/quantdesk-security", "contracts/programs/quantdesk-oracle"]
+    - action: "Implement CPI calls between programs"
+      refs: ["Cross-program invocations with proper account ownership"]
+    - action: "Update program IDs and deployment configuration"
+      refs: ["contracts/Anchor.toml", "contracts/Cargo.toml"]
+  future:
+    - action: "Optimize CPI performance for <1s overhead requirement"
+      refs: ["Performance optimization"]

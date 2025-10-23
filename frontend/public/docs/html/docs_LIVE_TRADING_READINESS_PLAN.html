@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Trading Readiness Plan - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/docs">&larr; Back to Documentation</a>
+        </div>
+        <h1>🚀 Live Trading Readiness Plan</h1>
+<h2>📊 Current Status: 🟡 TESTING REQUIRED</h2>
+<p><strong>We have completed the leverage integration but need comprehensive testing before live trading.</strong></p>
+<h2>🧪 Phase 1: Extended Backtesting (CRITICAL)</h2>
+<h3><strong>Step 1.1: Full Historical Backtests</strong></h3>
+<p>Run each strategy on <strong>FULL DATASETS</strong> (not just 200 rows):</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Test each strategy with full data</span>
+python<span class="w"> </span>test_full_backtest_lorentzian.py<span class="w">    </span><span class="c1"># 2+ months of data</span>
+python<span class="w"> </span>test_full_backtest_logistic.py<span class="w">      </span><span class="c1"># 2+ months of data  </span>
+python<span class="w"> </span>test_full_backtest_chandelier.py<span class="w">    </span><span class="c1"># 2+ months of data</span>
+</code></pre></div>
+
+<p><strong>Target Metrics:</strong>
+- <strong>Minimum 500+ trades</strong> per strategy
+- <strong>Multiple market conditions</strong> (trending + choppy)
+- <strong>Drawdown analysis</strong> (max acceptable: -20%)
+- <strong>Sharpe ratio</strong> (target: &gt;1.0)</p>
+<h3><strong>Step 1.2: Multi-Timeframe Testing</strong></h3>
+<p>Test on different timeframes:</p>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>scripts/systematic_multi_timeframe_test.py
+</code></pre></div>
+
+<p><strong>Test Timeframes:</strong>
+- 15m (current)
+- 1h (for different signal frequency)
+- 4h (for swing trading validation)</p>
+<h3><strong>Step 1.3: Strategy Comparison</strong></h3>
+<p>Compare all strategies side-by-side:</p>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>scripts/comprehensive_strategy_comparison.py
+</code></pre></div>
+
+<p><strong>Expected Results:</strong>
+- <strong>Lorentzian</strong>: Best overall returns (target: 20-50% annually)
+- <strong>Logistic</strong>: Good confirmation/diversification 
+- <strong>Chandelier</strong>: Risk management/downside protection</p>
+<h2>🧪 Phase 2: Risk Management Validation (CRITICAL)</h2>
+<h3><strong>Step 2.1: Liquidation Testing</strong></h3>
+<p>Verify liquidation protection works:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Test with extreme market moves</span>
+<span class="n">test_liquidation_scenarios</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;leverage&quot;</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span> <span class="s2">&quot;price_move&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">10</span><span class="o">%</span><span class="p">},</span>  <span class="c1"># 10% against position</span>
+    <span class="p">{</span><span class="s2">&quot;leverage&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;price_move&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">8</span><span class="o">%</span><span class="p">},</span>  <span class="c1"># 8% against position  </span>
+    <span class="p">{</span><span class="s2">&quot;leverage&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s2">&quot;price_move&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">15</span><span class="o">%</span><span class="p">}</span>   <span class="c1"># 15% against position</span>
+<span class="p">]</span>
+</code></pre></div>
+
+<h3><strong>Step 2.2: Maximum Drawdown Analysis</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Analyze worst-case scenarios</span>
+<span class="n">max_concurrent_losses</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># 5 losing trades in a row</span>
+<span class="n">max_acceptable_drawdown</span> <span class="o">=</span> <span class="o">-</span><span class="mi">20</span><span class="o">%</span>  <span class="c1"># Portfolio level</span>
+</code></pre></div>
+
+<h3><strong>Step 2.3: Position Sizing Stress Test</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Test with different market conditions</span>
+<span class="n">market_scenarios</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;high_volatility&quot;</span><span class="p">,</span>    <span class="c1"># SOL moves 15%+ daily</span>
+    <span class="s2">&quot;low_liquidity&quot;</span><span class="p">,</span>      <span class="c1"># Weekend/off-hours</span>
+    <span class="s2">&quot;trending_market&quot;</span><span class="p">,</span>    <span class="c1"># Strong directional moves</span>
+    <span class="s2">&quot;choppy_market&quot;</span>       <span class="c1"># Sideways/ranging</span>
+<span class="p">]</span>
+</code></pre></div>
+
+<h2>🧪 Phase 3: Infrastructure Testing (MEDIUM PRIORITY)</h2>
+<h3><strong>Step 3.1: Exchange Connection Testing</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Test Bitget API connections</span>
+python<span class="w"> </span>test_bitget_connectivity.py
+python<span class="w"> </span>test_order_execution.py
+</code></pre></div>
+
+<h3><strong>Step 3.2: Paper Trading Simulation</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Run live paper trading for 24-48 hours</span>
+python<span class="w"> </span>scripts/live_paper_trading_test.py<span class="w"> </span>--duration<span class="o">=</span>48h
+</code></pre></div>
+
+<h2>🧪 Phase 4: Parameter Optimization (OPTIONAL)</h2>
+<h3><strong>Step 4.1: Leverage Optimization</strong></h3>
+<p>Test different leverage levels:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">leverage_tests</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;lorentzian&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s2">&quot;logistic&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="s2">&quot;chandelier&quot;</span><span class="p">:</span> <span class="mi">75</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;lorentzian&quot;</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span> <span class="s2">&quot;logistic&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s2">&quot;chandelier&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">},</span>  <span class="c1"># Current</span>
+    <span class="p">{</span><span class="s2">&quot;lorentzian&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;logistic&quot;</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span> <span class="s2">&quot;chandelier&quot;</span><span class="p">:</span> <span class="mi">125</span><span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div>
+
+<h3><strong>Step 4.2: Allocation Optimization</strong></h3>
+<p>Test different allocation percentages:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">allocation_tests</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;conservative&quot;</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">},</span>  <span class="c1"># 2% per position</span>
+    <span class="p">{</span><span class="s2">&quot;current&quot;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">},</span>       <span class="c1"># 5% per position (current)</span>
+    <span class="p">{</span><span class="s2">&quot;aggressive&quot;</span><span class="p">:</span> <span class="mf">0.08</span><span class="p">}</span>     <span class="c1"># 8% per position</span>
+<span class="p">]</span>
+</code></pre></div>
+
+<h2>🎯 TESTING PRIORITY MATRIX</h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Priority</th>
+<th>Time Needed</th>
+<th>Risk if Skipped</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Extended Backtesting</strong></td>
+<td>🔴 CRITICAL</td>
+<td>2-4 hours</td>
+<td><strong>HIGH</strong> - Could lose money on untested strategies</td>
+</tr>
+<tr>
+<td><strong>Risk Management</strong></td>
+<td>🔴 CRITICAL</td>
+<td>1-2 hours</td>
+<td><strong>VERY HIGH</strong> - Could blow account</td>
+</tr>
+<tr>
+<td><strong>Infrastructure</strong></td>
+<td>🟡 MEDIUM</td>
+<td>30 min</td>
+<td><strong>MEDIUM</strong> - Technical failures</td>
+</tr>
+<tr>
+<td><strong>Optimization</strong></td>
+<td>🟢 OPTIONAL</td>
+<td>2+ hours</td>
+<td><strong>LOW</strong> - Suboptimal but workable</td>
+</tr>
+</tbody>
+</table>
+<h2>🚦 GO/NO-GO CRITERIA</h2>
+<h3><strong>✅ READY FOR LIVE TRADING IF:</strong></h3>
+<ul>
+<li>[ ] All strategies show <strong>positive returns</strong> on full datasets (500+ trades)</li>
+<li>[ ] <strong>Maximum drawdown &lt; 20%</strong> across all strategies  </li>
+<li>[ ] <strong>No liquidations</strong> in stress testing</li>
+<li>[ ] <strong>Sharpe ratio &gt; 1.0</strong> for at least primary strategy (Lorentzian)</li>
+<li>[ ] <strong>Risk management</strong> triggers work correctly</li>
+<li>[ ] <strong>API connections</strong> stable and reliable</li>
+</ul>
+<h3><strong>❌ NOT READY IF:</strong></h3>
+<ul>
+<li>[ ] Any strategy shows <strong>consistent losses</strong> on full data</li>
+<li>[ ] <strong>Drawdown &gt; 30%</strong> or frequent liquidations</li>
+<li>[ ] <strong>Technical failures</strong> in infrastructure</li>
+<li>[ ] <strong>Risk management failures</strong> in testing</li>
+</ul>
+<h2>🏃‍♂️ FAST TRACK OPTION (2-3 Hours)</h2>
+<p>If you want to move quickly to live trading:</p>
+<h3><strong>Minimum Required Testing:</strong></h3>
+<ol>
+<li><strong>Full backtest Lorentzian</strong> (primary strategy) - 30 min</li>
+<li><strong>Risk management validation</strong> - 30 min  </li>
+<li><strong>Live paper trading test</strong> - 1-2 hours</li>
+<li><strong>API connectivity test</strong> - 15 min</li>
+</ol>
+<h3><strong>Start with Conservative Settings:</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="nt">live_trading_config</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">initial_capital</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100.0</span><span class="w">      </span><span class="c1"># Start with $100 instead of $500</span>
+<span class="w">  </span><span class="nt">max_positions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w">            </span><span class="c1"># Only 1 position at a time</span>
+<span class="w">  </span><span class="nt">leverage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span><span class="w">                </span><span class="c1"># Lower leverage (50x instead of 75x)</span>
+<span class="w">  </span><span class="nt">allocation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.02</span><span class="w">            </span><span class="c1"># Conservative 2% allocation</span>
+<span class="w">  </span><span class="nt">strategy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lorentzian_only</span><span class="w">   </span><span class="c1"># Only use best-performing strategy</span>
+</code></pre></div>
+
+<h2>🔄 RECOMMENDED APPROACH</h2>
+<h3><strong>Option A: Thorough Testing (Recommended)</strong></h3>
+<ul>
+<li>Complete all 4 phases</li>
+<li>Start live trading with full confidence</li>
+<li><strong>Timeline</strong>: 4-6 hours testing</li>
+</ul>
+<h3><strong>Option B: Fast Track</strong></h3>
+<ul>
+<li>Do minimum required testing</li>
+<li>Start with conservative settings</li>
+<li>Scale up after proving profitability</li>
+<li><strong>Timeline</strong>: 2-3 hours testing</li>
+</ul>
+<h3><strong>Option C: Immediate Live Trading (NOT RECOMMENDED)</strong></h3>
+<ul>
+<li>Skip testing entirely</li>
+<li>High risk of losses</li>
+<li>Could work but dangerous</li>
+</ul>
+<h2>🎯 MY RECOMMENDATION</h2>
+<p><strong>Start with Option B (Fast Track):</strong></p>
+<ol>
+<li><strong>Run full Lorentzian backtest</strong> (our best strategy)</li>
+<li><strong>Test risk management</strong> (liquidation protection)  </li>
+<li><strong>Start live trading conservatively</strong> ($100, 1 position, 50x leverage)</li>
+<li><strong>Scale up gradually</strong> as confidence builds</li>
+</ol>
+<p>This gives you the best balance of speed vs. safety.</p>
+<h2>📝 Next Steps</h2>
+<p><strong>Which approach do you want to take?</strong></p>
+<p><strong>A)</strong> Full testing (4-6 hours, maximum confidence)<br />
+<strong>B)</strong> Fast track (2-3 hours, balanced approach)<br />
+<strong>C)</strong> Conservative immediate start (minimal testing, small size)</p>
+<p>Let me know and I'll create the specific test scripts for your chosen path!</p>
+<hr />
+<p><em>Status: 🟡 TESTING PHASE</em><br />
+<em>Next: Execute chosen testing approach</em><br />
+<em>Goal: Safe transition to profitable live trading</em></p>
+    </div>
+</body>
+</html>

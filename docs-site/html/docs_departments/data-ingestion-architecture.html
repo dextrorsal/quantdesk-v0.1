@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data-Ingestion-Architecture - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/">&larr; Back to Documentation</a>
+        </div>
+        <h1>Data Ingestion Department Architecture</h1>
+<h2>Overview</h2>
+<p>High-performance data ingestion pipeline providing real-time market data, whale monitoring, news feeds, and DeFi analytics to MIKEY-AI and trading systems. Based on actual implementation with 11 specialized data collectors.</p>
+<h2>Technology Stack (Based on Actual Package.json Analysis)</h2>
+<ul>
+<li><strong>Core Processing</strong>: Node.js with Bull task queue 4.12.0</li>
+<li><strong>Streaming</strong>: Redis 4.6.0 + Redis Streams + ioredis 5.3.0</li>
+<li><strong>Real-time Data</strong>: WebSocket 8.14.0, Pyth Network @pythnetwork/hermes-client 2.0.0</li>
+<li><strong>Blockchain</strong>: @solana/web3.js 1.87.0 for Solana blockchain events</li>
+<li><strong>Scheduling</strong>: node-cron 3.0.3 for periodic data collection</li>
+<li><strong>HTTP Clients</strong>: Axios 1.6.0 for API integrations</li>
+<li><strong>Database</strong>: PostgreSQL 8.11.0 for data storage</li>
+<li><strong>Logging</strong>: Winston 3.11.0 for comprehensive logging</li>
+</ul>
+<h2>Data Ingestion Architecture</h2>
+<div class="codehilite"><pre><span></span><code>Data Sources → Connectors → Kafka Topics → Processing Pipelines → 
+Transformers → Enrichment → Storage Streams → 
+Vector Storage → MIKEY-AI &amp; Trading Systems
+</code></pre></div>
+
+<h2>Actual Data Sources (Based on Real Collector Implementation)</h2>
+<h3>Market Data Collectors (11 Specialized Collectors)</h3>
+<ul>
+<li><strong>price-collector.js</strong>: Pyth Network price feeds via @pythnetwork/hermes-client 2.0.0</li>
+<li><strong>coinalyze-service.js</strong>: On-chain analytics and DeFi metrics via Coinalyze API  </li>
+<li><strong>coinpaprika-service.js</strong>: Cryptocurrency market data and analysis</li>
+<li><strong>defillama-service.js</strong>: TVL monitoring and protocol analytics via api.llama.fi</li>
+</ul>
+<h3>DeFi Analytics Collectors</h3>
+<ul>
+<li><strong>dune-analytics-service.js</strong>: Custom Dune Analytics queries for on-chain data</li>
+<li><strong>artemis-analytics-service.js</strong>: DeFi analytics and market intelligence</li>
+<li><strong>advanced-analytics-services</strong>: Real-time DeFi metrics and performance tracking</li>
+</ul>
+<h3>Blockchain Event Monitoring</h3>
+<ul>
+<li><strong>real-whale-monitor.js</strong>: Solana WebSocket large transaction detection (threshold: $WHALE_THRESHOLD)</li>
+<li><strong>whale-monitor.js</strong>: Alternative whale monitoring implementation  </li>
+<li><strong>trench-watcher.js</strong>: Trading pattern recognition and signal detection</li>
+<li><strong>advanced-trench-watcher.js</strong>: Sophisticated trading signal analysis</li>
+</ul>
+<h3>Market Intelligence</h3>
+<ul>
+<li><strong>news-scraper.js</strong>: Financial news aggregation and sentiment analysis</li>
+<li><strong>real-time feed collection</strong>: Live market data streaming (5-second intervals)</li>
+<li><strong>cross-source validation</strong>: Data verification across multiple sources</li>
+</ul>
+<h3>Weather &amp; Alternative Data</h3>
+<ul>
+<li><strong>Weather APIs</strong>: Weather impact on commodity trading</li>
+<li><strong>Economic Data</strong>: Federal Reserve, economic indicators</li>
+<li><strong>Alternative Sources</strong>: Satellite imagery, supply chain data</li>
+</ul>
+<h2>Pipeline Architecture</h2>
+<h3>Data Connectors Layer</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">Connectors</span><span class="o">/</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">market</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">exchange</span><span class="o">-</span><span class="n">connector</span><span class="p">.</span><span class="n">py</span><span class="w">      </span><span class="p">#</span><span class="w"> </span><span class="n">Exchange</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">connectors</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">oracle</span><span class="o">-</span><span class="n">connector</span><span class="p">.</span><span class="n">py</span><span class="w">        </span><span class="p">#</span><span class="w"> </span><span class="n">Oracle</span><span class="w"> </span><span class="n">network</span><span class="w"> </span><span class="n">connectors</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">dex</span><span class="o">-</span><span class="n">connector</span><span class="p">.</span><span class="n">py</span><span class="w">           </span><span class="p">#</span><span class="w"> </span><span class="n">DEX</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">connectors</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">news</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">news</span><span class="o">-</span><span class="n">connector</span><span class="p">.</span><span class="n">py</span><span class="w">          </span><span class="p">#</span><span class="w"> </span><span class="n">News</span><span class="w"> </span><span class="n">API</span><span class="w"> </span><span class="n">connectors</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">rss</span><span class="o">-</span><span class="n">connector</span><span class="p">.</span><span class="n">py</span><span class="w">           </span><span class="p">#</span><span class="w"> </span><span class="n">RSS</span><span class="w"> </span><span class="n">feed</span><span class="w"> </span><span class="n">connectors</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">content</span><span class="o">-</span><span class="n">connector</span><span class="p">.</span><span class="n">py</span><span class="w">       </span><span class="p">#</span><span class="w"> </span><span class="n">Content</span><span class="w"> </span><span class="n">aggregator</span><span class="w"> </span><span class="n">connectors</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">social</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">twitter</span><span class="o">-</span><span class="n">connector</span><span class="p">.</span><span class="n">py</span><span class="w">       </span><span class="p">#</span><span class="w"> </span><span class="n">Twitter</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">connector</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">reddit</span><span class="o">-</span><span class="n">connector</span><span class="p">.</span><span class="n">py</span><span class="w">        </span><span class="p">#</span><span class="w"> </span><span class="n">Reddit</span><span class="w"> </span><span class="n">API</span><span class="w"> </span><span class="n">connector</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">sentiment</span><span class="o">-</span><span class="n">connector</span><span class="p">.</span><span class="n">py</span><span class="w">     </span><span class="p">#</span><span class="w"> </span><span class="n">Social</span><span class="w"> </span><span class="n">sentiment</span><span class="w"> </span><span class="n">analysis</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">blockchain</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">solana</span><span class="o">-</span><span class="n">connector</span><span class="p">.</span><span class="n">py</span><span class="w">        </span><span class="p">#</span><span class="w"> </span><span class="n">Solana</span><span class="w"> </span><span class="n">RPC</span><span class="w"> </span><span class="n">connector</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">transaction</span><span class="o">-</span><span class="n">connector</span><span class="p">.</span><span class="n">py</span><span class="w">   </span><span class="p">#</span><span class="w"> </span><span class="n">Transaction</span><span class="w"> </span><span class="n">monitoring</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">program</span><span class="o">-</span><span class="n">connector</span><span class="p">.</span><span class="n">py</span><span class="w">       </span><span class="p">#</span><span class="w"> </span><span class="n">Program</span><span class="w"> </span><span class="k">event</span><span class="w"> </span><span class="n">monitoring</span>
+<span class="err">└──</span><span class="w"> </span><span class="n">alternative</span><span class="o">/</span>
+<span class="w">    </span><span class="err">├──</span><span class="w"> </span><span class="n">weather</span><span class="o">-</span><span class="n">connector</span><span class="p">.</span><span class="n">py</span><span class="w">       </span><span class="p">#</span><span class="w"> </span><span class="n">Weather</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">feeds</span>
+<span class="w">    </span><span class="err">├──</span><span class="w"> </span><span class="n">economic</span><span class="o">-</span><span class="n">connector</span><span class="p">.</span><span class="n">py</span><span class="w">      </span><span class="p">#</span><span class="w"> </span><span class="n">Economic</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">feeds</span>
+<span class="w">    </span><span class="err">└──</span><span class="w"> </span><span class="n">alt</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">connector</span><span class="p">.</span><span class="n">py</span><span class="w">      </span><span class="p">#</span><span class="w"> </span><span class="n">Alternative</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">sources</span>
+</code></pre></div>
+
+<h3>Processing Layer</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">Proc</span><span class="nv">essing</span><span class="o">/</span>
+<span class="err">├──</span><span class="w"> </span><span class="nf">stream</span><span class="o">-</span><span class="nv">processors</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nf">market</span><span class="o">-</span><span class="nv">processor.py</span><span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="nv">Market</span><span class="w"> </span><span class="nv">data</span><span class="w"> </span><span class="nv">normalization</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nf">news</span><span class="o">-</span><span class="nv">processor.py</span><span class="w">          </span><span class="err">#</span><span class="w"> </span><span class="nv">News</span><span class="w"> </span><span class="nv">content</span><span class="w"> </span><span class="nv">processing</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nf">social</span><span class="o">-</span><span class="nv">processor.py</span><span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="nv">Social</span><span class="w"> </span><span class="nv">media</span><span class="w"> </span><span class="nv">processing</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="nf">blockchain</span><span class="o">-</span><span class="nv">processor.py</span><span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="nv">Blockchain</span><span class="w"> </span><span class="nv">event</span><span class="w"> </span><span class="nv">processing</span>
+<span class="err">├──</span><span class="w"> </span><span class="nf">transformers</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nf">time</span><span class="o">-</span><span class="nv">series</span><span class="o">-</span><span class="nv">transformer.py</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="nv">Time</span><span class="w"> </span><span class="nv">series</span><span class="w"> </span><span class="nv">data</span><span class="w"> </span><span class="nv">transformation</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nf">sentiment</span><span class="o">-</span><span class="nv">transformer.py</span><span class="w">   </span><span class="err">#</span><span class="w"> </span><span class="nv">Sentiment</span><span class="w"> </span><span class="nv">score</span><span class="w"> </span><span class="nv">computation</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nf">technical</span><span class="o">-</span><span class="nv">transformer.py</span><span class="w">   </span><span class="err">#</span><span class="w"> </span><span class="nv">Technical</span><span class="w"> </span><span class="nv">indicator</span><span class="w"> </span><span class="nv">calculation</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="nf">enrichment</span><span class="o">-</span><span class="nv">transformer.py</span><span class="w">  </span><span class="err">#</span><span class="w"> </span><span class="nv">Data</span><span class="w"> </span><span class="nv">enrichment</span><span class="w"> </span><span class="nv">pipelines</span>
+<span class="err">├──</span><span class="w"> </span><span class="nf">validators</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nf">data</span><span class="o">-</span><span class="nv">validator.py</span><span class="w">          </span><span class="err">#</span><span class="w"> </span><span class="nv">Data</span><span class="w"> </span><span class="nv">quality</span><span class="w"> </span><span class="nv">validation</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nf">schema</span><span class="o">-</span><span class="nv">validator.py</span><span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="nv">Schema</span><span class="w"> </span><span class="nv">compliance</span><span class="w"> </span><span class="nv">checking</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="nf">integrity</span><span class="o">-</span><span class="nv">validator.py</span><span class="w">     </span><span class="err">#</span><span class="w"> </span><span class="nv">Data</span><span class="w"> </span><span class="nv">integrity</span><span class="w"> </span><span class="nv">verification</span>
+<span class="err">└──</span><span class="w"> </span><span class="nf">aggregators</span><span class="o">/</span>
+<span class="w">    </span><span class="err">├──</span><span class="w"> </span><span class="nf">real</span><span class="o">-</span><span class="nv">time</span><span class="o">-</span><span class="nv">aggregator.py</span><span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="nv">Real</span><span class="o">-</span><span class="nv">time</span><span class="w"> </span><span class="nv">data</span><span class="w"> </span><span class="nv">aggregation</span>
+<span class="w">    </span><span class="err">├──</span><span class="w"> </span><span class="nf">batch</span><span class="o">-</span><span class="nv">aggregator.py</span><span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="nv">Batch</span><span class="w"> </span><span class="nv">data</span><span class="w"> </span><span class="nv">aggregation</span>
+<span class="w">    </span><span class="err">└──</span><span class="w"> </span><span class="nf">historical</span><span class="o">-</span><span class="nv">aggregator.py</span><span class="w">   </span><span class="err">#</span><span class="w"> </span><span class="nv">Historical</span><span class="w"> </span><span class="nv">data</span><span class="w"> </span><span class="nv">processing</span>
+</code></pre></div>
+
+<h3>Storage Layer</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">Storage</span><span class="o">/</span>
+<span class="err">├──</span><span class="w"> </span><span class="kt">real</span><span class="o">-</span><span class="kt">time</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">redis</span><span class="o">-</span><span class="n">cache</span><span class="o">/</span><span class="w">               </span><span class="p">#</span><span class="w"> </span><span class="n">Real</span><span class="o">-</span><span class="kt">time</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">cache</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">influxdb</span><span class="o">/</span><span class="w">                  </span><span class="p">#</span><span class="w"> </span><span class="n">Time</span><span class="o">-</span><span class="n">series</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">storage</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">stream</span><span class="o">-</span><span class="n">storage</span><span class="o">/</span><span class="w">            </span><span class="p">#</span><span class="w"> </span><span class="n">Stream</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">storage</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">batch</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">data</span><span class="o">-</span><span class="n">lake</span><span class="o">/</span><span class="w">                 </span><span class="p">#</span><span class="w"> </span><span class="n">Raw</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">storage</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">processed</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="w">            </span><span class="p">#</span><span class="w"> </span><span class="n">Processed</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">storage</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">aggregates</span><span class="o">/</span><span class="w">                </span><span class="p">#</span><span class="w"> </span><span class="n">Aggregated</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">storage</span>
+<span class="err">└──</span><span class="w"> </span><span class="n">vector</span><span class="o">/</span>
+<span class="w">    </span><span class="err">├──</span><span class="w"> </span><span class="n">embeddings</span><span class="o">/</span><span class="w">                </span><span class="p">#</span><span class="w"> </span><span class="n">AI</span><span class="w"> </span><span class="n">embeddings</span><span class="w"> </span><span class="n">storage</span>
+<span class="w">    </span><span class="err">├──</span><span class="w"> </span><span class="n">semantic</span><span class="o">-</span><span class="n">search</span><span class="o">/</span><span class="w">           </span><span class="p">#</span><span class="w"> </span><span class="n">Semantic</span><span class="w"> </span><span class="n">search</span><span class="w"> </span><span class="n">index</span>
+<span class="w">    </span><span class="err">└──</span><span class="w"> </span><span class="n">context</span><span class="o">-</span><span class="n">storage</span><span class="o">/</span><span class="w">           </span><span class="p">#</span><span class="w"> </span><span class="n">AI</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="n">storage</span>
+</code></pre></div>
+
+<h2>Data Processing Workflows</h2>
+<h3>Real-time Market Data Pipeline</h3>
+<ol>
+<li><strong>Collection</strong>: Connect to exchange APIs and oracle networks</li>
+<li><strong>Normalization</strong>: Standardize data formats and timestamps</li>
+<li><strong>Enrichment</strong>: Add metadata, technical indicators</li>
+<li><strong>Validation</strong>: Quality checks and anomaly detection</li>
+<li><strong>Distribution</strong>: Stream to MIKEY-AI and trading systems</li>
+</ol>
+<h3>News Processing Pipeline</h3>
+<ol>
+<li><strong>Ingestion</strong>: Pull news articles from multiple sources</li>
+<li><strong>Content Extraction</strong>: Clean and normalize article content</li>
+<li><strong>Sentiment Analysis</strong>: Extract sentiment scores and entities</li>
+<li><strong>Categorization</strong>: Categorize by market, asset, relevance</li>
+<li><strong>Distribution</strong>: Feed to AI and analytics systems</li>
+</ol>
+<h3>Social Media Pipeline</h3>
+<ol>
+<li><strong>Stream Collection</strong>: Real-time social media monitoring</li>
+<li><strong>Content Processing</strong>: Clean and standardize posts</li>
+<li><strong>Sentiment Analysis</strong>: Real-time sentiment scoring</li>
+<li><strong>Influence Analysis</strong>: Identify influential posts/accounts</li>
+<li><strong>Trend Detection</strong>: Identify emerging trends and narratives</li>
+</ol>
+<h3>Blockchain Event Pipeline</h3>
+<ol>
+<li><strong>Event Monitoring</strong>: Real-time blockchain event tracking</li>
+<li><strong>Transaction Analysis</strong>: Extract relevant trading events</li>
+<li><strong>Program State</strong>: Monitor smart contract state changes</li>
+<li><strong>Correlation</strong>: Correlate on-chain with off-chain events</li>
+<li><strong>Distribution</strong>: Feed to analytics and trading systems</li>
+</ol>
+<h2>Quality &amp; Performance Architecture</h2>
+<h3>Data Quality Framework</h3>
+<ul>
+<li><strong>Schema Validation</strong>: Enforce data schema compliance</li>
+<li><strong>Anomaly Detection</strong>: Identify and flag data anomalies</li>
+<li><strong>Completeness Checks</strong>: Ensure data completeness and accuracy</li>
+<li><strong>Latency Monitoring</strong>: Track data processing latency</li>
+<li><strong>Audit Trail</strong>: Complete data provenance tracking</li>
+</ul>
+<h3>Performance Optimizations</h3>
+<ul>
+<li><strong>Parallel Processing</strong>: Utilize multiple CPU cores for processing</li>
+<li><strong>Batch Operations</strong>: Optimize database operations with batching</li>
+<li><strong>Memory Management</strong>: Optimized memory usage for large datasets</li>
+<li><strong>Caching Strategy</strong>: Intelligent caching for frequently accessed data</li>
+<li><strong>Load Balancing</strong>: Distribute load across processing nodes</li>
+</ul>
+<h3>Reliability Features</h3>
+<ul>
+<li><strong>Fault Tolerance</strong>: Automatic failover for failed components</li>
+<li><strong>Data Recovery</strong>: Recover from data loss or corruption</li>
+<li><strong>Backpressure Handling</strong>: Handle high-volume data spikes</li>
+<li><strong>Health Monitoring</strong>: Continuous health checks and monitoring</li>
+<li><strong>Circuit Breakers</strong>: Prevent cascade failures</li>
+</ul>
+<h2>Integration Patterns</h2>
+<h3>Backtesting Data Service</h3>
+<ul>
+<li><strong>Historical Data</strong>: Provide clean historical data for backtesting</li>
+<li><strong>Tick Data</strong>: High-frequency historical data generation</li>
+<li><strong>Market Conditions</strong>: Simulate various market conditions</li>
+<li><strong>Performance Metrics</strong>: Data for strategy performance evaluation</li>
+</ul>
+<h3>ML Training Pipeline</h3>
+<ul>
+<li><strong>Feature Engineering</strong>: Generate ML features from raw data</li>
+<li><strong>Training Datasets</strong>: Create labeled datasets for model training</li>
+<li><strong>Validation Data</strong>: Provide validation and test datasets</li>
+<li><strong>Model Monitoring</strong>: Feed real-time data to deployed models</li>
+</ul>
+<h3>Real-time Analytics</h3>
+<ul>
+<li><strong>Dashboard Data</strong>: Power analytics dashboards with real-time data</li>
+<li><strong>Alerts</strong>: Generate alerts based on data thresholds</li>
+<li><strong>Metrics</strong>: Compute and store business metrics</li>
+<li><strong>Reports</strong>: Generate periodic reports from collected data</li>
+</ul>
+<h2>Security &amp; Compliance</h2>
+<h3>Data Security</h3>
+<ul>
+<li><strong>Encryption</strong>: Encrypt sensitive data at rest and in transit</li>
+<li><strong>Access Control</strong>: Role-based access to data streams</li>
+<li><strong>Data Masking</strong>: Mask sensitive information where required</li>
+<li><strong>Audit Logging</strong>: Complete audit trail of data access</li>
+</ul>
+<h3>Compliance Features</h3>
+<ul>
+<li><strong>Data Retention</strong>: Configurable data retention policies</li>
+<li><strong>Privacy Protection</strong>: PII detection and protection</li>
+<li><strong>Regulatory Compliance</strong>: Comply with financial regulations</li>
+<li><strong>Data Governance</strong>: Data quality and governance policies</li>
+</ul>
+<h2>Monitoring &amp; Observability</h2>
+<h3>Pipeline Monitoring</h3>
+<ul>
+<li><strong>Throughput Metrics</strong>: Track data processing throughput</li>
+<li><strong>Latency Metrics</strong>: Monitor end-to-end data latency</li>
+<li><strong>Error Rates</strong>: Track processing errors and failures</li>
+<li><strong>Resource Usage</strong>: Monitor CPU, memory, disk usage</li>
+</ul>
+<h3>Data Quality Monitoring</h3>
+<ul>
+<li><strong>Quality Scores</strong>: Real-time data quality scoring</li>
+<li><strong>Anomaly Detection</strong>: Automated anomaly detection and alerts</li>
+<li><strong>Trend Analysis</strong>: Track data quality trends over time</li>
+<li><strong>Alerting</strong>: Alert on data quality degradation</li>
+</ul>
+<h3>System Health</h3>
+<ul>
+<li><strong>Component Health</strong>: Monitor health of all pipeline components</li>
+<li><strong>Dependency Health</strong>: Monitor external service dependencies</li>
+<li><strong>Performance Metrics</strong>: Track system performance metrics</li>
+<li><strong>Capacity Planning</strong>: Monitor and predict capacity needs</li>
+</ul>
+    </div>
+</body>
+</html>

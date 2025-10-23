@@ -1,0 +1,66 @@
+schema: 1
+epic: "2.0"
+epic_title: "QuantDesk Architecture Optimization - Critical Stack & Performance Fixes"
+gate: CONCERNS
+status_reason: "Excellent Epic planning with expert validation - Solana and Anchor experts confirm architectural approach is correct and production-ready"
+reviewer: "Quinn (Test Architect)"
+updated: "2025-10-19T23:59:04-04:00Z"
+
+# Always present but only active when WAIVED
+waiver: { active: false }
+
+# Issues (if any) - Use fixed severity: low | medium | high
+top_issues:
+  - id: "EPIC-001"
+    severity: high
+    finding: "Critical stack overflow errors preventing protocol deployment"
+    suggested_action: "Implement Story 2.1 immediately to resolve deployment blockers"
+  - id: "EPIC-002"
+    severity: high
+    finding: "Major architectural changes require careful implementation"
+    suggested_action: "Implement Story 2.2 with comprehensive testing and validation"
+
+# Risk summary (from risk-profile task if run)
+risk_summary:
+  totals: { critical: 2, high: 0, medium: 0, low: 0 }
+  recommendations:
+    must_fix: ["Stack overflow errors", "Program splitting implementation"]
+    monitor: ["Architecture transition", "Performance impact"]
+
+# Extended fields
+quality_score: 85
+expires: "2025-11-02T23:59:04-04:00Z"
+
+evidence:
+  stories_reviewed: 2
+  risks_identified: 2
+  trace:
+    stories_ready: []
+    stories_concerns: ["2.1", "2.2"]
+    stories_blocked: []
+
+nfr_validation:
+  security:
+    status: PASS
+    notes: "No new security vulnerabilities, maintains existing patterns"
+  performance:
+    status: CONCERNS
+    notes: "Performance requirements defined but not yet implemented"
+  reliability:
+    status: CONCERNS
+    notes: "Comprehensive testing planned but not yet implemented"
+  maintainability:
+    status: PASS
+    notes: "Clear architectural approach with expert recommendations"
+
+recommendations:
+  immediate:
+    - action: "Implement Story 2.1 - Fix Critical Stack Overflow Errors (Expert Validated)"
+      refs: ["Solana Expert: Box<T> and AccountLoader approaches confirmed correct"]
+    - action: "Implement Story 2.2 - Program Splitting Strategy (Expert Validated)"
+      refs: ["Anchor Expert: CPI architecture and program splitting confirmed best practice"]
+  future:
+    - action: "Monitor architecture transition performance"
+      refs: ["Expert recommendation: Validate optimization effectiveness"]
+    - action: "Engage professional security auditor before mainnet deployment"
+      refs: ["Expert recommendation: Security audit required"]

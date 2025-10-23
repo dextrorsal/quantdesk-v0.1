@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ml-Trading-Strat - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/docs">&larr; Back to Documentation</a>
+        </div>
+        <h1>ML Trading Strategy Development Specification</h1>
+<h2>Overview</h2>
+<p>Integrate advanced machine learning models into existing crypto trading infrastructure to achieve realistic returns (0.5-2% daily) with high win rates (60-75%). Leverage existing GPU PyTorch setup and data pipeline.</p>
+<h2>Objectives</h2>
+<ul>
+<li><strong>Target Returns</strong>: 0.5-2% daily (15-60% monthly)</li>
+<li><strong>Target Win Rate</strong>: 60-75%</li>
+<li><strong>Risk Management</strong>: Max 2% risk per trade, 6% portfolio heat</li>
+<li><strong>Sharpe Ratio</strong>: Target &gt;2.0</li>
+<li><strong>Max Drawdown</strong>: &lt;15%</li>
+</ul>
+<h2>Architecture Integration</h2>
+<h3>Existing Infrastructure Utilization</h3>
+<ul>
+<li><strong>Data Pipeline</strong>: Leverage existing OHLCV feeds and feature engineering</li>
+<li><strong>Trading Pipeline</strong>: Integrate ML predictions into existing execution system</li>
+<li><strong>GPU Setup</strong>: Optimize PyTorch training for maximum throughput</li>
+<li><strong>Features</strong>: Enhance existing RSI, CCI, Wave Trend with ML-derived features</li>
+</ul>
+<h3>New ML Components</h3>
+<div class="codehilite"><pre><span></span><code>MLTradingSystem
+├── FeatureEngineering
+│   ├── TechnicalFeatures (existing)
+│   ├── MLDerivedFeatures (new)
+│   └── MarketStructureFeatures (new)
+├── ModelTraining
+│   ├── TimeSeriesModels
+│   ├── EnsembleModels
+│   └── ReinforcementLearning
+├── PredictionEngine
+│   ├── RealTimePrediction
+│   ├── ConfidenceScoring
+│   └── SignalGeneration
+└── ModelManagement
+    ├── ModelVersioning
+    ├── PerformanceTracking
+    └── AutoRetraining
+</code></pre></div>
+
+<h2>Feature Engineering Enhancement</h2>
+<h3>Advanced Feature Categories</h3>
+<h4>1. Market Microstructure Features</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">MarketMicrostructureFeatures</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;order_flow_imbalance&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;bid_ask_spread_normalized&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;volume_weighted_price_pressure&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;tick_rule_indicators&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;large_trade_indicators&#39;</span>
+        <span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">calculate_order_flow_imbalance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate buy/sell pressure from volume data&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">calculate_price_pressure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Volume-weighted price pressure indicators&quot;&quot;&quot;</span>
+</code></pre></div>
+
+<h4>2. Cross-Asset Features</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">CrossAssetFeatures</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">assets</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;BTC&#39;</span><span class="p">,</span> <span class="s1">&#39;ETH&#39;</span><span class="p">,</span> <span class="s1">&#39;SOL&#39;</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assets</span> <span class="o">=</span> <span class="n">assets</span>
+
+    <span class="k">def</span> <span class="nf">calculate_correlation_features</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Rolling correlations between assets&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">calculate_relative_strength</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Asset performance relative to basket&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">calculate_sector_rotation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;DeFi, Layer1, Meme rotation indicators&quot;&quot;&quot;</span>
+</code></pre></div>
+
+<h4>3. Temporal Features</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">TemporalFeatures</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;time_of_day_cyclical&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;day_of_week_cyclical&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;session_indicators&#39;</span><span class="p">,</span>  <span class="c1"># Asian/European/US</span>
+            <span class="s1">&#39;volatility_regime&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;trend_strength_decay&#39;</span>
+        <span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">create_cyclical_time_features</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timestamps</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert time to cyclical features&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">detect_volatility_regime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Low/Medium/High volatility classification&quot;&quot;&quot;</span>
+</code></pre></div>
+
+<h4>4. Sentiment &amp; Flow Features</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">SentimentFlowFeatures</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;funding_rate_zscore&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;open_interest_change&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;liquidation_clusters&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;whale_movement_indicators&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;social_sentiment_score&#39;</span>
+        <span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">calculate_funding_pressure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">funding_data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Funding rate extremes and normalization&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">detect_liquidation_cascades</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Predict liquidation cascade probability&quot;&quot;&quot;</span>
+</code></pre></div>
+
+<h2>Model Architecture Specifications</h2>
+<h3>1. Time Series Transformer</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">CryptoTransformer</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">d_model</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">nhead</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">num_layers</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_projection</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="n">d_model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">positional_encoding</span> <span class="o">=</span> <span class="n">PositionalEncoding</span><span class="p">(</span><span class="n">d_model</span><span class="p">)</span>
+
+        <span class="n">encoder_layer</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">TransformerEncoderLayer</span><span class="p">(</span>
+            <span class="n">d_model</span><span class="o">=</span><span class="n">d_model</span><span class="p">,</span>
+            <span class="n">nhead</span><span class="o">=</span><span class="n">nhead</span><span class="p">,</span>
+            <span class="n">dim_feedforward</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
+            <span class="n">dropout</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+            <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transformer</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">TransformerEncoder</span><span class="p">(</span><span class="n">encoder_layer</span><span class="p">,</span> <span class="n">num_layers</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">d_model</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># Buy/Hold/Sell</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="c1"># Input shape: (batch_size, sequence_length, features)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_projection</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">positional_encoding</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="c1"># Use last timestep for prediction</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">classifier</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>2. Multi-Scale LSTM-CNN Hybrid</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">MultiScaleLSTMCNN</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">sequence_length</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="c1"># Multiple timeframe processing</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv_1m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_conv_block</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv_5m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_conv_block</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv_15m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_conv_block</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span>
+
+        <span class="c1"># LSTM for temporal dependencies</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lstm</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span>
+            <span class="n">input_size</span><span class="o">=</span><span class="mi">192</span><span class="p">,</span>  <span class="c1"># 64*3 conv outputs</span>
+            <span class="n">hidden_size</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+            <span class="n">num_layers</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">dropout</span><span class="o">=</span><span class="mf">0.2</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Attention mechanism</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attention</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MultiheadAttention</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Output layers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.3</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Regression for price direction</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_create_conv_block</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Conv1d</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">out_channels</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">MaxPool1d</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="p">)</span>
+</code></pre></div>
+
+<h3>3. Ensemble Meta-Learner</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">EnsembleMetaLearner</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_models</span><span class="p">,</span> <span class="n">meta_features</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">base_models</span> <span class="o">=</span> <span class="n">base_models</span>
+
+        <span class="c1"># Meta-learner to combine predictions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta_learner</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">base_models</span><span class="p">)</span> <span class="o">+</span> <span class="n">meta_features</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">meta_x</span><span class="p">):</span>
+        <span class="c1"># Get predictions from all base models</span>
+        <span class="n">base_predictions</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_models</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+                <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                <span class="n">base_predictions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span>
+
+        <span class="c1"># Combine with meta features</span>
+        <span class="n">combined</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">base_predictions</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span> <span class="n">meta_x</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta_learner</span><span class="p">(</span><span class="n">combined</span><span class="p">)</span>
+</code></pre></div>
+
+<h2>Training Pipeline Specification</h2>
+<h3>1. Data Preparation</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">CryptoDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">sequence_length</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">prediction_horizon</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sequence_length</span> <span class="o">=</span> <span class="n">sequence_length</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prediction_horizon</span> <span class="o">=</span> <span class="n">prediction_horizon</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="c1"># Features: last 60 timesteps</span>
+        <span class="n">features</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">idx</span><span class="p">:</span><span class="n">idx</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">sequence_length</span><span class="p">]</span>
+
+        <span class="c1"># Target: future return classification</span>
+        <span class="n">future_price</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">sequence_length</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">prediction_horizon</span><span class="p">][</span><span class="s1">&#39;close&#39;</span><span class="p">]</span>
+        <span class="n">current_price</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">sequence_length</span><span class="p">][</span><span class="s1">&#39;close&#39;</span><span class="p">]</span>
+        <span class="n">future_return</span> <span class="o">=</span> <span class="p">(</span><span class="n">future_price</span> <span class="o">-</span> <span class="n">current_price</span><span class="p">)</span> <span class="o">/</span> <span class="n">current_price</span>
+
+        <span class="c1"># Classification: Strong Buy(2), Buy(1), Hold(0), Sell(-1), Strong Sell(-2)</span>
+        <span class="k">if</span> <span class="n">future_return</span> <span class="o">&gt;</span> <span class="mf">0.015</span><span class="p">:</span>    <span class="c1"># &gt;1.5%</span>
+            <span class="n">target</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="k">elif</span> <span class="n">future_return</span> <span class="o">&gt;</span> <span class="mf">0.005</span><span class="p">:</span>  <span class="c1"># &gt;0.5%</span>
+            <span class="n">target</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">future_return</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mf">0.005</span><span class="p">:</span> <span class="c1"># -0.5% to 0.5%</span>
+            <span class="n">target</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">elif</span> <span class="n">future_return</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mf">0.015</span><span class="p">:</span> <span class="c1"># -1.5% to -0.5%</span>
+            <span class="n">target</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>                        <span class="c1"># &lt;-1.5%</span>
+            <span class="n">target</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span>
+
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>2. Advanced Training Loop</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">AdvancedTrainer</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">device</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">config</span>
+
+        <span class="c1"># Advanced optimizer with scheduler</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">AdamW</span><span class="p">(</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span>
+            <span class="n">lr</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;learning_rate&#39;</span><span class="p">],</span>
+            <span class="n">weight_decay</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;weight_decay&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Cosine annealing with warm restarts</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">CosineAnnealingWarmRestarts</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="p">,</span>
+            <span class="n">T_0</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;T_0&#39;</span><span class="p">],</span>
+            <span class="n">T_mult</span><span class="o">=</span><span class="mi">2</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Loss function with class weights</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">(</span>
+            <span class="n">weight</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;class_weights&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">train_epoch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">val_loader</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+        <span class="n">train_losses</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">batch_idx</span><span class="p">,</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">train_loader</span><span class="p">):</span>
+            <span class="n">data</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">),</span> <span class="n">target</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+
+            <span class="c1"># Forward pass</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+
+            <span class="c1"># Backward pass with gradient clipping</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+            <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">clip_grad_norm_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="mf">1.0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+            <span class="n">train_losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+
+            <span class="c1"># Learning rate scheduling</span>
+            <span class="k">if</span> <span class="n">batch_idx</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+        <span class="c1"># Validation</span>
+        <span class="n">val_loss</span><span class="p">,</span> <span class="n">val_acc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">val_loader</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">train_losses</span><span class="p">),</span> <span class="n">val_loss</span><span class="p">,</span> <span class="n">val_acc</span>
+</code></pre></div>
+
+<h3>3. Walk-Forward Validation</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">WalkForwardValidator</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">train_window</span><span class="o">=</span><span class="mi">252</span><span class="o">*</span><span class="mi">24</span><span class="p">,</span> <span class="n">test_window</span><span class="o">=</span><span class="mi">30</span><span class="o">*</span><span class="mi">24</span><span class="p">):</span>  <span class="c1"># 252 days train, 30 days test</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">train_window</span> <span class="o">=</span> <span class="n">train_window</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_window</span> <span class="o">=</span> <span class="n">test_window</span>
+
+    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_class</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">train_window</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_window</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_window</span><span class="p">):</span>
+            <span class="c1"># Training data</span>
+            <span class="n">train_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">train_window</span><span class="p">]</span>
+
+            <span class="c1"># Test data</span>
+            <span class="n">test_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">train_window</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">train_window</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">test_window</span><span class="p">]</span>
+
+            <span class="c1"># Train model</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="n">model_class</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_train_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_data</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+
+            <span class="c1"># Test model</span>
+            <span class="n">test_results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_test_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">test_data</span><span class="p">)</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test_results</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_aggregate_results</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</code></pre></div>
+
+<h2>Trading Signal Generation</h2>
+<h3>1. Prediction Engine</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">MLPredictionEngine</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">feature_generator</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="n">models</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feature_generator</span> <span class="o">=</span> <span class="n">feature_generator</span>
+
+    <span class="k">def</span> <span class="nf">generate_signal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">market_data</span><span class="p">):</span>
+        <span class="c1"># Generate features</span>
+        <span class="n">features</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_generator</span><span class="o">.</span><span class="n">create_features</span><span class="p">(</span><span class="n">market_data</span><span class="p">)</span>
+
+        <span class="c1"># Get predictions from all models</span>
+        <span class="n">predictions</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">confidences</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+            <span class="n">conf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_confidence</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">features</span><span class="p">)</span>
+
+            <span class="n">predictions</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">pred</span>
+            <span class="n">confidences</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">conf</span>
+
+        <span class="c1"># Ensemble prediction</span>
+        <span class="n">final_signal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ensemble_predictions</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">confidences</span><span class="p">)</span>
+        <span class="n">signal_strength</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_signal_strength</span><span class="p">(</span><span class="n">confidences</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;signal&#39;</span><span class="p">:</span> <span class="n">final_signal</span><span class="p">,</span>  <span class="c1"># -2 to 2</span>
+            <span class="s1">&#39;confidence&#39;</span><span class="p">:</span> <span class="n">signal_strength</span><span class="p">,</span>  <span class="c1"># 0 to 1</span>
+            <span class="s1">&#39;individual_predictions&#39;</span><span class="p">:</span> <span class="n">predictions</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">_calculate_confidence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">features</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate prediction confidence using model uncertainty&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s1">&#39;predict_proba&#39;</span><span class="p">):</span>
+            <span class="n">proba</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">proba</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">proba</span><span class="p">)[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>  <span class="c1"># Difference between top 2</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># For neural networks, use entropy of softmax output</span>
+            <span class="n">logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+            <span class="n">probs</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">entropy</span> <span class="o">=</span> <span class="o">-</span><span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">probs</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">probs</span> <span class="o">+</span> <span class="mf">1e-8</span><span class="p">),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="p">(</span><span class="n">entropy</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">probs</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+</code></pre></div>
+
+<h3>2. Position Sizing with ML Confidence</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">MLPositionSizer</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_position_size</span><span class="o">=</span><span class="mf">0.02</span><span class="p">):</span>  <span class="c1"># 2% base risk</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">base_position_size</span> <span class="o">=</span> <span class="n">base_position_size</span>
+
+    <span class="k">def</span> <span class="nf">calculate_position_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signal_data</span><span class="p">,</span> <span class="n">account_balance</span><span class="p">,</span> <span class="n">volatility</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate position size based on ML confidence and market conditions&quot;&quot;&quot;</span>
+
+        <span class="c1"># Base position size</span>
+        <span class="n">base_size</span> <span class="o">=</span> <span class="n">account_balance</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_position_size</span>
+
+        <span class="c1"># Adjust for signal strength</span>
+        <span class="n">signal_multiplier</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">signal_data</span><span class="p">[</span><span class="s1">&#39;signal&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="mf">2.0</span>  <span class="c1"># 0 to 1</span>
+        <span class="n">confidence_multiplier</span> <span class="o">=</span> <span class="n">signal_data</span><span class="p">[</span><span class="s1">&#39;confidence&#39;</span><span class="p">]</span>
+
+        <span class="c1"># Adjust for volatility</span>
+        <span class="n">volatility_multiplier</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.2</span> <span class="o">/</span> <span class="n">volatility</span><span class="p">)</span>  <span class="c1"># Reduce size in high vol</span>
+
+        <span class="c1"># Final position size</span>
+        <span class="n">position_size</span> <span class="o">=</span> <span class="n">base_size</span> <span class="o">*</span> <span class="n">signal_multiplier</span> <span class="o">*</span> <span class="n">confidence_multiplier</span> <span class="o">*</span> <span class="n">volatility_multiplier</span>
+
+        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">position_size</span><span class="p">,</span> <span class="n">account_balance</span> <span class="o">*</span> <span class="mf">0.05</span><span class="p">)</span>  <span class="c1"># Never risk more than 5%</span>
+</code></pre></div>
+
+<h2>Model Management &amp; Monitoring</h2>
+<h3>1. Model Performance Tracking</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ModelPerformanceTracker</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;accuracy&#39;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s1">&#39;precision&#39;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s1">&#39;recall&#39;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s1">&#39;sharpe_ratio&#39;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s1">&#39;max_drawdown&#39;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s1">&#39;win_rate&#39;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s1">&#39;avg_return_per_trade&#39;</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">track_prediction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prediction</span><span class="p">,</span> <span class="n">actual_outcome</span><span class="p">,</span> <span class="n">trade_result</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Track individual prediction performance&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">calculate_rolling_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate rolling performance metrics&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">should_retrain</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Determine if model needs retraining based on performance degradation&quot;&quot;&quot;</span>
+        <span class="n">recent_accuracy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">50</span><span class="p">:])</span>
+        <span class="n">historical_accuracy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">200</span><span class="p">:</span><span class="o">-</span><span class="mi">50</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">recent_accuracy</span> <span class="o">&lt;</span> <span class="n">historical_accuracy</span> <span class="o">*</span> <span class="mf">0.9</span>  <span class="c1"># 10% degradation threshold</span>
+</code></pre></div>
+
+<h3>2. Auto-Retraining Pipeline</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">AutoRetrainingPipeline</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_trainer</span><span class="p">,</span> <span class="n">performance_tracker</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_trainer</span> <span class="o">=</span> <span class="n">model_trainer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">performance_tracker</span> <span class="o">=</span> <span class="n">performance_tracker</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">check_and_retrain</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if retraining is needed and execute if so&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">performance_tracker</span><span class="o">.</span><span class="n">should_retrain</span><span class="p">():</span>
+            <span class="c1"># Get fresh data</span>
+            <span class="n">fresh_data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fetch_recent_data</span><span class="p">()</span>
+
+            <span class="c1"># Retrain model</span>
+            <span class="n">new_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">fresh_data</span><span class="p">)</span>
+
+            <span class="c1"># Validate new model</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_new_model</span><span class="p">(</span><span class="n">new_model</span><span class="p">):</span>
+                <span class="c1"># Deploy new model</span>
+                <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_deploy_model</span><span class="p">(</span><span class="n">new_model</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Model successfully retrained and deployed&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h2>Integration with Existing Trading Pipeline</h2>
+<h3>1. Signal Integration</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">MLSignalIntegrator</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">existing_strategy</span><span class="p">,</span> <span class="n">ml_engine</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">existing_strategy</span> <span class="o">=</span> <span class="n">existing_strategy</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ml_engine</span> <span class="o">=</span> <span class="n">ml_engine</span>
+
+    <span class="k">def</span> <span class="nf">generate_combined_signal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">market_data</span><span class="p">):</span>
+        <span class="c1"># Get traditional strategy signal</span>
+        <span class="n">traditional_signal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">existing_strategy</span><span class="o">.</span><span class="n">generate_signal</span><span class="p">(</span><span class="n">market_data</span><span class="p">)</span>
+
+        <span class="c1"># Get ML signal</span>
+        <span class="n">ml_signal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ml_engine</span><span class="o">.</span><span class="n">generate_signal</span><span class="p">(</span><span class="n">market_data</span><span class="p">)</span>
+
+        <span class="c1"># Combine signals with confidence weighting</span>
+        <span class="n">combined_signal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_combine_signals</span><span class="p">(</span><span class="n">traditional_signal</span><span class="p">,</span> <span class="n">ml_signal</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">combined_signal</span>
+
+    <span class="k">def</span> <span class="nf">_combine_signals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">traditional</span><span class="p">,</span> <span class="n">ml</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Combine traditional and ML signals intelligently&quot;&quot;&quot;</span>
+        <span class="c1"># If both agree, increase confidence</span>
+        <span class="k">if</span> <span class="n">traditional</span><span class="p">[</span><span class="s1">&#39;direction&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">ml</span><span class="p">[</span><span class="s1">&#39;signal&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s1">&#39;direction&#39;</span><span class="p">:</span> <span class="n">traditional</span><span class="p">[</span><span class="s1">&#39;direction&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;strength&#39;</span><span class="p">:</span> <span class="nb">min</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">traditional</span><span class="p">[</span><span class="s1">&#39;strength&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">ml</span><span class="p">[</span><span class="s1">&#39;confidence&#39;</span><span class="p">]),</span>
+                <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="s1">&#39;combined_agreement&#39;</span>
+            <span class="p">}</span>
+
+        <span class="c1"># If ML is very confident, prioritize it</span>
+        <span class="k">elif</span> <span class="n">ml</span><span class="p">[</span><span class="s1">&#39;confidence&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.8</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s1">&#39;direction&#39;</span><span class="p">:</span> <span class="n">ml</span><span class="p">[</span><span class="s1">&#39;signal&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;strength&#39;</span><span class="p">:</span> <span class="n">ml</span><span class="p">[</span><span class="s1">&#39;confidence&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="s1">&#39;ml_override&#39;</span>
+            <span class="p">}</span>
+
+        <span class="c1"># Otherwise, be conservative</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s1">&#39;direction&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>  <span class="c1"># Hold</span>
+                <span class="s1">&#39;strength&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="s1">&#39;conflict_hold&#39;</span>
+            <span class="p">}</span>
+</code></pre></div>
+
+<h2>Configuration Templates</h2>
+<h3>Training Configuration</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">TRAINING_CONFIG</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># Data parameters</span>
+    <span class="s1">&#39;sequence_length&#39;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+    <span class="s1">&#39;prediction_horizon&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="s1">&#39;train_test_split&#39;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+
+    <span class="c1"># Model parameters</span>
+    <span class="s1">&#39;model_type&#39;</span><span class="p">:</span> <span class="s1">&#39;transformer&#39;</span><span class="p">,</span>  <span class="c1"># &#39;transformer&#39;, &#39;lstm_cnn&#39;, &#39;ensemble&#39;</span>
+    <span class="s1">&#39;d_model&#39;</span><span class="p">:</span> <span class="mi">256</span><span class="p">,</span>
+    <span class="s1">&#39;nhead&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="s1">&#39;num_layers&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+
+    <span class="c1"># Training parameters</span>
+    <span class="s1">&#39;batch_size&#39;</span><span class="p">:</span> <span class="mi">64</span><span class="p">,</span>
+    <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="mf">0.001</span><span class="p">,</span>
+    <span class="s1">&#39;weight_decay&#39;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
+    <span class="s1">&#39;epochs&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s1">&#39;early_stopping_patience&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+
+    <span class="c1"># Class weights for imbalanced data</span>
+    <span class="s1">&#39;class_weights&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],</span>  <span class="c1"># Adjust for signal distribution</span>
+
+    <span class="c1"># Validation parameters</span>
+    <span class="s1">&#39;validation_split&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+    <span class="s1">&#39;walk_forward_validation&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s1">&#39;train_window_days&#39;</span><span class="p">:</span> <span class="mi">252</span><span class="p">,</span>
+    <span class="s1">&#39;test_window_days&#39;</span><span class="p">:</span> <span class="mi">30</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3>Feature Engineering Configuration</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">FEATURE_CONFIG</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># Technical indicators (existing)</span>
+    <span class="s1">&#39;use_existing_features&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s1">&#39;existing_features&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;rsi&#39;</span><span class="p">,</span> <span class="s1">&#39;cci&#39;</span><span class="p">,</span> <span class="s1">&#39;wave_trend&#39;</span><span class="p">],</span>
+
+    <span class="c1"># New ML features</span>
+    <span class="s1">&#39;market_microstructure&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;enabled&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;orderbook_levels&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="s1">&#39;trade_size_buckets&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">100000</span><span class="p">]</span>
+    <span class="p">},</span>
+
+    <span class="s1">&#39;cross_asset&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;enabled&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;reference_assets&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;BTC&#39;</span><span class="p">,</span> <span class="s1">&#39;ETH&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;correlation_windows&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">24</span><span class="p">,</span> <span class="mi">168</span><span class="p">,</span> <span class="mi">720</span><span class="p">]</span>  <span class="c1"># 1d, 1w, 1m</span>
+    <span class="p">},</span>
+
+    <span class="s1">&#39;temporal&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;enabled&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;timezone&#39;</span><span class="p">:</span> <span class="s1">&#39;UTC&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;session_boundaries&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;asian&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+            <span class="s1">&#39;european&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span>
+            <span class="s1">&#39;us&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">24</span><span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2>Success Metrics &amp; Monitoring</h2>
+<h3>Key Performance Indicators</h3>
+<ul>
+<li><strong>Prediction Accuracy</strong>: &gt;65%</li>
+<li><strong>Sharpe Ratio</strong>: &gt;2.0</li>
+<li><strong>Maximum Drawdown</strong>: &lt;15%</li>
+<li><strong>Win Rate</strong>: &gt;60%</li>
+<li><strong>Average Daily Return</strong>: 0.5-2%</li>
+<li><strong>Model Stability</strong>: &lt;10% accuracy degradation over 30 days</li>
+</ul>
+<h3>Monitoring Dashboard Requirements</h3>
+<ul>
+<li>Real-time model predictions vs actual outcomes</li>
+<li>Rolling performance metrics</li>
+<li>Feature importance tracking</li>
+<li>Model confidence distributions</li>
+<li>Trading signal frequency and quality</li>
+</ul>
+<h2>Implementation Timeline</h2>
+<h3>Phase 1 (Week 1-2): Foundation</h3>
+<ul>
+<li>Integrate advanced feature engineering</li>
+<li>Set up model training pipeline</li>
+<li>Implement basic transformer model</li>
+</ul>
+<h3>Phase 2 (Week 3-4): Model Development</h3>
+<ul>
+<li>Develop LSTM-CNN hybrid</li>
+<li>Implement ensemble methods</li>
+<li>Set up walk-forward validation</li>
+</ul>
+<h3>Phase 3 (Week 5-6): Integration</h3>
+<ul>
+<li>Connect ML predictions to trading pipeline</li>
+<li>Implement position sizing logic</li>
+<li>Set up performance tracking</li>
+</ul>
+<h3>Phase 4 (Week 7-8): Optimization</h3>
+<ul>
+<li>Hyperparameter tuning</li>
+<li>Model performance optimization</li>
+<li>Auto-retraining pipeline</li>
+</ul>
+<h3>Phase 5 (Week 9-10): Production</h3>
+<ul>
+<li>Live testing with small capital</li>
+<li>Monitoring and debugging</li>
+<li>Performance optimization</li>
+</ul>
+<h2>Risk Management Integration</h2>
+<h3>ML-Specific Risk Controls</h3>
+<ul>
+<li><strong>Prediction Confidence Thresholds</strong>: Only trade on high-confidence signals</li>
+<li><strong>Model Performance Monitoring</strong>: Shut down models with degraded performance</li>
+<li><strong>Ensemble Disagreement</strong>: Reduce position size when models disagree</li>
+<li><strong>Market Regime Detection</strong>: Adjust model weights based on market conditions</li>
+</ul>
+<p>This specification provides a comprehensive framework for integrating advanced ML models into your existing crypto trading infrastructure, targeting realistic returns with proper risk management.</p>
+    </div>
+</body>
+</html>

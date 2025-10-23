@@ -1,0 +1,12 @@
+# Technology Stack (Based on Actual Package.json & Vite Config)
+- **Framework**: React 18.2.0 + TypeScript 5.2.2
+- **Build Tool**: Vite 7.1.8 with PWA plugin
+- **Styling**: Tailwind CSS 3.3.6 + Bootstrap 5.3.8 + React Bootstrap 2.10.10
+- **State Management**: Zustand 4.4.7 + React Context (TradingProvider, MarketProvider, etc.)
+- **Real-time**: Socket.io-client 4.8.1 + WebSocket 8.18.3
+- **Charts**: Lightweight-charts 4.2.3 + Recharts 2.15.4
+- **Routing**: React Router DOM 6.30.1 + React Router 7.9.3
+- **Solana Integration**: @solana/wallet-adapter ecosystem (base, react, react-ui, wallets)
+- **UI Components**: Lucide React, React Feather, Heroicons
+- **Grid Layout**: React Grid Layout 1.5.2
+- **Forms**: React Hot Toast 2.4.1

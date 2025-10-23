@@ -1,0 +1,77 @@
+schema: 1
+story: '1.1'
+story_title: 'Fix Collateral Display and Withdrawal'
+gate: FAIL
+status_reason: 'Critical security and functionality issues identified that could lead to user fund loss.'
+reviewer: 'Quinn (Test Architect)'
+updated: '2025-10-20T10:15:00Z'
+
+top_issues:
+  - id: 'SEC-001'
+    severity: high
+    finding: 'Hardcoded SOL price ($184) creates price manipulation risk'
+    suggested_action: 'Implement real-time oracle price integration with staleness checks'
+    suggested_owner: 'dev'
+  - id: 'SEC-002'
+    severity: high
+    finding: 'Database/smart contract sync issues could cause fund loss'
+    suggested_action: 'Implement comprehensive synchronization validation and recovery procedures'
+    suggested_owner: 'dev'
+  - id: 'REQ-001'
+    severity: high
+    finding: 'Multiple acceptance criteria not implemented (collateral display, withdrawal functionality)'
+    suggested_action: 'Complete implementation of all acceptance criteria before proceeding'
+    suggested_owner: 'dev'
+  - id: 'TEST-001'
+    severity: medium
+    finding: 'Missing integration tests for critical collateral management paths'
+    suggested_action: 'Add comprehensive test coverage for deposit/withdraw workflows'
+    suggested_owner: 'dev'
+  - id: 'ARCH-001'
+    severity: medium
+    finding: 'Frontend displays inconsistent collateral amounts from multiple sources'
+    suggested_action: 'Implement single source of truth for collateral data'
+    suggested_owner: 'dev'
+
+waiver: { active: false }
+
+# Extended fields
+quality_score: 40  # 100 - (20*3 FAILs) - (10*2 CONCERNS)
+expires: '2025-02-10T10:15:00Z'
+
+evidence:
+  tests_reviewed: 8
+  risks_identified: 5
+  trace:
+    ac_covered: [1, 2]  # Only basic display and withdrawal initiation
+    ac_gaps: [3, 4, 5]  # Collateral calculation, database sync, error handling
+
+nfr_validation:
+  security:
+    status: FAIL
+    notes: 'Critical security vulnerabilities in price handling and fund management'
+  performance:
+    status: CONCERNS
+    notes: 'Multiple redundant oracle calls and inefficient database queries'
+  reliability:
+    status: FAIL
+    notes: 'Database synchronization issues and insufficient error handling'
+  maintainability:
+    status: CONCERNS
+    notes: 'Hardcoded values and inconsistent data sources'
+
+recommendations:
+  immediate:  # Must fix before production
+    - action: 'Implement real-time oracle price integration'
+      refs: ['contracts/programs/quantdesk-perp-dex/src/oracle.rs']
+    - action: 'Add database synchronization validation'
+      refs: ['backend/src/routes/deposits.ts', 'backend/src/services/supabaseDatabase.ts']
+    - action: 'Complete all acceptance criteria implementation'
+      refs: ['frontend/src/components/AccountSlideOut.tsx', 'frontend/src/components/WithdrawModal.tsx']
+  future:  # Can be addressed later
+    - action: 'Add comprehensive integration tests'
+      refs: ['contracts/tests/', 'backend/src/tests/']
+    - action: 'Implement frontend error boundaries'
+      refs: ['frontend/src/components/']
+    - action: 'Add monitoring for collateral discrepancies'
+      refs: ['backend/src/services/']

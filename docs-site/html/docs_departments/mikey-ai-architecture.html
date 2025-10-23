@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mikey-Ai-Architecture - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/">&larr; Back to Documentation</a>
+        </div>
+        <h1>MIKEY-AI Department Architecture</h1>
+<h2>Overview</h2>
+<p>Sophisticated AI trading agent built with LangChain, featuring multi-LLM routing, trading intelligence capabilities, and integration with Solana DeFi protocols. The system functions as a "Bloomberg Terminal meets ChatGPT for decentralized finance."</p>
+<h2>Technology Stack (Based on Actual Package.json Analysis)</h2>
+<ul>
+<li><strong>Core Framework</strong>: LangChain 0.3.15 with custom agents</li>
+<li><strong>LLM Providers</strong>: OpenAI, Anthropic, Google Gemini, Cohere (@langchain/openai, @langchain/anthropic, etc.)</li>
+<li><strong>Trading Integration</strong>: CCXT 4.5.5 for exchange integrations</li>
+<li><strong>Solana Integration</strong>: @solana/web3.js 1.87.6, @solana/spl-token 0.3.9</li>
+<li><strong>Task Queue</strong>: Bull 4.12.2 for async operations</li>
+<li><strong>Data Analysis</strong>: InfluxDB, Elasticsearch, PostgreSQL, Redis</li>
+<li><strong>Real-time</strong>: Socket.io 4.7.4, WebSocket support</li>
+</ul>
+<h2>Actual MIKEY-AI Component Architecture (Based on Real Codebase)</h2>
+<div class="codehilite"><pre><span></span><code><span class="nx">MIKEY</span><span class="o">-</span><span class="nx">AI</span><span class="o">/</span>
+<span class="err">├──</span><span class="w"> </span><span class="nx">src</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">agents</span><span class="o">/</span><span class="w">                   </span><span class="err">#</span><span class="w"> </span><span class="nx">Core</span><span class="w"> </span><span class="nx">AI</span><span class="w"> </span><span class="nx">agent</span><span class="w"> </span><span class="nx">implementations</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="nx">TradingAgent</span><span class="p">.</span><span class="nx">ts</span><span class="w">       </span><span class="err">#</span><span class="w"> </span><span class="nx">Main</span><span class="w"> </span><span class="nx">trading</span><span class="w"> </span><span class="nx">intelligence</span><span class="w"> </span><span class="nx">agent</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="kn">api</span><span class="o">/</span><span class="w">                      </span><span class="err">#</span><span class="w"> </span><span class="nx">REST</span><span class="w"> </span><span class="nx">API</span><span class="w"> </span><span class="nx">server</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="nx">index</span><span class="p">.</span><span class="nx">ts</span><span class="w">              </span><span class="err">#</span><span class="w"> </span><span class="nx">Main</span><span class="w"> </span><span class="nx">API</span><span class="w"> </span><span class="nx">entry</span><span class="w"> </span><span class="nx">point</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">cli</span><span class="o">/</span><span class="w">                      </span><span class="err">#</span><span class="w"> </span><span class="nx">Command</span><span class="o">-</span><span class="nx">line</span><span class="w"> </span><span class="kd">interface</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">config</span><span class="o">/</span><span class="w">                   </span><span class="err">#</span><span class="w"> </span><span class="nx">Configuration</span><span class="w"> </span><span class="nx">management</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">services</span><span class="o">/</span><span class="w">                 </span><span class="err">#</span><span class="w"> </span><span class="nx">Core</span><span class="w"> </span><span class="nx">service</span><span class="w"> </span><span class="nx">layer</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">CCXTService</span><span class="p">.</span><span class="nx">ts</span><span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="nx">Exchange</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="nx">via</span><span class="w"> </span><span class="nx">CCXT</span><span class="w"> </span><span class="m m-Double">4.5.5</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">QuantDeskTools</span><span class="p">.</span><span class="nx">ts</span><span class="w">     </span><span class="err">#</span><span class="w"> </span><span class="nx">QuantDesk</span><span class="w"> </span><span class="nx">API</span><span class="w"> </span><span class="nx">integration</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">QuantDeskTradingTools</span><span class="p">.</span><span class="nx">ts</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="nx">Trading</span><span class="o">-</span><span class="nx">specific</span><span class="w"> </span><span class="nx">tools</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">SupabaseTools</span><span class="p">.</span><span class="nx">ts</span><span class="w">      </span><span class="err">#</span><span class="w"> </span><span class="nx">Database</span><span class="w"> </span><span class="nx">integration</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">SolanaService</span><span class="p">.</span><span class="nx">ts</span><span class="w">      </span><span class="err">#</span><span class="w"> </span><span class="nx">Solana</span><span class="w"> </span><span class="nx">blockchain</span><span class="w"> </span><span class="nx">integration</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">RealDataTools</span><span class="p">.</span><span class="nx">ts</span><span class="w">      </span><span class="err">#</span><span class="w"> </span><span class="nx">Real</span><span class="o">-</span><span class="nx">time</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="nx">tools</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">MultiLLMRouter</span><span class="p">.</span><span class="nx">ts</span><span class="w">     </span><span class="err">#</span><span class="w"> </span><span class="nx">Multi</span><span class="o">-</span><span class="nx">LLM</span><span class="w"> </span><span class="nx">intelligent</span><span class="w"> </span><span class="nx">routing</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="nx">OfficialLLMRouter</span><span class="p">.</span><span class="nx">ts</span><span class="w">  </span><span class="err">#</span><span class="w"> </span><span class="nx">Production</span><span class="w"> </span><span class="nx">LLM</span><span class="w"> </span><span class="nx">router</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">types</span><span class="o">/</span><span class="w">                    </span><span class="err">#</span><span class="w"> </span><span class="nx">TypeScript</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="nx">definitions</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="nx">utils</span><span class="o">/</span><span class="w">                    </span><span class="err">#</span><span class="w"> </span><span class="nx">Utility</span><span class="w"> </span><span class="nx">functions</span>
+<span class="err">├──</span><span class="w"> </span><span class="nx">tests</span><span class="o">/</span><span class="w">                        </span><span class="err">#</span><span class="w"> </span><span class="nx">Test</span><span class="w"> </span><span class="nx">suites</span>
+<span class="err">└──</span><span class="w"> </span><span class="nx">docs</span><span class="o">/</span><span class="w">                         </span><span class="err">#</span><span class="w"> </span><span class="nx">Documentation</span>
+</code></pre></div>
+
+<h2>Core AI Systems (Based on Actual Implementation)</h2>
+<h3>Multi-LLM Router (Multiple Implementations)</h3>
+<ul>
+<li><strong>SimpleLLMRouter</strong>: Basic routing between OpenAI GPT-4o-mini and Google Gemini 2.0-flash-exp</li>
+<li><strong>OfficialLLMRouter</strong>: Production-grade multi-provider router with fallback handling</li>
+<li><strong>Supported Providers</strong>: OpenAI, Anthropic, Google Gemini, Cohere (all installed via @langchain packages)</li>
+<li><strong>Intelligent Routing</strong>: Cost optimization and performance-based provider selection</li>
+<li><strong>Configuration</strong>: Environment-based provider initialization with fallback support</li>
+</ul>
+<h3>TradingAgent Core Architecture</h3>
+<ul>
+<li><strong>LangChain Integration</strong>: Built on LangChain 0.3.15 with DynamicTool support</li>
+<li><strong>Query Processing</strong>: Intelligent query analysis to determine data source needs</li>
+<li><strong>Tool Integration</strong>: Automatic tool selection based on query requirements</li>
+<li><strong>Real-time Data</strong>: Integration with QuantDesk real-time data streams</li>
+<li><strong>Multi-source Response</strong>: Combines data from CCXT, Supabase, and QuantDesk APIs</li>
+</ul>
+<h3>Specialized Service Layer</h3>
+<ul>
+<li><strong>CCXTService</strong>: Exchange market data analysis via CCXT 4.5.5 (pure data collection)</li>
+<li><strong>QuantDeskTools</strong>: Direct QuantDesk API integration for portfolio/account data</li>
+<li><strong>QuantDeskTradingTools</strong>: Trading-specific functionality and order management</li>
+<li><strong>SupabaseTools</strong>: Database integration for historical data and user analytics</li>
+<li><strong>SolanaService</strong>: Solana blockchain integration for on-chain data</li>
+<li><strong>RealDataTools</strong>: Real-time data processing and streaming</li>
+<li><strong>SolanaAgentKitTools</strong>: Direct blockchain operations via solana-agent-kit (POC)</li>
+</ul>
+<h3>Solana Agent Kit Integration (POC)</h3>
+<ul>
+<li><strong>Direct Blockchain Operations</strong>: Token swaps, balance queries, wallet management</li>
+<li><strong>Jupiter Exchange Integration</strong>: Token swap quotes and execution capabilities</li>
+<li><strong>SPL Token Operations</strong>: Token balance checks and metadata retrieval</li>
+<li><strong>Trading-Focused Tools</strong>: Excludes NFT minting, focuses on perpetual trading needs</li>
+<li><strong>LangChain Integration</strong>: Seamless integration with existing DynamicTool patterns</li>
+<li><strong>Security Considerations</strong>: Read-only mode for POC, proper key management for production</li>
+</ul>
+<h2>Trading Intelligence Features</h2>
+<h3>Market Analytics Engine</h3>
+<ul>
+<li><strong>Real-time Analysis</strong>: Live market condition assessment</li>
+<li><strong>Pattern Recognition</strong>: Chart pattern and anomaly detection</li>
+<li><strong>Sentiment Analysis</strong>: News, Twitter, social sentiment tracking</li>
+<li><strong>Correlation Analysis</strong>: Asset relationship modeling</li>
+</ul>
+<h3>ML Algorithm Pipeline</h3>
+<ul>
+<li><strong>Strategy Development</strong>: Create and test trading algorithms</li>
+<li><strong>Backtesting Framework</strong>: Historical performance validation</li>
+<li><strong>Live Deployment</strong>: Automatic deployment to live trading</li>
+<li><strong>Performance Monitoring</strong>: Real-time strategy performance tracking</li>
+</ul>
+<h3>Risk Management Intelligence</h3>
+<ul>
+<li><strong>Position Monitoring</strong>: Real-time portfolio risk assessment</li>
+<li><strong>Market Stress Detection</strong>: Identify high-risk market conditions</li>
+<li><strong>Stop-loss Optimization</strong>: Intelligent stop-loss placement</li>
+<li><strong>Portfolio Rebalancing</strong>: Automated rebalancing recommendations</li>
+</ul>
+<h2>Integration Architecture</h2>
+<h3>Data Flow Integration</h3>
+<div class="codehilite"><pre><span></span><code><span class="nv">Data</span><span class="w"> </span><span class="nv">Sources</span><span class="w"> </span>→<span class="w"> </span><span class="nv">Ingestion</span><span class="w"> </span><span class="nv">Pipeline</span><span class="w"> </span>→<span class="w"> </span><span class="nv">Processing</span><span class="w"> </span><span class="nv">Engine</span><span class="w"> </span>→<span class="w"> </span>
+<span class="nv">Vector</span><span class="w"> </span><span class="nv">Storage</span><span class="w"> </span>→<span class="w"> </span><span class="nv">AI</span><span class="w"> </span><span class="nv">Agents</span><span class="w"> </span>→<span class="w"> </span><span class="nv">Trading</span><span class="w"> </span><span class="nv">Engine</span><span class="w"> </span>→<span class="w"> </span>
+<span class="nv">Execution</span><span class="w"> </span>→<span class="w"> </span><span class="nv">Smart</span><span class="w"> </span><span class="nv">Contracts</span><span class="w"> </span>→<span class="w"> </span><span class="nv">Back</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">MIKEY</span><span class="o">-</span><span class="nv">AI</span><span class="w"> </span><span class="ss">(</span><span class="nv">feedback</span><span class="w"> </span><span class="k">loop</span><span class="ss">)</span>
+</code></pre></div>
+
+<h3>RPC Router Architecture</h3>
+<ul>
+<li><strong>Smart Routing</strong>: Optimal service selection based on load &amp; performance</li>
+<li><strong>Failover Mechanisms</strong>: Automatic failover for service failures</li>
+<li><strong>Load Balancing</strong>: Distribute requests across service instances</li>
+<li><strong>Response Caching</strong>: Cache frequent RPC responses for performance</li>
+</ul>
+<h3>Backend Integration</h3>
+<ul>
+<li><strong>API Gateway</strong>: RESTful endpoints for MIKEY-AI capabilities</li>
+<li><strong>WebSocket Streams</strong>: Real-time data flow between MIKEY-AI and backend</li>
+<li><strong>Database Integration</strong>: Portfolio data storage and retrieval</li>
+<li><strong>Event System</strong>: Asynchronous event processing for AI decisions</li>
+</ul>
+<h3>Smart Contract Integration</h3>
+<ul>
+<li><strong>IDL Analysis</strong>: Automatic Solana program interface generation</li>
+<li><strong>Transaction Building</strong>: AI-assigned transaction construction</li>
+<li><strong>Execution Monitoring</strong>: Real-time transaction status tracking</li>
+<li><strong>Result Analysis</strong>: Learning from trading execution results</li>
+</ul>
+<h2>Specialized Tools Integration</h2>
+<h3>IDL Space Integration</h3>
+<ul>
+<li><strong>Program Analysis</strong>: Automatic Solana program interface extraction</li>
+<li><strong>Function Mapping</strong>: Map smart contract functions to trading operations</li>
+<li><strong>Schema Generation</strong>: Generate TypeScript types from Solana IDLs</li>
+<li><strong>Documentation</strong>: Auto-generate trading strategy documentation</li>
+</ul>
+<h3>Postman Testing Suites</h3>
+<ul>
+<li><strong>API Testing</strong>: Automated testing of all MIKEY-AI endpoints</li>
+<li><strong>Performance Testing</strong>: Load testing for AI service endpoints</li>
+<li><strong>Integration Testing</strong>: Cross-service integration validation</li>
+<li><strong>Contract Testing</strong>: API contract compliance validation</li>
+</ul>
+<h3>Blockchain Tools</h3>
+<ul>
+<li><strong>Transaction Simulation</strong>: Pre-execution transaction testing</li>
+<li><strong>Gas Optimization</strong>: AI-powered gas fee optimization</li>
+<li><strong>Slippage Analysis</strong>: Trading impact analysis</li>
+<li><strong>Security Scanning</strong>: Smart contract vulnerability detection</li>
+</ul>
+<h3>AI Development Tools</h3>
+<ul>
+<li><strong>Prompt Engineering</strong>: Advanced prompt management system</li>
+<li><strong>Chain Optimization</strong>: LangChain performance tuning</li>
+<li><strong>Memory Management</strong>: Long-term AI memory optimization</li>
+<li><strong>Model Management</strong>: LLM model lifecycle management</li>
+</ul>
+<h2>Development Workflow</h2>
+<h3>Model Training Pipeline</h3>
+<ol>
+<li><strong>Data Collection</strong>: Historical and real-time data gathering</li>
+<li><strong>Feature Engineering</strong>: Create trading-relevant features</li>
+<li><strong>Model Training</strong>: Train ML models on historical data</li>
+<li><strong>Backtesting</strong>: Validate strategies on test datasets</li>
+<li><strong>Deployment</strong>: Deploy to live trading environment</li>
+<li><strong>Monitoring</strong>: Track performance and model drift</li>
+</ol>
+<h3>Integration Testing</h3>
+<ul>
+<li><strong>Unit Tests</strong>: Individual component validation</li>
+<li><strong>Integration Tests</strong>: Cross-service functionality testing</li>
+<li><strong>Performance Tests</strong>: Load and stress testing</li>
+<li><strong>AI Tests</strong>: Model accuracy and decision quality testing</li>
+</ul>
+<h2>Security &amp; Compliance</h2>
+<h3>AI Governance</h3>
+<ul>
+<li><strong>Decision Logging</strong>: Complete audit trail of AI decisions</li>
+<li><strong>Risk Limits</strong>: Configurable risk parameters per strategy</li>
+<li><strong>Compliance Monitoring</strong>: Ensure trading compliance with regulations</li>
+<li><strong>Human Oversight</strong>: Manual override and approval mechanisms</li>
+</ul>
+<h3>Data Privacy</h3>
+<ul>
+<li><strong>Data Encryption</strong>: Encrypt all sensitive trading data</li>
+<li><strong>Access Control</strong>: Role-based access to AI capabilities</li>
+<li><strong>Data Retention</strong>: Configurable data retention policies</li>
+<li><strong>Privacy Engineering</strong>: Privacy-preserving ML techniques</li>
+</ul>
+<h2>Performance Optimizations</h2>
+<h3>AI Performance</h3>
+<ul>
+<li><strong>Model Caching</strong>: Cache model responses for repeated queries</li>
+<li><strong>Batch Processing</strong>: Process multiple requests in batches</li>
+<li><strong>Parallel Processing</strong>: Utilize multiple CPU/GPU cores</li>
+<li><strong>Memory Optimization</strong>: Efficient memory usage for large models</li>
+</ul>
+<h3>Trading Performance</h3>
+<ul>
+<li><strong>Low Latency</strong>: Millisecond-level trading decisions</li>
+<li><strong>High Throughput</strong>: Handle thousands of decisions per second</li>
+<li><strong>Fault Tolerance</strong>: Continuously available trading decisions</li>
+<li><strong>Scalability</strong>: Scale to handle market volume growth</li>
+</ul>
+<h2>Monitoring &amp; Observability</h2>
+<h3>AI Monitoring</h3>
+<ul>
+<li><strong>Model Performance</strong>: Track accuracy, precision, recall metrics</li>
+<li><strong>Decision Quality</strong>: Monitor AI decision effectiveness</li>
+<li><strong>Model Drift</strong>: Detect and alert on model performance degradation</li>
+<li><strong>Resource Usage</strong>: Monitor CPU, GPU, memory utilization</li>
+</ul>
+<h3>Trading Monitoring</h3>
+<ul>
+<li><strong>Strategy Performance</strong>: Real-time strategy effectiveness tracking</li>
+<li><strong>Risk Metrics</strong>: Continuous risk assessment and alerting</li>
+<li><strong>Execution Quality</strong>: Monitor trade execution quality</li>
+<li><strong>Revenue Tracking</strong>: Strategy profitability analysis</li>
+</ul>
+    </div>
+</body>
+</html>

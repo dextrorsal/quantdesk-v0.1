@@ -1,0 +1,191 @@
+/* QuantDesk TradingView Custom Styles - Using CSS Custom Properties */
+
+/* Dark theme colors matching QuantDesk theme system */
+.tv-chart-container {
+  background-color: var(--bg-primary, #000000) !important;
+}
+
+.tv-chart-container .tv-header {
+  background-color: var(--bg-primary, #000000) !important;
+  border-bottom: 1px solid var(--bg-tertiary, #1a1a1a) !important;
+}
+
+.tv-chart-container .tv-toolbar {
+  background-color: var(--bg-primary, #000000) !important;
+  border-bottom: 1px solid var(--bg-tertiary, #1a1a1a) !important;
+}
+
+/* Chart background */
+.tv-chart-container .chart-container {
+  background-color: var(--bg-primary, #000000) !important;
+}
+
+/* Grid lines */
+.tv-chart-container .pane {
+  background-color: var(--bg-primary, #000000) !important;
+}
+
+.tv-chart-container .pane .pane-legend {
+  background-color: var(--bg-primary, #000000) !important;
+  color: var(--text-muted, #a3a3a3) !important;
+}
+
+/* Price scale */
+.tv-chart-container .pane .pane-legend .pane-legend-line {
+  color: var(--text-muted, #a3a3a3) !important;
+}
+
+/* Time scale */
+.tv-chart-container .pane .pane-legend .pane-legend-line {
+  color: var(--text-muted, #a3a3a3) !important;
+}
+
+/* Candlestick colors */
+.tv-chart-container .pane .pane-legend .pane-legend-line.up {
+  color: var(--success-500, #22c55e) !important;
+}
+
+.tv-chart-container .pane .pane-legend .pane-legend-line.down {
+  color: var(--danger-500, #ef4444) !important;
+}
+
+/* Volume bars */
+.tv-chart-container .pane .pane-legend .pane-legend-line.volume {
+  color: var(--text-muted, #a3a3a3) !important;
+}
+
+/* Crosshair */
+.tv-chart-container .pane .crosshair {
+  color: var(--bg-tertiary, #1a1a1a) !important;
+}
+
+/* Toolbar buttons */
+.tv-chart-container .tv-toolbar .tv-toolbar-button {
+  background-color: transparent !important;
+  color: var(--text-muted, #a3a3a3) !important;
+  border: 1px solid var(--bg-tertiary, #1a1a1a) !important;
+}
+
+.tv-chart-container .tv-toolbar .tv-toolbar-button:hover {
+  background-color: var(--bg-tertiary, #1a1a1a) !important;
+  color: var(--text-primary, #ffffff) !important;
+}
+
+.tv-chart-container .tv-toolbar .tv-toolbar-button.active {
+  background-color: var(--primary-500, #3b82f6) !important;
+  color: var(--text-primary, #ffffff) !important;
+}
+
+/* Interval buttons */
+.tv-chart-container .tv-toolbar .tv-toolbar-button.interval {
+  background-color: transparent !important;
+  color: var(--text-muted, #a3a3a3) !important;
+  border: 1px solid var(--bg-tertiary, #1a1a1a) !important;
+}
+
+.tv-chart-container .tv-toolbar .tv-toolbar-button.interval:hover {
+  background-color: var(--bg-tertiary, #1a1a1a) !important;
+  color: var(--text-primary, #ffffff) !important;
+}
+
+.tv-chart-container .tv-toolbar .tv-toolbar-button.interval.active {
+  background-color: var(--primary-500, #3b82f6) !important;
+  color: var(--text-primary, #ffffff) !important;
+}
+
+/* Chart type selector */
+.tv-chart-container .tv-toolbar .tv-toolbar-button.chart-type {
+  background-color: transparent !important;
+  color: var(--text-muted, #a3a3a3) !important;
+  border: 1px solid var(--bg-tertiary, #1a1a1a) !important;
+}
+
+.tv-chart-container .tv-toolbar .tv-toolbar-button.chart-type:hover {
+  background-color: var(--bg-tertiary, #1a1a1a) !important;
+  color: var(--text-primary, #ffffff) !important;
+}
+
+/* Indicators button */
+.tv-chart-container .tv-toolbar .tv-toolbar-button.indicators {
+  background-color: transparent !important;
+  color: var(--text-muted, #a3a3a3) !important;
+  border: 1px solid var(--bg-tertiary, #1a1a1a) !important;
+}
+
+.tv-chart-container .tv-toolbar .tv-toolbar-button.indicators:hover {
+  background-color: var(--bg-tertiary, #1a1a1a) !important;
+  color: var(--text-primary, #ffffff) !important;
+}
+
+/* Settings button */
+.tv-chart-container .tv-toolbar .tv-toolbar-button.settings {
+  background-color: transparent !important;
+  color: var(--text-muted, #a3a3a3) !important;
+  border: 1px solid var(--bg-tertiary, #1a1a1a) !important;
+}
+
+.tv-chart-container .tv-toolbar .tv-toolbar-button.settings:hover {
+  background-color: var(--bg-tertiary, #1a1a1a) !important;
+  color: var(--text-primary, #ffffff) !important;
+}
+
+/* Remove TradingView branding */
+.tv-chart-container .tv-footer {
+  display: none !important;
+}
+
+.tv-chart-container .tv-watermark {
+  display: none !important;
+}
+
+/* Hide search field and symbol search */
+.tv-chart-container .tv-header .tv-header-search,
+.tv-chart-container .tv-header .tv-header-symbol-search,
+.tv-chart-container .tv-toolbar .tv-toolbar-search,
+.tv-chart-container .tv-toolbar .tv-toolbar-symbol-search,
+.tv-chart-container .tv-header input[type="text"],
+.tv-chart-container .tv-toolbar input[type="text"] {
+  display: none !important;
+}
+
+/* Ensure chart takes full width */
+.tv-chart-container {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.tv-chart-container .chart-container {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Custom scrollbar */
+.tv-chart-container ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.tv-chart-container ::-webkit-scrollbar-track {
+  background: var(--bg-tertiary, #1a1a1a);
+}
+
+.tv-chart-container ::-webkit-scrollbar-thumb {
+  background: var(--bg-tertiary, #1a1a1a);
+  border-radius: 4px;
+}
+
+.tv-chart-container ::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted, #a3a3a3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .tv-chart-container .tv-toolbar {
+    flex-wrap: wrap;
+  }
+  
+  .tv-chart-container .tv-toolbar .tv-toolbar-button {
+  font-size: 12px;
+    padding: 4px 8px;
+  }
+}

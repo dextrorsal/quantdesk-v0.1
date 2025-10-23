@@ -1,0 +1,25 @@
+{
+  "reporter": "spec",
+  "timeout": 1000000,
+  "recursive": true,
+  "require": ["ts-node/register"],
+  "extension": ["ts"],
+  "spec": "tests/**/*.ts",
+  "exclude": "tests/utils/**/*.ts",
+  "reporter-options": {
+    "output": "test-results/results.xml"
+  },
+  "grep": "",
+  "bail": false,
+  "parallel": false,
+  "retries": 0,
+  "slow": 2000,
+  "delay": false,
+  "file": [],
+  "grep": "",
+  "invert": false,
+  "sort": false,
+  "watch": false,
+  "watch-files": ["tests/**/*.ts", "src/**/*.ts"],
+  "watch-ignore": ["node_modules/**/*", "dist/**/*", "target/**/*"]
+}
