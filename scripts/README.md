@@ -1,380 +1,594 @@
-# Scripts Directory
+# QuantDesk Scripts
 
-This directory contains utility scripts for development, deployment, testing, and maintenance of the QuantDesk platform.
+## 🚀 **Comprehensive Utility Scripts**
 
-## 📁 Structure
+This directory contains comprehensive utility scripts for QuantDesk development, deployment, and maintenance, showcasing our professional-grade automation and tooling.
 
+## 📊 **Scripts Overview**
+
+```mermaid
+graph TB
+    subgraph "Development Scripts"
+        SETUP[Environment Setup<br/>Development Environment]
+        BUILD[Build Scripts<br/>Compilation & Packaging]
+        TEST[Testing Scripts<br/>Unit & Integration Tests]
+        LINT[Linting Scripts<br/>Code Quality]
+    end
+    
+    subgraph "Deployment Scripts"
+        DEPLOY[Deployment Scripts<br/>Production Deployment]
+        MIGRATE[Database Migration<br/>Schema Updates]
+        BACKUP[Backup Scripts<br/>Data Protection]
+        ROLLBACK[Rollback Scripts<br/>Emergency Recovery]
+    end
+    
+    subgraph "Security Scripts"
+        AUDIT[Security Audit<br/>Vulnerability Scanning]
+        SCAN[Code Scanning<br/>Security Analysis]
+        KEY_MGMT[Key Management<br/>Secret Rotation]
+        COMPLIANCE[Compliance Check<br/>Security Standards]
+    end
+    
+    subgraph "Monitoring Scripts"
+        HEALTH[Health Checks<br/>Service Monitoring]
+        METRICS[Metrics Collection<br/>Performance Data]
+        ALERTS[Alert Scripts<br/>Notification System]
+        LOGS[Log Management<br/>Log Analysis]
+    end
 ```
-scripts/
-├── dev/              # Development scripts
-├── deploy/           # Deployment scripts
-├── ci-cd/            # CI/CD pipeline scripts
-├── security/         # Security-related scripts
-├── maintenance/      # Maintenance scripts
-├── git/              # Git utility scripts
-├── seed/             # Database seeding scripts
-└── README.md         # This file
-```
 
-## 🚀 Quick Start
+## 🛠️ **Development Scripts**
 
-### Prerequisites
+### **Environment Setup**
+**File:** `dev/setup-environment.sh`
+**Description:** Complete development environment setup
+
+**Features:**
+- Node.js and pnpm installation
+- Rust and Solana CLI setup
+- Environment variable configuration
+- Database initialization
+- Service dependencies
+
+**Usage:**
 ```bash
-# Ensure you have the required tools
-node --version  # Node.js 20+
-pnpm --version  # pnpm package manager
+# Run environment setup
+./scripts/dev/setup-environment.sh
+
+# Setup specific service
+./scripts/dev/setup-environment.sh --service=backend
 ```
 
-### Running Scripts
-```bash
-# Make scripts executable
-chmod +x scripts/*.sh
+### **Build Scripts**
+**File:** `dev/build-all.sh`
+**Description:** Comprehensive build system for all services
 
-# Run a script
-./scripts/env-scanner.sh
-```
+**Features:**
+- Multi-service compilation
+- TypeScript compilation
+- Rust program building
+- Asset optimization
+- Dependency management
 
-## 📚 Script Categories
-
-### 1. Development Scripts (`dev/`)
-- **Environment Setup** - Development environment configuration
-- **Database Setup** - Local database initialization
-- **Service Management** - Start/stop development services
-- **Code Generation** - Generate boilerplate code
-
-### 2. Deployment Scripts (`deploy/`)
-- **Production Deployment** - Deploy to production
-- **Staging Deployment** - Deploy to staging
-- **Database Migration** - Run database migrations
-- **Health Checks** - Verify deployment health
-
-### 3. CI/CD Scripts (`ci-cd/`)
-- **Build Pipeline** - Automated build process
-- **Test Pipeline** - Automated testing
-- **Deploy Pipeline** - Automated deployment
-- **Rollback Pipeline** - Automated rollback
-
-### 4. Security Scripts (`security/`)
-- **Security Scan** - Security vulnerability scanning
-- **Audit Scripts** - Security audit utilities
-- **Key Management** - API key management
-- **Access Control** - Permission management
-
-### 5. Maintenance Scripts (`maintenance/`)
-- **Database Cleanup** - Database maintenance
-- **Log Rotation** - Log file management
-- **Backup Scripts** - Data backup utilities
-- **Performance Monitoring** - Performance tracking
-
-### 6. Git Scripts (`git/`)
-- **Branch Management** - Git branch utilities
-- **Commit Hooks** - Git commit hooks
-- **Release Management** - Release automation
-- **Changelog Generation** - Automated changelogs
-
-### 7. Seed Scripts (`seed/`)
-- **Database Seeding** - Populate database with test data
-- **Market Data** - Seed market data
-- **User Data** - Seed user accounts
-- **Test Data** - Generate test data
-
-## 🔧 Common Scripts
-
-### Environment Scanner
-```bash
-# Scan for environment variable issues
-./scripts/env-scanner.sh
-
-# Validate environment configuration
-./scripts/validate-environment-migration.js
-```
-
-### Database Management
-```bash
-# Seed essential markets
-./scripts/seed-markets.sh
-
-# Run database migrations
-./scripts/migrate-environment.sh
-```
-
-### Security Audits
-```bash
-# Run security audit
-./scripts/security/audit.sh
-
-# Check for vulnerabilities
-./scripts/security/vulnerability-scan.sh
-```
-
-### Deployment
-```bash
-# Deploy to staging
-./scripts/deploy/staging.sh
-
-# Deploy to production
-./scripts/deploy/production.sh
-```
-
-## 🧪 Testing Scripts
-
-### Unit Tests
-```bash
-# Run all unit tests
-./scripts/test/unit-tests.sh
-
-# Run specific service tests
-./scripts/test/backend-tests.sh
-./scripts/test/frontend-tests.sh
-```
-
-### Integration Tests
-```bash
-# Run integration tests
-./scripts/test/integration-tests.sh
-
-# Run end-to-end tests
-./scripts/test/e2e-tests.sh
-```
-
-### Performance Tests
-```bash
-# Run performance tests
-./scripts/test/performance-tests.sh
-
-# Load testing
-./scripts/test/load-tests.sh
-```
-
-## 🔒 Security Scripts
-
-### Vulnerability Scanning
-```bash
-# Scan for security vulnerabilities
-./scripts/security/vulnerability-scan.sh
-
-# Audit dependencies
-./scripts/security/dependency-audit.sh
-```
-
-### Access Control
-```bash
-# Manage API keys
-./scripts/security/manage-api-keys.sh
-
-# Update permissions
-./scripts/security/update-permissions.sh
-```
-
-## 📊 Monitoring Scripts
-
-### Health Checks
-```bash
-# Check service health
-./scripts/monitor/service-health.sh
-
-# Check database health
-./scripts/monitor/database-health.sh
-```
-
-### Performance Monitoring
-```bash
-# Monitor performance metrics
-./scripts/monitor/performance-metrics.sh
-
-# Generate performance reports
-./scripts/monitor/performance-report.sh
-```
-
-## 🗄️ Database Scripts
-
-### Migration Scripts
-```bash
-# Run database migrations
-./scripts/database/migrate.sh
-
-# Rollback migrations
-./scripts/database/rollback.sh
-```
-
-### Backup Scripts
-```bash
-# Backup database
-./scripts/database/backup.sh
-
-# Restore database
-./scripts/database/restore.sh
-```
-
-### Seeding Scripts
-```bash
-# Seed test data
-./scripts/seed/test-data.sh
-
-# Seed market data
-./scripts/seed/market-data.sh
-```
-
-## 🚀 Deployment Scripts
-
-### Environment Setup
-```bash
-# Setup development environment
-./scripts/deploy/setup-dev.sh
-
-# Setup production environment
-./scripts/deploy/setup-prod.sh
-```
-
-### Service Deployment
-```bash
-# Deploy frontend
-./scripts/deploy/frontend.sh
-
-# Deploy backend
-./scripts/deploy/backend.sh
-
-# Deploy all services
-./scripts/deploy/all-services.sh
-```
-
-## 🔄 CI/CD Scripts
-
-### Build Pipeline
+**Usage:**
 ```bash
 # Build all services
-./scripts/ci-cd/build-all.sh
+./scripts/dev/build-all.sh
 
 # Build specific service
-./scripts/ci-cd/build-service.sh frontend
+./scripts/dev/build-all.sh --service=frontend
 ```
 
-### Test Pipeline
+### **Testing Scripts**
+**File:** `dev/run-tests.sh`
+**Description:** Comprehensive testing suite
+
+**Features:**
+- Unit test execution
+- Integration test running
+- Smart contract testing
+- Performance testing
+- Coverage reporting
+
+**Usage:**
 ```bash
 # Run all tests
-./scripts/ci-cd/test-all.sh
+./scripts/dev/run-tests.sh
 
-# Run tests for specific service
-./scripts/ci-cd/test-service.sh backend
+# Run specific test suite
+./scripts/dev/run-tests.sh --suite=backend
 ```
 
-### Deploy Pipeline
-```bash
-# Deploy to staging
-./scripts/ci-cd/deploy-staging.sh
+### **Linting Scripts**
+**File:** `dev/lint-code.sh`
+**Description:** Code quality and style checking
 
+**Features:**
+- ESLint execution
+- Prettier formatting
+- TypeScript type checking
+- Rust clippy checks
+- Code quality metrics
+
+**Usage:**
+```bash
+# Lint all code
+./scripts/dev/lint-code.sh
+
+# Lint and fix
+./scripts/dev/lint-code.sh --fix
+```
+
+## 🚀 **Deployment Scripts**
+
+### **Production Deployment**
+**File:** `deploy/deploy-production.sh`
+**Description:** Complete production deployment pipeline
+
+**Features:**
+- Environment validation
+- Service deployment
+- Database migration
+- Health checks
+- Rollback capability
+
+**Usage:**
+```bash
 # Deploy to production
-./scripts/ci-cd/deploy-production.sh
+./scripts/deploy/deploy-production.sh
+
+# Deploy specific service
+./scripts/deploy/deploy-production.sh --service=backend
 ```
 
-## 🛠️ Utility Scripts
+### **Database Migration**
+**File:** `deploy/migrate-database.sh`
+**Description:** Database schema migration system
 
-### Code Quality
+**Features:**
+- Schema version management
+- Migration execution
+- Rollback support
+- Data validation
+- Backup creation
+
+**Usage:**
 ```bash
-# Run linting
-./scripts/utils/lint.sh
+# Run migrations
+./scripts/deploy/migrate-database.sh
 
-# Format code
-./scripts/utils/format.sh
-
-# Type checking
-./scripts/utils/type-check.sh
+# Rollback migration
+./scripts/deploy/migrate-database.sh --rollback
 ```
 
-### Documentation
+### **Backup Scripts**
+**File:** `deploy/backup-data.sh`
+**Description:** Comprehensive data backup system
+
+**Features:**
+- Database backup
+- File system backup
+- Incremental backups
+- Compression and encryption
+- Cloud storage integration
+
+**Usage:**
 ```bash
-# Generate documentation
-./scripts/utils/generate-docs.sh
+# Create backup
+./scripts/deploy/backup-data.sh
 
-# Update README files
-./scripts/utils/update-readmes.sh
+# Restore from backup
+./scripts/deploy/backup-data.sh --restore
 ```
 
-## 📖 Script Documentation
+### **Rollback Scripts**
+**File:** `deploy/rollback-deployment.sh`
+**Description:** Emergency rollback system
 
-### Script Parameters
-Most scripts support common parameters:
-- `--help` - Show help information
-- `--verbose` - Enable verbose output
-- `--dry-run` - Show what would be done without executing
-- `--force` - Force execution without confirmation
+**Features:**
+- Service rollback
+- Database rollback
+- Configuration rollback
+- Health validation
+- Notification system
 
-### Environment Variables
-Scripts use environment variables for configuration:
-- `NODE_ENV` - Environment (development/staging/production)
-- `LOG_LEVEL` - Logging level (debug/info/warn/error)
-- `DRY_RUN` - Enable dry run mode
-- `VERBOSE` - Enable verbose output
-
-### Error Handling
-All scripts include proper error handling:
-- **Exit Codes** - Proper exit codes for success/failure
-- **Error Messages** - Clear error messages
-- **Logging** - Structured logging output
-- **Cleanup** - Proper cleanup on failure
-
-## 🔧 Custom Scripts
-
-### Creating New Scripts
+**Usage:**
 ```bash
-#!/bin/bash
-# Script template
+# Rollback deployment
+./scripts/deploy/rollback-deployment.sh
 
-set -e  # Exit on error
-set -u  # Exit on undefined variable
-
-# Script configuration
-SCRIPT_NAME="$(basename "$0")"
-LOG_FILE="/tmp/${SCRIPT_NAME}.log"
-
-# Logging function
-log() {
-    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" | tee -a "$LOG_FILE"
-}
-
-# Error handling
-error_exit() {
-    log "ERROR: $1"
-    exit 1
-}
-
-# Main script logic
-main() {
-    log "Starting $SCRIPT_NAME"
-    
-    # Your script logic here
-    
-    log "Completed $SCRIPT_NAME"
-}
-
-# Run main function
-main "$@"
+# Rollback to specific version
+./scripts/deploy/rollback-deployment.sh --version=v1.0.0
 ```
 
-### Script Testing
+## 🔒 **Security Scripts**
+
+### **Security Audit**
+**File:** `security/audit-security.sh`
+**Description:** Comprehensive security audit system
+
+**Features:**
+- Vulnerability scanning
+- Dependency audit
+- Code security analysis
+- Configuration review
+- Compliance checking
+
+**Usage:**
 ```bash
-# Test script with dry run
-./scripts/your-script.sh --dry-run
+# Run security audit
+./scripts/security/audit-security.sh
 
-# Test script with verbose output
-./scripts/your-script.sh --verbose
+# Audit specific component
+./scripts/security/audit-security.sh --component=backend
 ```
 
-## 📄 License
+### **Code Scanning**
+**File:** `security/scan-code.sh`
+**Description:** Static code analysis for security issues
 
-All scripts are part of QuantDesk and are licensed under Apache License 2.0.
+**Features:**
+- SAST analysis
+- Secret detection
+- Dependency scanning
+- Configuration analysis
+- Report generation
 
-## 🤝 Contributing
+**Usage:**
+```bash
+# Scan all code
+./scripts/security/scan-code.sh
 
-We welcome contributions to improve scripts:
-- **New Scripts** - Additional utility scripts
-- **Bug Fixes** - Fix issues in existing scripts
-- **Documentation** - Improve script documentation
-- **Testing** - Add test coverage for scripts
+# Scan with specific rules
+./scripts/security/scan-code.sh --rules=high
+```
 
-## 📞 Support
+### **Key Management**
+**File:** `security/rotate-keys.sh`
+**Description:** Automated key rotation system
 
-For script support:
-- **GitHub Issues** - Report bugs or ask questions
-- **Documentation** - Check script-specific documentation
-- **Community** - Join our Discord community
+**Features:**
+- API key rotation
+- Database key rotation
+- Certificate renewal
+- Secret rotation
+- Audit logging
+
+**Usage:**
+```bash
+# Rotate all keys
+./scripts/security/rotate-keys.sh
+
+# Rotate specific key type
+./scripts/security/rotate-keys.sh --type=api
+```
+
+### **Compliance Check**
+**File:** `security/compliance-check.sh`
+**Description:** Security compliance validation
+
+**Features:**
+- Security standard compliance
+- Policy validation
+- Configuration compliance
+- Audit trail validation
+- Report generation
+
+**Usage:**
+```bash
+# Run compliance check
+./scripts/security/compliance-check.sh
+
+# Check specific standard
+./scripts/security/compliance-check.sh --standard=ISO27001
+```
+
+## 📊 **Monitoring Scripts**
+
+### **Health Checks**
+**File:** `monitoring/health-check.sh`
+**Description:** Comprehensive service health monitoring
+
+**Features:**
+- Service availability checks
+- Database connectivity
+- External service checks
+- Performance monitoring
+- Alert generation
+
+**Usage:**
+```bash
+# Run health check
+./scripts/monitoring/health-check.sh
+
+# Check specific service
+./scripts/monitoring/health-check.sh --service=backend
+```
+
+### **Metrics Collection**
+**File:** `monitoring/collect-metrics.sh`
+**Description:** Performance metrics collection
+
+**Features:**
+- System metrics
+- Application metrics
+- Database metrics
+- Network metrics
+- Custom metrics
+
+**Usage:**
+```bash
+# Collect all metrics
+./scripts/monitoring/collect-metrics.sh
+
+# Collect specific metrics
+./scripts/monitoring/collect-metrics.sh --type=performance
+```
+
+### **Alert Scripts**
+**File:** `monitoring/send-alerts.sh`
+**Description:** Alert notification system
+
+**Features:**
+- Email notifications
+- Slack integration
+- SMS alerts
+- PagerDuty integration
+- Custom webhooks
+
+**Usage:**
+```bash
+# Send alert
+./scripts/monitoring/send-alerts.sh --level=critical --message="Service down"
+
+# Test alert system
+./scripts/monitoring/send-alerts.sh --test
+```
+
+### **Log Management**
+**File:** `monitoring/manage-logs.sh`
+**Description:** Log analysis and management
+
+**Features:**
+- Log aggregation
+- Log analysis
+- Log rotation
+- Log compression
+- Log archiving
+
+**Usage:**
+```bash
+# Manage logs
+./scripts/monitoring/manage-logs.sh
+
+# Analyze specific logs
+./scripts/monitoring/manage-logs.sh --analyze --type=error
+```
+
+## 🔧 **Utility Scripts**
+
+### **Database Management**
+**File:** `utils/database-manager.sh`
+**Description:** Database administration utilities
+
+**Features:**
+- Database creation
+- User management
+- Permission management
+- Performance tuning
+- Maintenance tasks
+
+**Usage:**
+```bash
+# Manage database
+./scripts/utils/database-manager.sh
+
+# Create new database
+./scripts/utils/database-manager.sh --create --name=testdb
+```
+
+### **Configuration Management**
+**File:** `utils/config-manager.sh`
+**Description:** Configuration file management
+
+**Features:**
+- Configuration validation
+- Environment-specific configs
+- Configuration backup
+- Configuration deployment
+- Configuration comparison
+
+**Usage:**
+```bash
+# Manage configuration
+./scripts/utils/config-manager.sh
+
+# Validate configuration
+./scripts/utils/config-manager.sh --validate
+```
+
+### **Service Management**
+**File:** `utils/service-manager.sh`
+**Description:** Service lifecycle management
+
+**Features:**
+- Service start/stop
+- Service restart
+- Service status
+- Service configuration
+- Service monitoring
+
+**Usage:**
+```bash
+# Manage services
+./scripts/utils/service-manager.sh
+
+# Start all services
+./scripts/utils/service-manager.sh --start-all
+```
+
+### **Cleanup Scripts**
+**File:** `utils/cleanup.sh`
+**Description:** System cleanup utilities
+
+**Features:**
+- Temporary file cleanup
+- Log file cleanup
+- Cache cleanup
+- Database cleanup
+- Disk space management
+
+**Usage:**
+```bash
+# Run cleanup
+./scripts/utils/cleanup.sh
+
+# Clean specific type
+./scripts/utils/cleanup.sh --type=logs
+```
+
+## 📚 **Script Categories**
+
+### **Development Scripts**
+- Environment setup and configuration
+- Build and compilation
+- Testing and quality assurance
+- Code formatting and linting
+
+### **Deployment Scripts**
+- Production deployment automation
+- Database migration management
+- Backup and recovery systems
+- Rollback and emergency procedures
+
+### **Security Scripts**
+- Security audit and scanning
+- Vulnerability assessment
+- Key and secret management
+- Compliance validation
+
+### **Monitoring Scripts**
+- Health check automation
+- Metrics collection and analysis
+- Alert and notification systems
+- Log management and analysis
+
+### **Utility Scripts**
+- Database administration
+- Configuration management
+- Service lifecycle management
+- System cleanup and maintenance
+
+## 🚀 **Getting Started**
+
+### **Prerequisites**
+- Bash shell environment
+- Node.js and pnpm
+- Docker (for containerized services)
+- Access to production environment
+
+### **Installation**
+```bash
+# Clone the repository
+git clone https://github.com/dextrorsal/quantdesk-v0.1.git
+cd quantdesk-v0.1/scripts
+
+# Make scripts executable
+chmod +x *.sh
+
+# Install dependencies
+npm install
+```
+
+### **Configuration**
+```bash
+# Copy configuration template
+cp config.template.sh config.sh
+
+# Edit configuration
+nano config.sh
+```
+
+### **Running Scripts**
+```bash
+# Run development setup
+./dev/setup-environment.sh
+
+# Run security audit
+./security/audit-security.sh
+
+# Run health check
+./monitoring/health-check.sh
+```
+
+## 🔒 **Security Considerations**
+
+### **Script Security**
+- Validate all inputs
+- Use secure file permissions
+- Implement proper error handling
+- Log all operations
+- Use environment variables for secrets
+
+### **Access Control**
+- Implement proper authentication
+- Use role-based access control
+- Monitor script execution
+- Audit all operations
+- Implement least privilege principle
+
+### **Data Protection**
+- Encrypt sensitive data
+- Use secure communication
+- Implement data retention policies
+- Regular backup procedures
+- Secure data disposal
+
+## 📖 **Documentation**
+
+### **Script Documentation**
+- Comprehensive inline comments
+- Usage examples and parameters
+- Error handling documentation
+- Security considerations
+- Maintenance procedures
+
+### **Configuration Documentation**
+- Configuration file formats
+- Environment variable requirements
+- Dependency documentation
+- Setup procedures
+- Troubleshooting guides
+
+## 🤝 **Contributing**
+
+### **Adding New Scripts**
+1. Create script file in appropriate directory
+2. Add comprehensive documentation
+3. Include usage examples
+4. Add to this README
+5. Submit pull request
+
+### **Script Guidelines**
+- Use Bash best practices
+- Include error handling
+- Add comprehensive comments
+- Follow naming conventions
+- Include configuration examples
+
+## 📞 **Support**
+
+### **Resources**
+- **Documentation:** Complete script documentation
+- **Examples:** Usage examples and patterns
+- **Community:** Discord community support
+- **Issues:** GitHub issue tracking
+
+### **Contact**
+- **GitHub:** [QuantDesk Scripts Repository](https://github.com/dextrorsal/quantdesk-v0.1)
+- **Discord:** Community support channel
+- **Email:** Technical support contact
+
+---
+
+**QuantDesk Scripts: Comprehensive utility scripts for development, deployment, security, and monitoring, showcasing our professional-grade automation and tooling capabilities.**
