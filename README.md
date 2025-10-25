@@ -88,76 +88,69 @@ pnpm run dev
 
 ---
 
-## 🧪 **Devnet Testing Interface**
+## 🧪 **Smart Contract Integration**
 
-### **Live Testing Environment**
-Access our comprehensive testing interface at `/devnet-testing` to:
-- **Test Solana Contract Interactions:** Real-time contract method testing
-- **Monitor Service Health:** Live status monitoring of all services
-- **Validate Program Integration:** Test against our deployed QuantDesk program
-- **Debug Wallet Connections:** Comprehensive wallet testing and debugging
-
-### **Quick Test**
-```bash
-# Start all services
-pnpm run dev
-
-# Visit testing interface
-open http://localhost:3001/devnet-testing
-```
-
-### **QuantDesk Program Integration**
+### **QuantDesk Program**
 - **Program ID:** `C2T3UnvGdHwEkspXJG7JyAhwo6VKQEKjN6eCq69guYSw`
 - **Network:** Solana Devnet
 - **RPC:** `https://api.devnet.solana.com`
+- **Status:** ✅ Deployed and verified
+
+### **Integration Examples**
+```typescript
+import { Connection, PublicKey } from '@solana/web3.js';
+
+// QuantDesk Program Configuration
+const QUANTDESK_PROGRAM_ID = 'C2T3UnvGdHwEkspXJG7JyAhwo6VKQEKjN6eCq69guYSw';
+const DEVNET_RPC = 'https://api.devnet.solana.com';
+
+// Initialize connection
+const connection = new Connection(DEVNET_RPC, 'confirmed');
+const programId = new PublicKey(QUANTDESK_PROGRAM_ID);
+
+// Check program status
+async function checkProgramStatus() {
+  const accountInfo = await connection.getAccountInfo(programId);
+  
+  if (accountInfo) {
+    console.log('✅ QuantDesk program found on devnet');
+    console.log(`📊 Program data length: ${accountInfo.data.length} bytes`);
+    console.log(`💰 Program balance: ${accountInfo.lamports / 1e9} SOL`);
+  } else {
+    console.log('❌ QuantDesk program not found on devnet');
+  }
+}
+```
 
 ---
 
-## 📊 **Developer APIs**
+## 📊 **SDK & Integration**
 
-### **Service Health Monitoring**
-All services provide comprehensive health check endpoints:
+### **TypeScript SDK**
 ```bash
-# Backend API
-curl http://localhost:3002/api/health
+# Install QuantDesk SDK
+npm install @quantdesk/sdk
 
-# Data Ingestion Service  
-curl http://localhost:3003/health
+# Basic integration
+import { QuantDeskSDK } from '@quantdesk/sdk';
 
-# Check service status
-curl http://localhost:3003/api/status
-```
-
-### **Real-Time Data APIs**
-```bash
-# Latest market prices
-curl http://localhost:3003/api/prices/latest
-
-# Whale transaction monitoring
-curl http://localhost:3003/api/whales/recent?limit=10
-
-# Wallet balance checking
-curl http://localhost:3003/api/wallet/balance
-```
-
-### **Integration Testing**
-Our comprehensive test suite validates all service integrations:
-```typescript
-// Real services integration test
-describe('Real Services Integration Tests', () => {
-  it('should connect to all services', async () => {
-    const services = [
-      'http://localhost:3002/api/health',
-      'http://localhost:3003/health'
-    ];
-    
-    for (const service of services) {
-      const response = await fetch(service);
-      expect(response.ok).toBe(true);
-    }
-  });
+const sdk = new QuantDeskSDK({
+  rpcUrl: 'https://api.devnet.solana.com',
+  programId: 'C2T3UnvGdHwEkspXJG7JyAhwo6VKQEKjN6eCq69guYSw'
 });
 ```
+
+### **Bot Templates**
+- **Trading Bot**: Automated trading strategies
+- **Liquidator Bot**: Liquidation monitoring and execution
+- **Maker Bot**: Market making and liquidity provision
+
+### **Integration Examples**
+- **Basic Integration**: Simple contract interaction
+- **Advanced Features**: Complex trading strategies
+- **Testing Framework**: Integration testing tools
+
+---
 
 ---
 
@@ -189,7 +182,7 @@ quantdesk/
 
 ## 🌐 **Open Source Components**
 
-QuantDesk provides comprehensive open-source components for the DeFi community, showcasing our complete multi-service architecture and professional-grade implementation.
+QuantDesk provides comprehensive open-source components for the DeFi community, following proven patterns of successful Solana DEX projects with superior developer experience and AI integration capabilities.
 
 ### **Smart Contracts** (`contracts/`)
 - **Complete Source Code** - Full Solana perpetual DEX implementation
@@ -204,7 +197,8 @@ QuantDesk provides comprehensive open-source components for the DeFi community, 
 - **Trading Bot Templates** - Market maker, liquidator, arbitrage, portfolio management
 - **API Documentation** - Complete endpoint documentation
 - **Integration Guides** - Step-by-step developer guides
-- **Advanced Examples** - More comprehensive than Drift's basic SDK
+- **AI Integration Examples** - Show how to integrate AI capabilities
+- **Multi-Language Support** - TypeScript + Rust + Python SDKs
 
 ### **Architecture Documentation** (`docs/`)
 - **Multi-Service Architecture** - Complete system architecture diagrams
@@ -218,6 +212,7 @@ QuantDesk provides comprehensive open-source components for the DeFi community, 
 - **Integration Patterns** - Real-world usage examples
 - **API Integration** - Comprehensive API client examples
 - **Smart Contract Examples** - Solana program interaction patterns
+- **AI Integration Examples** - AI-powered trading demonstrations
 
 ---
 
@@ -226,6 +221,8 @@ QuantDesk provides comprehensive open-source components for the DeFi community, 
 ### **Architecture & Services**
 - **[Architecture Documentation](docs/architecture/README.md)** - Complete multi-service architecture with visual diagrams
 - **[Smart Contracts](contracts/README.md)** - Complete Solana perpetual DEX implementation
+- **[AI Integration Examples](examples/ai-integration/)** - AI-powered trading demonstrations
+- **[Repository Strategy](docs/REPOSITORY_STRATEGY.md)** - Complete implementation strategy
 - **[SDK Documentation](sdk/README.md)** - Comprehensive TypeScript SDK with bot templates
 - **[Trading Bot Examples](sdk/typescript/bots/)** - Market maker, liquidator, arbitrage bot templates
 
