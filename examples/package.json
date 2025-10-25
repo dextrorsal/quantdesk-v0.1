@@ -1,0 +1,44 @@
+{
+  "name": "quantdesk-examples",
+  "version": "1.0.0",
+  "description": "Working code examples for QuantDesk integration",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test-all": "node devnet-testing/basic-service-test.js && node devnet-testing/wallet-integration.js && node api-integration/data-ingestion-examples.js",
+    "devnet-testing": "node devnet-testing/basic-service-test.js",
+    "wallet-integration": "node devnet-testing/wallet-integration.js",
+    "api-integration": "node api-integration/data-ingestion-examples.js",
+    "basic-service-test": "node devnet-testing/basic-service-test.js",
+    "program-interaction": "node devnet-testing/wallet-integration.js",
+    "realtime-data": "node api-integration/data-ingestion-examples.js"
+  },
+  "keywords": [
+    "quantdesk",
+    "solana",
+    "defi",
+    "trading",
+    "examples",
+    "integration"
+  ],
+  "author": "QuantDesk Team",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@solana/web3.js": "^1.98.4"
+  },
+  "devDependencies": {
+    "vitest": "^3.2.4"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/quantdesk/quantdesk.git",
+    "directory": "examples"
+  },
+  "bugs": {
+    "url": "https://github.com/quantdesk/quantdesk/issues"
+  },
+  "homepage": "https://github.com/quantdesk/quantdesk#readme"
+}

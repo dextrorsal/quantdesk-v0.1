@@ -88,6 +88,79 @@ pnpm run dev
 
 ---
 
+## 🧪 **Devnet Testing Interface**
+
+### **Live Testing Environment**
+Access our comprehensive testing interface at `/devnet-testing` to:
+- **Test Solana Contract Interactions:** Real-time contract method testing
+- **Monitor Service Health:** Live status monitoring of all services
+- **Validate Program Integration:** Test against our deployed QuantDesk program
+- **Debug Wallet Connections:** Comprehensive wallet testing and debugging
+
+### **Quick Test**
+```bash
+# Start all services
+pnpm run dev
+
+# Visit testing interface
+open http://localhost:3001/devnet-testing
+```
+
+### **QuantDesk Program Integration**
+- **Program ID:** `C2T3UnvGdHwEkspXJG7JyAhwo6VKQEKjN6eCq69guYSw`
+- **Network:** Solana Devnet
+- **RPC:** `https://api.devnet.solana.com`
+
+---
+
+## 📊 **Developer APIs**
+
+### **Service Health Monitoring**
+All services provide comprehensive health check endpoints:
+```bash
+# Backend API
+curl http://localhost:3002/api/health
+
+# Data Ingestion Service  
+curl http://localhost:3003/health
+
+# Check service status
+curl http://localhost:3003/api/status
+```
+
+### **Real-Time Data APIs**
+```bash
+# Latest market prices
+curl http://localhost:3003/api/prices/latest
+
+# Whale transaction monitoring
+curl http://localhost:3003/api/whales/recent?limit=10
+
+# Wallet balance checking
+curl http://localhost:3003/api/wallet/balance
+```
+
+### **Integration Testing**
+Our comprehensive test suite validates all service integrations:
+```typescript
+// Real services integration test
+describe('Real Services Integration Tests', () => {
+  it('should connect to all services', async () => {
+    const services = [
+      'http://localhost:3002/api/health',
+      'http://localhost:3003/health'
+    ];
+    
+    for (const service of services) {
+      const response = await fetch(service);
+      expect(response.ok).toBe(true);
+    }
+  });
+});
+```
+
+---
+
 ## 🤖 **AI Integration**
 
 ### **MIKEY-AI Features**

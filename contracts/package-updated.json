@@ -1,0 +1,64 @@
+{
+  "license": "ISC",
+  "scripts": {
+    "lint:fix": "prettier */*.js \"*/**/*{.js,.ts}\" -w",
+    "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check",
+    "test": "anchor test",
+    "test:unit": "anchor test --test tests/unit/**/*.test.ts",
+    "test:integration": "anchor test --test tests/integration/**/*.test.ts",
+    "test:security": "anchor test --test tests/security/**/*.test.ts",
+    "test:performance": "anchor test --test tests/performance/**/*.test.ts",
+    "test:comprehensive": "anchor test --test tests/comprehensive-security.test.ts",
+    "test:coverage": "anchor test --coverage",
+    "test:watch": "anchor test --watch",
+    "build": "anchor build",
+    "deploy": "anchor deploy",
+    "deploy:devnet": "anchor deploy --provider.cluster devnet",
+    "deploy:testnet": "anchor deploy --provider.cluster testnet",
+    "deploy:mainnet": "anchor deploy --provider.cluster mainnet-beta",
+    "idl:parse": "anchor idl parse --file target/idl/quantdesk_perp_dex.json",
+    "idl:generate": "anchor idl generate",
+    "validate": "anchor build && anchor test",
+    "security:audit": "cargo audit",
+    "security:check": "cargo check --all-targets",
+    "format": "cargo fmt",
+    "format:check": "cargo fmt --check"
+  },
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.32.1",
+    "nanoid": "^3.3.8",
+    "serialize-javascript": "^6.0.2",
+    "bs58": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/bn.js": "^5.1.0",
+    "@types/chai": "^4.3.0",
+    "@types/mocha": "^9.0.0",
+    "chai": "^4.3.4",
+    "mocha": "^11.7.4",
+    "prettier": "^2.6.2",
+    "ts-mocha": "^10.0.0",
+    "typescript": "^5.7.3",
+    "@types/node": "^20.0.0",
+    "nyc": "^15.1.0",
+    "c8": "^8.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/quantdesk/smart-contracts.git"
+  },
+  "keywords": [
+    "solana",
+    "anchor",
+    "defi",
+    "perpetual",
+    "trading",
+    "dex"
+  ],
+  "author": "QuantDesk Team",
+  "description": "QuantDesk Perpetual DEX Smart Contracts with comprehensive testing suite"
+}
