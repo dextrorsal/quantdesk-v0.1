@@ -1,0 +1,1217 @@
+{
+  "info": {
+    "name": "QuantDesk Trading Intelligence APIs",
+    "description": "Comprehensive API collection for QuantDesk trading intelligence platform. Includes all 9 integrated services: Pyth Network, Birdeye, CoinGecko, DeFiLlama, Dune Analytics, Artemis Analytics, CoinPaprika, Coinalyze, and News APIs.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "variable": [
+    {
+      "key": "base_url_pyth",
+      "value": "https://hermes.pyth.network/v2/updates/price/latest",
+      "type": "string"
+    },
+    {
+      "key": "base_url_birdeye",
+      "value": "https://public-api.birdeye.so/public/v1",
+      "type": "string"
+    },
+    {
+      "key": "base_url_coingecko",
+      "value": "https://api.coingecko.com/api/v3",
+      "type": "string"
+    },
+    {
+      "key": "base_url_defillama",
+      "value": "https://api.llama.fi",
+      "type": "string"
+    },
+    {
+      "key": "base_url_dune",
+      "value": "https://api.dune.com/api/v1",
+      "type": "string"
+    },
+    {
+      "key": "base_url_artemis",
+      "value": "https://api.artemis.xyz",
+      "type": "string"
+    },
+    {
+      "key": "base_url_coinpaprika",
+      "value": "https://api.coinpaprika.com/v1",
+      "type": "string"
+    },
+    {
+      "key": "base_url_coinalyze",
+      "value": "https://api.coinalyze.net/v1",
+      "type": "string"
+    },
+    {
+      "key": "birdeye_api_key",
+      "value": "{{BIRDEYE_API_KEY}}",
+      "type": "string"
+    },
+    {
+      "key": "coingecko_api_key",
+      "value": "{{COINGECKO_API_KEY}}",
+      "type": "string"
+    },
+    {
+      "key": "dune_api_key",
+      "value": "{{DUNE_API_KEY}}",
+      "type": "string"
+    },
+    {
+      "key": "artemis_api_key",
+      "value": "{{ARTEMIS_API_KEY}}",
+      "type": "string"
+    },
+    {
+      "key": "coinalyze_api_key",
+      "value": "{{COINALYZE_API_KEY}}",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Pyth Network - Price Feeds",
+      "description": "Real-time price feeds from Pyth Network for BTC, ETH, SOL",
+      "item": [
+        {
+          "name": "Get BTC Price Feed",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url_pyth}}?ids[]=e62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43",
+              "host": ["{{base_url_pyth}}"],
+              "query": [
+                {
+                  "key": "ids[]",
+                  "value": "e62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43",
+                  "description": "BTC price feed ID"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get ETH Price Feed",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url_pyth}}?ids[]=ff61491a931112ddf1bd8147cd1b641375f79f5825126d665480874634fd0ace",
+              "host": ["{{base_url_pyth}}"],
+              "query": [
+                {
+                  "key": "ids[]",
+                  "value": "ff61491a931112ddf1bd8147cd1b641375f79f5825126d665480874634fd0ace",
+                  "description": "ETH price feed ID"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get SOL Price Feed",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url_pyth}}?ids[]=ef0d8b6fda2ceba41da15d4095d1da392a0d2f8ed0c6c7bc0f4cfac8c280b56d",
+              "host": ["{{base_url_pyth}}"],
+              "query": [
+                {
+                  "key": "ids[]",
+                  "value": "ef0d8b6fda2ceba41da15d4095d1da392a0d2f8ed0c6c7bc0f4cfac8c280b56d",
+                  "description": "SOL price feed ID"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "2. Birdeye - Solana Token Data",
+      "description": "Comprehensive Solana token data including prices, trends, and analytics",
+      "item": [
+        {
+          "name": "Get Token List",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-KEY",
+                "value": "{{birdeye_api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url_birdeye}}/tokenlist?sort_by=v24hUSD&limit=100",
+              "host": ["{{base_url_birdeye}}"],
+              "path": ["tokenlist"],
+              "query": [
+                {
+                  "key": "sort_by",
+                  "value": "v24hUSD",
+                  "description": "Sort by 24h volume"
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Number of tokens to return"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Token Price",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-KEY",
+                "value": "{{birdeye_api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url_birdeye}}/token/price?address=So11111111111111111111111111111111111111112",
+              "host": ["{{base_url_birdeye}}"],
+              "path": ["token", "price"],
+              "query": [
+                {
+                  "key": "address",
+                  "value": "So11111111111111111111111111111111111111112",
+                  "description": "SOL token address"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Token Analytics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-KEY",
+                "value": "{{birdeye_api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url_birdeye}}/token/analytics?address=So11111111111111111111111111111111111111112",
+              "host": ["{{base_url_birdeye}}"],
+              "path": ["token", "analytics"],
+              "query": [
+                {
+                  "key": "address",
+                  "value": "So11111111111111111111111111111111111111112",
+                  "description": "SOL token address"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "3. CoinGecko - Market Data",
+      "description": "Global cryptocurrency market data and price information",
+      "item": [
+        {
+          "name": "Get Trending Coins",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url_coingecko}}/search/trending",
+              "host": ["{{base_url_coingecko}}"],
+              "path": ["search", "trending"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Coin Prices",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url_coingecko}}/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd&include_24hr_change=true",
+              "host": ["{{base_url_coingecko}}"],
+              "path": ["simple", "price"],
+              "query": [
+                {
+                  "key": "ids",
+                  "value": "bitcoin,ethereum,solana",
+                  "description": "Comma-separated coin IDs"
+                },
+                {
+                  "key": "vs_currencies",
+                  "value": "usd",
+                  "description": "Target currency"
+                },
+                {
+                  "key": "include_24hr_change",
+                  "value": "true",
+                  "description": "Include 24h price change"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Global Market Data",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url_coingecko}}/global",
+              "host": ["{{base_url_coingecko}}"],
+              "path": ["global"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "4. DeFiLlama - TVL Data",
+      "description": "Total Value Locked (TVL) data for DeFi protocols and chains",
+      "item": [
+        {
+          "name": "Get Total TVL",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url_defillama}}/tvl",
+              "host": ["{{base_url_defillama}}"],
+              "path": ["tvl"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Protocols",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url_defillama}}/protocols",
+              "host": ["{{base_url_defillama}}"],
+              "path": ["protocols"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Chain TVL",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url_defillama}}/chains",
+              "host": ["{{base_url_defillama}}"],
+              "path": ["chains"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "5. Dune Analytics - Blockchain Queries",
+      "description": "Custom blockchain queries and analytics",
+      "item": [
+        {
+          "name": "Execute Query",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Dune-API-Key",
+                "value": "{{dune_api_key}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query_id\": 123456,\n  \"parameters\": {}\n}"
+            },
+            "url": {
+              "raw": "{{base_url_dune}}/query/123456/execute",
+              "host": ["{{base_url_dune}}"],
+              "path": ["query", "123456", "execute"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Query Results",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Dune-API-Key",
+                "value": "{{dune_api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url_dune}}/query/123456/results",
+              "host": ["{{base_url_dune}}"],
+              "path": ["query", "123456", "results"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "6. Artemis Analytics - DeFi Protocols",
+      "description": "DeFi protocol analytics and metrics",
+      "item": [
+        {
+          "name": "Get Supported Assets",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{artemis_api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url_artemis}}/assets",
+              "host": ["{{base_url_artemis}}"],
+              "path": ["assets"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Asset Metrics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{artemis_api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url_artemis}}/assets/ethereum/metrics",
+              "host": ["{{base_url_artemis}}"],
+              "path": ["assets", "ethereum", "metrics"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "7. CoinPaprika - Market Data",
+      "description": "Cryptocurrency market data and price information",
+      "item": [
+        {
+          "name": "Get Global Market Data",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url_coinpaprika}}/global",
+              "host": ["{{base_url_coinpaprika}}"],
+              "path": ["global"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Coins",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url_coinpaprika}}/coins",
+              "host": ["{{base_url_coinpaprika}}"],
+              "path": ["coins"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Top Coins",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url_coinpaprika}}/tickers?quotes=USD&limit=100",
+              "host": ["{{base_url_coinpaprika}}"],
+              "path": ["tickers"],
+              "query": [
+                {
+                  "key": "quotes",
+                  "value": "USD",
+                  "description": "Currency quotes"
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Number of coins to return"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "8. Coinalyze - Perps Analytics",
+      "description": "Perpetual futures analytics including funding rates, open interest, and liquidations",
+      "item": [
+        {
+          "name": "Get Supported Exchanges",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url_coinalyze}}/exchanges?api_key={{coinalyze_api_key}}",
+              "host": ["{{base_url_coinalyze}}"],
+              "path": ["exchanges"],
+              "query": [
+                {
+                  "key": "api_key",
+                  "value": "{{coinalyze_api_key}}",
+                  "description": "Coinalyze API key"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Future Markets",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url_coinalyze}}/future-markets?api_key={{coinalyze_api_key}}",
+              "host": ["{{base_url_coinalyze}}"],
+              "path": ["future-markets"],
+              "query": [
+                {
+                  "key": "api_key",
+                  "value": "{{coinalyze_api_key}}",
+                  "description": "Coinalyze API key"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Current Open Interest",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url_coinalyze}}/open-interest?symbols=BTCUSDT_PERP.A,ETHUSDT_PERP.A,SOLUSDT_PERP.A&convert_to_usd=true&api_key={{coinalyze_api_key}}",
+              "host": ["{{base_url_coinalyze}}"],
+              "path": ["open-interest"],
+              "query": [
+                {
+                  "key": "symbols",
+                  "value": "BTCUSDT_PERP.A,ETHUSDT_PERP.A,SOLUSDT_PERP.A",
+                  "description": "Comma-separated trading symbols"
+                },
+                {
+                  "key": "convert_to_usd",
+                  "value": "true",
+                  "description": "Convert values to USD"
+                },
+                {
+                  "key": "api_key",
+                  "value": "{{coinalyze_api_key}}",
+                  "description": "Coinalyze API key"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Funding Rates",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url_coinalyze}}/funding-rates?symbols=BTCUSDT_PERP.A,ETHUSDT_PERP.A,SOLUSDT_PERP.A&api_key={{coinalyze_api_key}}",
+              "host": ["{{base_url_coinalyze}}"],
+              "path": ["funding-rates"],
+              "query": [
+                {
+                  "key": "symbols",
+                  "value": "BTCUSDT_PERP.A,ETHUSDT_PERP.A,SOLUSDT_PERP.A",
+                  "description": "Comma-separated trading symbols"
+                },
+                {
+                  "key": "api_key",
+                  "value": "{{coinalyze_api_key}}",
+                  "description": "Coinalyze API key"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Predicted Funding Rates",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url_coinalyze}}/predicted-funding-rates?symbols=BTCUSDT_PERP.A,ETHUSDT_PERP.A,SOLUSDT_PERP.A&api_key={{coinalyze_api_key}}",
+              "host": ["{{base_url_coinalyze}}"],
+              "path": ["predicted-funding-rates"],
+              "query": [
+                {
+                  "key": "symbols",
+                  "value": "BTCUSDT_PERP.A,ETHUSDT_PERP.A,SOLUSDT_PERP.A",
+                  "description": "Comma-separated trading symbols"
+                },
+                {
+                  "key": "api_key",
+                  "value": "{{coinalyze_api_key}}",
+                  "description": "Coinalyze API key"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "9. News APIs - Sentiment Data",
+      "description": "News and sentiment analysis from various sources",
+      "item": [
+        {
+          "name": "CoinDesk RSS Feed",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/rss+xml"
+              }
+            ],
+            "url": {
+              "raw": "https://www.coindesk.com/arc/outboundfeeds/rss/?outputType=xml",
+              "protocol": "https",
+              "host": ["www.coindesk.com"],
+              "path": ["arc", "outboundfeeds", "rss"],
+              "query": [
+                {
+                  "key": "outputType",
+                  "value": "xml"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "CoinTelegraph RSS Feed",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/rss+xml"
+              }
+            ],
+            "url": {
+              "raw": "https://cointelegraph.com/rss",
+              "protocol": "https",
+              "host": ["cointelegraph.com"],
+              "path": ["rss"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "The Block RSS Feed",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/rss+xml"
+              }
+            ],
+            "url": {
+              "raw": "https://www.theblock.co/rss.xml",
+              "protocol": "https",
+              "host": ["www.theblock.co"],
+              "path": ["rss.xml"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "10. QuantDesk Internal APIs",
+      "description": "Internal QuantDesk data pipeline and analytics APIs",
+      "item": [
+        {
+          "name": "Get QuantDesk Signals",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/signals",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "signals"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get QuantDesk Alerts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/alerts",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "alerts"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get QuantDesk Reports",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/v1/reports",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "reports"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "AI Query Endpoint",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{QUANTDESK_API_KEY}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"What are the current market signals?\",\n  \"context\": {\n    \"symbols\": [\"BTC\", \"ETH\", \"SOL\"]\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/v1/ai/query",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "v1", "ai", "query"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Auth (SIWS)",
+      "item": [
+        {
+          "name": "Get Nonce",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"walletPubkey\": \"{{WALLET_PUBKEY}}\" }"
+            },
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/siws/nonce",
+              "host": [
+                "{{BACKEND_BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "siws",
+                "nonce"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Verify Signature & Set Session",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "pm.globals.set(\"qd_session\", pm.response.cookies.get(\"qd_session\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"walletPubkey\": \"{{WALLET_PUBKEY}}\", \"signature\": \"<SIGNATURE_FROM_WALLET>\", \"nonce\": \"<NONCE_FROM_PREVIOUS_CALL>\", \"ref\": \"<OPTIONAL_REFERRER_PUBKEY>\" }"
+            },
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/siws/verify",
+              "host": [
+                "{{BACKEND_BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "siws",
+                "verify"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Referrals",
+      "item": [
+        {
+          "name": "Get Referral Summary",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Cookie",
+                "value": "qd_session={{qd_session}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/referrals/summary?wallet={{WALLET_PUBKEY}}",
+              "host": [
+                "{{BACKEND_BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "referrals",
+                "summary"
+              ],
+              "query": [
+                {
+                  "key": "wallet",
+                  "value": "{{WALLET_PUBKEY}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Referral Earnings Preview",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Cookie",
+                "value": "qd_session={{qd_session}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/referrals/preview?referrer={{WALLET_PUBKEY}}",
+              "host": [
+                "{{BACKEND_BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "referrals",
+                "preview"
+              ],
+              "query": [
+                {
+                  "key": "referrer",
+                  "value": "{{WALLET_PUBKEY}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Claim Referral Earnings",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Cookie",
+                "value": "qd_session={{qd_session}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"referrer\": \"{{WALLET_PUBKEY}}\" }"
+            },
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/referrals/claim",
+              "host": [
+                "{{BACKEND_BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "referrals",
+                "claim"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Activate Referral",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Cookie",
+                "value": "qd_session={{qd_session}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"referee_pubkey\": \"<REFEREE_WALLET_PUBKEY>\", \"minimum_volume\": 100 }"
+            },
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/referrals/activate",
+              "host": [
+                "{{BACKEND_BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "referrals",
+                "activate"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Chat",
+      "item": [
+        {
+          "name": "Get Chat History",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Cookie",
+                "value": "qd_session={{qd_session}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/chat/history?channel=global",
+              "host": [
+                "{{BACKEND_BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "chat",
+                "history"
+              ],
+              "query": [
+                {
+                  "key": "channel",
+                  "value": "global"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Chat Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Cookie",
+                "value": "qd_session={{qd_session}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"wallet_pubkey\": \"{{WALLET_PUBKEY}}\" }"
+            },
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/chat/token",
+              "host": [
+                "{{BACKEND_BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "chat",
+                "token"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Send Chat Message",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Cookie",
+                "value": "qd_session={{qd_session}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"token\": \"<CHAT_TOKEN_FROM_PREVIOUS_CALL>\", \"channel\": \"global\", \"message\": \"Hello from Postman!\" }"
+            },
+            "url": {
+              "raw": "{{BACKEND_BASE_URL}}/api/chat/send",
+              "host": [
+                "{{BACKEND_BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "chat",
+                "send"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// QuantDesk API Health Check",
+          "console.log('🚀 QuantDesk API Request:', pm.request.name);",
+          "console.log('📊 Endpoint:', pm.request.url.toString());",
+          "",
+          "// Add timestamp to requests",
+          "pm.globals.set('timestamp', new Date().toISOString());"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// QuantDesk API Response Tests",
+          "pm.test('Response time is less than 5000ms', function () {",
+          "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+          "});",
+          "",
+          "pm.test('Response status code is 200', function () {",
+          "    pm.response.to.have.status(200);",
+          "});",
+          "",
+          "pm.test('Response has valid JSON', function () {",
+          "    pm.response.to.be.json;",
+          "});",
+          "",
+          "// Log response for debugging",
+          "console.log('✅ QuantDesk API Response:', pm.response.status);",
+          "console.log('📊 Response Time:', pm.response.responseTime + 'ms');",
+          "",
+          "// Store response data for later use",
+          "if (pm.response.json()) {",
+          "    pm.globals.set('last_response', JSON.stringify(pm.response.json()));",
+          "}"
+        ]
+      }
+    }
+  ]
+}
