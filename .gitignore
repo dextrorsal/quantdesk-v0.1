@@ -6,6 +6,12 @@
 # ===================================================================
 
 # ===================================================================
+# 🔒 PRIVATE DOCUMENTATION (Internal Strategy & Analysis)
+# ===================================================================
+# Internal docs: investor materials, market analysis, brainstorming, rules
+private-docs/
+
+# ===================================================================
 # 🚨 CRITICAL: Secrets, Keys, and Environment Variables
 # ===================================================================
 # NEVER COMMIT THESE - Contains API keys, private keys, and sensitive data
@@ -78,10 +84,19 @@ certs/
 /contracts/smart-contracts/programs/
 /contracts/programs/
 
-# Integration tests with real data
-/tests/integration/
-/tests/e2e/
-/tests/performance/
+# ===================================================================
+# 🧪 TESTS - SELECTIVE PROTECTION (Show smart contract tests, protect internal tests)
+# ===================================================================
+# Smart contract tests: PUBLIC (like Drift Protocol)
+# Internal system tests: PRIVATE (backend, frontend, integration)
+
+# Internal system tests (PRIVATE)
+/tests/
+/backend/tests/
+/frontend/src/tests/
+
+# Smart contract tests (PUBLIC - keep contracts/tests/)
+# contracts/tests/ is NOT ignored - shows protocol security
 
 # Archive and backup files
 /archive/
@@ -394,7 +409,7 @@ _site/
 # - /MIKEY-AI/docs/ (AI documentation only)
 # - /data-ingestion/src/processors/common/ (data processors)
 
-# Frontend - ENTIRE SERVICE PROTECTED (Proprietary Trading UI)
+# Frontend - ENTIRE SERVICE PROTECTED (Like Jupiter, Drift, Hyperliquid)
 /frontend/
 
 # Docs Site - ENTIRE SERVICE PROTECTED (Proprietary Business Intelligence)
@@ -403,11 +418,11 @@ _site/
 # Database - ENTIRE SERVICE PROTECTED (Proprietary Database Schema & Logic)
 /database/
 
-# Data Ingestion - ENTIRE SERVICE PROTECTED (Proprietary Data Intelligence)
+# Data Ingestion - ENTIRE SERVICE PROTECTED (Like Jupiter, Drift, Hyperliquid)
 /data-ingestion/
 
-# Smart Contracts - ENTIRE SERVICE PROTECTED (Proprietary DEX Protocol)
-/contracts/
+# Smart Contracts - NOW PUBLIC (Following verified patterns like Drift's protocol-v2)
+# /contracts/
 
 # Config - ENTIRE SERVICE PROTECTED (Proprietary Infrastructure Setup)
 /config/
@@ -415,7 +430,7 @@ _site/
 # BMAD Docs - ENTIRE SERVICE PROTECTED (Proprietary Development Methodology)
 /bmad-docs/
 
-# Backend - ENTIRE SERVICE PROTECTED (Proprietary Trading Logic & API Keys)
+# Backend - ENTIRE SERVICE PROTECTED (Like Jupiter, Drift, Hyperliquid)
 /backend/
 
 # Admin Dashboard - ENTIRE SERVICE PROTECTED (Proprietary Admin Interface)
@@ -448,14 +463,13 @@ _site/
 # Reports - ENTIRE SERVICE PROTECTED (Proprietary Analysis & Security Reports)
 /reports/
 
-# SDK - ENTIRE SERVICE PROTECTED (Proprietary SDK Implementation)
-/sdk/
+# SDK - NOW PUBLIC (Following verified patterns like all competitors)
+# /sdk/
 
 # Src Config - ENTIRE SERVICE PROTECTED (Proprietary Configuration)
 /src/
 
-# Tests - ENTIRE SERVICE PROTECTED (Proprietary Testing Strategies)
-/tests/
+# Tests section moved up - see TESTS section above
 
 # ===================================================================
 # 🎯 PROJECT-SPECIFIC EXCLUSIONS

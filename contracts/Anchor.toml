@@ -1,0 +1,41 @@
+[toolchain]
+anchor_version = "0.32.1"
+solana_version = "2.3.0"
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.devnet]
+quantdesk_collateral = "GPrakftrbBUUiir2MpQZv6G7UB5Jq8yNGHV5YTVYPQ5i"
+quantdesk_core = "CNfhSBoMkRbDEQ2EC3RkfJ2S39Up6WJLr4U31ZL49LrU"
+quantdesk_oracle = "8gjwta4tMQshM7HbnEMsdFUMqjRe7XgVnxJVbcmf3cAC"
+quantdesk_perp_dex = "C2T3UnvGdHwEkspXJG7JyAhwo6VKQEKjN6eCq69guYSw"
+quantdesk_security = "84b7Khx4uj7mHDvn2V63kNSwkcgpagrBgZSdTJ7kTxWW"
+quantdesk_trading = "AvxWXu25yWhDXJBy1V5GYcn2eVws4F2QWK5G3zV4t8sZ"
+
+[programs.localnet]
+quantdesk_collateral = "GPrakftrbBUUiir2MpQZv6G7UB5Jq8yNGHV5YTVYPQ5i"
+quantdesk_core = "CNfhSBoMkRbDEQ2EC3RkfJ2S39Up6WJLr4U31ZL49LrU"
+quantdesk_oracle = "8gjwta4tMQshM7HbnEMsdFUMqjRe7XgVnxJVbcmf3cAC"
+quantdesk_perp_dex = "C2T3UnvGdHwEkspXJG7JyAhwo6VKQEKjN6eCq69guYSw"
+quantdesk_security = "84b7Khx4uj7mHDvn2V63kNSwkcgpagrBgZSdTJ7kTxWW"
+quantdesk_trading = "AvxWXu25yWhDXJBy1V5GYcn2eVws4F2QWK5G3zV4t8sZ"
+
+[programs.testnet]
+quantdesk_collateral = "GPrakftrbBUUiir2MpQZv6G7UB5Jq8yNGHV5YTVYPQ5i"
+quantdesk_core = "CNfhSBoMkRbDEQ2EC3RkfJ2S39Up6WJLr4U31ZL49LrU"
+quantdesk_oracle = "8gjwta4tMQshM7HbnEMsdFUMqjRe7XgVnxJVbcmf3cAC"
+quantdesk_perp_dex = "C2T3UnvGdHwEkspXJG7JyAhwo6VKQEKjN6eCq69guYSw"
+quantdesk_security = "84b7Khx4uj7mHDvn2V63kNSwkcgpagrBgZSdTJ7kTxWW"
+quantdesk_trading = "AvxWXu25yWhDXJBy1V5GYcn2eVws4F2QWK5G3zV4t8sZ"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "devnet"
+wallet = "~/.config/solana/keys/id.json"
+
+[scripts]
+test = "npm run test:unit"

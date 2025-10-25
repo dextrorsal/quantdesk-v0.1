@@ -1,0 +1,24 @@
+[package]
+name = "quantdesk-perp-dex"
+version = "0.1.0"
+description = "QuantDesk Perpetual DEX Smart Contracts"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "quantdesk_perp_dex"
+
+[features]
+default = []
+cpi = ["no-entrypoint"]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
+init-if-needed = ["anchor-lang/init-if-needed"]
+
+
+[dependencies]
+anchor-lang = { version = "0.32.1", features = ["init-if-needed"] }
+anchor-spl = "0.32.1"
+pyth-sdk-solana = "0.10.0"

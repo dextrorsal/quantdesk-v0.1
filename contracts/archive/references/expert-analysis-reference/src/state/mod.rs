@@ -1,0 +1,21 @@
+// State module - aggregates all account state definitions
+// This module organizes account structs by domain for better maintainability
+
+pub mod market;
+pub mod protocol;
+pub mod collateral;
+pub mod advanced;
+pub mod remaining;
+pub mod order;
+pub mod position;
+pub mod user_account;
+
+// Re-export all state structs for easy access
+pub use market::*;
+pub use protocol::*;
+pub use collateral::*;
+pub use advanced::*;
+pub use remaining::*;
+pub use order::*;
+pub use position::*;
+pub use user_account::*;
