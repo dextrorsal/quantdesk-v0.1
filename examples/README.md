@@ -1,223 +1,435 @@
-# Examples Directory
+# QuantDesk Examples
 
-This directory contains comprehensive examples and demos for using QuantDesk components in your own projects.
+## 🚀 **Comprehensive Integration Examples**
 
-## 📁 Structure
+This directory contains comprehensive examples demonstrating QuantDesk's capabilities, showcasing our complete multi-service architecture and professional-grade implementation.
 
+## 📊 **Examples Overview**
+
+```mermaid
+graph TB
+    subgraph "Basic Examples"
+        BASIC[Basic Trading<br/>Core SDK Usage]
+        ADVANCED[Advanced Orders<br/>Complex Trading]
+        PORTFOLIO[Portfolio Management<br/>Position Tracking]
+        AI_INTEGRATION[AI Integration<br/>MIKEY-AI Usage]
+    end
+    
+    subgraph "Bot Templates"
+        MARKET_MAKER[Market Maker Bot<br/>Liquidity Provision]
+        LIQUIDATOR[Liquidation Bot<br/>Risk Management]
+        ARBITRAGE[Arbitrage Bot<br/>Cross-Market Trading]
+        PORTFOLIO_MGR[Portfolio Manager<br/>Automated Rebalancing]
+    end
+    
+    subgraph "Integration Patterns"
+        API_CLIENT[API Client<br/>REST Integration]
+        WEBSOCKET[WebSocket Client<br/>Real-time Data]
+        SMART_CONTRACT[Smart Contract<br/>On-chain Integration]
+        ORACLE[Oracle Integration<br/>Price Feeds]
+    end
+    
+    subgraph "Advanced Features"
+        RISK_MANAGEMENT[Risk Management<br/>Portfolio Protection]
+        PERFORMANCE[Performance Analytics<br/>Trading Metrics]
+        MONITORING[System Monitoring<br/>Health Checks]
+        DEPLOYMENT[Deployment Examples<br/>Production Setup]
+    end
 ```
-examples/
-├── frontend-ui-components.tsx    # React UI component examples
-├── backend-api-services.ts      # Node.js API service examples
-├── mikey-ai-agents.ts          # LangChain AI agent examples
-├── data-ingestion-processors.ts # Real-time data processing examples
-├── smart-contract-interactions.ts # Solana program interaction examples
-└── typescript/                 # TypeScript-specific examples
-```
 
-## 🚀 Quick Start
+## 🎯 **Basic Examples**
 
-Each example file is self-contained and can be used as a reference for implementing similar functionality in your projects.
+### **Basic Trading Example**
+**File:** `basic-trading.ts`
+**Description:** Comprehensive example of QuantDesk SDK usage for basic trading operations
 
-### Frontend Components
+**Features:**
+- Client initialization and setup
+- Market data retrieval
+- Portfolio overview
+- Position management
+- Order placement and monitoring
+- AI analysis integration
+
+**Usage:**
 ```typescript
-import { PriceDisplay, TradingButton, OrderForm } from './frontend-ui-components';
+import { BasicTradingExample } from './basic-trading';
 
-// Use in your React components
-<PriceDisplay 
-  symbol="SOL" 
-  price={100.50} 
-  change24h={5.2} 
-/>
+const example = new BasicTradingExample(client);
+await example.runExample();
 ```
 
-### Backend Services
+### **Advanced Orders Example**
+**File:** `advanced-orders.ts`
+**Description:** Advanced order management and execution strategies
+
+**Features:**
+- Limit orders with custom parameters
+- Stop-loss and take-profit orders
+- Order modification and cancellation
+- Order book analysis
+- Advanced order types
+
+### **Portfolio Management Example**
+**File:** `portfolio-management.ts`
+**Description:** Comprehensive portfolio tracking and management
+
+**Features:**
+- Real-time portfolio monitoring
+- Position analysis and reporting
+- Risk assessment and management
+- Performance tracking
+- Portfolio optimization
+
+### **AI Integration Example**
+**File:** `ai-integration.ts`
+**Description:** MIKEY-AI integration and usage patterns
+
+**Features:**
+- Market sentiment analysis
+- Trading signal generation
+- Risk assessment
+- Natural language chat
+- AI-powered insights
+
+## 🤖 **Trading Bot Templates**
+
+### **Market Maker Bot**
+**File:** `bots/market-maker.ts`
+**Description:** Professional market making implementation
+
+**Features:**
+- Automated bid/ask order placement
+- Dynamic spread adjustment
+- Risk management
+- Position monitoring
+- Performance optimization
+
+**Configuration:**
 ```typescript
-import { MarketDataService, OrderService } from './backend-api-services';
-
-// Create service instances
-const marketService = new MarketDataService(database, oracle);
-const orderService = new OrderService(database);
-```
-
-### AI Agents
-```typescript
-import { MarketAnalysisAgent, TradingStrategyAgent } from './mikey-ai-agents';
-
-// Create agent instances
-const analysisAgent = new MarketAnalysisAgent(apiKey);
-const strategyAgent = new TradingStrategyAgent(apiKey);
-```
-
-### Data Processing
-```typescript
-import { MarketDataProcessor, PriceAggregator } from './data-ingestion-processors';
-
-// Create processor instances
-const processor = new MarketDataProcessor(config);
-const aggregator = new PriceAggregator(config);
-```
-
-### Smart Contract Interactions
-```typescript
-import { QuantDeskProgramClient, WalletHelper } from './smart-contract-interactions';
-
-// Create client instances
-const client = new QuantDeskProgramClient(connection, wallet, programId, idl);
-const walletHelper = new WalletHelper(connection);
-```
-
-## 📚 Example Categories
-
-### 1. Frontend UI Components
-- **PriceDisplay** - Market price display component
-- **TradingButton** - Buy/sell action buttons
-- **OrderForm** - Order placement form
-- **PortfolioSummary** - Portfolio overview component
-- **useMarketData** - Market data React hook
-
-### 2. Backend API Services
-- **MarketDataService** - Market data operations
-- **OrderService** - Order management
-- **PortfolioService** - Portfolio operations
-- **createApiRoutes** - Express route creation
-- **errorHandler** - Error handling middleware
-
-### 3. AI Agents
-- **MarketAnalysisAgent** - Market sentiment analysis
-- **TradingStrategyAgent** - Strategy generation
-- **RiskManagementAgent** - Risk assessment
-- **AgentFactory** - Agent creation utilities
-- **AgentOrchestrator** - Multi-agent coordination
-
-### 4. Data Processing
-- **MarketDataProcessor** - WebSocket data processing
-- **PriceAggregator** - Multi-source price aggregation
-- **DataValidator** - Data quality validation
-- **DataPipeline** - Complete data pipeline
-- **RestApiDataSource** - REST API data source
-
-### 5. Smart Contract Interactions
-- **QuantDeskProgramClient** - Solana program client
-- **MarketDataClient** - Market data client
-- **TransactionBuilder** - Transaction construction
-- **WalletHelper** - Wallet utilities
-- **EventListener** - Event monitoring
-- **ContractUtils** - Utility functions
-
-## 🔧 Usage Examples
-
-### Creating a Trading Bot
-```typescript
-import { MarketAnalysisAgent, OrderService } from './examples';
-
-// Initialize services
-const analysisAgent = new MarketAnalysisAgent(apiKey);
-const orderService = new OrderService(database);
-
-// Analyze market and place orders
-const analysis = await analysisAgent.analyzeMarket('SOL', marketData);
-if (analysis.sentiment === 'bullish') {
-  await orderService.createOrder(userId, {
-    symbol: 'SOL',
-    side: 'buy',
-    amount: 1.0,
-    type: 'market'
-  });
-}
-```
-
-### Building a Data Dashboard
-```typescript
-import { MarketDataProcessor, PriceAggregator } from './examples';
-
-// Set up data processing
-const processor = new MarketDataProcessor(config);
-const aggregator = new PriceAggregator(config);
-
-processor.on('marketData', (data) => {
-  aggregator.addPriceData(data);
-});
-
-const prices = aggregator.getAllPrices();
-// Display prices in your dashboard
-```
-
-### Implementing Wallet Integration
-```typescript
-import { WalletHelper, QuantDeskProgramClient } from './examples';
-
-// Create wallet and fund it
-const wallet = WalletHelper.createWallet();
-await WalletHelper.fundWallet(wallet, 1.0); // 1 SOL
-
-// Create program client
-const client = new QuantDeskProgramClient(connection, wallet, programId, idl);
-
-// Create user account
-const tx = await client.createUserAccount(wallet);
-```
-
-## 🧪 Testing Examples
-
-Each example includes test patterns:
-
-```typescript
-// Example test structure
-describe('MarketDataService', () => {
-  let service: MarketDataService;
-  
-  beforeEach(() => {
-    service = new MarketDataService(mockDatabase, mockOracle);
-  });
-  
-  it('should get price for symbol', async () => {
-    const price = await service.getPrice('SOL');
-    expect(price).toBeGreaterThan(0);
-  });
+const bot = new MarketMakerBot({
+  client: client,
+  market: 'SOL-PERP',
+  spread: 0.001,        // 0.1% spread
+  size: 0.1,           // 0.1 SOL per order
+  maxPositions: 5,
+  updateInterval: 5000, // 5 seconds
+  minSpread: 0.0005,   // 0.05% minimum spread
+  maxSpread: 0.002     // 0.2% maximum spread
 });
 ```
 
-## 📖 Documentation
+### **Liquidation Bot**
+**File:** `bots/liquidator.ts`
+**Description:** Automated liquidation system
 
-Each example file includes:
-- **Comprehensive Comments** - Detailed explanations
-- **Type Definitions** - TypeScript interfaces
-- **Error Handling** - Proper error management
-- **Best Practices** - Recommended patterns
-- **Usage Examples** - Practical implementations
+**Features:**
+- Real-time position monitoring
+- Liquidation threshold detection
+- Automated liquidation execution
+- Gas price optimization
+- Risk management
 
-## 🔒 Security Considerations
+**Configuration:**
+```typescript
+const bot = new LiquidationBot({
+  client: client,
+  markets: ['SOL-PERP', 'ETH-PERP', 'BTC-PERP'],
+  liquidationThreshold: 0.8,  // 80% liquidation threshold
+  maxGasPrice: 0.001,          // Max 0.001 SOL gas price
+  updateInterval: 2000,        // 2 seconds
+  minLiquidationSize: 0.01,    // Min 0.01 SOL position size
+  maxLiquidationSize: 100      // Max 100 SOL position size
+});
+```
 
-Examples include security best practices:
-- **Input Validation** - All inputs validated
-- **Error Handling** - Secure error management
-- **API Key Protection** - Secure credential handling
-- **Rate Limiting** - Prevent API abuse
-- **Data Sanitization** - Clean user inputs
+### **Arbitrage Bot**
+**File:** `bots/arbitrage.ts`
+**Description:** Cross-market arbitrage trading
 
-## 🚀 Deployment
+**Features:**
+- Multi-market price monitoring
+- Arbitrage opportunity detection
+- Automated trade execution
+- Risk management
+- Profit optimization
 
-Examples are designed to be:
-- **Production Ready** - Can be used in production
-- **Scalable** - Handle high loads
-- **Maintainable** - Easy to modify and extend
-- **Testable** - Comprehensive test coverage
+**Configuration:**
+```typescript
+const bot = new ArbitrageBot({
+  client: client,
+  markets: ['SOL-PERP', 'ETH-PERP', 'BTC-PERP'],
+  minProfit: 0.001,        // 0.1% minimum profit
+  maxSize: 1.0,           // Max 1 SOL per trade
+  updateInterval: 3000,   // 3 seconds
+  maxPositions: 3,        // Max 3 concurrent positions
+  gasLimit: 0.001        // Max 0.001 SOL gas price
+});
+```
 
-## 📄 License
+### **Portfolio Manager Bot**
+**File:** `bots/portfolio-mgr.ts`
+**Description:** Automated portfolio management
 
-All examples are part of QuantDesk and are licensed under Apache License 2.0.
+**Features:**
+- Target allocation management
+- Automated rebalancing
+- Risk monitoring
+- Performance optimization
+- Dynamic position sizing
 
-## 🤝 Contributing
+**Configuration:**
+```typescript
+const targetAllocation = new Map<string, number>();
+targetAllocation.set('SOL-PERP', 0.4);  // 40% SOL
+targetAllocation.set('ETH-PERP', 0.3);  // 30% ETH
+targetAllocation.set('BTC-PERP', 0.3);  // 30% BTC
 
-We welcome contributions to improve examples:
-- **New Examples** - Additional use cases
-- **Bug Fixes** - Fix issues in existing examples
-- **Documentation** - Improve example documentation
-- **Tests** - Add test coverage
+const bot = new PortfolioManagerBot({
+  client: client,
+  markets: ['SOL-PERP', 'ETH-PERP', 'BTC-PERP'],
+  rebalanceThreshold: 0.05,    // 5% rebalance threshold
+  maxLeverage: 10,             // Max 10x leverage
+  riskLimit: 0.1,              // Max 10% risk per position
+  updateInterval: 10000,        // 10 seconds
+  maxPositions: 10,            // Max 10 positions
+  targetAllocation: targetAllocation
+});
+```
 
-## 📞 Support
+## 🔧 **Integration Patterns**
 
-For questions about examples:
-- **GitHub Issues** - Report bugs or ask questions
-- **Documentation** - Check service-specific READMEs
-- **Community** - Join our Discord community
+### **API Client Integration**
+**File:** `integration/api-client.ts`
+**Description:** RESTful API integration patterns
+
+**Features:**
+- HTTP client setup
+- Authentication handling
+- Error handling and retries
+- Request/response logging
+- Rate limiting
+
+### **WebSocket Integration**
+**File:** `integration/websocket-client.ts`
+**Description:** Real-time data streaming
+
+**Features:**
+- WebSocket connection management
+- Real-time market data
+- Order book updates
+- Position updates
+- Error handling and reconnection
+
+### **Smart Contract Integration**
+**File:** `integration/smart-contract.ts`
+**Description:** Direct smart contract interaction
+
+**Features:**
+- Solana program interaction
+- Transaction building
+- Account management
+- Error handling
+- Gas optimization
+
+### **Oracle Integration**
+**File:** `integration/oracle.ts`
+**Description:** Price feed integration
+
+**Features:**
+- Pyth Network integration
+- Switchboard integration
+- Price validation
+- Consensus mechanisms
+- Fallback handling
+
+## 📊 **Advanced Features**
+
+### **Risk Management**
+**File:** `advanced/risk-management.ts`
+**Description:** Comprehensive risk management system
+
+**Features:**
+- Portfolio risk calculation
+- Position risk assessment
+- Risk limit enforcement
+- Automated risk reduction
+- Risk reporting
+
+### **Performance Analytics**
+**File:** `advanced/performance-analytics.ts`
+**Description:** Trading performance analysis
+
+**Features:**
+- Trade analysis
+- Performance metrics
+- Risk-adjusted returns
+- Benchmark comparison
+- Reporting and visualization
+
+### **System Monitoring**
+**File:** `advanced/system-monitoring.ts`
+**Description:** System health monitoring
+
+**Features:**
+- Health check implementation
+- Performance monitoring
+- Error tracking
+- Alerting system
+- Dashboard integration
+
+### **Deployment Examples**
+**File:** `deployment/production-setup.ts`
+**Description:** Production deployment patterns
+
+**Features:**
+- Environment configuration
+- Security setup
+- Monitoring configuration
+- Backup strategies
+- Scaling patterns
+
+## 🚀 **Getting Started**
+
+### **Prerequisites**
+- Node.js 20+
+- TypeScript 5+
+- QuantDesk SDK
+- Solana wallet
+
+### **Installation**
+```bash
+# Clone the repository
+git clone https://github.com/dextrorsal/quantdesk-v0.1.git
+cd quantdesk-v0.1/examples
+
+# Install dependencies
+npm install
+
+# Build examples
+npm run build
+```
+
+### **Configuration**
+```typescript
+// Create client configuration
+const client = new QuantDeskClient({
+  rpcUrl: 'https://api.devnet.solana.com',
+  programId: 'C2T3UnvGdHwEkspXJG7JyAhwo6VKQEKjN6eCq69guYSw',
+  wallet: wallet // Your Solana wallet
+});
+```
+
+### **Running Examples**
+```bash
+# Run basic trading example
+npm run example:basic-trading
+
+# Run market maker bot
+npm run bot:market-maker
+
+# Run arbitrage bot
+npm run bot:arbitrage
+
+# Run portfolio manager
+npm run bot:portfolio-manager
+```
+
+## 📚 **Example Categories**
+
+### **Beginner Examples**
+- Basic trading operations
+- Simple order placement
+- Portfolio overview
+- Market data retrieval
+
+### **Intermediate Examples**
+- Advanced order types
+- Position management
+- Risk assessment
+- AI integration
+
+### **Advanced Examples**
+- Trading bot development
+- Automated strategies
+- Performance optimization
+- Production deployment
+
+### **Expert Examples**
+- Custom strategy development
+- Advanced risk management
+- System integration
+- Performance analytics
+
+## 🔒 **Security Considerations**
+
+### **API Key Management**
+- Store API keys securely
+- Use environment variables
+- Implement key rotation
+- Monitor key usage
+
+### **Wallet Security**
+- Use hardware wallets in production
+- Implement proper key management
+- Monitor wallet activity
+- Use multi-signature where possible
+
+### **Risk Management**
+- Set appropriate position limits
+- Implement stop-loss orders
+- Monitor portfolio risk
+- Use proper leverage
+
+## 📖 **Documentation**
+
+### **Code Documentation**
+- Comprehensive inline comments
+- TypeScript type definitions
+- JSDoc documentation
+- Usage examples
+
+### **API Documentation**
+- Complete API reference
+- Request/response examples
+- Error handling
+- Rate limiting information
+
+### **Architecture Documentation**
+- System architecture diagrams
+- Data flow documentation
+- Integration patterns
+- Deployment guides
+
+## 🤝 **Contributing**
+
+### **Adding New Examples**
+1. Create example file in appropriate directory
+2. Add comprehensive documentation
+3. Include usage examples
+4. Add to this README
+5. Submit pull request
+
+### **Example Guidelines**
+- Use TypeScript strict mode
+- Include error handling
+- Add comprehensive comments
+- Follow naming conventions
+- Include configuration examples
+
+## 📞 **Support**
+
+### **Resources**
+- **Documentation:** Complete API and SDK documentation
+- **Examples:** Comprehensive code examples
+- **Community:** Discord community support
+- **Issues:** GitHub issue tracking
+
+### **Contact**
+- **GitHub:** [QuantDesk Examples Repository](https://github.com/dextrorsal/quantdesk-v0.1)
+- **Discord:** Community support channel
+- **Email:** Technical support contact
+
+---
+
+**QuantDesk Examples: Comprehensive integration examples showcasing our complete multi-service architecture, trading bot templates, and professional-grade implementation patterns.**

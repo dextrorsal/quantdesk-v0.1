@@ -116,45 +116,50 @@ quantdesk/
 
 ## 🌐 **Open Source Components**
 
-The following components are available for community use:
+QuantDesk provides comprehensive open-source components for the DeFi community, showcasing our complete multi-service architecture and professional-grade implementation.
 
-### **Examples** (`examples/`)
-- **Frontend UI Components** - React components for trading interfaces
-- **Backend API Services** - Node.js service patterns and utilities
-- **MIKEY-AI Agents** - LangChain agent implementations
-- **Data Ingestion** - Real-time data processing examples
-- **Smart Contract Interactions** - Solana program interaction patterns
-- **Community Trading Bot** - Complete automated trading bot example
-- **API Integration** - Comprehensive API client examples
-- **UI Component Library** - Professional trading interface components
+### **Smart Contracts** (`contracts/`)
+- **Complete Source Code** - Full Solana perpetual DEX implementation
+- **Core Trading Algorithms** - AMM, funding, liquidation, position management
+- **Risk Management Logic** - Insurance fund, spot balances, token operations
+- **Oracle Integration** - Pyth Network + Switchboard integration
+- **Comprehensive Tests** - Full test coverage and validation
+- **Build Documentation** - Complete Cargo.toml, Anchor.toml, compilation process
 
 ### **SDK** (`sdk/`)
-- **TypeScript SDK** - Complete SDK for QuantDesk integration
-- **API Client** - RESTful API client with TypeScript support
-- **Utilities** - Helper functions and common patterns
-- **Type Definitions** - Comprehensive TypeScript types
+- **TypeScript SDK** - Complete SDK with comprehensive examples
+- **Trading Bot Templates** - Market maker, liquidator, arbitrage, portfolio management
+- **API Documentation** - Complete endpoint documentation
+- **Integration Guides** - Step-by-step developer guides
+- **Advanced Examples** - More comprehensive than Drift's basic SDK
 
-### **Scripts** (`scripts/`)
-- **Development Scripts** - Environment setup and development utilities
-- **Deployment Scripts** - Production deployment automation
-- **Security Scripts** - Security auditing and vulnerability scanning
-- **Database Scripts** - Database management and seeding utilities
+### **Architecture Documentation** (`docs/`)
+- **Multi-Service Architecture** - Complete system architecture diagrams
+- **Visual Documentation** - Professional Mermaid diagrams and flows
+- **Service Integration** - Frontend, Backend, MIKEY-AI service documentation
+- **Security Architecture** - Multi-layer security implementation
+- **Performance Optimization** - Caching, load balancing, monitoring
+
+### **Examples** (`examples/`)
+- **Trading Bot Templates** - Advanced bot implementations
+- **Integration Patterns** - Real-world usage examples
+- **API Integration** - Comprehensive API client examples
+- **Smart Contract Examples** - Solana program interaction patterns
 
 ---
 
 ## 📋 **Documentation**
 
 ### **Architecture & Services**
-- **[Architecture Guide](ARCHITECTURE_GUIDE.md)** - Complete system architecture overview
-- **[Services Overview](SERVICES_OVERVIEW.md)** - Multi-service architecture details
-- **[Frontend Service](FRONTEND_SERVICE.md)** - React trading interface documentation
-- **[Backend Service](BACKEND_SERVICE.md)** - API services and gateway documentation
-- **[MIKEY-AI Service](MIKEY_AI_SERVICE.md)** - AI trading agent documentation
+- **[Architecture Documentation](docs/architecture/README.md)** - Complete multi-service architecture with visual diagrams
+- **[Smart Contracts](contracts/README.md)** - Complete Solana perpetual DEX implementation
+- **[SDK Documentation](sdk/README.md)** - Comprehensive TypeScript SDK with bot templates
+- **[Trading Bot Examples](sdk/typescript/bots/)** - Market maker, liquidator, arbitrage bot templates
 
 ### **Community Resources**
 - **[Examples](examples/README.md)** - Code examples and demos
-- **[SDK](sdk/README.md)** - Software Development Kit documentation
 - **[Scripts](scripts/README.md)** - Utility scripts and automation tools
+- **[Contributing Guidelines](CONTRIBUTING.md)** - How to contribute to the project
 
 ### **Security & Contributing**
 - **[Security Policy](SECURITY.md)** - Security policies and vulnerability reporting
