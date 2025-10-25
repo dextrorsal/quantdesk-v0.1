@@ -1,0 +1,241 @@
+{
+  "id": "quantdesk-complete-platform-env",
+  "name": "QuantDesk Complete Platform Environment",
+  "values": [
+    {
+      "key": "BACKEND_BASE_URL",
+      "value": "http://localhost:3002",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "BACKEND_WS_URL",
+      "value": "ws://localhost:3002",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "SOLANA_RPC_URL",
+      "value": "https://api.devnet.solana.com",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "SOLANA_WS_URL",
+      "value": "wss://api.devnet.solana.com",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "PROGRAM_ID",
+      "value": "GcpEyGMJg9AvEx8LgAyzyUNTPWFxovHxtmQ4vVWuWu3a",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "SUPABASE_URL",
+      "value": "https://your-project.supabase.co",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "SUPABASE_REST_URL",
+      "value": "https://your-project.supabase.co/rest/v1",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "SUPABASE_ANON_KEY",
+      "value": "YOUR_SUPABASE_ANON_KEY",
+      "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "SUPABASE_SERVICE_ROLE_KEY",
+      "value": "YOUR_SUPABASE_SERVICE_ROLE_KEY",
+      "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "PYTH_BASE_URL",
+      "value": "https://hermes.pyth.network",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "PYTH_WS_URL",
+      "value": "wss://hermes.pyth.network/ws",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "JUPITER_TOKENS_URL",
+      "value": "https://tokens.jup.ag/tokens",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "JUPITER_QUOTE_URL",
+      "value": "https://quote-api.jup.ag/v6/quote",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "WALLET_PUBKEY",
+      "value": "YOUR_DEV_WALLET_PUBKEY",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "AI_BASE_URL",
+      "value": "http://localhost:3000",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "REDIS_URL",
+      "value": "redis://localhost:6379",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "GRAFANA_URL",
+      "value": "http://localhost:3100",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "BIRDEYE_API_KEY",
+      "value": "YOUR_BIRDEYE_API_KEY",
+      "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "COINGECKO_API_KEY",
+      "value": "YOUR_COINGECKO_API_KEY",
+      "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "DUNE_API_KEY",
+      "value": "YOUR_DUNE_API_KEY",
+      "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "ARTEMIS_API_KEY",
+      "value": "YOUR_ARTEMIS_API_KEY",
+      "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "COINALYZE_API_KEY",
+      "value": "YOUR_COINALYZE_API_KEY",
+      "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "QUANTDESK_API_KEY",
+      "value": "YOUR_QUANTDESK_API_KEY",
+      "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "AUTH_TOKEN",
+      "value": "",
+      "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "REFRESH_TOKEN",
+      "value": "",
+      "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "ADMIN_TOKEN",
+      "value": "",
+      "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "ORDER_ID",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "DEPOSIT_ID",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "HELIUS_RPC_URL",
+      "value": "https://devnet.helius-rpc.com",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "QUICKNODE_RPC_URL",
+      "value": "https://solana-devnet.g.alchemy.com/v2/demo",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "ALCHEMY_RPC_URL",
+      "value": "https://solana-devnet.g.alchemy.com/v2/demo",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "SYNDICA_RPC_URL",
+      "value": "https://solana-api.syndica.io/access-token/demo",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "CHAINSTACK_RPC_URL",
+      "value": "https://solana-devnet.core.chainstack.com/demo",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "TWITTER_API_BASE",
+      "value": "https://api.twitter.com/2",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "TELEGRAM_BOT_BASE",
+      "value": "https://api.telegram.org/bot<token>/",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "DISCORD_API_BASE",
+      "value": "https://discord.com/api",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "OPENAI_API_BASE",
+      "value": "https://api.openai.com/v1",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "ANTHROPIC_API_BASE",
+      "value": "https://api.anthropic.com/v1",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "GOOGLE_AI_BASE",
+      "value": "https://generativelanguage.googleapis.com",
+      "type": "default",
+      "enabled": true
+    }
+  ],
+  "_postman_variable_scope": "environment"
+}
