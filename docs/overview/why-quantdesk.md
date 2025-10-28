@@ -12,18 +12,19 @@
 
 ### How We Respond
 QuantDesk unifies data, execution, and monitoring into a single terminal:
-- **Data Layer**: Live order books, funding, and depth from Drift, Jupiter, and other Solana-native perp venues
-- **Execution Layer**: Hardened APIs that interact with our backend, Supabase, Redis, and WebSocket pipelines for instant order routing
-- **Intelligence Layer**: MIKEY surfaces market structure insights without exposing proprietary strategy logic
+- **Data Layer**: Live order books, funding, and depth from Pyth Network oracles and Solana-native perp venues
+- **Execution Layer**: Hardened APIs with SIWS authentication, backend services, Supabase database, and WebSocket pipelines for instant order routing
+- **Intelligence Layer**: MIKEY surfaces market structure insights powered by LangChain and multi-LLM routing
 
 ## 🏗️ Architecture at a Glance
 
 | Layer | What It Includes | Why It Matters |
 |-------|------------------|----------------|
-| **Data Ingestion** | Solana RPC streams, price oracles, news feeds | Consistent real-time data flow under heavy load |
-| **Core Services** | Node/TypeScript backend sitting on Supabase + Redis | Durable storage with low-latency caching |
-| **Realtime Delivery** | WebSockets, event broadcasting, alerting | Traders see market moves the instant they happen |
-| **Terminal UI** | React-based dashboard with pro-level layouts | Traders get the Bloomberg-style experience for DeFi |
+| **Data Ingestion** | Solana RPC streams, Pyth Network oracles, news feeds | Consistent real-time data flow under heavy load |
+| **Core Services** | Node/TypeScript backend, Supabase (PostgreSQL), Redis (optional cache) | Durable storage with low-latency operations |
+| **Realtime Delivery** | Socket.IO WebSockets, event broadcasting, alerting | Traders see market moves the instant they happen |
+| **Terminal UI** | React + Vite dashboard with professional layouts | Traders get the Bloomberg-style experience for DeFi |
+| **AI Assistant** | LangChain integration with multi-LLM routing | MIKEY provides intelligent market analysis and insights |
 
 Everything is modular: APIs can be consumed by our own terminal or by teams who need institutional integrations.
 
@@ -35,9 +36,10 @@ Everything is modular: APIs can be consumed by our own terminal or by teams who 
 
 ## 🔒 Trust Without Revealing IP
 
-- **Non-custodial by design** – keys stay with the trader, orders route through secure signing flows
-- **Observability-first** – metrics, logging, and alerting built for production reliability
-- **Security posture** – Supabase role policies, Redis access controls, and rate-limited APIs keep infrastructure hardened
+- **Non-custodial by design** – wallet-based authentication (SIWS), keys stay with the trader
+- **Session security** – HTTP-only cookies with 7-day expiration for secure authentication
+- **Observability-first** – metrics, logging, and Grafana dashboards built for production reliability  
+- **Security posture** – Supabase role policies, rate-limited APIs (per-minute), and transaction verification keep infrastructure hardened
 
 ## 🧭 Where to Explore Next
 

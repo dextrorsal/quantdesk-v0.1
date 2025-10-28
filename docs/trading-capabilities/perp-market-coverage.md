@@ -4,12 +4,25 @@ QuantDesk focuses on the perp markets that matter most to active traders. This p
 
 ## Live Markets
 
-| Market | Max Leverage | Notes |
-|--------|--------------|-------|
-| BTC-PERP | Up to 100x | High-liquidity flagship contract |
-| ETH-PERP | Up to 75x | Ideal for ETH options hedging |
-| SOL-PERP | Up to 50x | Deep Solana-native liquidity |
-| Additional Listings | 10x–25x | Rotating basket of SOL ecosystem perps |
+**Verified from database (October 2025):**
+
+| Market | Max Leverage | Base Asset | Status |
+|--------|--------------|------------|--------|
+| BTC-PERP | Up to 100x | BTC | ✅ Active |
+| ETH-PERP | Up to 100x | ETH | ✅ Active |
+| SOL-PERP | Up to 100x | SOL | ✅ Active |
+| SOL/USD | Up to 10x | SOL | ✅ Active |
+| AVAX-PERP | Up to 30x | AVAX | ✅ Active |
+| BNB-PERP | Up to 30x | BNB | ✅ Active |
+| AAVE-PERP | Up to 20x | AAVE | ✅ Active |
+| JUP-PERP | Up to 20x | JUP | ✅ Active |
+| BONK-PERP | Up to 10x | BONK | ✅ Active |
+| FARTCOIN-PERP | Up to 10x | FARTCOIN | ✅ Active |
+
+**Additional Markets:**
+- BTC/USD (10x leverage)
+- ETH/USD (10x leverage)
+- Additional Listings (10x–25x) - Various SOL ecosystem perps
 
 All live markets include:
 - Depth ladder on the terminal with top-of-book liquidity and cumulative size.

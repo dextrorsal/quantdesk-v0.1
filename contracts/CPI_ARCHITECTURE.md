@@ -1,29 +1,44 @@
-# Cross-Program Invocation (CPI) Architecture
+# Smart Contract Modular Architecture
 
 ## Overview
 
-The QuantDesk protocol uses Cross-Program Invocations (CPI) to enable communication between specialized programs while maintaining modularity and reducing stack overflow issues.
+The QuantDesk protocol uses a **single Solana program** with modular instruction organization to provide clear separation of concerns while maintaining deployment simplicity and avoiding stack overflow issues.
 
 ## Program Architecture
 
+**Current Implementation:** Single program (`quantdesk_perp_dex`) with specialized modules
+
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Core Program  │    │ Trading Program  │    │Collateral Program│
-│                 │    │                 │    │                 │
-│ • User Accounts │◄──►│ • Positions     │◄──►│ • Deposits     │
-│ • Markets      │    │ • Orders        │    │ • Withdrawals  │
-│ • Basic Ops    │    │ • Advanced Ops  │    │ • Cross-Collat │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
+┌────────────────────────────────────────────────────────────┐
+│          QuantDesk Perp DEX Program (C2T3UnvG...YSw)      │
+├────────────────────────────────────────────────────────────┤
+│                                                              │
+│  ┌──────────────────┐    ┌──────────────────┐              │
+│  │ Position Module   │◄──►│  Order Module   │              │
+│  │ • open_position() │    │ • place_order() │              │
+│  │ • close_position()│    │ • cancel_order()│              │
+│  └──────────────────┘    └──────────────────┘              │
+│                                                              │
+│  ┌──────────────────┐    ┌──────────────────┐              │
+│  │ Market Module     │    │ Security Module  │              │
+│  │ • initialize_mk()│    │ • keeper_auth()  │              │
+│  │ • settle_fund()  │    │ • circuit_brk()  │              │
+│  └──────────────────┘    └──────────────────┘              │
+│                                                              │
+│  ┌──────────────────┐    ┌──────────────────┐              │
+│  │ Collateral Mod    │    │ Oracle Module   │              │
+│  │ • deposit_sol()   │    │ • price_feed()  │              │
+│  │ • withdraw_sol()  │    │ • consensus()   │              │
+│  └──────────────────┘    └──────────────────┘              │
+│                                                              │
+└────────────────────────────────────────────────────────────┘
          ▲                       ▲                       ▲
          │                       │                       │
          ▼                       ▼                       ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│ Security Program│    │ Oracle Program  │    │                 │
-│                 │    │                 │    │                 │
-│ • Circuit Breaks│◄──►│ • Price Feeds  │    │                 │
-│ • Keeper Mgmt   │    │ • Insurance    │    │                 │
-│ • Risk Mgmt     │    │ • Emergency     │    │                 │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
+┌────────────────────────────────────────────────────────────┐
+│              External Integrations                          │
+│ • Pyth Network (Oracle) • User Wallets • Liquidation Bots  │
+└────────────────────────────────────────────────────────────┘
 ```
 
 ## CPI Interfaces

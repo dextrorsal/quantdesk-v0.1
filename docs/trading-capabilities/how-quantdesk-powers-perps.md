@@ -10,22 +10,24 @@ QuantDesk delivers the full perpetual trading workflow on Solana without exposin
 
 ## 2. Smart Contract Stack Tuned for Perps
 
-- **Account program:** Keeps your trading accounts, sub-accounts, and order history organized on-chain.
-- **Collateral vault:** Manages deposits and withdrawals securely while tracking your available margin.
-- **Perp engine:** Routes orders, updates positions, and enforces leverage rules.
-- **Oracle layer:** Pulls price data from multiple sources to keep mark prices honest.
-- **Protection pool:** Backs liquidations and extreme events so healthy traders aren’t penalized.
+- **QuantDesk Perp DEX Program** (`C2T3UnvGdHwEkspXJG7JyAhwo6VKQEKjN6eCq69guYSw`) – Core perpetual trading engine
+- **Additional programs:** Collateral, Oracle, Security, Trading, Core modules for specialization
+- **Account program:** Keeps trading accounts, sub-accounts organized on-chain
+- **Oracle layer:** Pyth Network price feeds with confidence scores for accurate mark prices
+- **Rate limiting:** Per-minute limits to prevent abuse (100 pub/min, 10 trading/min, 5 auth/15min)
+- **Transaction verification:** All on-chain transactions verified before processing
 
-These pieces mirror battle-tested Solana perp protocols, giving you familiarity with the reliability you expect from venues like Drift.
+These pieces provide battle-tested Solana perp functionality with enterprise-grade security and monitoring.
 
 ## 3. Real-Time Data Pipeline
 
-- **Supabase storage:** Persists account states, historical fills, and analytics for quick recall.
-- **Redis cache:** Keeps order books, funding, and sentiment metrics hot so the terminal updates instantly.
-- **WebSockets everywhere:** Market data, MIKEY alerts, and account changes stream straight to your screen.
-- **API gateway:** Central entry point that signs and submits transactions, validates requests, and rate-limits abusive traffic.
+- **Supabase storage:** PostgreSQL database with Row Level Security for account states, historical fills, and analytics
+- **Redis cache:** Optional cache for order books, funding, and sentiment metrics (disabled in development)
+- **Socket.IO WebSockets:** Real-time market data, MIKEY alerts, and account changes stream to clients
+- **API gateway (Port 3002):** Central entry point that validates requests, manages SIWS sessions, and applies rate limiting
+- **Pyth Network integration:** Direct oracle price feeds for BTC, ETH, SOL with confidence tracking
 
-The result is a terminal that reacts to market swings the moment they happen.
+The result is a terminal that reacts to market swings the moment they happen with sub-second updates.
 
 ## 4. Execution Built for Volatility
 
@@ -43,10 +45,12 @@ The result is a terminal that reacts to market swings the moment they happen.
 
 ## 6. Operational Reliability
 
-- **Secure architecture:** Wallet signatures happen client-side; transactions execute via PDAs so keys never leave your wallet.
-- **Observability:** Dashboards track node latency, WebSocket uptime, and error rates so you know the system is healthy.
-- **Scalability:** Horizontal scaling keeps the terminal responsive during high-volume events.
-- **Failover ready:** Multi-region infrastructure means the trading experience stays online.
+- **Secure architecture:** SIWS authentication with client-side signing; transactions execute via PDAs so keys never leave your wallet
+- **Session management:** HTTP-only cookies with 7-day expiration; Redis-backed sessions (optional in dev)
+- **Observability:** Grafana dashboards track node latency, WebSocket uptime, error rates, and system metrics
+- **Multi-service architecture:** Backend (3002), Frontend (3001), MIKEY-AI (3000), Data Ingestion (3003), Admin (5173)
+- **Health monitoring:** Real-time system health endpoints and automated alerting for service degradation
+- **Transaction verification:** All on-chain transactions verified before processing to prevent fraud
 
 ## What This Means When You Trade
 

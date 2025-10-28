@@ -19,6 +19,7 @@ QuantDesk is a **production-ready Solana perpetual DEX platform** that eliminate
 - **AI-Powered Trading:** LangChain integration with real-time market intelligence
 - **Enterprise Security:** Multi-layer security with comprehensive protection
 - **Professional Interface:** Bloomberg Terminal-level sophistication for crypto trading
+- **Complete Ecosystem:** Smart contracts + services + AI + community integration
 
 ---
 
@@ -33,8 +34,8 @@ QuantDesk is a **production-ready Solana perpetual DEX platform** that eliminate
 ### **Installation**
 ```bash
 # Clone the repository
-git clone https://github.com/quantdesk/quantdesk.git
-cd quantdesk
+git clone https://github.com/dextrorsal/quantdesk.git
+cd quantdesk-0.1.1
 
 # Install dependencies
 pnpm install
@@ -121,6 +122,35 @@ async function checkProgramStatus() {
   }
 }
 ```
+
+---
+
+## 🔓 **Open Source & Transparency**
+
+### **Complete Ecosystem Documentation**
+
+QuantDesk provides comprehensive open source documentation:
+
+- ✅ **Smart Contracts:** Complete source transparency (50+ Rust files)
+- ✅ **Multi-service Architecture:** Full architecture documentation
+- ✅ **Frontend & Backend:** Complete service documentation
+- ✅ **AI Integration:** Transparent SDK via public API
+- ✅ **Developer Playground:** Interactive API testing environment
+- ✅ **Comprehensive SDK:** 6+ integration examples
+- ✅ **Community Rewards:** Points & airdrop system
+
+### **Open Source Metrics**
+- **Repository Size:** 200+ files across multiple services
+- **Documentation:** Comprehensive architecture, API, and development guides
+- **Services:** 5 complete services (Frontend, Backend, MIKEY-AI, Data Ingestion, Contracts)
+- **Smart Contracts:** Complete source transparency (50+ Rust files)
+- **SDK Examples:** 6 comprehensive integration examples
+- **Developer Playground:** Interactive API testing environment
+
+### **Transparency Balance**
+**Open:** Integration methods, SDK, API documentation, architecture  
+**Protected:** AI models, training data, proprietary algorithms  
+**Result:** Maximum transparency while maintaining competitive advantages
 
 ---
 

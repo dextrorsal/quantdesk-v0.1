@@ -11,7 +11,7 @@
 ### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/quantdesk/quantdesk.git
+git clone https://github.com/dextrorsal/quantdesk.git
 cd quantdesk
 
 # Install dependencies

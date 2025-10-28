@@ -13,9 +13,10 @@ Swap in the environment that matches your deployment; all examples below use the
 
 ## Authentication
 
-- **REST endpoints** require a session token issued after Sign-In with Solana (SIWS). Include it as `Authorization: Bearer <token>`.
-- **WebSocket connections** accept the same bearer token via query string or initial auth message.
-- The auth service rotates tokens; expect to refresh them according to the session TTL (default 7 days for trusted clients).
+- **REST endpoints** – Use SIWS authentication which creates an HTTP-only session cookie (`qd_session`)
+- **WebSocket connections** – Socket.IO server reads the session cookie automatically; no separate token needed
+- **Session duration** – 7-day expiration with automatic cleanup
+- **Wallet-based** – No passwords; all signatures are client-side with your wallet
 
 ## Market Data
 
@@ -32,42 +33,52 @@ GET /api/markets/:symbol/funding      # Funding history
 ## Trading & Accounts
 
 ```http
-GET  /api/account/state               # Wallet + account status
-POST /api/accounts/trading-accounts   # Create sub-account
-POST /api/deposits/deposit            # Initiate deposit flow
-POST /api/orders                      # Place order (market/limit/stop)
-POST /api/orders/:id/cancel           # Cancel order
-GET  /api/positions                   # Current positions + P&L
+# Account Management
+GET  /api/accounts/trading-accounts        # List sub-accounts
+POST /api/accounts/trading-accounts       # Create sub-account
+GET  /api/accounts/balances                # Get all balances
+POST /api/accounts/transfer               # Transfer between accounts
+
+# Deposits & Withdrawals
+GET  /api/deposits/balances                # Get deposit balances
+POST /api/deposits/deposit                # Initiate deposit
+POST /api/deposits/deposit/confirm        # Confirm deposit transaction
+POST /api/deposits/withdraw               # Initiate withdrawal
+
+# Trading
+GET  /api/positions                       # Current positions + P&L (implemented)
+POST /api/orders                          # Place order (placeholder)
+POST /api/orders/:id/cancel              # Cancel order (placeholder)
+
+# Referrals
+GET  /api/referrals/summary               # Get referral earnings
+POST /api/referrals/claim                # Claim SOL rewards
 ```
 
 - Order endpoints expect canonical market IDs and size/price fields. Advanced order types (stop-loss, bracket) use dedicated payloads under `/api/advanced-orders`.
 - Cross-account transfers and delegated access live under `/api/accounts/*` routes for multi-account workflows.
 
-## Streaming Workflow
+## Streaming Workflow (WebSocket via Socket.IO)
 
-1. Open a WebSocket connection: `ws://localhost:3002/ws?token=<JWT>`
-2. Subscribe to channels:
-   ```json
-   {"type":"subscribe","channel":"price","symbol":"SOL-PERP"}
-   {"type":"subscribe","channel":"orderbook","symbol":"SOL-PERP"}
+1. **Connect** – Open Socket.IO connection to `ws://localhost:3002` (session cookie auto-sent)
+2. **Authentication** – Session cookie from SIWS login is automatically used
+3. **Listen** – Subscribe to events via Socket.IO event system:
+   ```javascript
+   socket.on('price_update', (data) => {
+     // Handle price updates
+     console.log(data);
+   });
    ```
-3. Handle messages shaped like:
-   ```json
-   {
-     "v":1,
-     "type":"price",
-     "symbol":"SOL-PERP",
-     "ts":1730930000000,
-     "data":{"price":55.12,"confidence":0.02,"slot":211883040}
-   }
-   ```
-4. If the stream drops, fall back to REST polling until the socket reconnects.
+4. **Reconnection** – Socket.IO handles automatic reconnection with session validation
 
 ## Rate Limits & Resilience
 
-- Public market routes enforce per-IP limits and return `429` with a `Retry-After` header when exceeded.
-- Authenticated trading routes apply stricter per-wallet limits.
-- The backend caches price/orderbook snapshots in Redis (1–3 second TTL) to keep responses fast and consistent across clients.
+- **Public routes**: 100 requests/minute per IP
+- **Trading routes**: 10 requests/minute per wallet
+- **Auth routes**: 5 attempts per 15 minutes
+- **Admin routes**: 50 requests/minute
+- All endpoints return `429` with `X-RateLimit-Remaining` header when limits are exceeded
+- Redis caching (optional in dev) keeps responses fast when enabled
 
 ## Tooling & Environments
 

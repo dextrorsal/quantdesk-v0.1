@@ -5,7 +5,9 @@ QuantDesk walks traders through a professional onboarding flow—from wallet con
 ## 1. Connect Wallet
 
 - **Wallet prompt** invites users to connect Phantom, Solflare, or any supported Solana wallet.
+- **SIWS Authentication**: Wallet signature verification ensures secure, non-custodial access
 - Feature highlights set expectations (non-custodial, low latency, risk managed).
+- Session established via HTTP-only cookies with 7-day expiration
 - Once connected, the app detects any existing trading accounts and proceeds accordingly.
 
 ## 2. Create Trading Account
@@ -28,8 +30,12 @@ QuantDesk walks traders through a professional onboarding flow—from wallet con
 
 ## Built-In Safeguards
 
-- Wallet connection requires signature verification to prevent spoofing.
-- Every lifecycle step has loading/error states so users know when on-chain actions complete.
-- Audit logging and backend checks ensure account creation and deposit flows can be reviewed later if needed.
+- **Signature Verification**: SIWS authentication requires cryptographic wallet signatures
+- **Transaction Verification**: All on-chain transactions verified before processing
+- **Session Security**: HTTP-only cookies prevent XSS attacks
+- **Rate Limiting**: 5 requests/minute for authentication endpoints
+- **Audit Logging**: Complete transaction history for compliance review
+- **Error Handling**: Clear loading/error states throughout lifecycle
+- **Backend Validation**: All account creation and deposit flows validated server-side
 
 This lifecycle makes onboarding smooth for newcomers while preserving the controls professional desks expect. Pair it with the [Multi-Account Control](../trading-capabilities/multi-account-control.md) and [Terminal Toolbox](../trading-capabilities/perp-terminal-toolbox.md) docs for the full experience story.

@@ -43,23 +43,63 @@ graph TB
 
 ## 🔐 **Authentication**
 
-### **JWT Token Authentication**
-```typescript
-// Request headers
+QuantDesk uses **SIWS (Solana In-App Web3 Signing)** for authentication. This provides secure, wallet-based authentication without passwords.
+
+### **SIWS Authentication Flow**
+
+#### **Step 1: Get Nonce**
+```http
+POST /api/siws/nonce
+Content-Type: application/json
+
 {
-  "Authorization": "Bearer <jwt_token>",
-  "Content-Type": "application/json"
+  "walletPubkey": "YOUR_WALLET_PUBLIC_KEY"
 }
 ```
 
-### **API Key Authentication**
-```typescript
-// Request headers
+**Response:**
+```json
 {
-  "X-API-Key": "<api_key>",
-  "Content-Type": "application/json"
+  "nonce": "random_base58_string"
 }
 ```
+
+#### **Step 2: Sign and Verify**
+```http
+POST /api/siws/verify
+Content-Type: application/json
+
+{
+  "walletPubkey": "YOUR_WALLET_PUBLIC_KEY",
+  "signature": "SIGNED_NONCE_BASE58",
+  "nonce": "nonce_from_step_1",
+  "ref": "OPTIONAL_REFERRER_PUBKEY"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
+This sets an HTTP-only cookie `qd_session` that authenticates future requests.
+
+#### **Step 3: Use Authentication**
+All protected endpoints automatically read the `qd_session` cookie. No additional headers needed.
+
+### **Logout**
+```http
+POST /api/siws/logout
+```
+
+Clears the session cookie.
+
+### **Session Management**
+- Sessions are stored in Redis (optional in development)
+- Sessions expire after 7 days
+- Users are automatically created on first sign-in
 
 ## 📈 **Market Data Endpoints**
 
@@ -149,6 +189,27 @@ GET /api/markets/{symbol}/history
   ]
 }
 ```
+
+## 📝 **Order Management**
+
+### **Get Orders**
+```http
+GET /api/orders
+```
+
+**Note:** Order management endpoints are currently in development. API returns placeholder responses.
+
+### **Place Order**
+```http
+POST /api/orders
+```
+
+### **Cancel Order**
+```http
+DELETE /api/orders/:id
+```
+
+---
 
 ## 💼 **Trading Endpoints**
 
@@ -477,11 +538,139 @@ POST /api/ai/chat
 }
 ```
 
+## 🎁 **Referrals**
+
+### **Get Referral Summary**
+```http
+GET /api/referrals/summary?wallet=WALLET_PUBKEY
+```
+
+**Response:**
+```json
+{
+  "count": 5,
+  "earnings": 125.50,
+  "refs": [
+    {
+      "id": "ref_123",
+      "referee_pubkey": "ABC123...",
+      "earned": 25.00,
+      "created_at": "2024-01-15T10:00:00Z"
+    }
+  ]
+}
+```
+
+### **Preview Referral Earnings**
+```http
+GET /api/referrals/preview?referrer=WALLET_PUBKEY
+```
+
+### **Claim Referral Earnings**
+```http
+POST /api/referrals/claim
+Content-Type: application/json
+
+{
+  "referrer": "YOUR_WALLET_PUBKEY"
+}
+```
+
+### **Activate Referral**
+```http
+POST /api/referrals/activate
+Content-Type: application/json
+
+{
+  "referee_pubkey": "REFEREE_WALLET_PUBKEY",
+  "minimum_volume": 100
+}
+```
+
+---
+
+## 💬 **Chat System**
+
+### **Get Chat Channels**
+```http
+GET /api/chat/channels
+```
+
+### **Get Chat History**
+```http
+GET /api/chat/history?channelId=global&limit=50
+```
+
+### **Send Chat Message**
+```http
+POST /api/chat/send
+Content-Type: application/json
+
+{
+  "channelId": "global",
+  "message": "Hello from @wallet_pubkey!"
+}
+```
+
+---
+
+## 💼 **Account Management**
+
+### **Get Trading Accounts**
+```http
+GET /api/accounts/trading-accounts
+```
+
+### **Create Trading Account**
+```http
+POST /api/accounts/trading-accounts
+Content-Type: application/json
+
+{
+  "name": "My Trading Account"
+}
+```
+
+### **Get Account Balances**
+```http
+GET /api/accounts/balances
+```
+
+### **Transfer Between Accounts**
+```http
+POST /api/accounts/transfer
+Content-Type: application/json
+
+{
+  "fromSubAccountId": "sub_account_1",
+  "toSubAccountId": "sub_account_2",
+  "asset": "USDC",
+  "amount": 1000.00
+}
+```
+
+### **Manage Delegates**
+```http
+# Add delegate
+POST /api/accounts/delegates
+
+# Get delegates
+GET /api/accounts/delegates
+
+# Update delegate permissions
+PUT /api/accounts/delegates/:id
+
+# Remove delegate
+DELETE /api/accounts/delegates/:id
+```
+
+---
+
 ## 👤 **User Management**
 
 ### **Get User Profile**
 ```http
-GET /api/user/profile
+GET /api/users/profile
 ```
 
 **Response:**
@@ -490,43 +679,9 @@ GET /api/user/profile
   "success": true,
   "data": {
     "id": "user_789",
-    "email": "user@example.com",
-    "walletAddress": "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU",
-    "tier": "pro",
-    "kycStatus": "verified",
-    "createdAt": "2024-01-01T00:00:00Z",
-    "lastLogin": "2024-01-15T10:30:00Z"
-  }
-}
-```
-
-### **Update User Settings**
-```http
-PUT /api/user/settings
-```
-
-**Request Body:**
-```json
-{
-  "notifications": {
-    "email": true,
-    "push": false,
-    "sms": false
-  },
-  "trading": {
-    "defaultLeverage": 10,
-    "riskTolerance": "medium",
-    "autoClose": true
-  }
-}
-```
-
-**Response:**
-```json
-{
-  "success": true,
-  "data": {
-    "message": "Settings updated successfully"
+    "wallet_pubkey": "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU",
+    "created_at": "2024-01-01T00:00:00Z",
+    "last_login": "2024-01-15T10:30:00Z"
   }
 }
 ```
@@ -669,17 +824,20 @@ GET /api/status
 ## 📚 **Rate Limiting**
 
 ### **Rate Limits**
-- **General API**: 1000 requests per hour
-- **Trading API**: 100 requests per hour
-- **AI API**: 50 requests per hour
-- **Analytics API**: 200 requests per hour
+- **Public API**: 100 requests per minute
+- **Trading API**: 10 requests per minute (order placement)
+- **Authentication**: 5 attempts per 15 minutes
+- **Admin API**: 50 requests per minute
+- **Webhook API**: 20 requests per minute
 
 ### **Rate Limit Headers**
 ```http
-X-RateLimit-Limit: 1000
-X-RateLimit-Remaining: 999
+X-RateLimit-Limit: 100
+X-RateLimit-Remaining: 95
 X-RateLimit-Reset: 1642248600
 ```
+
+**Note:** Rate limits are applied per-minute, not per-hour, to prevent abuse while allowing normal usage.
 
 ## 🔒 **Security**
 

@@ -88,12 +88,12 @@ Please include the following information in your report:
 - **Dependency Scanning**: Regular vulnerability scanning of dependencies
 
 ### Audit Partners
-- **Smart Contract Audits**: [Audit Partner Name]
-- **Infrastructure Audits**: [Audit Partner Name]
-- **Application Security**: [Audit Partner Name]
+- **Smart Contract Audits**: Scheduled for Q2 2025
+- **Infrastructure Audits**: TBD
+- **Application Security**: TBD
 
 ### Audit Reports
-- **Public Reports**: Available at [audit-reports.quantdesk.com]
+- **Public Reports**: Will be published upon completion
 - **Private Reports**: Available to security researchers upon request
 - **Remediation Status**: Tracked and updated regularly
 
@@ -150,10 +150,10 @@ Please include the following information in your report:
 ## 🚨 Incident Response
 
 ### Response Team
-- **Security Lead**: [Name] - security@quantdesk.com
-- **Technical Lead**: [Name] - tech@quantdesk.com
-- **Legal Counsel**: [Name] - legal@quantdesk.com
-- **Communications**: [Name] - comms@quantdesk.com
+- **Security Lead**: security@quantdesk.com
+- **Technical Lead**: Contact through GitHub issues
+- **Legal Counsel**: Contact through GitHub security advisories
+- **Communications**: Contact through GitHub discussions
 
 ### Response Procedures
 1. **Detection**: Automated detection and alerting
@@ -188,16 +188,16 @@ Please include the following information in your report:
 ## 🔗 Security Resources
 
 ### Internal Resources
-- **Security Wiki**: [Internal security documentation]
-- **Training Materials**: [Security training resources]
-- **Incident Playbooks**: [Response procedures]
-- **Security Tools**: [Available security tools]
+- **Security Wiki**: See [docs/security/](docs/security/)
+- **Training Materials**: Available upon request
+- **Incident Playbooks**: Available upon request
+- **Security Tools**: GitHub security advisories
 
 ### External Resources
-- **OWASP**: [Open Web Application Security Project]
-- **NIST**: [National Institute of Standards and Technology]
-- **CIS**: [Center for Internet Security]
-- **SANS**: [SysAdmin, Audit, Network, and Security Institute]
+- **OWASP**: https://owasp.org/ (Open Web Application Security Project)
+- **NIST**: https://www.nist.gov/ (National Institute of Standards and Technology)
+- **CIS**: https://www.cisecurity.org/ (Center for Internet Security)
+- **SANS**: https://www.sans.org/ (SysAdmin, Audit, Network, and Security Institute)
 
 ## 📞 Contact Information
 

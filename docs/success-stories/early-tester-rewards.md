@@ -10,16 +10,18 @@ QuantDesk is launching with a referral-driven rewards system so early traders ea
 
 ## How It Works
 
-1. **Connect Your Wallet** – Sign in with your Solana wallet; the first successful login with `?ref=<pubkey>` binds you to that referrer.
-2. **Activate** – Complete a light usage threshold (e.g., 5 test trades or $10 simulated volume) so the system knows you’re real. Once activated, your referrer starts earning and your discount persists.
-3. **Share Your Link** – Your dashboard surfaces a unique invite: `waitlist?ref=<your_pubkey>`. Share it anywhere; every activated trader expands your fee share.
-4. **Track & Claim** – Weekly SOL payouts accrue in your “Referrals & Earnings” panel, with a transparent ledger mirrored to a Solana PDA for on-chain proof.
+1. **Connect Your Wallet** – Sign in with SIWS (Solana In-App Web3 Signing); the first successful login with `?ref=<pubkey>` binds you to that referrer.
+2. **Activate Referral** – Call the activation endpoint with your referrer's pubkey and minimum volume threshold.
+3. **Track Earnings** – View referral summary via `/api/referrals/summary` showing count and earnings.
+4. **Claim Rewards** – Post to `/api/referrals/claim` to receive SOL payouts directly to your wallet via Solana transaction.
 
 ## Built-In Fair Play
 
-- One wallet per signup; self-referrals and obvious farming patterns are removed automatically.
-- Referral earnings and discounts run on a net-fee basis, ensuring the platform remains sustainable while still giving back ~35%.
-- Caps, rate limits, and audit trails keep the system healthy as volume scales.
+- Wallet-based authentication ensures one account per wallet address
+- Self-referrals prevented through automated system checks
+- Referral earnings calculated via `/api/referrals/preview` before activation
+- All referral activity tracked in database with audit trails
+- Rate limiting protects the referral system from abuse
 
 ## Future Perks
 

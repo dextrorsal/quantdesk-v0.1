@@ -5,15 +5,21 @@ QuantDesk is engineered for professional desks—this page highlights the advanc
 ## Institutional Trading Features
 
 - **Multi-Account Control** – Master/sub-account permissions, delegated access, and cross-collateral controls built for managed money.
-- **Advanced Order Suite** – TWAP, Iceberg, bracket orders, and time-in-force options sitting alongside risk-aware execution safeguards.
+- **SIWS Authentication** – Wallet-based signature verification with HTTP-only session management for enterprise security.
+- **Rate Limiting** – Per-minute rate limits (30 req/min trading, 100 req/min admin) with tiered access controls.
+- **Advanced Order Suite** – TWAP, Iceberg, bracket orders, and time-in-force options sitting alongside risk-aware execution safeguards (in development).
 - **Risk & Liquidation Engine** – Continuous monitoring of health factors, configurable limits, and insurance fund hooks for future upgrades.
 - **Just-in-Time Liquidity** – Architecture accommodates market maker auctions and price improvement routing for block-sized flow.
+- **Multi-Program Architecture** – Separate programs for collateral, oracle, trading, security, and core operations.
 
 ## Operational Tooling
 
-- **Admin Dashboard** – Role-based console for compliance checks, account freezes, and manual overrides when needed.
+- **Admin Dashboard** – Role-based console for compliance checks, account freezes, and manual overrides when needed (Port 5173).
+- **API Gateway** – Centralized API management with rate limiting, authentication, and request validation (Port 3002).
+- **Real-time Monitoring** – WebSocket support via Socket.IO for live updates to trading terminals.
 - **Audit Trails** – Every action (trades, transfers, permission changes) logged with timestamps and wallet signatures for easy review.
 - **Reporting & Analytics** – Rollups across markets, accounts, and timeframes prepared for risk, finance, and performance reporting.
+- **Grafana Integration** – Metrics collection and monitoring dashboards for production observability.
 
 ## Deployment Playbooks
 

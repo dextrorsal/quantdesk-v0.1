@@ -4,10 +4,11 @@ QuantDesk is built to handle live trading capital without asking you to compromi
 
 ## 1. Account & Key Protection
 
-- **Non-custodial by default** – QuantDesk never holds your exchange funds or wallet keys. Orders are signed client-side and routed securely.
-- **Environment-scoped secrets** – `.env` files stay local; production deployments expect encrypted secrets or managed vaults.
-- **Role-based access** – Supabase Row Level Security (RLS) policies restrict every table to the authenticated owner; no shared views, no public reads.
-- **Session controls** – JWT expiry and automatic refresh ensure inactive sessions close cleanly.
+- **Non-custodial by default** – QuantDesk never holds your wallet keys. Orders are signed client-side and routed securely.
+- **SIWS Authentication** – Wallet-based authentication (Solana In-App Web3 Signing) with signature verification
+- **Environment-scoped secrets** – `.env` files stay local; production deployments expect encrypted secrets or managed vaults
+- **Role-based access** – Supabase Row Level Security (RLS) policies restrict every table to the authenticated owner; no shared views, no public reads
+- **Session controls** – HTTP-only cookies with JWT tokens, 7-day expiration, and automatic cleanup of inactive sessions
 
 ## 2. Data Layer Safeguards
 
@@ -18,10 +19,11 @@ QuantDesk is built to handle live trading capital without asking you to compromi
 
 ## 3. API & Backend Security
 
-- **Authenticated routes** – Trading, portfolio, and alert endpoints require signed requests; anonymous access is limited to documentation and public status checks.
-- **Request validation** – Every payload passes schema checks before touching business logic; malformed requests are rejected early.
-- **Rate limiting** – Default limit of 100 requests per 15 minutes per token, adjustable per deployment.
-- **Transport security** – HTTPS (or TLS-secured gRPC/WebSockets) enforced for all external communication.
+- **Authenticated routes** – Trading, portfolio, and alert endpoints require wallet signatures; anonymous access is limited to documentation and public status checks
+- **Request validation** – Every payload passes schema checks before touching business logic; malformed requests are rejected early
+- **Rate limiting** – Tiered limits: Public (100 req/min), Trading (10 req/min), Auth (5 per 15 min), Admin (50 req/min), Webhook (20 req/min)
+- **Transport security** – HTTPS enforced for all external communication; WebSockets use Socket.IO with authentication
+- **Transaction verification** – All on-chain transactions verified before processing to prevent fraud
 
 ## 4. Real-Time Services
 
