@@ -4,9 +4,11 @@ QuantDesk includes an admin console for support teams and system operators. This
 
 ## Access Model
 
-- **Dedicated admin frontend** served on a separate route or subdomain (`/admin` or `admin.quantdesk.app`).
-- **Single sign-on ready**: today we use wallet + password auth; MFA and VPN/IP allow-listing are on the hardening roadmap.
-- **Role-based access** with clear tiers: read-only support, account operations, system admin, and super admin for emergency controls.
+- **Dedicated admin frontend** served on a separate route (Port 5173 at `/admin`)
+- **Authentication**: SIWS (Solana In-App Web3 Signing) with wallet signature verification
+- **Session management**: HTTP-only cookies with 7-day expiration for secure authentication
+- **Role-based access** with clear tiers: read-only support, account operations, system admin, and super admin for emergency controls
+- **Hardening roadmap**: MFA and VPN/IP allow-listing planned for production
 
 ## Controls Available Today
 

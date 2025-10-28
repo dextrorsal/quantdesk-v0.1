@@ -56,9 +56,10 @@ SUPABASE_URL=your_supabase_url
 SUPABASE_ANON_KEY=your_supabase_anon_key
 SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
 
-# Authentication
-JWT_SECRET=your_jwt_secret
-JWT_EXPIRES_IN=24h
+# Authentication (SIWS - Solana In-App Web3 Signing)
+# No JWT required - uses wallet signatures and HTTP-only cookies
+SESSION_SECRET=your_session_secret
+SESSION_EXPIRES_IN=7d
 
 # Solana Configuration
 SOLANA_RPC_URL=https://api.devnet.solana.com

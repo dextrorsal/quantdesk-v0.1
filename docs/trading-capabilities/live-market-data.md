@@ -32,9 +32,11 @@ Clients subscribe via the WebSocket layer first, then fall back to REST polling 
 
 ## Caching & Fallbacks
 
-- Redis caches fresh snapshots under `qd:{ENV}:price:{SYMBOL}` and `qd:{ENV}:orderbook:{SYMBOL}` with 1–3 second TTLs.
-- Pub/Sub channels (`qd:{ENV}:price`, `qd:{ENV}:orderbook`) fan out updates to the WebSocket broadcaster.
-- A stale-while-revalidate approach lets the terminal display the last good value immediately while it re-fetches in the background.
+- **Redis caching** (optional in development) stores snapshots under `qd:{ENV}:price:{SYMBOL}` and `qd:{ENV}:orderbook:{SYMBOL}` with 1–3 second TTLs
+- **Socket.IO** handles real-time delivery to WebSocket clients
+- **Database fallback** – Prices stored in Supabase `oracle_prices` table for historical lookups
+- **Pyth Network** – Primary oracle source for live price feeds (BTC, ETH, SOL)
+- Stale-while-revalidate approach lets the terminal display cached values while fetching fresh data
 
 ## Frontend Consumption Pattern
 

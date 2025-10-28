@@ -12,10 +12,11 @@ This guide will help you test the QuantDesk perpetual DEX platform on Solana dev
 - Modern web browser
 
 ### Access the Platform
-1. Visit [QuantDesk Devnet](https://devnet.quantdesk.app)
-2. Connect your Solana wallet
-3. Switch to Devnet network in your wallet
-4. Request test SOL if needed
+1. Start local development server: `pnpm run dev`
+2. Visit `http://localhost:3001`
+3. Connect your Solana wallet
+4. Switch to Devnet network in your wallet
+5. Request test SOL if needed
 
 ## 💰 Getting Test SOL
 

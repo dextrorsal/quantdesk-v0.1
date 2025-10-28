@@ -6,8 +6,9 @@ QuantDesk spans the terminal UI, backend services, smart data ingestion, and MIK
 
 ### Trading Experience
 - Perp terminal with market boards, execution desk, risk dashboard, and MIKEY insight cards.
-- Wallet-driven authentication, sub-accounts, and collateral tracking surfaced in the UI.
-- Supabase + Redis-backed APIs handling orders, portfolios, and live WebSocket updates.
+- SIWS wallet-based authentication (Solana In-App Web3 Signing) with session management.
+- Multi-account support with sub-accounts and delegated access.
+- Supabase-backed APIs handling positions, orders, and portfolios with WebSocket real-time updates.
 
 ### Data & Intelligence Pipeline
 - Redis-stream backbone collecting price ticks, whale activity, news, and user telemetry.
@@ -15,9 +16,12 @@ QuantDesk spans the terminal UI, backend services, smart data ingestion, and MIK
 - MIKEY intelligence layer translating those streams into summaries, alerts, and chat responses.
 
 ### Platform Reliability
-- Row Level Security enforced across Supabase tables with rate limits and audit logs.
-- Dockerized worker fleet, observability dashboards, and CI checks protecting deployments.
-- RPC load balancer blueprint implemented for multi-provider Solana connectivity.
+- Row Level Security enforced across Supabase tables with per-minute rate limits and audit logs.
+- Multi-service architecture (Backend, Frontend, MIKEY-AI, Data Ingestion, Admin Dashboard).
+- HTTP-only cookie sessions with 7-day expiration.
+- Grafana observability dashboards for production monitoring.
+- Dockerized deployment with CI/CD checks.
+- Transaction verification for all on-chain operations.
 
 ## 🚧 Focus Areas in Flight
 

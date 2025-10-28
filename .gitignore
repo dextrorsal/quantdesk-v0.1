@@ -4,7 +4,7 @@
 # This .gitignore balances open source value with proprietary protection
 # Keeps valuable components for community while protecting sensitive code
 # ===================================================================
-
+bmad/
 # ===================================================================
 # 🔒 PRIVATE DOCUMENTATION (Internal Strategy & Analysis)
 # ===================================================================
@@ -73,16 +73,15 @@ certs/
 !/MIKEY-AI/integration/INTEGRATION_SUMMARY.md
 !/MIKEY-AI/integration/REALITY_CHECK.md
 
+# MIKEY-AI - Hide Competitive Intelligence Strategy Docs
+/MIKEY-AI/Docs/*STRATEGY*.md
+
 /data-ingestion/src/processors/trading/
 /data-ingestion/src/analyzers/
 /data-ingestion/src/strategies/
 
 /admin-dashboard/src/components/trading/
 /admin-dashboard/src/services/trading/
-
-# Smart contract source code (proprietary trading logic)
-/contracts/smart-contracts/programs/
-/contracts/programs/
 
 # ===================================================================
 # 🧪 TESTS - SELECTIVE PROTECTION (Show smart contract tests, protect internal tests)

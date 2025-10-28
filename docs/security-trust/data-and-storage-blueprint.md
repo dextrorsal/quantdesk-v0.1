@@ -4,8 +4,8 @@ QuantDesk’s data layer is designed to keep trading records accurate, auditable
 
 ## 1. Core Databases
 
-- **Supabase PostgreSQL 17** – Primary ledger for users, accounts, orders, positions, and trades. We use Postgres directly for speed while retaining Supabase auth and Row Level Security.
-- **Redis Streams & Cache** – Event bus for high-frequency feeds (prices, whale moves, news) and low-latency state (order books, alerts).
+- **Supabase PostgreSQL** – Primary ledger for users, accounts, orders, positions, and trades. We use Postgres directly for speed while retaining Supabase auth and Row Level Security.
+- **Redis Streams & Cache** – Event bus for high-frequency feeds (prices, whale moves, news) and low-latency state (order books, alerts). Optional in development mode.
 - **Timescale Extensions** – Time-series indexes for price and funding data so historical lookups remain sub-second even at scale.
 
 ## 2. Key Tables (What They Hold)

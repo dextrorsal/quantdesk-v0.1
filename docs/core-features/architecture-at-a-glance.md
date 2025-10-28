@@ -18,7 +18,8 @@ QuantDesk is a layered platform: the terminal you see on screen is backed by rea
 
 - **Supabase PostgreSQL** – Source of truth for accounts, orders, positions, and analytics with Row Level Security enforcing per-user access.
 - **Timeseries Schemas** – Tables for oracle prices, funding history, and liquidations tuned with Timescale-style indexing for fast queries.
-- **Redis Caching** – Hot storage for order books, whale flow, and news events feeding both the terminal and MIKEY.
+- **Redis Caching** – Hot storage for order books, whale flow, and news events feeding both the terminal and MIKEY (optional in development).
+- **Session Management** – HTTP-only cookies with Redis-backed session storage for authentication.
 
 ## 4. Blockchain & External Integrations
 
