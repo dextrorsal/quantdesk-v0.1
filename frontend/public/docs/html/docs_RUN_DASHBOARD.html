@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Run Dashboard - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/docs">&larr; Back to Documentation</a>
+        </div>
+        <h1>SOL Trading Dashboard</h1>
+<h2>How to Run the Trading System</h2>
+<ol>
+<li>
+<p>Make sure your ML model environment is activated:
+   <code>bash
+   conda activate ML-torch</code></p>
+</li>
+<li>
+<p>Run the all-in-one trading system script:
+   <code>bash
+   python scripts/start_trading_system.py</code></p>
+</li>
+<li>
+<p>Open your browser and go to:
+   <code>http://127.0.0.1:5000</code></p>
+</li>
+</ol>
+<h2>Dashboard Features</h2>
+<p>The dashboard provides a visual representation of your trading system with:</p>
+<ol>
+<li>
+<p><strong>Real-time Price Chart</strong>: Displays the SOL price with real-time updates</p>
+</li>
+<li>
+<p><strong>Signal Alerts</strong>: Shows trading signals as they occur, with:</p>
+</li>
+<li>Color-coded signal types:<ul>
+<li>Purple: TradingView-style signals</li>
+<li>Blue: Combined signals (weighted approach)</li>
+<li>Orange: Strong signals (both models agree)</li>
+</ul>
+</li>
+<li>Confidence level bars for both models</li>
+<li>
+<p>Timestamp and price at signal generation</p>
+</li>
+<li>
+<p><strong>Performance Statistics</strong>: Shows:</p>
+</li>
+<li>Total number of signals</li>
+<li>Win rate</li>
+<li>Average return</li>
+<li>Last signal time</li>
+</ol>
+<h2>Filtering Signals</h2>
+<p>You can filter signals by type using the dropdown menu in the Trading Signals section:
+- All Signals
+- TradingView Style
+- Combined
+- Strong</p>
+<h2>Customizing Thresholds</h2>
+<p>If you want to adjust the confidence thresholds, run the script with custom parameters:</p>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>scripts/start_trading_system.py<span class="w"> </span>--confidence-threshold<span class="w"> </span><span class="m">0</span>.28<span class="w"> </span>--combined-threshold<span class="w"> </span><span class="m">0</span>.22
+</code></pre></div>
+
+<h2>Stopping the System</h2>
+<p>To stop both the trading system and dashboard, press <code>Ctrl+C</code> in the terminal where you started the system.</p>
+<h2>Troubleshooting</h2>
+<p>If the dashboard isn't showing any data:
+1. Check the logs in the <code>logs</code> directory
+2. Make sure the trading system is running
+3. Try refreshing the dashboard by clicking the 🔄 icon</p>
+<p>If trading signals aren't appearing:
+1. The model might not have detected favorable trading conditions yet
+2. Try lowering the confidence thresholds
+3. Make sure the models are loaded correctly </p>
+    </div>
+</body>
+</html>

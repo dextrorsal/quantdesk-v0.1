@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ai-Agent-Integration - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/docs">&larr; Back to Documentation</a>
+        </div>
+        <h1>AI Agent Integration Guide: ML Trading Strategy Implementation</h1>
+<h2>Overview</h2>
+<p>This guide provides specific prompting strategies and workflows for integrating the ML trading strategy specification into your existing codebase using AI coding agents (Claude Code, Cursor, and the new Amazon Kiro agentic IDE).</p>
+<h2>Pre-Integration Preparation</h2>
+<h3>1. Project Context Documentation</h3>
+<p>Create a comprehensive context file for the AI agents:</p>
+<div class="codehilite"><pre><span></span><code><span class="gh"># PROJECT_CONTEXT.md</span>
+
+<span class="gu">## Current Architecture</span>
+<span class="k">-</span><span class="w"> </span>Language: Python
+<span class="k">-</span><span class="w"> </span>ML Framework: PyTorch (GPU-enabled)
+<span class="k">-</span><span class="w"> </span>Data Sources: [List your data feeds]
+<span class="k">-</span><span class="w"> </span>Trading Framework: [Your current framework]
+<span class="k">-</span><span class="w"> </span>Existing Indicators: RSI, CCI, Wave Trend
+<span class="k">-</span><span class="w"> </span>Database: [Your database setup]
+<span class="k">-</span><span class="w"> </span>Infrastructure: [Cloud/local setup]
+
+<span class="gu">## Key Files Structure</span>
+</code></pre></div>
+
+<p>project/
+├── data/
+│   ├── feeds.py          # Data ingestion
+│   └── preprocessing.py  # Current feature engineering
+├── strategies/
+│   ├── base_strategy.py  # Your base strategy class
+│   └── indicators.py     # RSI, CCI, Wave Trend
+├── execution/
+│   ├── trader.py         # Current trading logic
+│   └── risk_manager.py   # Existing risk management
+└── config/
+    └── settings.py       # Configuration</p>
+<div class="codehilite"><pre><span></span><code>## Dependencies
+- torch==2.0.0
+- pandas==1.5.3
+- numpy==1.24.0
+- [Add your current dependencies]
+
+## Trading Logic Flow
+[Describe your current trading flow]
+</code></pre></div>
+
+<h3>2. Existing Code Samples</h3>
+<p>Prepare representative samples of your key files that the AI agent should understand and integrate with.</p>
+<h2>Agent-Specific Integration Strategies</h2>
+<h3>Claude Code Integration</h3>
+<h4>Initial Setup Prompt</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Use this prompt when starting with Claude Code</span>
+claude-code<span class="w"> </span>--prompt<span class="w"> </span><span class="s2">&quot;I need to integrate advanced ML models into my existing crypto trading system. Here&#39;s my current project structure and a detailed ML specification. Please analyze my existing codebase and create an integration plan that:</span>
+
+<span class="s2">1. Preserves all existing functionality</span>
+<span class="s2">2. Adds the new ML components incrementally</span>
+<span class="s2">3. Maintains my current coding style and patterns</span>
+<span class="s2">4. Provides clear migration steps</span>
+
+<span class="s2">Focus on backward compatibility and gradual deployment.&quot;</span>
+</code></pre></div>
+
+<h4>Iterative Development Prompts</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1"># For feature engineering integration</span>
+claude-code<span class="w"> </span>--prompt<span class="w"> </span><span class="s2">&quot;Looking at my existing indicators.py file, integrate the new ML feature engineering classes while maintaining the same interface pattern. Ensure the new features can be toggled on/off via configuration.&quot;</span>
+
+<span class="c1"># For model training pipeline</span>
+claude-code<span class="w"> </span>--prompt<span class="w"> </span><span class="s2">&quot;Create the model training pipeline that integrates with my existing data preprocessing. Use my current data loading patterns and add the new ML training components as separate modules.&quot;</span>
+
+<span class="c1"># For signal integration</span>
+claude-code<span class="w"> </span>--prompt<span class="w"> </span><span class="s2">&quot;Integrate ML predictions into my existing trading signal generation without breaking current strategy logic. The integration should be additive and configurable.&quot;</span>
+</code></pre></div>
+
+<h3>Cursor IDE Integration</h3>
+<h4>Workspace Setup</h4>
+<ol>
+<li><strong>Open your project in Cursor</strong></li>
+<li><strong>Add the ML specification as a reference document</strong></li>
+<li><strong>Use Cursor's composer feature with context</strong></li>
+</ol>
+<h4>Effective Cursor Prompts</h4>
+<h5>For Code Analysis</h5>
+<div class="codehilite"><pre><span></span><code><span class="nv">@codebase</span><span class="w"> </span><span class="n">Analyze</span><span class="w"> </span><span class="n">my</span><span class="w"> </span><span class="k">current</span><span class="w"> </span><span class="n">trading</span><span class="w"> </span><span class="k">system</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">identify</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">best</span><span class="w"> </span><span class="n">integration</span><span class="w"> </span><span class="n">points</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">ML</span><span class="w"> </span><span class="n">components</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">specification</span><span class="p">.</span><span class="w"> </span><span class="n">Focus</span><span class="w"> </span><span class="k">on</span><span class="err">:</span>
+<span class="o">-</span><span class="w"> </span><span class="k">Where</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">add</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="n">engineering</span>
+<span class="o">-</span><span class="w"> </span><span class="n">How</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">integrate</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="n">predictions</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Minimal</span><span class="w"> </span><span class="n">changes</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">existing</span><span class="w"> </span><span class="n">code</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Configuration</span><span class="o">-</span><span class="n">driven</span><span class="w"> </span><span class="n">approach</span>
+</code></pre></div>
+
+<h5>For Implementation</h5>
+<div class="codehilite"><pre><span></span><code><span class="nv">@codebase</span><span class="w"> </span><span class="n">Looking</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">my</span><span class="w"> </span><span class="n">existing</span><span class="w"> </span><span class="o">[</span><span class="n">filename</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">implement</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="o">[</span><span class="n">specific ML component</span><span class="o">]</span><span class="w"> </span><span class="k">while</span><span class="err">:</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Following</span><span class="w"> </span><span class="n">my</span><span class="w"> </span><span class="k">current</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="n">patterns</span>
+<span class="o">-</span><span class="w"> </span><span class="k">Using</span><span class="w"> </span><span class="n">my</span><span class="w"> </span><span class="n">existing</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="n">handling</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Maintaining</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">same</span><span class="w"> </span><span class="n">configuration</span><span class="w"> </span><span class="n">style</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Adding</span><span class="w"> </span><span class="n">comprehensive</span><span class="w"> </span><span class="n">logging</span><span class="w"> </span><span class="ow">like</span><span class="w"> </span><span class="n">my</span><span class="w"> </span><span class="n">other</span><span class="w"> </span><span class="n">modules</span>
+</code></pre></div>
+
+<h5>For Testing Integration</h5>
+<div class="codehilite"><pre><span></span><code><span class="nv">@codebase</span><span class="w"> </span><span class="k">Create</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="n">tests</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ML</span><span class="w"> </span><span class="n">integration</span><span class="w"> </span><span class="nl">that</span><span class="p">:</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Mock</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">ML</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="n">predictions</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Test</span><span class="w"> </span><span class="n">backward</span><span class="w"> </span><span class="n">compatibility</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Validate</span><span class="w"> </span><span class="n">configuration</span><span class="w"> </span><span class="n">options</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Follow</span><span class="w"> </span><span class="n">my</span><span class="w"> </span><span class="n">existing</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="n">patterns</span>
+</code></pre></div>
+
+<h3>Amazon Kiro Agentic IDE Integration</h3>
+<h4>Understanding Kiro's Unique Features</h4>
+<p>Kiro is an agentic IDE that helps you do your best work with features such as specs, steering, and hooks. Amazon Kiro AI IDE, an advanced tool for spec-driven development and rapid code prototyping was just released in preview and offers intelligent agentic workflows for automation.</p>
+<h4>Spec-Driven Development with Kiro</h4>
+<p>Since Kiro excels at spec-driven development, leverage your ML specification directly:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Create a Kiro Spec file: ml_integration.kspec</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">KIRO SPECIFICATION: ML Trading Strategy Integration</span>
+
+<span class="sd">TARGET: Existing crypto trading system</span>
+<span class="sd">GOAL: Integrate ML models while preserving existing functionality</span>
+<span class="sd">CONSTRAINTS: </span>
+<span class="sd">- Backward compatibility required</span>
+<span class="sd">- Gradual rollout approach</span>
+<span class="sd">- PyTorch GPU optimization</span>
+<span class="sd">- Configuration-driven features</span>
+
+<span class="sd">INTEGRATION_POINTS:</span>
+<span class="sd">1. Feature engineering enhancement</span>
+<span class="sd">2. Model training pipeline</span>
+<span class="sd">3. Prediction engine integration</span>
+<span class="sd">4. Signal blending logic</span>
+
+<span class="sd">EXISTING_PATTERNS:</span>
+<span class="sd">- Class-based architecture</span>
+<span class="sd">- Configuration management via settings.py</span>
+<span class="sd">- Logging with structured format</span>
+<span class="sd">- Error handling with fallbacks</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</code></pre></div>
+
+<h4>Kiro Steering Prompts</h4>
+<p>Use Kiro's steering feature to guide the implementation:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># KIRO_STEERING: Feature Engineering Integration</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Analyze existing indicators.py and extend with ML features.</span>
+<span class="sd">Maintain same interface pattern.</span>
+<span class="sd">Add configuration toggles.</span>
+<span class="sd">Preserve existing RSI, CCI, Wave Trend calculations.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># KIRO_STEERING: Model Integration  </span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Create ml/ module structure compatible with existing data pipeline.</span>
+<span class="sd">Use existing data loading patterns.</span>
+<span class="sd">Implement training/prediction separation.</span>
+<span class="sd">Add model versioning and management.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># KIRO_STEERING: Signal Blending</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Extend current SignalGenerator class.</span>
+<span class="sd">Add ML prediction input option.</span>
+<span class="sd">Implement confidence-based blending.</span>
+<span class="sd">Maintain fallback to traditional signals.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</code></pre></div>
+
+<h4>Kiro Hooks for Integration Points</h4>
+<p>Leverage Kiro's hooks feature for key integration points:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># KIRO_HOOK: pre_signal_generation</span>
+<span class="k">def</span> <span class="nf">integrate_ml_prediction</span><span class="p">(</span><span class="n">traditional_signal</span><span class="p">,</span> <span class="n">market_data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Hook to add ML prediction before final signal generation&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">enable_ml</span> <span class="ow">and</span> <span class="n">ml_engine</span><span class="o">.</span><span class="n">is_ready</span><span class="p">():</span>
+        <span class="n">ml_prediction</span> <span class="o">=</span> <span class="n">ml_engine</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">market_data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">blend_signals</span><span class="p">(</span><span class="n">traditional_signal</span><span class="p">,</span> <span class="n">ml_prediction</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">traditional_signal</span>
+
+<span class="c1"># KIRO_HOOK: post_feature_calculation  </span>
+<span class="k">def</span> <span class="nf">enhance_features_with_ml</span><span class="p">(</span><span class="n">base_features</span><span class="p">,</span> <span class="n">market_data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Hook to add ML-derived features after basic calculation&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">enable_ml_features</span><span class="p">:</span>
+        <span class="n">ml_features</span> <span class="o">=</span> <span class="n">ml_feature_engine</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">market_data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span><span class="o">**</span><span class="n">base_features</span><span class="p">,</span> <span class="o">**</span><span class="n">ml_features</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">base_features</span>
+
+<span class="c1"># KIRO_HOOK: pre_position_sizing</span>
+<span class="k">def</span> <span class="nf">ml_position_adjustment</span><span class="p">(</span><span class="n">base_position</span><span class="p">,</span> <span class="n">ml_confidence</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Hook to adjust position size based on ML confidence&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">ml_confidence</span> <span class="o">&gt;</span> <span class="n">config</span><span class="o">.</span><span class="n">high_confidence_threshold</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">base_position</span> <span class="o">*</span> <span class="n">config</span><span class="o">.</span><span class="n">ml_confidence_multiplier</span>
+    <span class="k">return</span> <span class="n">base_position</span>
+</code></pre></div>
+
+<h4>Kiro Agentic Workflow Setup</h4>
+<p>Configure Kiro's agentic automation for your integration:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># .kiro/workflows/ml_integration.yml</span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ML</span><span class="nv"> </span><span class="s">Trading</span><span class="nv"> </span><span class="s">Integration</span><span class="nv"> </span><span class="s">Workflow&quot;</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Automated</span><span class="nv"> </span><span class="s">integration</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">ML</span><span class="nv"> </span><span class="s">components&quot;</span>
+
+<span class="nt">agents</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;code_analyzer&quot;</span>
+<span class="w">    </span><span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Analyze</span><span class="nv"> </span><span class="s">existing</span><span class="nv"> </span><span class="s">codebase</span><span class="nv"> </span><span class="s">patterns&quot;</span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;feature_integrator&quot;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Integrate</span><span class="nv"> </span><span class="s">ML</span><span class="nv"> </span><span class="s">feature</span><span class="nv"> </span><span class="s">engineering&quot;</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;code_analyzer&quot;</span><span class="p p-Indicator">]</span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;model_integrator&quot;</span>
+<span class="w">    </span><span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Add</span><span class="nv"> </span><span class="s">model</span><span class="nv"> </span><span class="s">training</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">prediction&quot;</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;feature_integrator&quot;</span><span class="p p-Indicator">]</span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;signal_integrator&quot;</span>
+<span class="w">    </span><span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Integrate</span><span class="nv"> </span><span class="s">ML</span><span class="nv"> </span><span class="s">signals</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">existing</span><span class="nv"> </span><span class="s">logic&quot;</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;model_integrator&quot;</span><span class="p p-Indicator">]</span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;test_generator&quot;</span>
+<span class="w">    </span><span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Generate</span><span class="nv"> </span><span class="s">comprehensive</span><span class="nv"> </span><span class="s">test</span><span class="nv"> </span><span class="s">suite&quot;</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;signal_integrator&quot;</span><span class="p p-Indicator">]</span>
+
+<span class="nt">hooks</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">pre_integration</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">validate_existing_functionality</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">backup_current_codebase</span>
+
+<span class="w">  </span><span class="nt">post_integration</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">run_backward_compatibility_tests</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">validate_performance_benchmarks</span>
+</code></pre></div>
+
+<h2>Strategic Integration Workflow</h2>
+<h3>Phase 1: Analysis and Planning</h3>
+<div class="codehilite"><pre><span></span><code><span class="gs">**AI Agent Prompt Template:**</span>
+
+&quot;I have an existing crypto trading system and want to integrate advanced ML capabilities using [Claude Code/Cursor/Kiro]. Please:
+
+<span class="k">1.</span> <span class="gs">**Code Review**</span>: Analyze my existing codebase and identify:
+<span class="w">   </span><span class="k">-</span><span class="w"> </span>Current architecture patterns
+<span class="w">   </span><span class="k">-</span><span class="w"> </span>Extension points for ML integration
+<span class="w">   </span><span class="k">-</span><span class="w"> </span>Potential conflicts or dependencies
+<span class="w">   </span><span class="k">-</span><span class="w"> </span>Best practices I&#39;m already following
+
+<span class="k">2.</span> <span class="gs">**Integration Plan**</span>: Create a step-by-step plan that:
+<span class="w">   </span><span class="k">-</span><span class="w"> </span>Preserves existing functionality
+<span class="w">   </span><span class="k">-</span><span class="w"> </span>Minimizes code changes
+<span class="w">   </span><span class="k">-</span><span class="w"> </span>Allows gradual rollout
+<span class="w">   </span><span class="k">-</span><span class="w"> </span>Maintains testability
+
+<span class="k">3.</span> <span class="gs">**Risk Assessment**</span>: Identify potential issues:
+<span class="w">   </span><span class="k">-</span><span class="w"> </span>Breaking changes
+<span class="w">   </span><span class="k">-</span><span class="w"> </span>Performance impacts
+<span class="w">   </span><span class="k">-</span><span class="w"> </span>Integration complexity
+<span class="w">   </span><span class="k">-</span><span class="w"> </span>Rollback strategies
+
+Please provide specific file changes and code examples.&quot;
+</code></pre></div>
+
+<h3>Phase 2: Incremental Implementation</h3>
+<h4>Step 1: Feature Engineering Integration</h4>
+<div class="codehilite"><pre><span></span><code><span class="gs">**Prompt for AI Agent:**</span>
+
+&quot;Integrate the advanced feature engineering from the ML specification into my existing feature pipeline. Requirements:
+
+<span class="k">-</span><span class="w"> </span>Extend my current FeatureBase class
+<span class="k">-</span><span class="w"> </span>Add new features as optional modules
+<span class="k">-</span><span class="w"> </span>Maintain existing feature calculation methods
+<span class="k">-</span><span class="w"> </span>Use configuration flags to enable/disable new features
+<span class="k">-</span><span class="w"> </span>Follow my current naming conventions
+<span class="k">-</span><span class="w"> </span>Add the same level of documentation
+
+Show me the exact code changes needed for [specific file].&quot;
+</code></pre></div>
+
+<h4>Step 2: Model Integration</h4>
+<div class="codehilite"><pre><span></span><code><span class="gs">**Prompt for AI Agent:**</span>
+
+&quot;Add the ML model training and prediction pipeline to my project. Requirements:
+
+<span class="k">-</span><span class="w"> </span>Create new ml/ directory with proper structure
+<span class="k">-</span><span class="w"> </span>Integrate with my existing data loading
+<span class="k">-</span><span class="w"> </span>Use my current configuration management
+<span class="k">-</span><span class="w"> </span>Add proper error handling and logging
+<span class="k">-</span><span class="w"> </span>Make model predictions optional (fallback to existing logic)
+<span class="k">-</span><span class="w"> </span>Follow my current class inheritance patterns
+
+Focus on the ModelTrainer class first, then PredictionEngine.&quot;
+</code></pre></div>
+
+<h4>Step 3: Signal Integration</h4>
+<div class="codehilite"><pre><span></span><code><span class="gs">**Prompt for AI Agent:**</span>
+
+&quot;Integrate ML predictions into my existing trading signal generation. Requirements:
+
+<span class="k">-</span><span class="w"> </span>Modify my SignalGenerator class minimally
+<span class="k">-</span><span class="w"> </span>Add ML predictions as additional input
+<span class="k">-</span><span class="w"> </span>Maintain existing signal logic as fallback
+<span class="k">-</span><span class="w"> </span>Use confidence-based blending
+<span class="k">-</span><span class="w"> </span>Add comprehensive logging
+<span class="k">-</span><span class="w"> </span>Ensure backward compatibility
+
+Show me exactly how to modify [my_signal_file.py].&quot;
+</code></pre></div>
+
+<h3>Phase 3: Testing and Validation</h3>
+<h4>Testing Strategy Prompt</h4>
+<div class="codehilite"><pre><span></span><code><span class="gs">**AI Agent Prompt:**</span>
+
+&quot;Create a comprehensive testing strategy for the ML integration:
+
+<span class="k">1.</span> <span class="gs">**Unit Tests**</span>: For each new ML component
+<span class="k">2.</span> <span class="gs">**Integration Tests**</span>: End-to-end with existing system
+<span class="k">3.</span> <span class="gs">**Backward Compatibility Tests**</span>: Ensure nothing breaks
+<span class="k">4.</span> <span class="gs">**Performance Tests**</span>: Measure impact on execution speed
+<span class="k">5.</span> <span class="gs">**Mock Tests**</span>: For ML models during development
+
+Use my existing test framework and patterns. Show me specific test implementations.&quot;
+</code></pre></div>
+
+<h2>Advanced Prompting Techniques</h2>
+<h3>Context-Aware Prompting</h3>
+<div class="codehilite"><pre><span></span><code><span class="gs">**Multi-Context Prompt:**</span>
+
+&quot;I&#39;m integrating ML into my trading system. Here&#39;s my context:
+
+<span class="gs">**Current System:**</span>
+<span class="k">-</span><span class="w"> </span>[Paste key existing code snippets]
+<span class="k">-</span><span class="w"> </span>[Current performance metrics]
+<span class="k">-</span><span class="w"> </span>[Existing architecture decisions]
+
+<span class="gs">**ML Integration Goal:**</span>
+<span class="k">-</span><span class="w"> </span>[Specific ML specification sections]
+<span class="k">-</span><span class="w"> </span>[Performance targets]
+<span class="k">-</span><span class="w"> </span>[Integration constraints]
+
+<span class="gs">**Specific Request:**</span>
+[Detailed implementation request]
+
+Please provide code that seamlessly integrates with my existing patterns.&quot;
+</code></pre></div>
+
+<h3>Iterative Refinement Prompts</h3>
+<div class="codehilite"><pre><span></span><code><span class="gs">**Refinement Prompt Template:**</span>
+
+&quot;The previous implementation needs adjustment. Here&#39;s what I found:
+
+<span class="gs">**Issues Encountered:**</span>
+<span class="k">-</span><span class="w"> </span>[Specific problems]
+<span class="k">-</span><span class="w"> </span>[Performance concerns]
+<span class="k">-</span><span class="w"> </span>[Integration conflicts]
+
+<span class="gs">**My Existing Code Style:**</span>
+<span class="k">-</span><span class="w"> </span>[Show examples of your patterns]
+
+<span class="gs">**Requested Changes:**</span>
+<span class="k">-</span><span class="w"> </span>[Specific modifications needed]
+
+Please revise the implementation to address these issues while maintaining integration with my existing codebase.&quot;
+</code></pre></div>
+
+<h2>Common Integration Patterns</h2>
+<h3>1. Configuration-Driven Integration</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Prompt: &quot;Make all ML features configurable&quot;</span>
+<span class="k">class</span> <span class="nc">MLConfig</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enable_ml_features</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enable_ml_predictions</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ml_confidence_threshold</span> <span class="o">=</span> <span class="mf">0.7</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fallback_to_traditional</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># Usage in existing code</span>
+<span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">enable_ml_predictions</span> <span class="ow">and</span> <span class="n">ml_confidence</span> <span class="o">&gt;</span> <span class="n">config</span><span class="o">.</span><span class="n">ml_confidence_threshold</span><span class="p">:</span>
+    <span class="n">signal</span> <span class="o">=</span> <span class="n">ml_prediction</span>
+<span class="k">elif</span> <span class="n">config</span><span class="o">.</span><span class="n">fallback_to_traditional</span><span class="p">:</span>
+    <span class="n">signal</span> <span class="o">=</span> <span class="n">traditional_strategy</span><span class="o">.</span><span class="n">get_signal</span><span class="p">()</span>
+</code></pre></div>
+
+<h3>2. Decorator-Based Integration</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Prompt: &quot;Use decorators to add ML functionality to existing methods&quot;</span>
+<span class="k">def</span> <span class="nf">with_ml_enhancement</span><span class="p">(</span><span class="n">confidence_threshold</span><span class="o">=</span><span class="mf">0.7</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="c1"># Get traditional signal</span>
+            <span class="n">traditional_signal</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+            <span class="c1"># Get ML enhancement</span>
+            <span class="k">if</span> <span class="n">ml_engine</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+                <span class="n">ml_signal</span> <span class="o">=</span> <span class="n">ml_engine</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">ml_signal</span><span class="o">.</span><span class="n">confidence</span> <span class="o">&gt;</span> <span class="n">confidence_threshold</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">blend_signals</span><span class="p">(</span><span class="n">traditional_signal</span><span class="p">,</span> <span class="n">ml_signal</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">traditional_signal</span>
+        <span class="k">return</span> <span class="n">wrapper</span>
+    <span class="k">return</span> <span class="n">decorator</span>
+</code></pre></div>
+
+<h3>3. Factory Pattern Integration</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Prompt: &quot;Use factory pattern to integrate ML models&quot;</span>
+<span class="k">class</span> <span class="nc">PredictionEngineFactory</span><span class="p">:</span>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">create_engine</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">use_ml</span> <span class="ow">and</span> <span class="n">ml_models_available</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">MLPredictionEngine</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">ml_models</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">TraditionalPredictionEngine</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">traditional_indicators</span><span class="p">)</span>
+</code></pre></div>
+
+<h2>Debugging and Troubleshooting Prompts</h2>
+<h3>Performance Issues</h3>
+<div class="codehilite"><pre><span></span><code><span class="gs">**Performance Debugging Prompt:**</span>
+
+&quot;The ML integration is causing performance issues. Help me optimize:
+
+<span class="gs">**Current Issues:**</span>
+<span class="k">-</span><span class="w"> </span>[Specific performance problems]
+<span class="k">-</span><span class="w"> </span>[Timing measurements]
+
+<span class="gs">**My Existing Code:**</span>
+<span class="k">-</span><span class="w"> </span>[Show problematic code]
+
+<span class="gs">**Requirements:**</span>
+<span class="k">-</span><span class="w"> </span>Maintain prediction accuracy
+<span class="k">-</span><span class="w"> </span>Reduce latency to &lt;100ms
+<span class="k">-</span><span class="w"> </span>Use my existing caching patterns
+
+Please provide optimized implementation with profiling suggestions.&quot;
+</code></pre></div>
+
+<h3>Integration Conflicts</h3>
+<div class="codehilite"><pre><span></span><code><span class="gs">**Conflict Resolution Prompt:**</span>
+
+&quot;I&#39;m getting conflicts between my existing code and the new ML integration:
+
+<span class="gs">**Error Messages:**</span>
+<span class="k">-</span><span class="w"> </span>[Specific errors]
+
+<span class="gs">**Conflicting Code:**</span>
+<span class="k">-</span><span class="w"> </span>[Show conflicting sections]
+
+<span class="gs">**My Constraints:**</span>
+<span class="k">-</span><span class="w"> </span>Cannot modify [specific existing code]
+<span class="k">-</span><span class="w"> </span>Must maintain [specific functionality]
+
+Please provide a solution that works around these constraints.&quot;
+</code></pre></div>
+
+<h2>Validation and Testing Prompts</h2>
+<h3>Comprehensive Testing</h3>
+<div class="codehilite"><pre><span></span><code><span class="gs">**Testing Strategy Prompt:**</span>
+
+&quot;Create a complete testing suite for the ML integration:
+
+<span class="k">1.</span> <span class="gs">**Functional Tests**</span>: Verify ML predictions work correctly
+<span class="k">2.</span> <span class="gs">**Performance Tests**</span>: Ensure acceptable speed
+<span class="k">3.</span> <span class="gs">**Integration Tests**</span>: Test with existing system
+<span class="k">4.</span> <span class="gs">**Edge Case Tests**</span>: Handle missing data, model failures
+<span class="k">5.</span> <span class="gs">**Regression Tests**</span>: Ensure existing functionality intact
+
+Use my existing test framework [pytest/unittest] and follow my test patterns.&quot;
+</code></pre></div>
+
+<h3>Gradual Rollout Strategy</h3>
+<div class="codehilite"><pre><span></span><code><span class="gs">**Rollout Planning Prompt:**</span>
+
+&quot;Design a safe rollout strategy for the ML integration:
+
+<span class="k">1.</span> <span class="gs">**Development Phase**</span>: Local testing with historical data
+<span class="k">2.</span> <span class="gs">**Staging Phase**</span>: Paper trading with live data
+<span class="k">3.</span> <span class="gs">**Production Phase**</span>: Gradual capital allocation
+
+Include:
+<span class="k">-</span><span class="w"> </span>Feature flags for quick rollback
+<span class="k">-</span><span class="w"> </span>Monitoring and alerting
+<span class="k">-</span><span class="w"> </span>A/B testing framework
+<span class="k">-</span><span class="w"> </span>Performance comparison tools
+
+Show me the implementation for each phase.&quot;
+</code></pre></div>
+
+<h2>Best Practices for AI Agent Collaboration</h2>
+<h3>1. Always Provide Context</h3>
+<ul>
+<li>Share your existing code patterns</li>
+<li>Explain your constraints and requirements</li>
+<li>Include performance expectations</li>
+<li>Mention your coding standards</li>
+</ul>
+<h3>2. Iterate and Refine</h3>
+<ul>
+<li>Start with basic integration</li>
+<li>Test thoroughly at each step</li>
+<li>Refine based on results</li>
+<li>Use agent feedback to improve</li>
+</ul>
+<h3>3. Maintain Documentation</h3>
+<ul>
+<li>Document all changes made by AI agents</li>
+<li>Keep track of what works and what doesn't</li>
+<li>Create integration guides for future reference</li>
+<li>Update your project documentation</li>
+</ul>
+<h3>4. Validate Everything</h3>
+<ul>
+<li>Never blindly accept AI-generated code</li>
+<li>Test all integrations thoroughly</li>
+<li>Review for security implications</li>
+<li>Ensure performance meets requirements</li>
+</ul>
+<h3>5. Leverage Kiro's Unique Capabilities</h3>
+<ul>
+<li>Use spec-driven development for complex integrations</li>
+<li>Implement steering for guided code generation</li>
+<li>Set up hooks for clean integration points</li>
+<li>Configure agentic workflows for automation</li>
+</ul>
+<p>This guide will help you effectively collaborate with AI coding agents to integrate the ML trading strategy into your existing system while maintaining stability and performance.</p>
+    </div>
+</body>
+</html>

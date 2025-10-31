@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.1-Real-Time-Portfolio-Updates.Story - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/">&larr; Back to Documentation</a>
+        </div>
+        <h1>1.1 Real-time Portfolio Updates</h1>
+<h2>Story Details</h2>
+<p><strong>Status:</strong> Approved 
+<strong>Priority:</strong> Medium<br />
+<strong>Department:</strong> Frontend<br />
+<strong>Supporting Departments:</strong> Backend, Database, Caching
+<strong>Complexity:</strong> 
+- Technical: Medium
+- Integration: High
+- Risk: Low</p>
+<h2>User Story</h2>
+<p><strong>As a:</strong> trader
+<strong>I want:</strong> See my portfolio value update in real-time on the dashboard
+<strong>So that:</strong> I can make informed trading decisions based on current market conditions</p>
+<h2>Acceptance Criteria</h2>
+<h3>Functional Criteria</h3>
+<ul>
+<li>[ ] Portfolio value updates automatically every 5 seconds</li>
+<li>[ ] Individual position values reflect current market prices</li>
+<li>[ ] UI shows smooth animations without flickering</li>
+<li>[ ] Updates pause when user is viewing order form to prevent interference</li>
+</ul>
+<h3>Integration Requirements</h3>
+<ul>
+<li><strong>Backend:</strong> Real-time WebSocket endpoint for portfolio updates</li>
+<li><strong>Database:</strong> Efficient portfolio aggregation queries</li>
+<li><strong>Caching:</strong> Portfolio data cached with 5-second TTL</li>
+<li><strong>Oracle:</strong> Real-time price feed integration</li>
+</ul>
+<h3>Cross-Department Dependencies</h3>
+<ul>
+<li><strong>Dependency 1:</strong> Backend WebSocket service for real-time data (Dep: Backend)</li>
+<li><strong>Dependency 2:</strong> Portfolio aggregation query optimization (Dep: Database)</li>
+<li><strong>Dependency 3:</strong> Cache invalidation strategy for portfolio data (Dep: Caching)</li>
+<li><strong>Dependency 4:</strong> Real-time price processing (Dep: Oracle public feed)</li>
+</ul>
+<h2>Technical Context</h2>
+<h3>Current Architecture</h3>
+<p>Frontend currently polls portfolio API every 30 seconds. This needs to change to WebSocket-based real-time updates for better UX.</p>
+<h3>Department-Specific Context</h3>
+<h4>Frontend Context</h4>
+<ul>
+<li><strong>Components Involved:</strong> PortfolioDashboard, PositionCard, PortfolioValue</li>
+<li><strong>State Management:</strong> Redux store slices for portfolio and positions</li>
+<li><strong>API Endpoints Required:</strong> WebSocket /ws/portfolio</li>
+</ul>
+<h4>Backend Context</h4>
+<ul>
+<li><strong>Services:</strong> PortfolioService, WebSocketManager, OracleService</li>
+<li><strong>Database Tables:</strong> positions, trades, users</li>
+<li><strong>Cache Strategy:</strong> Redis cache for calculated portfolio data</li>
+</ul>
+<h4>Database Context</h4>
+<ul>
+<li><strong>Tables:</strong> users, positions, trades, portfolio_snapshots</li>
+<li><strong>Indexes:</strong> Composite index on (user_id, asset_id) for positions, timestamp index for trades</li>
+<li><strong>Queries:</strong> SUM(positions.quantity * current_price) GROUP BY user_id</li>
+</ul>
+<h4>Caching Context</h4>
+<ul>
+<li><strong>Cache Keys:</strong> portfolio:{user_id}, position:{user_id}:{asset_id}</li>
+<li><strong>TTL Strategy:</strong> 5 seconds for portfolio, 30 seconds for individual positions</li>
+<li><strong>Invalidation:</strong> Manual invalidation on trades, automatic expiration for price updates</li>
+</ul>
+<h2>Implementation Details</h2>
+<h3>Development Tasks</h3>
+<h4>Frontend Tasks (8h)</h4>
+<ol>
+<li>Implement WebSocket client reconnect logic with exponential backoff</li>
+<li>Create Redux reducers for real-time portfolio updates</li>
+<li>Update PortfolioDashboard component to handle real-time data</li>
+<li>Add smooth animations for value changes using React Spring</li>
+</ol>
+<h4>Backend Tasks (10h)</h4>
+<ol>
+<li>Create WebSocket endpoint <code>/ws/portfolio</code> with user-specific rooms</li>
+<li>Implement efficient portfolio calculation service</li>
+<li>Add Oracle price feed integration for real-time prices</li>
+<li>Create background task for portfolio recalculation every 5 seconds</li>
+</ol>
+<h4>Database Tasks (4h)</h4>
+<ol>
+<li>Optimize portfolio aggregation query with proper indexes</li>
+<li>Add materialized view for position values if performance requires</li>
+<li>Create database function for portfolio calculation</li>
+</ol>
+<h3>Integration Sequence</h3>
+<ol>
+<li><strong>Phase 1:</strong> Backend WebSocket service implementation (Backend)</li>
+<li><strong>Phase 2:</strong> Database query optimization (Database) </li>
+<li><strong>Phase 3:</strong> Frontend WebSocket client and UI updates (Frontend)</li>
+</ol>
+<h2>Testing Strategy</h2>
+<h3>Frontend Testing</h3>
+<ul>
+<li><strong>Unit Tests:</strong> WebSocket client reconnection logic, Redux reducers</li>
+<li><strong>Integration Tests:</strong> Component updates with mock WebSocket data</li>
+<li><strong>E2E Tests:</strong> Full portfolio update flow in browser automation</li>
+</ul>
+<h3>Backend Testing</h3>
+<ul>
+<li><strong>Unit Tests:</strong> Portfolio calculation logic, WebSocket message handling</li>
+<li><strong>API Tests:</strong> WebSocket endpoint functionality with mock clients</li>
+<li><strong>Integration Tests:</strong> End-to-end portfolio update with database and cache</li>
+</ul>
+<h3>Cross-Department Testing</h3>
+<ul>
+<li><strong>Contract:</strong> Full data flow from Oracle price updates to frontend display</li>
+<li><strong>Data Flow:</strong> Cache invalidation triggers correct WebSocket messages</li>
+<li><strong>Performance:</strong> 100 concurrent users can receive updates without degradation</li>
+</ul>
+<h2>Quality Gates</h2>
+<h3>Key Performance Indicators</h3>
+<ul>
+<li><strong>Response Time:</strong> WebSocket messages delivered within 100ms</li>
+<li><strong>Throughput:</strong> Support 1000 concurrent WebSocket connections</li>
+<li><strong>Error Rate:</strong> &lt;0.1% WebSocket disconnections (excluding client issues)</li>
+</ul>
+<h3>Security Requirements</h3>
+<ul>
+<li><strong>Authentication:</strong> WebSocket connections validated with JWT tokens</li>
+<li><strong>Data Protection:</strong> User-specific rooms prevent data leakage</li>
+<li><strong>Audit Trail:</strong> WebSocket connection events logged</li>
+</ul>
+<h2>Risks and Mitigations</h2>
+<h3>Technical Risks</h3>
+<ul>
+<li><strong>Risk 1:</strong> WebSocket connection instability - <em>Mitigation:</em> Implement exponential backoff reconnection</li>
+<li><strong>Risk 2:</strong> Database performance under load - <em>Mitigation:</em> Proper indexing and caching strategy</li>
+</ul>
+<h3>Integration Risks</h3>
+<ul>
+<li><strong>Risk 1:</strong> Cache inconsistency with database - <em>Mitigation:</em> Database triggers for cache invalidation</li>
+<li><strong>Risk 2:</strong> Frontend state synchronization issues - <em>Mitigation:</em> Designated backend as source of truth</li>
+</ul>
+<h2>Rollout Strategy</h2>
+<h3>Deployment Phases</h3>
+<ol>
+<li><strong>Phase 1:</strong> Backend WebSocket service (Backend) (2025-10-20)</li>
+<li><strong>Phase 2:</strong> Database optimizations (Database) (2025-10-21)</li>
+<li><strong>Phase 3:</strong> Frontend real-time updates (Frontend) (2025-10-22)</li>
+</ol>
+<h3>Rollback Plan</h3>
+<ul>
+<li><strong>Trigger:</strong> &gt;1% WebSocket error rate or frontend performance degradation</li>
+<li><strong>Procedure:</strong> Switch to 30-second polling fallback mechanism</li>
+<li><strong>Verification:</strong> Monitor portfolio update frequency and error rates</li>
+</ul>
+<h2>Success Metrics</h2>
+<ul>
+<li><strong>User Metrics:</strong> Increase in trading volume, reduced page refreshes</li>
+<li><strong>Technical Metrics:</strong> &lt;5s data latency, 99.9% WebSocket uptime</li>
+<li><strong>Business Metrics:</strong> Improved user engagement metrics</li>
+</ul>
+<hr />
+<p><strong>Story Created:</strong> 15/10/2025
+<strong>Last Updated:</strong> 15/10/2025
+<strong>Review Required:</strong> Yes</p>
+<hr />
+<p><em>This story demonstrates cross-departmental coordination between Frontend, Backend, Database, and Caching departments.</em></p>
+    </div>
+</body>
+</html>

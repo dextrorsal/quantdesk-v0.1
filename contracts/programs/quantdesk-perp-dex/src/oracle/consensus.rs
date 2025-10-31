@@ -75,7 +75,7 @@ pub fn get_consensus_price(
                  pyth_price.get_scaled_price(), switchboard_price.get_scaled_price());
             
             // Both oracles available - use consensus logic
-            let consensus_price = calculate_weighted_consensus(pyth_price, switchboard_price)?;
+            let consensus_price = calculate_weighted_consensus(&pyth_price, &switchboard_price)?;
             
             // Validate consensus price
             validate_consensus_price(&consensus_price, max_staleness)?;
@@ -138,7 +138,7 @@ pub fn get_consensus_price(
 /// 
 /// # Returns
 /// * `Result<OraclePrice>` - Weighted consensus price
-fn calculate_weighted_consensus(p1: OraclePrice, p2: OraclePrice) -> Result<OraclePrice> {
+fn calculate_weighted_consensus(p1: &OraclePrice, p2: &OraclePrice) -> Result<OraclePrice> {
     // Check for price manipulation (outlier detection)
     let price_diff_percentage = calculate_price_difference_percentage(&p1, &p2);
     
@@ -146,7 +146,7 @@ fn calculate_weighted_consensus(p1: OraclePrice, p2: OraclePrice) -> Result<Orac
         msg!("⚠️ Large price difference detected: {:.2}%", price_diff_percentage);
         
         // Use median instead of weighted average for outlier protection
-        return calculate_median_consensus(p1, p2);
+        return calculate_median_consensus(p1.clone(), p2.clone());
     }
     
     // Calculate weighted average based on confidence intervals
@@ -333,7 +333,7 @@ fn validate_single_oracle_price(price: &OraclePrice, max_staleness: i64) -> Resu
 /// 
 /// # Returns
 /// * `Result<()>` - Success if caching completed
-fn cache_consensus_result(cache_account: &mut AccountInfo, price: &OraclePrice) -> Result<()> {
+fn cache_consensus_result(_cache_account: &mut AccountInfo, price: &OraclePrice) -> Result<()> {
     msg!("💾 Caching consensus result: ${:.2}", price.get_scaled_price());
     
     // TODO: Implement actual caching logic when price cache account structure is defined

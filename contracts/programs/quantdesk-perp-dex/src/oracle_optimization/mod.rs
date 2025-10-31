@@ -4,4 +4,3 @@
 
 pub mod batch_validation;
 pub mod switchboard;
-pub mod consensus;

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Osvm-Devnet-Guide - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/">&larr; Back to Documentation</a>
+        </div>
+        <h1>OSVM Devnet Guide for QuantDesk (Node/TS)</h1>
+<h2>Ports and Environment</h2>
+<ul>
+<li>Frontend: 3001</li>
+<li>Backend: 3002</li>
+<li>OSVM local RPC: 8899</li>
+<li>Optional MCP server: 3010</li>
+</ul>
+<p>Export environment:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">SOLANA_RPC_URL</span><span class="o">=</span>http://127.0.0.1:8899
+<span class="nb">export</span><span class="w"> </span><span class="nv">KEYPAIR_PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>solana<span class="w"> </span>config<span class="w"> </span>get<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;s/^Keypair Path: //p&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
+</code></pre></div>
+
+<h2>Start Local Devnet (using your existing devnet wallet)</h2>
+<ul>
+<li>Your Solana CLI keypair is referenced read-only via <code>KEYPAIR_PATH</code>. We do not modify <code>~/.config/solana</code>.</li>
+</ul>
+<p>Start devnet:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># If osvm is installed globally</span>
+osvm<span class="w"> </span>rpc<span class="w"> </span>devnet<span class="w"> </span>--rpc-port<span class="w"> </span><span class="m">8899</span><span class="w"> </span>--background
+
+<span class="c1"># Or from this repo (if you cloned osvm-cli)</span>
+cargo<span class="w"> </span>run<span class="w"> </span>--bin<span class="w"> </span>osvm<span class="w"> </span>--<span class="w"> </span>rpc<span class="w"> </span>devnet<span class="w"> </span>--rpc-port<span class="w"> </span><span class="m">8899</span><span class="w"> </span>--background
+</code></pre></div>
+
+<p>Health check:</p>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;id&quot;:1,&quot;method&quot;:&quot;getHealth&quot;}&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>http://127.0.0.1:8899
+</code></pre></div>
+
+<h2>Backend (3002) proxy → RPC (8899)</h2>
+<p>Add a thin proxy to avoid browser CORS to 8899.</p>
+<p>server/rpcProxy.ts</p>
+<div class="codehilite"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createProxyMiddleware</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;http-proxy-middleware&#39;</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">rpcProxy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createProxyMiddleware</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">target</span><span class="o">:</span><span class="w"> </span><span class="kt">process.env.SOLANA_RPC_URL</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;http://127.0.0.1:8899&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">changeOrigin</span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">pathRewrite</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s1">&#39;^/rpc&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">timeout</span><span class="o">:</span><span class="w"> </span><span class="kt">30000</span><span class="p">,</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<p>server/index.ts</p>
+<div class="codehilite"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">express</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;express&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">cors</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;cors&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">rpcProxy</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./rpcProxy&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">express</span><span class="p">();</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">cors</span><span class="p">({</span><span class="w"> </span><span class="nx">origin</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;http://127.0.0.1:3001&#39;</span><span class="p">,</span><span class="s1">&#39;http://localhost:3001&#39;</span><span class="p">]</span><span class="w"> </span><span class="p">}));</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">&#39;/rpc&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">rpcProxy</span><span class="p">);</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mf">3002</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Backend on 3002&#39;</span><span class="p">));</span>
+</code></pre></div>
+
+<p>Frontend calls the backend:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:3002/rpc&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;application/json&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="kt">JSON.stringify</span><span class="p">({</span><span class="w"> </span><span class="nx">jsonrpc</span><span class="o">:</span><span class="s1">&#39;2.0&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="kt">1</span><span class="p">,</span><span class="w"> </span><span class="nx">method</span><span class="o">:</span><span class="s1">&#39;getSlot&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">params</span><span class="o">:</span><span class="p">[]</span><span class="w"> </span><span class="p">}),</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<h2>Node/TS Helpers</h2>
+<p>src/infra/osvm.ts</p>
+<div class="codehilite"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Connection</span><span class="p">,</span><span class="w"> </span><span class="nx">clusterApiUrl</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@solana/web3.js&#39;</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">getConnection</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="nx">Connection</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">SOLANA_RPC_URL</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">clusterApiUrl</span><span class="p">(</span><span class="s1">&#39;devnet&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Connection</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">commitment</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;confirmed&#39;</span><span class="w"> </span><span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>src/infra/keypair.ts</p>
+<div class="codehilite"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Keypair</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@solana/web3.js&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">fs</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;fs&#39;</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">loadKeypair</span><span class="p">(</span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">Keypair</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">secret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">path</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;utf8&#39;</span><span class="p">))</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="kt">number</span><span class="p">[];</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">Keypair</span><span class="p">.</span><span class="nx">fromSecretKey</span><span class="p">(</span><span class="nb">Uint8Array</span><span class="p">.</span><span class="kr">from</span><span class="p">(</span><span class="nx">secret</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2>Tests</h2>
+<p>tests/solana.smoke.test.ts</p>
+<div class="codehilite"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">getConnection</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../src/infra/osvm&#39;</span><span class="p">;</span>
+
+<span class="nx">it</span><span class="p">(</span><span class="s1">&#39;connects and fetches slot&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">getConnection</span><span class="p">();</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">slot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">conn</span><span class="p">.</span><span class="nx">getSlot</span><span class="p">(</span><span class="s1">&#39;confirmed&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">expect</span><span class="p">(</span><span class="nx">slot</span><span class="p">).</span><span class="nx">toBeGreaterThan</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<p>tests/account-init.test.ts</p>
+<div class="codehilite"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Keypair</span><span class="p">,</span><span class="w"> </span><span class="nx">SystemProgram</span><span class="p">,</span><span class="w"> </span><span class="nx">Transaction</span><span class="p">,</span><span class="w"> </span><span class="nx">Connection</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@solana/web3.js&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">getConnection</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../src/infra/osvm&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">loadKeypair</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../src/infra/keypair&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">KEYPAIR_PATH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">KEYPAIR_PATH</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;Account init&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="nx">conn</span><span class="o">:</span><span class="w"> </span><span class="kt">Connection</span><span class="p">;</span>
+<span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="nx">payer</span><span class="o">:</span><span class="w"> </span><span class="kt">Keypair</span><span class="p">;</span>
+
+<span class="w">  </span><span class="nx">beforeAll</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">getConnection</span><span class="p">();</span>
+<span class="w">    </span><span class="nx">payer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">loadKeypair</span><span class="p">(</span><span class="nx">KEYPAIR_PATH</span><span class="p">);</span>
+<span class="w">  </span><span class="p">});</span>
+
+<span class="w">  </span><span class="nx">it</span><span class="p">(</span><span class="s1">&#39;creates a system account&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">newAccount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Keypair</span><span class="p">.</span><span class="nx">generate</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">lamports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10000000</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">tx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Transaction</span><span class="p">().</span><span class="nx">add</span><span class="p">(</span>
+<span class="w">      </span><span class="nx">SystemProgram</span><span class="p">.</span><span class="nx">createAccount</span><span class="p">({</span>
+<span class="w">        </span><span class="nx">fromPubkey</span><span class="o">:</span><span class="w"> </span><span class="kt">payer.publicKey</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">newAccountPubkey</span><span class="o">:</span><span class="w"> </span><span class="kt">newAccount.publicKey</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">lamports</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">space</span><span class="o">:</span><span class="w"> </span><span class="kt">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">programId</span><span class="o">:</span><span class="w"> </span><span class="kt">SystemProgram.programId</span><span class="p">,</span>
+<span class="w">      </span><span class="p">})</span>
+<span class="w">    </span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">sig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">conn</span><span class="p">.</span><span class="nx">sendTransaction</span><span class="p">(</span><span class="nx">tx</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="nx">payer</span><span class="p">,</span><span class="w"> </span><span class="nx">newAccount</span><span class="p">],</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">skipPreflight</span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">conn</span><span class="p">.</span><span class="nx">confirmTransaction</span><span class="p">(</span><span class="nx">sig</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;confirmed&#39;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">bal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">conn</span><span class="p">.</span><span class="nx">getBalance</span><span class="p">(</span><span class="nx">newAccount</span><span class="p">.</span><span class="nx">publicKey</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;confirmed&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">expect</span><span class="p">(</span><span class="nx">bal</span><span class="p">).</span><span class="nx">toBeGreaterThan</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<p>Run tests:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">SOLANA_RPC_URL</span><span class="o">=</span>http://127.0.0.1:8899
+<span class="nb">export</span><span class="w"> </span><span class="nv">KEYPAIR_PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>solana<span class="w"> </span>config<span class="w"> </span>get<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;s/^Keypair Path: //p&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
+npm<span class="w"> </span><span class="nb">test</span>
+</code></pre></div>
+
+<h2>Troubleshooting</h2>
+<ul>
+<li>Validator exits with tuning error (sudo needed):</li>
+</ul>
+<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>net.core.rmem_max<span class="o">=</span><span class="m">134217728</span>
+sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>net.core.rmem_default<span class="o">=</span><span class="m">134217728</span>
+sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>net.core.wmem_max<span class="o">=</span><span class="m">134217728</span>
+sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>net.core.wmem_default<span class="o">=</span><span class="m">134217728</span>
+</code></pre></div>
+
+<ul>
+<li>Health check:</li>
+</ul>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;id&quot;:1,&quot;method&quot;:&quot;getHealth&quot;}&#39;</span><span class="w"> </span>http://127.0.0.1:8899
+</code></pre></div>
+
+<h2>Optional: MCP Server (port 3010)</h2>
+<div class="codehilite"><pre><span></span><code>osvm<span class="w"> </span>mcp<span class="w"> </span>start<span class="w"> </span>--rpc<span class="w"> </span><span class="m">127</span>.0.0.1:8899<span class="w"> </span>--port<span class="w"> </span><span class="m">3010</span><span class="w"> </span>--keypair<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$KEYPAIR_PATH</span><span class="s2">&quot;</span>
+</code></pre></div>
+    </div>
+</body>
+</html>

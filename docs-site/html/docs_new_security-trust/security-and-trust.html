@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security-And-Trust - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/">&larr; Back to Documentation</a>
+        </div>
+        <h1>Security &amp; Trust at QuantDesk</h1>
+<p>QuantDesk is built to handle live trading capital without asking you to compromise on safety. This page explains the safeguards layered through the stack so you know exactly how your data and keys stay protected.</p>
+<h2>1. Account &amp; Key Protection</h2>
+<ul>
+<li><strong>Non-custodial by default</strong> – QuantDesk never holds your exchange funds or wallet keys. Orders are signed client-side and routed securely.</li>
+<li><strong>Environment-scoped secrets</strong> – <code>.env</code> files stay local; production deployments expect encrypted secrets or managed vaults.</li>
+<li><strong>Role-based access</strong> – Supabase Row Level Security (RLS) policies restrict every table to the authenticated owner; no shared views, no public reads.</li>
+<li><strong>Session controls</strong> – JWT expiry and automatic refresh ensure inactive sessions close cleanly.</li>
+</ul>
+<h2>2. Data Layer Safeguards</h2>
+<ul>
+<li><strong>Supabase policies</strong> enforce per-user reads/writes on markets, orders, positions, and funding tables.</li>
+<li><strong>Audit trails</strong> log inserts, updates, and deletes with user IDs and timestamps for full transparency.</li>
+<li><strong>Query rate limits</strong> protect the database from abuse and noisy neighbours.</li>
+<li><strong>Partitioned analytics</strong> keeps historical metrics separate from live trading data to minimize blast radius.</li>
+</ul>
+<h2>3. API &amp; Backend Security</h2>
+<ul>
+<li><strong>Authenticated routes</strong> – Trading, portfolio, and alert endpoints require signed requests; anonymous access is limited to documentation and public status checks.</li>
+<li><strong>Request validation</strong> – Every payload passes schema checks before touching business logic; malformed requests are rejected early.</li>
+<li><strong>Rate limiting</strong> – Default limit of 100 requests per 15 minutes per token, adjustable per deployment.</li>
+<li><strong>Transport security</strong> – HTTPS (or TLS-secured gRPC/WebSockets) enforced for all external communication.</li>
+</ul>
+<h2>4. Real-Time Services</h2>
+<ul>
+<li><strong>WebSocket tokens</strong> expire quickly and are tied to user identity; reconnects must re-authenticate.</li>
+<li><strong>Isolated ingestion workers</strong> run without access to customer data—only to the queues they process.</li>
+<li><strong>Backpressure handling</strong> throttles outbound events when clients fall behind, preventing buffer overflow or dropped messages.</li>
+</ul>
+<h2>5. Monitoring &amp; Alerts</h2>
+<ul>
+<li><strong>System health dashboards</strong> watch RPC response times, WebSocket uptime, and queue depths so operations can react before users feel impact.</li>
+<li><strong>Security alerts</strong> trigger when unusual API activity, rapid credential reuse, or suspicious funding flows are detected.</li>
+<li><strong>Log aggregation</strong> keeps structured logs searchable for incident response.</li>
+</ul>
+<h2>6. Deployment Hygiene</h2>
+<ul>
+<li><strong>Separate environments</strong> – Local, staging, and production use distinct Supabase instances and API keys.</li>
+<li><strong>Automated CI checks</strong> scan for committed secrets and enforce lint/tests before shipping.</li>
+<li><strong>Infrastructure as code</strong> keeps environments reproducible and reviewable.</li>
+<li><strong>Routine key rotation</strong> is part of the operational calendar to limit credential exposure.</li>
+</ul>
+<h2>7. Steps You Control</h2>
+<ul>
+<li>Keep your <code>.env</code> file outside version control.</li>
+<li>Rotate exchange and Supabase keys regularly.</li>
+<li>Restrict CORS domains to the hosts you actually use.</li>
+<li>Review and adjust QuantDesk rate limits to match your team’s usage pattern.</li>
+<li>Enable multi-factor authentication on every connected wallet or exchange account.</li>
+</ul>
+<hr />
+<p>Curious about the system internals? Dive into <a href="../trading-capabilities/how-quantdesk-powers-perps.html">How QuantDesk Powers Perps</a> to see how the architecture and security layers work together.</p>
+    </div>
+</body>
+</html>

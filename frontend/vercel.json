@@ -1,0 +1,212 @@
+{
+  "buildCommand": "pnpm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "installCommand": "pnpm install --no-frozen-lockfile",
+  "devCommand": "pnpm run dev",
+  "rewrites": [
+    {
+      "source": "/docs/technical-portfolio",
+      "destination": "/docs/html/docs_TECHNICAL_EVOLUTION_PORTFOLIO.html"
+    },
+    {
+      "source": "/docs/performance-metrics",
+      "destination": "/docs/html/docs_PERFORMANCE_METRICS.html"
+    },
+    {
+      "source": "/docs/getting-started",
+      "destination": "/docs/html/docs_getting-started/README.html"
+    },
+    {
+      "source": "/docs/api",
+      "destination": "/docs/html/docs_api/API.html"
+    },
+    {
+      "source": "/docs/architecture",
+      "destination": "/docs/html/docs_architecture/"
+    },
+    {
+      "source": "/docs/ai-integration",
+      "destination": "/docs/html/docs_ai-agent-memory/"
+    },
+    {
+      "source": "/docs/trading-capabilities",
+      "destination": "/docs/html/docs_trading-capabilities/"
+    },
+    {
+      "source": "/docs/security",
+      "destination": "/docs/html/docs_security-trust/"
+    },
+    {
+      "source": "/docs/ml-model",
+      "destination": "/docs/html/docs_ML_MODEL.html"
+    },
+    {
+      "source": "/docs/roadmap",
+      "destination": "/docs/html/docs_ROADMAP.html"
+    },
+    {
+      "source": "/docs/vision",
+      "destination": "/docs/html/docs_VISION.html"
+    },
+    {
+      "source": "/docs/whitepaper",
+      "destination": "/docs/html/docs_WHITEPAPER.html"
+    },
+    {
+      "source": "/docs/why-quantdesk",
+      "destination": "/docs/html/docs_overview/why-quantdesk.html"
+    },
+    {
+      "source": "/docs/what-makes-us-different",
+      "destination": "/docs/html/docs_core-features/what-makes-us-different.html"
+    },
+    {
+      "source": "/docs/account-lifecycle",
+      "destination": "/docs/html/docs_core-features/account-lifecycle.html"
+    },
+    {
+      "source": "/docs/enterprise-readiness",
+      "destination": "/docs/html/docs_core-features/enterprise-readiness.html"
+    },
+    {
+      "source": "/docs/roadmap-status",
+      "destination": "/docs/html/docs_success-stories/roadmap-and-status.html"
+    },
+    {
+      "source": "/docs/user-experience-roadmap",
+      "destination": "/docs/html/docs_success-stories/user-experience-roadmap.html"
+    },
+    {
+      "source": "/docs/early-tester-rewards",
+      "destination": "/docs/html/docs_success-stories/early-tester-rewards.html"
+    },
+    {
+      "source": "/docs/port-layout",
+      "destination": "/docs/html/docs_operations/PORT_LAYOUT.html"
+    },
+    {
+      "source": "/docs/api-integration-research",
+      "destination": "/docs/html/docs_operations/API_INTEGRATION_RESEARCH.html"
+    },
+    {
+      "source": "/docs/environment-variables",
+      "destination": "/docs/html/docs_security/ENVIRONMENT_VARIABLES.html"
+    },
+    {
+      "source": "/docs/project-history",
+      "destination": "/docs/html/history_README.html"
+    },
+    {
+      "source": "/docs/architecture-archive",
+      "destination": "/docs/html/docs_archive/architecture/overview.html"
+    },
+    {
+      "source": "/docs/trading-archive",
+      "destination": "/docs/html/docs_archive/trading/overview.html"
+    },
+    {
+      "source": "/docs/analysis-archive",
+      "destination": "/docs/html/docs_archive/analysis/IMPLEMENTATION_SUMMARY.html"
+    },
+    {
+      "source": "/docs/meet-mikey",
+      "destination": "/docs/html/docs_ai-engine/meet-mikey.html"
+    },
+    {
+      "source": "/docs/market-intelligence-pipeline",
+      "destination": "/docs/html/docs_ai-engine/market-intelligence-pipeline.html"
+    },
+    {
+      "source": "/docs/security-trust-overview",
+      "destination": "/docs/html/docs_security-trust/security-and-trust.html"
+    },
+    {
+      "source": "/docs/security-posture",
+      "destination": "/docs/html/docs_security-trust/security-posture.html"
+    },
+    {
+      "source": "/docs/data-storage-blueprint",
+      "destination": "/docs/html/docs_security-trust/data-and-storage-blueprint.html"
+    },
+    {
+      "source": "/docs/admin-operations",
+      "destination": "/docs/html/docs_security-trust/admin-operations.html"
+    },
+    {
+      "source": "/docs/how-quantdesk-powers-perps",
+      "destination": "/docs/html/docs_trading-capabilities/how-quantdesk-powers-perps.html"
+    },
+    {
+      "source": "/docs/perp-terminal-toolbox",
+      "destination": "/docs/html/docs_trading-capabilities/perp-terminal-toolbox.html"
+    },
+    {
+      "source": "/docs/perp-market-coverage",
+      "destination": "/docs/html/docs_trading-capabilities/perp-market-coverage.html"
+    },
+    {
+      "source": "/docs/multi-account-control",
+      "destination": "/docs/html/docs_trading-capabilities/multi-account-control.html"
+    },
+    {
+      "source": "/docs/live-market-data",
+      "destination": "/docs/html/docs_trading-capabilities/live-market-data.html"
+    },
+    {
+      "source": "/docs/terminal-shortcuts",
+      "destination": "/docs/html/docs_trading-capabilities/terminal-shortcuts.html"
+    },
+    {
+      "source": "/docs/api-access",
+      "destination": "/docs/html/docs_trading-capabilities/api-access.html"
+    },
+    {
+      "source": "/docs/architecture-at-a-glance",
+      "destination": "/docs/html/docs_core-features/architecture-at-a-glance.html"
+    },
+    {
+      "source": "/docs",
+      "destination": "/docs/index.html"
+    },
+    {
+      "source": "/admin/:path*",
+      "destination": "/admin/:path*"
+    },
+    {
+      "source": "/((?!docs|assets).*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/docs/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        },
+        {
+          "key": "Pragma",
+          "value": "no-cache"
+        },
+        {
+          "key": "Expires",
+          "value": "0"
+        }
+      ]
+    }
+  ],
+  "env": {
+    "VITE_API_URL": "https://api.quantdesk.app"
+  }
+}

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin User Management - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/docs">&larr; Back to Documentation</a>
+        </div>
+        <h1>🔐 QuantDesk Admin User Management</h1>
+<h2>Overview</h2>
+<p>The QuantDesk admin user management system provides secure authentication and role-based access control for the admin dashboard. It integrates with Supabase for data persistence and includes comprehensive audit logging.</p>
+<h2>Architecture</h2>
+<h3>Database Schema</h3>
+<h4><code>admin_users</code> Table</h4>
+<div class="codehilite"><pre><span></span><code><span class="o">-</span><span class="w"> </span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="p">(</span><span class="k">Primary</span><span class="w"> </span><span class="k">Key</span><span class="p">)</span>
+<span class="o">-</span><span class="w"> </span><span class="n">username</span><span class="p">:</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="k">Unique</span><span class="p">)</span>
+<span class="o">-</span><span class="w"> </span><span class="n">password_hash</span><span class="p">:</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>
+<span class="o">-</span><span class="w"> </span><span class="k">role</span><span class="p">:</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">founding</span><span class="o">-</span><span class="n">dev</span><span class="p">,</span><span class="w"> </span><span class="k">admin</span><span class="p">,</span><span class="w"> </span><span class="n">super</span><span class="o">-</span><span class="k">admin</span><span class="p">)</span>
+<span class="o">-</span><span class="w"> </span><span class="n">permissions</span><span class="p">:</span><span class="w"> </span><span class="n">JSONB</span>
+<span class="o">-</span><span class="w"> </span><span class="n">is_active</span><span class="p">:</span><span class="w"> </span><span class="nb">BOOLEAN</span>
+<span class="o">-</span><span class="w"> </span><span class="n">last_login</span><span class="p">:</span><span class="w"> </span><span class="k">TIMESTAMP</span>
+<span class="o">-</span><span class="w"> </span><span class="n">created_at</span><span class="p">:</span><span class="w"> </span><span class="k">TIMESTAMP</span>
+<span class="o">-</span><span class="w"> </span><span class="n">updated_at</span><span class="p">:</span><span class="w"> </span><span class="k">TIMESTAMP</span>
+<span class="o">-</span><span class="w"> </span><span class="n">created_by</span><span class="p">:</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="p">(</span><span class="k">Foreign</span><span class="w"> </span><span class="k">Key</span><span class="p">)</span>
+</code></pre></div>
+
+<h4><code>admin_audit_logs</code> Table</h4>
+<div class="codehilite"><pre><span></span><code><span class="o">-</span><span class="w"> </span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="p">(</span><span class="k">Primary</span><span class="w"> </span><span class="k">Key</span><span class="p">)</span>
+<span class="o">-</span><span class="w"> </span><span class="n">admin_user_id</span><span class="p">:</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="p">(</span><span class="k">Foreign</span><span class="w"> </span><span class="k">Key</span><span class="p">)</span>
+<span class="o">-</span><span class="w"> </span><span class="n">action</span><span class="p">:</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="o">-</span><span class="w"> </span><span class="n">resource</span><span class="p">:</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="o">-</span><span class="w"> </span><span class="n">details</span><span class="p">:</span><span class="w"> </span><span class="n">JSONB</span>
+<span class="o">-</span><span class="w"> </span><span class="n">ip_address</span><span class="p">:</span><span class="w"> </span><span class="n">INET</span>
+<span class="o">-</span><span class="w"> </span><span class="n">user_agent</span><span class="p">:</span><span class="w"> </span><span class="nb">TEXT</span>
+<span class="o">-</span><span class="w"> </span><span class="n">created_at</span><span class="p">:</span><span class="w"> </span><span class="k">TIMESTAMP</span>
+</code></pre></div>
+
+<h3>Security Features</h3>
+<ul>
+<li><strong>Password Hashing</strong>: bcrypt with salt rounds</li>
+<li><strong>JWT Authentication</strong>: 24-hour token expiration</li>
+<li><strong>Row Level Security</strong>: Supabase RLS policies</li>
+<li><strong>Audit Logging</strong>: Complete action tracking</li>
+<li><strong>Role-Based Access</strong>: Granular permissions system</li>
+</ul>
+<h2>API Endpoints</h2>
+<h3>Authentication</h3>
+<h4><code>POST /api/admin/login</code></h4>
+<p>Login with username and password.</p>
+<p><strong>Request:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;twoFactorCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="w"> </span><span class="c1">// Optional for super-admin</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>Response:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jwt-token&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;permissions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;array&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4><code>GET /api/admin/verify</code></h4>
+<p>Verify JWT token and get user info.</p>
+<p><strong>Headers:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="n">Authorization</span><span class="o">:</span><span class="w"> </span><span class="n">Bearer</span><span class="w"> </span><span class="o">&lt;</span><span class="n">jwt</span><span class="o">-</span><span class="n">token</span><span class="o">&gt;</span>
+</code></pre></div>
+
+<p><strong>Response:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;permissions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;array&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3>User Management</h3>
+<h4><code>GET /api/admin/users</code></h4>
+<p>Get all admin users (requires authentication).</p>
+<p><strong>Response:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;users&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;permissions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;array&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;is_active&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">boolea</span><span class="kc">n</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;last_login&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;timestamp&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;timestamp&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4><code>POST /api/admin/users</code></h4>
+<p>Create new admin user (requires authentication).</p>
+<p><strong>Request:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;founding-dev|admin|super-admin&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;permissions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;array&quot;</span><span class="p">]</span><span class="w"> </span><span class="c1">// Optional</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4><code>PUT /api/admin/users/:id</code></h4>
+<p>Update admin user (requires authentication).</p>
+<p><strong>Request:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// Optional</span>
+<span class="w">  </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// Optional</span>
+<span class="w">  </span><span class="nt">&quot;permissions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;array&quot;</span><span class="p">],</span><span class="w"> </span><span class="c1">// Optional</span>
+<span class="w">  </span><span class="nt">&quot;is_active&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">boolea</span><span class="kc">n</span><span class="w"> </span><span class="c1">// Optional</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4><code>DELETE /api/admin/users/:id</code></h4>
+<p>Deactivate admin user (soft delete, requires authentication).</p>
+<p><strong>Response:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;User deactivated successfully&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3>Audit Logs</h3>
+<h4><code>GET /api/admin/audit-logs</code></h4>
+<p>Get audit logs with pagination.</p>
+<p><strong>Query Parameters:</strong>
+- <code>limit</code>: Number of logs to return (default: 100)
+- <code>offset</code>: Number of logs to skip (default: 0)</p>
+<p><strong>Response:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;logs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;details&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">      </span><span class="nt">&quot;ip_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;user_agent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;timestamp&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;admin_users&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2>Role System</h2>
+<h3>Roles</h3>
+<ol>
+<li><strong>founding-dev</strong></li>
+<li>Full system access</li>
+<li>Can manage all users</li>
+<li>Access to all features</li>
+<li>
+<p>No 2FA requirement</p>
+</li>
+<li>
+<p><strong>admin</strong></p>
+</li>
+<li>Standard admin access</li>
+<li>Can manage users (except founding-dev)</li>
+<li>Access to most features</li>
+<li>
+<p>No 2FA requirement</p>
+</li>
+<li>
+<p><strong>super-admin</strong></p>
+</li>
+<li>Advanced admin access</li>
+<li>Can manage users (except founding-dev)</li>
+<li>Access to sensitive features</li>
+<li><strong>Requires 2FA</strong></li>
+</ol>
+<h3>Permissions</h3>
+<ul>
+<li><code>read</code>: View data and logs</li>
+<li><code>write</code>: Modify data and settings</li>
+<li><code>admin</code>: User management</li>
+<li><code>super-admin</code>: Advanced system operations</li>
+<li><code>founding-dev</code>: Complete system control</li>
+</ul>
+<h2>Setup Instructions</h2>
+<h3>1. Database Migration</h3>
+<p>Run the SQL migration in your Supabase database:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Copy and execute the contents of:</span>
+<span class="c1">-- backend/src/migrations/create_admin_users_table.sql</span>
+</code></pre></div>
+
+<h3>2. Environment Variables</h3>
+<p>Ensure these environment variables are set:</p>
+<div class="codehilite"><pre><span></span><code>SUPABASE_URL=your-supabase-url
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+JWT_SECRET=your-jwt-secret
+</code></pre></div>
+
+<h3>3. Initial User Setup</h3>
+<p>Run the setup script to create initial admin users:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>backend
+node<span class="w"> </span>src/scripts/setup-admin-users.js
+</code></pre></div>
+
+<h3>4. Backend Dependencies</h3>
+<p>Install required packages:</p>
+<div class="codehilite"><pre><span></span><code>npm<span class="w"> </span>install<span class="w"> </span>bcrypt<span class="w"> </span>jsonwebtoken<span class="w"> </span>@types/bcrypt<span class="w"> </span>@types/jsonwebtoken
+</code></pre></div>
+
+<h2>Frontend Integration</h2>
+<h3>Authentication Context</h3>
+<p>The admin dashboard uses React Context for authentication state management:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// AuthContext provides:</span>
+<span class="o">-</span><span class="w"> </span><span class="nx">user</span><span class="o">:</span><span class="w"> </span><span class="kt">Current</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="nx">info</span>
+<span class="o">-</span><span class="w"> </span><span class="nx">login</span><span class="o">:</span><span class="w"> </span><span class="kt">Login</span><span class="w"> </span><span class="kd">function</span>
+<span class="o">-</span><span class="w"> </span><span class="nx">logout</span><span class="o">:</span><span class="w"> </span><span class="kt">Logout</span><span class="w"> </span><span class="kd">function</span>
+<span class="o">-</span><span class="w"> </span><span class="nx">isAuthenticated</span><span class="o">:</span><span class="w"> </span><span class="kt">Auth</span><span class="w"> </span><span class="nx">status</span>
+</code></pre></div>
+
+<h3>Protected Routes</h3>
+<p>Admin routes are protected using the <code>ProtectedRoute</code> component:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&lt;</span><span class="nx">ProtectedRoute</span><span class="o">&gt;</span>
+<span class="w">  </span><span class="o">&lt;</span><span class="nx">AdminDashboard</span><span class="w"> </span><span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="err">/ProtectedRoute&gt;</span>
+</code></pre></div>
+
+<h3>Login Page</h3>
+<p>The login page handles:
+- Username/password authentication
+- 2FA for super-admin users
+- Error handling and validation
+- Token storage in localStorage</p>
+<h2>Security Best Practices</h2>
+<h3>Password Security</h3>
+<ul>
+<li>Minimum 8 characters</li>
+<li>bcrypt hashing with salt rounds</li>
+<li>No password storage in plain text</li>
+</ul>
+<h3>Token Security</h3>
+<ul>
+<li>JWT tokens with 24-hour expiration</li>
+<li>Secure token storage in localStorage</li>
+<li>Automatic token refresh on app load</li>
+</ul>
+<h3>Access Control</h3>
+<ul>
+<li>Role-based permissions</li>
+<li>Row Level Security in database</li>
+<li>API endpoint protection</li>
+<li>Audit logging for all actions</li>
+</ul>
+<h3>Network Security</h3>
+<ul>
+<li>HTTPS required in production</li>
+<li>IP address logging</li>
+<li>User agent tracking</li>
+<li>Rate limiting (recommended)</li>
+</ul>
+<h2>Monitoring and Logging</h2>
+<h3>Audit Trail</h3>
+<ul>
+<li>All admin actions are logged</li>
+<li>Includes user, action, resource, and metadata</li>
+<li>IP address and user agent tracking</li>
+<li>Timestamp for all events</li>
+</ul>
+<h3>Security Monitoring</h3>
+<ul>
+<li>Failed login attempts</li>
+<li>Permission violations</li>
+<li>Suspicious activity patterns</li>
+<li>System access logs</li>
+</ul>
+<h2>Troubleshooting</h2>
+<h3>Common Issues</h3>
+<ol>
+<li><strong>Login Failures</strong></li>
+<li>Check username/password</li>
+<li>Verify user is active</li>
+<li>
+<p>Check database connection</p>
+</li>
+<li>
+<p><strong>Token Issues</strong></p>
+</li>
+<li>Verify JWT_SECRET is set</li>
+<li>Check token expiration</li>
+<li>
+<p>Clear localStorage if needed</p>
+</li>
+<li>
+<p><strong>Permission Errors</strong></p>
+</li>
+<li>Verify user role and permissions</li>
+<li>Check API endpoint protection</li>
+<li>Review audit logs</li>
+</ol>
+<h3>Debug Mode</h3>
+<p>Enable debug logging by setting:</p>
+<div class="codehilite"><pre><span></span><code>LOG_LEVEL=debug
+</code></pre></div>
+
+<h2>API Error Codes</h2>
+<ul>
+<li><code>INVALID_CREDENTIALS</code>: Wrong username/password</li>
+<li><code>NO_TOKEN</code>: Missing authorization header</li>
+<li><code>INVALID_TOKEN</code>: Invalid or expired token</li>
+<li><code>MISSING_FIELDS</code>: Required fields not provided</li>
+<li><code>CREATE_USER_ERROR</code>: User creation failed</li>
+<li><code>UPDATE_USER_ERROR</code>: User update failed</li>
+<li><code>DELETE_USER_ERROR</code>: User deletion failed</li>
+<li><code>FETCH_USERS_ERROR</code>: Failed to fetch users</li>
+<li><code>FETCH_LOGS_ERROR</code>: Failed to fetch audit logs</li>
+</ul>
+<h2>Future Enhancements</h2>
+<ul>
+<li>[ ] Two-factor authentication (TOTP)</li>
+<li>[ ] Password reset functionality</li>
+<li>[ ] Session management</li>
+<li>[ ] API rate limiting</li>
+<li>[ ] Advanced audit reporting</li>
+<li>[ ] User activity dashboards</li>
+<li>[ ] Automated security alerts</li>
+<li>[ ] Integration with external identity providers</li>
+</ul>
+    </div>
+</body>
+</html>

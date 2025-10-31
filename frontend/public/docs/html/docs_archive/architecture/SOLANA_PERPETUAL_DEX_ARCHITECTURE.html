@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solana Perpetual Dex Architecture - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/docs">&larr; Back to Documentation</a>
+        </div>
+        <h1>Solana Perpetual DEX Architecture Documentation</h1>
+<h2>Overview</h2>
+<p>This document outlines the complete architecture for building a Solana-based perpetual DEX similar to Drift Protocol. The system involves multiple interconnected components that must work together seamlessly.</p>
+<h2>Core Architecture Components</h2>
+<h3>1. User Account Lifecycle</h3>
+<h4>State Flow:</h4>
+<div class="codehilite"><pre><span></span><code>Wallet Connection → Account Creation → Deposit → Trading → Withdrawal
+</code></pre></div>
+
+<h4>Detailed States:</h4>
+<ol>
+<li><strong>Disconnected State</strong>: User needs to connect wallet</li>
+<li><strong>Connected, No Account</strong>: Wallet connected but no trading account created</li>
+<li><strong>Account Created, No Deposits</strong>: Account exists but no collateral deposited</li>
+<li><strong>Account with Deposits</strong>: Ready for trading with sufficient collateral</li>
+<li><strong>Active Trading</strong>: User has open positions</li>
+<li><strong>Risk State</strong>: Positions approaching liquidation</li>
+</ol>
+<h3>2. Smart Contract Architecture</h3>
+<h4>Core Programs:</h4>
+<ul>
+<li><strong>User Account Program</strong>: Manages individual user accounts</li>
+<li><strong>Collateral Vault Program</strong>: Handles deposits/withdrawals</li>
+<li><strong>Trading Program</strong>: Manages order matching and position management</li>
+<li><strong>Oracle Program</strong>: Price feed management</li>
+<li><strong>Insurance Fund Program</strong>: Risk management and liquidation</li>
+</ul>
+<h4>Account Structure:</h4>
+<div class="codehilite"><pre><span></span><code>User Account
+├── Master Account (Main wallet)
+├── Trading Accounts (Sub-accounts)
+├── Collateral Balances
+├── Open Positions
+├── Order History
+└── Risk Metrics
+</code></pre></div>
+
+<h3>3. Backend Components</h3>
+<h4>Database Schema:</h4>
+<ul>
+<li><strong>Users</strong>: Master account information</li>
+<li><strong>Trading Accounts</strong>: Sub-account management</li>
+<li><strong>Deposits/Withdrawals</strong>: Transaction history</li>
+<li><strong>Positions</strong>: Open trading positions</li>
+<li><strong>Orders</strong>: Order book and history</li>
+<li><strong>Balances</strong>: Asset balances per account</li>
+<li><strong>Risk Metrics</strong>: Margin ratios, liquidation prices</li>
+</ul>
+<h4>API Endpoints:</h4>
+<ul>
+<li><strong>Authentication</strong>: Wallet connection and signing</li>
+<li><strong>Account Management</strong>: Create/update accounts</li>
+<li><strong>Deposit/Withdrawal</strong>: Asset transfers</li>
+<li><strong>Trading</strong>: Order placement and management</li>
+<li><strong>Risk Management</strong>: Position monitoring</li>
+<li><strong>Data Feeds</strong>: Real-time market data</li>
+</ul>
+<h3>4. Frontend State Management</h3>
+<h4>State Machine:</h4>
+<div class="codehilite"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">UserState</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">walletConnected</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">accountCreated</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">hasDeposits</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">canTrade</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">riskLevel</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;safe&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;warning&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;danger&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>UI Components:</h4>
+<ul>
+<li><strong>Wallet Connection Modal</strong></li>
+<li><strong>Account Creation Flow</strong></li>
+<li><strong>Deposit Modal</strong></li>
+<li><strong>Trading Interface</strong></li>
+<li><strong>Position Management</strong></li>
+<li><strong>Risk Dashboard</strong></li>
+</ul>
+<h2>Implementation Phases</h2>
+<h3>Phase 1: Foundation (Current)</h3>
+<ul>
+<li>[x] Basic wallet connection</li>
+<li>[x] User authentication</li>
+<li>[x] Database schema</li>
+<li>[x] Basic trading interface</li>
+</ul>
+<h3>Phase 2: Account Management</h3>
+<ul>
+<li>[ ] Account creation flow</li>
+<li>[ ] Account state management</li>
+<li>[ ] Multi-account support</li>
+<li>[ ] Account switching</li>
+</ul>
+<h3>Phase 3: Collateral System</h3>
+<ul>
+<li>[ ] Deposit mechanism</li>
+<li>[ ] Withdrawal system</li>
+<li>[ ] Collateral tracking</li>
+<li>[ ] Balance management</li>
+</ul>
+<h3>Phase 4: Trading Engine</h3>
+<ul>
+<li>[ ] Order matching</li>
+<li>[ ] Position management</li>
+<li>[ ] Leverage system</li>
+<li>[ ] Order types (market, limit, stop)</li>
+</ul>
+<h3>Phase 5: Risk Management</h3>
+<ul>
+<li>[ ] Margin calculations</li>
+<li>[ ] Liquidation system</li>
+<li>[ ] Risk monitoring</li>
+<li>[ ] Insurance fund</li>
+</ul>
+<h3>Phase 6: Advanced Features</h3>
+<ul>
+<li>[ ] Oracle integration</li>
+<li>[ ] Real-time data feeds</li>
+<li>[ ] Advanced order types</li>
+<li>[ ] Portfolio management</li>
+</ul>
+<h2>Technical Requirements</h2>
+<h3>Solana Program Requirements:</h3>
+<ul>
+<li>Account size optimization</li>
+<li>Cross-program invocations</li>
+<li>Event emission</li>
+<li>Error handling</li>
+<li>Security validations</li>
+</ul>
+<h3>Backend Requirements:</h3>
+<ul>
+<li>Real-time data processing</li>
+<li>WebSocket connections</li>
+<li>Database optimization</li>
+<li>API rate limiting</li>
+<li>Security measures</li>
+</ul>
+<h3>Frontend Requirements:</h3>
+<ul>
+<li>State management</li>
+<li>Real-time updates</li>
+<li>Responsive design</li>
+<li>Error handling</li>
+<li>User experience optimization</li>
+</ul>
+<h2>Security Considerations</h2>
+<h3>Smart Contract Security:</h3>
+<ul>
+<li>Authority validation</li>
+<li>Oracle price validation</li>
+<li>Position limit enforcement</li>
+<li>Liquidation protection</li>
+<li>Reentrancy protection</li>
+</ul>
+<h3>Backend Security:</h3>
+<ul>
+<li>Input validation</li>
+<li>Rate limiting</li>
+<li>Authentication</li>
+<li>Data encryption</li>
+<li>Audit logging</li>
+</ul>
+<h3>Frontend Security:</h3>
+<ul>
+<li>Wallet integration security</li>
+<li>State validation</li>
+<li>Error boundary handling</li>
+<li>Secure communication</li>
+</ul>
+<h2>Performance Optimization</h2>
+<h3>Solana Optimizations:</h3>
+<ul>
+<li>Address lookup tables</li>
+<li>Transaction batching</li>
+<li>Account size minimization</li>
+<li>Efficient state updates</li>
+</ul>
+<h3>Backend Optimizations:</h3>
+<ul>
+<li>Database indexing</li>
+<li>Caching strategies</li>
+<li>Connection pooling</li>
+<li>Load balancing</li>
+</ul>
+<h3>Frontend Optimizations:</h3>
+<ul>
+<li>Component optimization</li>
+<li>State management efficiency</li>
+<li>Bundle size optimization</li>
+<li>Lazy loading</li>
+</ul>
+<h2>Monitoring and Analytics</h2>
+<h3>Key Metrics:</h3>
+<ul>
+<li>User engagement</li>
+<li>Trading volume</li>
+<li>System performance</li>
+<li>Risk metrics</li>
+<li>Error rates</li>
+</ul>
+<h3>Monitoring Tools:</h3>
+<ul>
+<li>Application performance monitoring</li>
+<li>Database monitoring</li>
+<li>Blockchain monitoring</li>
+<li>User analytics</li>
+<li>Error tracking</li>
+</ul>
+<h2>Documentation Standards</h2>
+<h3>Code Documentation:</h3>
+<ul>
+<li>Inline comments</li>
+<li>Function documentation</li>
+<li>API documentation</li>
+<li>Architecture diagrams</li>
+<li>Deployment guides</li>
+</ul>
+<h3>User Documentation:</h3>
+<ul>
+<li>User guides</li>
+<li>FAQ</li>
+<li>Troubleshooting</li>
+<li>Feature explanations</li>
+<li>Video tutorials</li>
+</ul>
+<h2>Next Steps</h2>
+<ol>
+<li><strong>Complete Account Management System</strong></li>
+<li><strong>Implement Deposit/Withdrawal Flow</strong></li>
+<li><strong>Build Trading Engine</strong></li>
+<li><strong>Add Risk Management</strong></li>
+<li><strong>Integrate Oracles</strong></li>
+<li><strong>Optimize Performance</strong></li>
+<li><strong>Add Advanced Features</strong></li>
+<li><strong>Security Audit</strong></li>
+<li><strong>User Testing</strong></li>
+<li><strong>Production Deployment</strong></li>
+</ol>
+<hr />
+<p><em>This document will be updated as development progresses and new requirements are identified.</em></p>
+    </div>
+</body>
+</html>

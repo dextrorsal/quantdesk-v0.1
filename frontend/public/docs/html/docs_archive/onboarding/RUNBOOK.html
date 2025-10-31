@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Runbook - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/docs">&larr; Back to Documentation</a>
+        </div>
+        <h2>Early Tester Onboarding Runbook (Solana + Supabase + Redis)</h2>
+<p>Goal: Enable wallet sign-in, referral binding (25% + 10%), chat access, and claims in a local/devnet setup.</p>
+<h3>1) Prereqs</h3>
+<ul>
+<li>Solana CLI: <code>solana --version</code></li>
+<li>Anchor CLI: <code>anchor --version</code></li>
+<li>Node 23.x, pnpm (or yarn)</li>
+<li>Supabase project: URL + anon key + service role key</li>
+<li>Redis instance (local or managed)</li>
+</ul>
+<h3>2) Environment</h3>
+<ul>
+<li>Backend <code>.env</code> (server-only):</li>
+<li><code>SUPABASE_URL</code>, <code>SUPABASE_SERVICE_ROLE_KEY</code></li>
+<li><code>SESSION_SECRET</code>, <code>REDIS_URL</code></li>
+<li><code>FEATURE_REFERRALS=true</code>, <code>FEATURE_CHAT=true</code>, <code>REFERRAL_L1=0.25</code>, <code>TRADER_DISCOUNT=0.10</code></li>
+<li>Frontend <code>.env</code>:</li>
+<li><code>VITE_SUPABASE_URL</code>, <code>VITE_SUPABASE_ANON_KEY</code></li>
+</ul>
+<h3>3) Database (Supabase)</h3>
+<ul>
+<li>Run <code>database/referrals_schema.sql</code> in Supabase SQL editor.</li>
+<li>Enable RLS and add policies as needed (see comments in SQL).</li>
+<li>Optional: create a DB function/webhook to flip <code>referrals.activated</code> on mock trade events.</li>
+</ul>
+<h3>4) Backend boot</h3>
+<ul>
+<li>Start local validator (for E2E): <code>solana-test-validator</code></li>
+<li>Backend start: <code>pnpm dev</code> (or project start script)</li>
+<li>Confirm routes in Postman: <code>/auth/nonce</code>, <code>/auth/verify</code>, <code>/referrals/*</code>, <code>/chat/*</code>, <code>/claims/*</code>.</li>
+</ul>
+<h3>5) Frontend boot</h3>
+<ul>
+<li>Start: <code>pnpm dev</code></li>
+<li>Flow: connect wallet → nonce → sign → verify → session cookie → show invite link.</li>
+</ul>
+<h3>6) Referrals (25% + 10%)</h3>
+<ul>
+<li>Bind on first successful verify with <code>?ref=&lt;referrer_pubkey&gt;</code>.</li>
+<li>Activation rule: after threshold (e.g., 5 mock trades or $10 sim volume).</li>
+<li>Claims: preview (calc on net fees), execute weekly (SOL on devnet).</li>
+</ul>
+<h3>7) Chat</h3>
+<ul>
+<li>Token endpoint issues short-lived chat token (JWT).</li>
+<li>WS/SSE connects with token; Redis pub/sub for presence and broadcast.</li>
+<li>Rate limits via Redis (e.g., 5 msgs / 10s / wallet).</li>
+</ul>
+<h3>8) Testing</h3>
+<ul>
+<li>Unit/program: Anchor + Bankrun for PDA/referral logic (faster, deterministic).</li>
+<li>E2E/UI: solana-test-validator + Playwright + wallet-adapter mock.</li>
+<li>Postman: import <code>docs/api/QuantDesk-API-Collection.json</code> and <code>QuantDesk-Complete-Environment.json</code>.</li>
+</ul>
+<h3>9) Solana MCP (reference points)</h3>
+<ul>
+<li>Local validator vs bankrun recommendations (faster tests, time travel).</li>
+<li>PDA patterns and multi-user seeding tips.</li>
+<li>Wallet mocking options for E2E.</li>
+</ul>
+<h3>10) Ops</h3>
+<ul>
+<li>Cron for weekly claims.</li>
+<li>Monitoring: RPC health, Redis memory, error rates.</li>
+<li>Feature flags: disable/enable referrals/chat quickly if needed.</li>
+</ul>
+    </div>
+</body>
+</html>
