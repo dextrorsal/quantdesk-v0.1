@@ -47,78 +47,68 @@ ssl/
 certs/
 
 # ===================================================================
-# 🔒 PROPRIETARY CODE PROTECTION (Selective)
+# 🔒 PROPRIETARY CODE PROTECTION (Complete)
 # ===================================================================
-# Protect proprietary trading algorithms while showing public source code
-# This allows open-source transparency while protecting competitive advantage
+# Hide ALL source code - only show public parts: examples, docs, tests, SDKs, public APIs
 
-# Backend - Hide proprietary trading logic
-/backend/src/services/trading/
-/backend/src/controllers/trading/
-/backend/src/middleware/trading/
-/backend/src/utils/trading/
-/backend/src/strategies/
-
-# Show backend public parts: tests/, docs/, examples/, README.md, public API routes
-# /backend/tests/ - KEEP (show tests)
-# /backend/docs/ - KEEP (show docs)
-# /backend/examples/ - KEEP (show examples)
-# /backend/README.md - KEEP (show README)
-# /backend/src/routes/*.ts - KEEP (show API endpoints structure - public API visible)
-# All public API endpoints in /backend/src/routes/ are visible
-
-# MIKEY-AI - Protect proprietary AI trading logic
+# Hide entire services (keep only public parts: docs/, examples/, tests/, README.md)
 /MIKEY-AI/
-# But show public documentation and examples
-!/MIKEY-AI/README.md
-!/MIKEY-AI/LICENSE
-!/MIKEY-AI/SECURITY.md
-!/MIKEY-AI/package.json
-!/MIKEY-AI/tsconfig.json
-!/MIKEY-AI/docs/
-!/MIKEY-AI/Docs/
-!/MIKEY-AI/examples/
-!/MIKEY-AI/integration/mikey-bridge/README.md
-!/MIKEY-AI/integration/INTEGRATION_SUMMARY.md
-!/MIKEY-AI/integration/REALITY_CHECK.md
+/MIKEY-AI/src/
+/MIKEY-AI/package.json
+/MIKEY-AI/tsconfig.json
+/MIKEY-AI/.env.example
+/MIKEY-AI/.eslintrc.js
+/MIKEY-AI/.prettierrc
+/MIKEY-AI/.dockerignore
+/MIKEY-AI/Dockerfile
+/MIKEY-AI/.husky/
+/MIKEY-AI/.lintstagedrc.js
+# Keep: MIKEY-AI/examples/, MIKEY-AI/docs/, MIKEY-AI/tests/, MIKEY-AI/README.md (if exist)
 
-# MIKEY-AI - Hide Competitive Intelligence Strategy Docs
-/MIKEY-AI/Docs/*STRATEGY*.md
+/frontend/src/
+/frontend/public/
+/frontend/package.json
+/frontend/package-lock.json
+/frontend/pnpm-lock.yaml
+/frontend/vite.config.ts
+/frontend/tsconfig.json
+/frontend/postcss.config.js
+/frontend/.env.example
+/frontend/.gitignore
+/frontend/index.html
+/frontend/nginx.conf
+/frontend/kill-frontend.sh
+/frontend/vercel.json
+# Keep: frontend/examples/, frontend/docs/, frontend/tests/, frontend/README.md (if exist)
 
-# Data Ingestion - Hide proprietary trading analyzers
-/data-ingestion/src/processors/trading/
-/data-ingestion/src/analyzers/
-/data-ingestion/src/strategies/
+/backend/src/
+/backend/package.json
+/backend/pnpm-lock.yaml
+/backend/tsconfig.json
+/backend/.env.example
+/backend/.eslintrc.js
+/backend/Dockerfile
+/backend/railway.json
+/backend/railway.toml
+/backend/railway.yaml
+/backend/.railwayignore
+/backend/kill-backend.sh
+/backend/instrument.js
+/backend/enhanced-price-api.js
+/backend/pyth-sdk-api.js
+/backend/quick-validation.js
+# Keep: backend/tests/, backend/docs/, backend/examples/, backend/README.md (if exist)
+# Keep: backend/src/routes/*.ts (public API endpoints only - but hide entire src/ for now)
 
-# Show data-ingestion public parts: tests/, docs/, examples/, README.md
-# /data-ingestion/test/ - KEEP (show tests)
-# /data-ingestion/docs/ - KEEP (show docs)
-# /data-ingestion/examples/ - KEEP (show examples)
-# /data-ingestion/README.md - KEEP (show README)
+/data-ingestion/src/
+/data-ingestion/package.json
+/data-ingestion/package-lock.json
+/data-ingestion/.env.example
+/data-ingestion/.cursorrules
+/data-ingestion/README.md
+# Keep: data-ingestion/test/, data-ingestion/docs/, data-ingestion/examples/ (if exist)
 
-# Admin Dashboard - Hide proprietary trading UI
-/admin-dashboard/src/components/trading/
-/admin-dashboard/src/services/trading/
-
-# Show admin-dashboard public parts: tests/, docs/, examples/, README.md
-# /admin-dashboard/tests/ - KEEP (show tests)
-# /admin-dashboard/docs/ - KEEP (show docs)
-# /admin-dashboard/examples/ - KEEP (show examples)
-# /admin-dashboard/README.md - KEEP (show README)
-
-# Frontend - Hide proprietary trading UI
-/frontend/src/components/trading/
-/frontend/src/services/trading/
-/frontend/src/hooks/trading/
-/frontend/src/utils/trading/
-
-# Show frontend public parts: tests/, docs/, examples/, README.md, public components
-# /frontend/src/tests/ - KEEP (show tests)
-# /frontend/docs/ - KEEP (show docs)
-# /frontend/examples/ - KEEP (show examples)
-# /frontend/README.md - KEEP (show README)
-# /frontend/src/components/ui/ - KEEP (show UI components)
-# /frontend/src/services/api/ - KEEP (show API services)
+/admin-dashboard/
 
 # ===================================================================
 # 🧪 TESTS - PUBLIC
@@ -518,16 +508,27 @@ _site/
 # Scripts - KEEP PUBLIC
 # /scripts/ - KEEP public utility scripts (hide sensitive ones below)
 
-# Hide proprietary/sensitive directories
+# Hide proprietary/sensitive directories (ENTIRE DIRECTORIES)
+/admin-dashboard/
+/important-docs/
+/reports/
+/database/
+/debug/
+/misc/
+/data/
+/assets/
 /bmad-docs/
 /docs-site/
 !/docs-site/README.md
-/important-docs/
 /.bmad-core/
 /.playwright-mcp/
-/project_history/
-/reports/
+/.cursor/
+/.docker/
+/.vscode/
+/bmad/
+/config/
 /src/
+/project_history/
 
 # ===================================================================
 # 🎯 PROJECT-SPECIFIC EXCLUSIONS
