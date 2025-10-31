@@ -1,0 +1,456 @@
+// QuantDesk Terminal Theme Styles
+// Terminal-style admin dashboard with neon accents
+
+// Import terminal variables
+@import 'quantdesk-variables';
+
+// Global Terminal Styles
+body {
+  background: $body-bg;
+  color: $body-color;
+  font-family: $font-family-base;
+  font-size: 14px;
+  line-height: 1.4;
+  overflow-x: hidden;
+}
+
+// Terminal Cursor Effect
+.terminal-cursor::after {
+  content: '_';
+  color: $accent-green;
+  animation: blink $terminal-blink;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+// Terminal Glow Effects
+.terminal-glow {
+  box-shadow: $terminal-glow;
+}
+
+.terminal-glow-green {
+  box-shadow: 0 0 10px rgba($accent-green, 0.3);
+}
+
+.terminal-glow-cyan {
+  box-shadow: 0 0 10px rgba($accent-cyan, 0.3);
+}
+
+.terminal-glow-blue {
+  box-shadow: 0 0 10px rgba($accent-blue, 0.3);
+}
+
+// Terminal Typography
+.terminal-text {
+  font-family: $font-family-base;
+  color: $text-on-light-primary; // Default to light card text
+}
+
+.terminal-heading {
+  font-family: $font-family-base;
+  color: $text-on-light-primary; // Default to light card text
+  font-weight: 600;
+}
+
+.terminal-subheading {
+  font-family: $font-family-base;
+  color: $text-on-light-secondary; // Default to light card text
+  font-weight: 500;
+}
+
+// Terminal Cards with better contrast
+.terminal-card {
+  background: $card-bg;
+  border: 1px solid $card-border-color;
+  border-radius: 8px; // Slightly rounded like frontend
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  color: $card-color;
+  
+  .card-header {
+    background: $card-light-header-bg;
+    border-bottom: 1px solid $card-light-border;
+    color: $text-on-light-primary;
+    font-weight: 600;
+    border-radius: 8px 8px 0 0;
+  }
+  
+  .card-body {
+    background: $card-bg;
+    color: $card-color;
+  }
+}
+
+// Terminal Buttons (text color should be light on colored buttons)
+.btn-terminal {
+  font-family: $font-family-base;
+  font-weight: 500;
+  border-radius: 0;
+  transition: all 0.3s ease;
+  
+  &.btn-primary {
+    background: $accent-blue;
+    border-color: $accent-blue;
+    color: $text-on-dark-primary; // Light text on primary button
+    
+    &:hover {
+      background: lighten($accent-blue, 10%);
+      border-color: lighten($accent-blue, 10%);
+      box-shadow: 0 0 15px rgba($accent-blue, 0.3);
+    }
+  }
+  
+  &.btn-success {
+    background: $accent-green;
+    border-color: $accent-green;
+    color: $text-on-dark-primary; // Light text on success button
+    
+    &:hover {
+      background: lighten($accent-green, 10%);
+      border-color: lighten($accent-green, 10%);
+      box-shadow: 0 0 15px rgba($accent-green, 0.3);
+    }
+  }
+  
+  &.btn-warning {
+    background: $accent-yellow;
+    border-color: $accent-yellow;
+    color: $text-on-dark-primary; // Light text on warning button
+    
+    &:hover {
+      background: lighten($accent-yellow, 10%);
+      border-color: lighten($accent-yellow, 10%);
+      box-shadow: 0 0 15px rgba($accent-yellow, 0.3);
+    }
+  }
+  
+  &.btn-danger {
+    background: $accent-red;
+    border-color: $accent-red;
+    color: $text-on-dark-primary; // Light text on danger button
+    
+    &:hover {
+      background: lighten($accent-red, 10%);
+      border-color: lighten($accent-red, 10%);
+      box-shadow: 0 0 15px rgba($accent-red, 0.3);
+    }
+  }
+}
+
+// Terminal Toggle Switch (keep dark background for toggle)
+.terminal-toggle {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+  
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $terminal-medium-gray; // Darker gray for toggle track
+    transition: 0.4s;
+    border-radius: 0;
+    border: 1px solid $accent-blue;
+    
+    &:before {
+      position: absolute;
+      content: "";
+      height: 22px;
+      width: 22px;
+      left: 3px;
+      bottom: 3px;
+      background-color: $terminal-black; // Black for toggle knob
+      transition: 0.4s;
+      border-radius: 0;
+      border: 1px solid $accent-blue;
+    }
+  }
+  
+  input:checked + .slider {
+    background-color: $accent-green;
+    box-shadow: 0 0 10px rgba($accent-green, 0.3);
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(30px);
+    background-color: $terminal-black;
+  }
+}
+
+// Terminal Status Indicators
+.status-indicator {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 0;
+  margin-right: 8px;
+  
+  &.status-online {
+    background: $accent-green;
+    box-shadow: 0 0 10px rgba($accent-green, 0.3);
+  }
+  
+  &.status-offline {
+    background: $accent-red;
+    box-shadow: 0 0 10px rgba($accent-red, 0.3);
+  }
+  
+  &.status-warning {
+    background: $accent-yellow;
+    box-shadow: 0 0 10px rgba($accent-yellow, 0.3);
+  }
+  
+  &.status-info {
+    background: $accent-cyan;
+    box-shadow: 0 0 10px rgba($accent-cyan, 0.3);
+  }
+}
+
+// Terminal Tables
+.terminal-table {
+  background: $table-bg;
+  color: $table-color; // Dark text for table content
+  border: 1px solid $table-border-color;
+  
+  th {
+    background: $card-light-header-bg; // Slightly different light background for table headers
+    color: $text-on-light-primary; // Dark text for table headers
+    font-weight: 600;
+    border-bottom: 2px solid $accent-blue;
+  }
+  
+  td {
+    border-bottom: 1px solid $table-border-color;
+    padding: 12px;
+  }
+  
+  tr:hover {
+    background: $table-hover-bg;
+  }
+}
+
+// Terminal Forms
+.terminal-form {
+  .form-control {
+    background: $input-bg;
+    border: 1px solid $input-border-color;
+    color: $input-color; // Dark text for input
+    font-family: $font-family-base;
+    
+    &:focus {
+      background: $input-bg;
+      border-color: $accent-blue;
+      color: $input-color;
+      box-shadow: 0 0 0 0.2rem rgba($accent-blue, 0.25);
+    }
+  }
+  
+  .form-label {
+    color: $text-on-light-primary; // Dark text for form labels
+    font-weight: 500;
+  }
+}
+
+// Terminal Navigation (changed to light background)
+.terminal-nav {
+  background: $navbar-bg;
+  border-bottom: 2px solid $accent-blue;
+
+  .nav-link {
+    color: $navbar-color; // Dark text for nav links
+    font-family: $font-family-base;
+    font-weight: 500;
+
+    &:hover {
+      color: $accent-blue;
+      background: rgba($accent-blue, 0.1);
+    }
+
+    &.active {
+      color: $accent-blue;
+      background: rgba($accent-blue, 0.2);
+    }
+  }
+}
+
+// Terminal Sidebar (changed to light background)
+.terminal-sidebar {
+  background: $sidebar-bg;
+  border-right: 2px solid $accent-blue;
+
+  .nav-link {
+    color: $sidebar-color; // Dark text for sidebar links
+    font-family: $font-family-base;
+    padding: 12px 20px;
+    border-bottom: 1px solid $card-light-border; // Light border for sidebar items
+
+    &:hover {
+      color: $accent-blue;
+      background: rgba($accent-blue, 0.1);
+    }
+
+    &.active {
+      color: $accent-blue;
+      background: rgba($accent-blue, 0.2);
+      border-left: 4px solid $accent-blue;
+    }
+  }
+}
+
+// Terminal Dashboard Grid
+.terminal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+// Terminal Metrics Cards with blue accents
+.metric-card {
+  background: $card-bg;
+  border: 1px solid $card-border-color;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  color: $card-color;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    border-color: $accent-blue;
+    box-shadow: 0 0 0 1px rgba($accent-blue, 0.2);
+  }
+  
+  .metric-value {
+    font-size: 2rem;
+    font-weight: 600;
+    color: $accent-blue; // Blue accent like frontend
+  }
+  
+  .metric-label {
+    color: $text-on-light-secondary;
+    font-size: 0.9rem;
+    margin-top: 8px;
+    font-weight: 500;
+  }
+  
+  .metric-change {
+    font-size: 0.8rem;
+    margin-top: 4px;
+    font-weight: 600;
+    
+    &.positive {
+      color: $accent-green;
+    }
+    
+    &.negative {
+      color: $accent-red;
+    }
+  }
+}
+
+// Terminal Alerts
+.terminal-alert {
+  border: 1px solid;
+  border-radius: 0;
+  padding: 12px;
+  margin: 10px 0;
+  font-family: $font-family-base;
+  
+  &.alert-success {
+    background: rgba($accent-green, 0.1);
+    border-color: $accent-green;
+    color: $accent-green;
+  }
+  
+  &.alert-warning {
+    background: rgba($accent-yellow, 0.1);
+    border-color: $accent-yellow;
+    color: $accent-yellow;
+  }
+  
+  &.alert-danger {
+    background: rgba($accent-red, 0.1);
+    border-color: $accent-red;
+    color: $accent-red;
+  }
+  
+  &.alert-info {
+    background: rgba($accent-cyan, 0.1);
+    border-color: $accent-cyan;
+    color: $accent-cyan;
+  }
+}
+
+// Terminal Code Blocks (keep dark background)
+.terminal-code {
+  background: $terminal-black;
+  border: 1px solid $terminal-medium-gray;
+  border-radius: 0;
+  padding: 15px;
+  font-family: $font-family-monospace;
+  color: $text-on-dark-primary; // Light text on dark background
+  overflow-x: auto;
+  
+  .prompt {
+    color: $accent-blue;
+    font-weight: 600;
+  }
+  
+  .command {
+    color: $text-on-dark-primary;
+  }
+  
+  .output {
+    color: $accent-green;
+  }
+  
+  .error {
+    color: $accent-red;
+  }
+}
+
+// Terminal Loading Spinner (keep dark background)
+.terminal-spinner {
+  border: 2px solid $terminal-medium-gray;
+  border-top: 2px solid $accent-green;
+  border-radius: 0;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// Terminal Scrollbar
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f8f9fa;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $terminal-medium-gray;
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $accent-green;
+}

@@ -1,8 +1,56 @@
 use anchor_lang::prelude::*;
-use crate::user_accounts::*;
+use crate::state::UserAccount;
 
 /// User Account Management Instructions Module
 /// This module handles user account creation, updates, and management
+
+/// Create User Account Context
+#[derive(Accounts)]
+#[instruction(account_index: u16)]
+pub struct CreateUserAccount<'info> {
+    #[account(
+        init,
+        payer = authority,
+        space = 8 + UserAccount::INIT_SPACE,
+        seeds = [b"user_account", authority.key().as_ref(), &account_index.to_le_bytes()],
+        bump
+    )]
+    pub user_account: Account<'info, UserAccount>,
+    
+    #[account(mut)]
+    pub authority: Signer<'info>,
+    
+    pub system_program: Program<'info, System>,
+}
+
+/// Update User Account Context
+#[derive(Accounts)]
+pub struct UpdateUserAccount<'info> {
+    #[account(
+        mut,
+        constraint = user_account.authority == authority.key()
+    )]
+    pub user_account: Account<'info, UserAccount>,
+    
+    #[account(mut)]
+    pub authority: Signer<'info>,
+}
+
+/// Close User Account Context
+#[derive(Accounts)]
+pub struct CloseUserAccount<'info> {
+    #[account(
+        mut,
+        close = authority,
+        constraint = user_account.authority == authority.key(),
+        constraint = user_account.total_positions == 0,
+        constraint = user_account.total_orders == 0
+    )]
+    pub user_account: Account<'info, UserAccount>,
+    
+    #[account(mut)]
+    pub authority: Signer<'info>,
+}
 
 /// User action types for permission checking
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Debug)]
@@ -92,19 +140,19 @@ pub fn check_user_permissions(
     
     match action {
         UserAction::Deposit => {
-            require!(user_account.can_deposit(), UserAccountError::AccountInactive);
+            require!(user_account.can_deposit(), crate::errors::ErrorCode::AccountInactive);
         },
         UserAction::Withdraw => {
-            require!(user_account.can_withdraw(), UserAccountError::AccountInactive);
+            require!(user_account.can_withdraw(), crate::errors::ErrorCode::AccountInactive);
         },
         UserAction::Trade => {
-            require!(user_account.can_trade(), UserAccountError::AccountInactive);
+            require!(user_account.can_trade(), crate::errors::ErrorCode::AccountInactive);
         },
         UserAction::CreatePosition => {
-            require!(user_account.can_trade(), UserAccountError::AccountInactive);
+            require!(user_account.can_trade(), crate::errors::ErrorCode::AccountInactive);
         },
         UserAction::ClosePosition => {
-            require!(user_account.is_active, UserAccountError::AccountInactive);
+            require!(user_account.is_active, crate::errors::ErrorCode::AccountInactive);
         },
     }
     

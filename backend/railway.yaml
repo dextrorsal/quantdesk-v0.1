@@ -1,0 +1,20 @@
+# Railway Configuration for QuantDesk Backend
+build:
+  builder: DOCKERFILE
+  dockerfilePath: Dockerfile
+
+deploy:
+  healthcheckPath: /health
+  healthcheckTimeout: 100
+  restartPolicyType: ON_FAILURE
+  restartPolicyMaxRetries: 10
+
+# Environment variables (these will be set in Railway dashboard)
+# NODE_ENV: production
+# PORT: 3002
+# DATABASE_URL: your_database_url
+# SUPABASE_URL: your_supabase_url
+# SUPABASE_ANON_KEY: your_supabase_key
+# JWT_SECRET: your_jwt_secret
+# SOLANA_NETWORK: devnet
+# RPC_URL: https://api.devnet.solana.com

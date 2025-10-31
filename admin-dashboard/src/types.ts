@@ -1,0 +1,1 @@
+// QuantDesk Admin Terminal Types

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contributing - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/docs">&larr; Back to Documentation</a>
+        </div>
+        <h1>Contributing to QuantDesk</h1>
+<p>Thank you for your interest in contributing to QuantDesk! We welcome contributions from the community and appreciate your help in making QuantDesk the premier Bloomberg Terminal for Crypto.</p>
+<h2>🤝 <strong>How to Contribute</strong></h2>
+<h3>1. <strong>Report Issues</strong></h3>
+<ul>
+<li>Use <a href="https://github.com/dextrorsal/quantdesk/issues">GitHub Issues</a> to report bugs</li>
+<li>Include detailed steps to reproduce the issue</li>
+<li>Provide system information and error logs</li>
+</ul>
+<h3>2. <strong>Suggest Features</strong></h3>
+<ul>
+<li>Use <a href="https://github.com/dextrorsal/quantdesk/discussions">GitHub Discussions</a> for feature requests</li>
+<li>Describe the use case and expected behavior</li>
+<li>Consider the impact on existing users</li>
+</ul>
+<h3>3. <strong>Submit Code</strong></h3>
+<ul>
+<li>Fork the repository</li>
+<li>Create a feature branch</li>
+<li>Make your changes</li>
+<li>Submit a pull request</li>
+</ul>
+<h2>🚀 <strong>Getting Started</strong></h2>
+<h3>Prerequisites</h3>
+<ul>
+<li>Node.js 18+</li>
+<li>Git</li>
+<li>Solana CLI tools</li>
+<li>Basic knowledge of TypeScript/JavaScript</li>
+</ul>
+<h3>Development Setup</h3>
+<ol>
+<li><strong>Fork and Clone</strong></li>
+</ol>
+<div class="codehilite"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/your-username/quantdesk.git
+<span class="nb">cd</span><span class="w"> </span>quantdesk
+</code></pre></div>
+
+<ol>
+<li><strong>Install Dependencies</strong></li>
+</ol>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Backend</span>
+<span class="nb">cd</span><span class="w"> </span>backend
+npm<span class="w"> </span>install
+
+<span class="c1"># Frontend</span>
+<span class="nb">cd</span><span class="w"> </span>../frontend
+npm<span class="w"> </span>install
+</code></pre></div>
+
+<ol>
+<li><strong>Environment Setup</strong></li>
+</ol>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Copy environment files</span>
+cp<span class="w"> </span>backend/.env.example<span class="w"> </span>backend/.env
+cp<span class="w"> </span>frontend/.env.example<span class="w"> </span>frontend/.env
+</code></pre></div>
+
+<ol>
+<li><strong>Start Development</strong></li>
+</ol>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Backend</span>
+<span class="nb">cd</span><span class="w"> </span>backend
+npm<span class="w"> </span>run<span class="w"> </span>dev
+
+<span class="c1"># Frontend (new terminal)</span>
+<span class="nb">cd</span><span class="w"> </span>frontend
+npm<span class="w"> </span>run<span class="w"> </span>dev
+</code></pre></div>
+
+<h2>📋 <strong>Contribution Guidelines</strong></h2>
+<h3>Code Style</h3>
+<ul>
+<li><strong>TypeScript</strong>: Use TypeScript for all new code</li>
+<li><strong>ESLint</strong>: Follow our ESLint configuration</li>
+<li><strong>Prettier</strong>: Use Prettier for code formatting</li>
+<li><strong>Naming</strong>: Use descriptive variable and function names</li>
+</ul>
+<h3>Commit Messages</h3>
+<p>Use conventional commit format:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">type</span><span class="p">(</span><span class="nx">scope</span><span class="p">):</span><span class="w"> </span><span class="nx">description</span>
+
+<span class="nx">feat</span><span class="p">(</span><span class="kn">api</span><span class="p">):</span><span class="w"> </span><span class="nx">add</span><span class="w"> </span><span class="nx">new</span><span class="w"> </span><span class="nx">order</span><span class="w"> </span><span class="nx">endpoint</span>
+<span class="nx">fix</span><span class="p">(</span><span class="nx">ui</span><span class="p">):</span><span class="w"> </span><span class="nx">resolve</span><span class="w"> </span><span class="nx">wallet</span><span class="w"> </span><span class="nx">connection</span><span class="w"> </span><span class="nx">issue</span>
+<span class="nx">docs</span><span class="p">(</span><span class="nx">readme</span><span class="p">):</span><span class="w"> </span><span class="nx">update</span><span class="w"> </span><span class="nx">installation</span><span class="w"> </span><span class="nx">guide</span>
+</code></pre></div>
+
+<h3>Pull Request Process</h3>
+<ol>
+<li><strong>Create Feature Branch</strong></li>
+</ol>
+<div class="codehilite"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>feature/your-feature-name
+</code></pre></div>
+
+<ol>
+<li><strong>Make Changes</strong></li>
+<li>Write clean, well-documented code</li>
+<li>Add tests for new functionality</li>
+<li>
+<p>Update documentation as needed</p>
+</li>
+<li>
+<p><strong>Test Your Changes</strong></p>
+</li>
+</ol>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Backend tests</span>
+<span class="nb">cd</span><span class="w"> </span>backend
+npm<span class="w"> </span><span class="nb">test</span>
+
+<span class="c1"># Frontend tests</span>
+<span class="nb">cd</span><span class="w"> </span>../frontend
+npm<span class="w"> </span><span class="nb">test</span>
+</code></pre></div>
+
+<ol>
+<li><strong>Submit Pull Request</strong></li>
+<li>Provide clear description of changes</li>
+<li>Link to related issues</li>
+<li>Include screenshots for UI changes</li>
+</ol>
+<h2>🎯 <strong>Areas for Contribution</strong></h2>
+<h3>Frontend Development</h3>
+<ul>
+<li><strong>UI Components</strong>: Improve existing components or create new ones</li>
+<li><strong>User Experience</strong>: Enhance the trading interface</li>
+<li><strong>Mobile Responsiveness</strong>: Optimize for mobile devices</li>
+<li><strong>Accessibility</strong>: Improve accessibility features</li>
+</ul>
+<h3>Backend Development</h3>
+<ul>
+<li><strong>API Endpoints</strong>: Add new endpoints or improve existing ones</li>
+<li><strong>Performance</strong>: Optimize database queries and API responses</li>
+<li><strong>Security</strong>: Enhance security measures</li>
+<li><strong>Monitoring</strong>: Improve logging and monitoring</li>
+</ul>
+<h3>Smart Contracts</h3>
+<ul>
+<li><strong>New Features</strong>: Implement new trading features</li>
+<li><strong>Gas Optimization</strong>: Reduce transaction costs</li>
+<li><strong>Security Audits</strong>: Review and improve security</li>
+<li><strong>Testing</strong>: Add comprehensive test coverage</li>
+</ul>
+<h3>Documentation</h3>
+<ul>
+<li><strong>API Documentation</strong>: Improve API documentation</li>
+<li><strong>User Guides</strong>: Create tutorials and guides</li>
+<li><strong>Code Comments</strong>: Add inline documentation</li>
+<li><strong>Architecture Docs</strong>: Document system architecture</li>
+</ul>
+<h3>Testing</h3>
+<ul>
+<li><strong>Unit Tests</strong>: Add tests for new functionality</li>
+<li><strong>Integration Tests</strong>: Test API endpoints</li>
+<li><strong>E2E Tests</strong>: Test complete user workflows</li>
+<li><strong>Performance Tests</strong>: Test system performance</li>
+</ul>
+<h2>🔍 <strong>Code Review Process</strong></h2>
+<h3>What We Look For</h3>
+<ol>
+<li><strong>Functionality</strong></li>
+<li>Does the code work as intended?</li>
+<li>Are edge cases handled properly?</li>
+<li>
+<p>Is error handling implemented?</p>
+</li>
+<li>
+<p><strong>Code Quality</strong></p>
+</li>
+<li>Is the code readable and maintainable?</li>
+<li>Are best practices followed?</li>
+<li>
+<p>Is the code properly documented?</p>
+</li>
+<li>
+<p><strong>Testing</strong></p>
+</li>
+<li>Are tests included for new functionality?</li>
+<li>Do existing tests still pass?</li>
+<li>
+<p>Is test coverage adequate?</p>
+</li>
+<li>
+<p><strong>Security</strong></p>
+</li>
+<li>Are there any security vulnerabilities?</li>
+<li>Is input validation implemented?</li>
+<li>Are sensitive data handled properly?</li>
+</ol>
+<h3>Review Timeline</h3>
+<ul>
+<li><strong>Initial Review</strong>: Within 48 hours</li>
+<li><strong>Follow-up Reviews</strong>: Within 24 hours</li>
+<li><strong>Final Approval</strong>: Within 1 week</li>
+</ul>
+<h2>🐛 <strong>Bug Reports</strong></h2>
+<h3>Before Reporting</h3>
+<ol>
+<li><strong>Check Existing Issues</strong>: Search for similar issues</li>
+<li><strong>Test Latest Version</strong>: Ensure you're using the latest code</li>
+<li><strong>Gather Information</strong>: Collect relevant details</li>
+</ol>
+<h3>Bug Report Template</h3>
+<div class="codehilite"><pre><span></span><code><span class="gs">**Bug Description**</span>
+A clear description of the bug.
+
+<span class="gs">**Steps to Reproduce**</span>
+<span class="k">1.</span> Go to &#39;...&#39;
+<span class="k">2.</span> Click on &#39;....&#39;
+<span class="k">3.</span> Scroll down to &#39;....&#39;
+<span class="k">4.</span> See error
+
+<span class="gs">**Expected Behavior**</span>
+What you expected to happen.
+
+<span class="gs">**Actual Behavior**</span>
+What actually happened.
+
+<span class="gs">**Environment**</span>
+<span class="k">-</span><span class="w"> </span>OS: [e.g. Windows 10]
+<span class="k">-</span><span class="w"> </span>Browser: [e.g. Chrome 91]
+<span class="k">-</span><span class="w"> </span>Node.js: [e.g. 18.0.0]
+<span class="k">-</span><span class="w"> </span>QuantDesk Version: [e.g. 1.0.0]
+
+<span class="gs">**Additional Context**</span>
+Any other context about the problem.
+</code></pre></div>
+
+<h2>💡 <strong>Feature Requests</strong></h2>
+<h3>Before Requesting</h3>
+<ol>
+<li><strong>Check Roadmap</strong>: Review our planned features</li>
+<li><strong>Search Discussions</strong>: Look for similar requests</li>
+<li><strong>Consider Impact</strong>: Think about user impact</li>
+</ol>
+<h3>Feature Request Template</h3>
+<div class="codehilite"><pre><span></span><code><span class="gs">**Feature Description**</span>
+A clear description of the feature.
+
+<span class="gs">**Use Case**</span>
+Describe the use case and why this feature is needed.
+
+<span class="gs">**Proposed Solution**</span>
+Describe your proposed solution.
+
+<span class="gs">**Alternatives**</span>
+Describe any alternative solutions you&#39;ve considered.
+
+<span class="gs">**Additional Context**</span>
+Any other context about the feature request.
+</code></pre></div>
+
+<h2>🏆 <strong>Recognition</strong></h2>
+<h3>Contributors</h3>
+<p>We recognize contributors in several ways:
+- <strong>GitHub Contributors</strong>: Listed in our contributors section
+- <strong>Release Notes</strong>: Mentioned in release notes
+- <strong>Community</strong>: Recognized in our community channels
+- <strong>Swag</strong>: QuantDesk merchandise for significant contributions</p>
+<h3>Types of Contributions</h3>
+<ul>
+<li><strong>Code</strong>: Bug fixes, features, improvements</li>
+<li><strong>Documentation</strong>: Guides, tutorials, API docs</li>
+<li><strong>Testing</strong>: Test cases, bug reports</li>
+<li><strong>Community</strong>: Help others, answer questions</li>
+<li><strong>Design</strong>: UI/UX improvements, mockups</li>
+</ul>
+<h2>📞 <strong>Getting Help</strong></h2>
+<h3>Community Channels</h3>
+<ul>
+<li><strong>Discord</strong>: <a href="https://discord.gg/quantdesk">QuantDesk Discord</a></li>
+<li><strong>GitHub Discussions</strong>: <a href="https://github.com/dextrorsal/quantdesk/discussions">GitHub Discussions</a></li>
+<li><strong>Email</strong>: contact@quantdesk.app</li>
+</ul>
+<h3>Mentorship</h3>
+<ul>
+<li><strong>New Contributors</strong>: We provide mentorship for new contributors</li>
+<li><strong>Code Review</strong>: Experienced developers review your code</li>
+<li><strong>Guidance</strong>: Help with architecture and best practices</li>
+</ul>
+<h2>📄 <strong>License</strong></h2>
+<p>By contributing to QuantDesk, you agree that your contributions will be licensed under the MIT License.</p>
+<h2>🙏 <strong>Thank You</strong></h2>
+<p>Thank you for contributing to QuantDesk! Your contributions help make decentralized trading more accessible and powerful for everyone.</p>
+<hr />
+<p><strong>Happy Contributing!</strong> 🚀</p>
+<p><em>Together, we're building the Bloomberg Terminal for Crypto.</em></p>
+    </div>
+</body>
+</html>

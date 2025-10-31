@@ -48,7 +48,16 @@
     "env:check": "npm run env:scan && npm run env:validate",
     "seed": "npx ts-node scripts/seed/seed.ts",
     "monitor": "npx ts-node scripts/monitor-protocol.ts",
-    "monitor:user": "npx ts-node scripts/monitor-users.ts"
+    "monitor:user": "npx ts-node scripts/monitor-users.ts",
+    "devnet:test:suite": "npx ts-node scripts/devnet_test_suite.ts",
+    "devnet:test:suite:verbose": "VERBOSE=true npx ts-node scripts/devnet_test_suite.ts",
+    "devnet:smoke": "bash scripts/run-devnet-smoke.sh"
+  },
+  "pnpm": {
+    "overrides": {
+      "rpc-websockets": "7.5.1",
+      "@solana/web3.js": "1.87.0"
+    }
   },
   "engines": {
     "node": ">=18.0.0"
@@ -64,15 +73,21 @@
   "author": "QuantDesk Team",
   "license": "MIT",
   "dependencies": {
+    "@coral-xyz/anchor": "^0.32.1",
     "jsonwebtoken": "^9.0.2",
     "node-fetch": "^3.3.2",
     "playwright": "^1.56.1",
     "ws": "^8.18.3"
   },
   "devDependencies": {
-    "@solana/web3.js": "^1.98.4",
+    "@solana/web3.js": "1.87.0",
+    "@types/chai": "^5.2.3",
+    "@types/node": "^20.19.20",
     "bs58": "^6.0.0",
+    "chai": "^6.2.0",
     "dotenv": "^17.2.3",
-    "tsconfig-paths": "^4.2.0"
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.9.3"
   }
 }

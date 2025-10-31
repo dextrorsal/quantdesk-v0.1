@@ -1,0 +1,15 @@
+# Railway ignore file for backend - force Docker deployment
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env*
+!.env.example
+*.log
+dist/
+build/
+coverage/
+.nyc_output/
+.cache/
+.temp/
+.tmp/

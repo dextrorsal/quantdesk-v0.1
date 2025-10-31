@@ -13,6 +13,7 @@ quantdesk_oracle = "8gjwta4tMQshM7HbnEMsdFUMqjRe7XgVnxJVbcmf3cAC"
 quantdesk_perp_dex = "C2T3UnvGdHwEkspXJG7JyAhwo6VKQEKjN6eCq69guYSw"
 quantdesk_security = "84b7Khx4uj7mHDvn2V63kNSwkcgpagrBgZSdTJ7kTxWW"
 quantdesk_trading = "AvxWXu25yWhDXJBy1V5GYcn2eVws4F2QWK5G3zV4t8sZ"
+vault-recovery = "GcpEyGMJg9AvEx8LgAyzyUNTPWFxovHxtmQ4vVWuWu3a"
 
 [programs.localnet]
 quantdesk_collateral = "GPrakftrbBUUiir2MpQZv6G7UB5Jq8yNGHV5YTVYPQ5i"

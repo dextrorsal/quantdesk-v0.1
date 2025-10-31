@@ -3,6 +3,7 @@
 
 use anchor_lang::prelude::*;
 use crate::oracle::OraclePrice;
+use crate::errors::ErrorCode;
 
 /// Price cache account for storing validated oracle prices
 #[account]
@@ -191,7 +192,7 @@ impl PriceCache {
         let mut seen_assets = std::collections::HashSet::new();
         for price in &self.prices {
             if !seen_assets.insert(&price.asset) {
-                return Err(ErrorCode::InvalidCache.into());
+                return Err(ErrorCode::DuplicateOrder.into()); // Using existing error code for duplicate asset
             }
         }
         

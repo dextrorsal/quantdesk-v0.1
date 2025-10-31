@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overview - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/docs">&larr; Back to Documentation</a>
+        </div>
+        <h1>Trading Overview - The Bloomberg Terminal for Crypto</h1>
+<p>QuantDesk brings institutional-grade trading capabilities to the crypto ecosystem, providing the same level of sophistication and reliability that professional traders expect from traditional finance platforms.</p>
+<h2>🎯 Professional Trading Platform</h2>
+<h3>Why QuantDesk is the "Bloomberg Terminal for Crypto"</h3>
+<p>Just as Bloomberg Terminal revolutionized traditional finance, QuantDesk transforms crypto trading with:</p>
+<ul>
+<li><strong>Real-time Market Data</strong>: Sub-second latency price feeds and market analytics</li>
+<li><strong>Professional Interface</strong>: Multi-monitor support with customizable layouts</li>
+<li><strong>Advanced Order Types</strong>: Sophisticated order management beyond basic buy/sell</li>
+<li><strong>Institutional Features</strong>: JIT liquidity, professional APIs, and enterprise support</li>
+<li><strong>Comprehensive Analytics</strong>: Portfolio management, risk metrics, and performance tracking</li>
+</ul>
+<h2>🏆 Core Trading Features</h2>
+<h3>Perpetual Trading</h3>
+<p>Trade perpetual futures on major crypto assets with up to 100x leverage:</p>
+<ul>
+<li><strong>BTC-PERP</strong>: Bitcoin perpetual futures</li>
+<li><strong>ETH-PERP</strong>: Ethereum perpetual futures  </li>
+<li><strong>SOL-PERP</strong>: Solana perpetual futures</li>
+<li><strong>More Assets</strong>: Continuously expanding asset coverage</li>
+</ul>
+<h3>Advanced Order Types</h3>
+<h4>Market Orders</h4>
+<ul>
+<li><strong>Instant Execution</strong>: Execute at current market price</li>
+<li><strong>Slippage Protection</strong>: Configurable slippage limits</li>
+<li><strong>Smart Routing</strong>: Optimal execution across liquidity sources</li>
+</ul>
+<h4>Limit Orders</h4>
+<ul>
+<li><strong>Price Control</strong>: Set exact entry/exit prices</li>
+<li><strong>Time in Force</strong>: GTC, IOC, FOK options</li>
+<li><strong>Post-Only</strong>: Ensure maker rebates</li>
+</ul>
+<h4>Stop Orders</h4>
+<ul>
+<li><strong>Stop Loss</strong>: Automatic position closure at loss threshold</li>
+<li><strong>Take Profit</strong>: Automatic position closure at profit target</li>
+<li><strong>Trailing Stops</strong>: Dynamic stop levels that follow price</li>
+</ul>
+<h4>Advanced Orders</h4>
+<ul>
+<li><strong>Iceberg Orders</strong>: Large orders split into smaller chunks</li>
+<li><strong>TWAP Orders</strong>: Time-weighted average price execution</li>
+<li><strong>Bracket Orders</strong>: Entry with automatic stop-loss and take-profit</li>
+</ul>
+<h3>Risk Management</h3>
+<h4>Position Management</h4>
+<ul>
+<li><strong>Real-time P&amp;L</strong>: Live profit/loss calculations</li>
+<li><strong>Margin Requirements</strong>: Dynamic margin calculations</li>
+<li><strong>Liquidation Protection</strong>: Automated risk management</li>
+<li><strong>Portfolio Analytics</strong>: Comprehensive position analysis</li>
+</ul>
+<h4>Leverage Control</h4>
+<ul>
+<li><strong>Flexible Leverage</strong>: 1x to 100x leverage options</li>
+<li><strong>Dynamic Margins</strong>: Real-time margin requirement updates</li>
+<li><strong>Risk Metrics</strong>: VaR, maximum drawdown, and correlation analysis</li>
+</ul>
+<h2>📊 Professional Analytics</h2>
+<h3>Market Analytics</h3>
+<ul>
+<li><strong>Order Book Depth</strong>: Real-time order book visualization</li>
+<li><strong>Volume Analysis</strong>: Historical and real-time volume metrics</li>
+<li><strong>Price Action</strong>: Technical indicators and chart patterns</li>
+<li><strong>Market Sentiment</strong>: Long/short ratio and funding rates</li>
+</ul>
+<h3>Portfolio Analytics</h3>
+<ul>
+<li><strong>Performance Metrics</strong>: Sharpe ratio, Sortino ratio, Calmar ratio</li>
+<li><strong>Risk Metrics</strong>: VaR, CVaR, maximum drawdown</li>
+<li><strong>Correlation Analysis</strong>: Asset correlation matrices</li>
+<li><strong>Attribution Analysis</strong>: Performance attribution by strategy</li>
+</ul>
+<h3>Real-time Monitoring</h3>
+<ul>
+<li><strong>Position Tracking</strong>: Live position monitoring and alerts</li>
+<li><strong>Risk Alerts</strong>: Automated risk threshold notifications</li>
+<li><strong>Performance Dashboards</strong>: Customizable performance views</li>
+<li><strong>Compliance Reporting</strong>: Regulatory reporting tools</li>
+</ul>
+<h2>🔧 Professional Tools</h2>
+<h3>Multi-Monitor Support</h3>
+<ul>
+<li><strong>Customizable Layouts</strong>: Drag-and-drop interface customization</li>
+<li><strong>Multiple Workspaces</strong>: Separate trading, analytics, and monitoring views</li>
+<li><strong>Hotkey Support</strong>: Professional keyboard shortcuts</li>
+<li><strong>Custom Indicators</strong>: Add your own technical indicators</li>
+</ul>
+<h3>Data Integration</h3>
+<ul>
+<li><strong>Real-time Feeds</strong>: Live market data from multiple sources</li>
+<li><strong>Historical Data</strong>: Comprehensive historical price and volume data</li>
+<li><strong>News Integration</strong>: Real-time news feeds and sentiment analysis</li>
+<li><strong>Social Sentiment</strong>: Social media sentiment indicators</li>
+</ul>
+<h3>API Access</h3>
+<ul>
+<li><strong>REST API</strong>: Complete programmatic access to all features</li>
+<li><strong>WebSocket API</strong>: Real-time data streams</li>
+<li><strong>Multiple SDKs</strong>: JavaScript, Python, and Rust SDKs</li>
+<li><strong>Rate Limiting</strong>: Professional rate limiting and quotas</li>
+</ul>
+<h2>🏢 Institutional Features</h2>
+<h3>Just-in-Time (JIT) Liquidity</h3>
+<ul>
+<li><strong>Auction System</strong>: Competitive liquidity auctions</li>
+<li><strong>Price Improvement</strong>: Better execution prices through auctions</li>
+<li><strong>Liquidity Providers</strong>: Professional market making tools</li>
+<li><strong>Settlement</strong>: Automated settlement and clearing</li>
+</ul>
+<h3>Enterprise APIs</h3>
+<ul>
+<li><strong>High-Frequency Trading</strong>: Low-latency API access</li>
+<li><strong>Bulk Operations</strong>: Batch order management</li>
+<li><strong>Custom Integrations</strong>: Flexible integration options</li>
+<li><strong>Professional Support</strong>: Dedicated enterprise support</li>
+</ul>
+<h3>Compliance &amp; Reporting</h3>
+<ul>
+<li><strong>Audit Trails</strong>: Complete transaction history</li>
+<li><strong>Regulatory Reporting</strong>: Built-in compliance reporting</li>
+<li><strong>Risk Monitoring</strong>: Real-time risk monitoring and alerts</li>
+<li><strong>Data Export</strong>: Comprehensive data export capabilities</li>
+</ul>
+<h2>🚀 Getting Started with Trading</h2>
+<h3>1. Connect Your Wallet</h3>
+<ul>
+<li><strong>Supported Wallets</strong>: Phantom, Solflare, Sollet, and more</li>
+<li><strong>Multi-signature</strong>: Support for multi-sig wallets</li>
+<li><strong>Hardware Wallets</strong>: Ledger and Trezor support</li>
+<li><strong>Institutional Wallets</strong>: Enterprise wallet integrations</li>
+</ul>
+<h3>2. Fund Your Account</h3>
+<ul>
+<li><strong>SOL Deposits</strong>: Deposit SOL for trading capital</li>
+<li><strong>Cross-chain</strong>: Support for multiple blockchain deposits</li>
+<li><strong>Instant Settlement</strong>: Real-time deposit processing</li>
+<li><strong>Withdrawal Options</strong>: Flexible withdrawal methods</li>
+</ul>
+<h3>3. Start Trading</h3>
+<ul>
+<li><strong>Market Selection</strong>: Choose from available perpetual markets</li>
+<li><strong>Order Placement</strong>: Use advanced order types for optimal execution</li>
+<li><strong>Position Management</strong>: Monitor and manage your positions</li>
+<li><strong>Risk Management</strong>: Set appropriate risk parameters</li>
+</ul>
+<h2>📈 Trading Strategies</h2>
+<h3>Scalping</h3>
+<ul>
+<li><strong>High-Frequency</strong>: Execute multiple trades per minute</li>
+<li><strong>Low Latency</strong>: Sub-second execution times</li>
+<li><strong>Market Making</strong>: Provide liquidity and earn spreads</li>
+<li><strong>Arbitrage</strong>: Cross-exchange arbitrage opportunities</li>
+</ul>
+<h3>Swing Trading</h3>
+<ul>
+<li><strong>Technical Analysis</strong>: Advanced charting and indicators</li>
+<li><strong>Position Sizing</strong>: Optimal position sizing algorithms</li>
+<li><strong>Risk Management</strong>: Stop-loss and take-profit automation</li>
+<li><strong>Portfolio Management</strong>: Multi-asset portfolio strategies</li>
+</ul>
+<h3>Institutional Trading</h3>
+<ul>
+<li><strong>Algorithmic Trading</strong>: Custom trading algorithms</li>
+<li><strong>Portfolio Optimization</strong>: Advanced portfolio optimization</li>
+<li><strong>Risk Management</strong>: Sophisticated risk management systems</li>
+<li><strong>Compliance</strong>: Built-in compliance and reporting</li>
+</ul>
+<h2>🔍 Advanced Features</h2>
+<h3>Custom Indicators</h3>
+<ul>
+<li><strong>Technical Analysis</strong>: 100+ built-in technical indicators</li>
+<li><strong>Custom Scripts</strong>: Create your own indicators</li>
+<li><strong>Backtesting</strong>: Test strategies on historical data</li>
+<li><strong>Optimization</strong>: Parameter optimization tools</li>
+</ul>
+<h3>Automated Trading</h3>
+<ul>
+<li><strong>Strategy Builder</strong>: Visual strategy builder</li>
+<li><strong>Backtesting</strong>: Historical strategy testing</li>
+<li><strong>Paper Trading</strong>: Risk-free strategy testing</li>
+<li><strong>Live Trading</strong>: Automated strategy execution</li>
+</ul>
+<h3>Portfolio Management</h3>
+<ul>
+<li><strong>Multi-Asset</strong>: Trade multiple assets simultaneously</li>
+<li><strong>Risk Budgeting</strong>: Allocate risk across strategies</li>
+<li><strong>Performance Attribution</strong>: Analyze strategy performance</li>
+<li><strong>Rebalancing</strong>: Automated portfolio rebalancing</li>
+</ul>
+<h2>🎯 Best Practices</h2>
+<h3>Risk Management</h3>
+<ul>
+<li><strong>Position Sizing</strong>: Never risk more than 2% per trade</li>
+<li><strong>Stop Losses</strong>: Always use stop-loss orders</li>
+<li><strong>Diversification</strong>: Diversify across multiple assets</li>
+<li><strong>Monitoring</strong>: Continuously monitor positions</li>
+</ul>
+<h3>Order Management</h3>
+<ul>
+<li><strong>Order Types</strong>: Use appropriate order types for your strategy</li>
+<li><strong>Slippage</strong>: Consider slippage in your calculations</li>
+<li><strong>Timing</strong>: Consider market timing and volatility</li>
+<li><strong>Execution</strong>: Monitor order execution quality</li>
+</ul>
+<h3>Performance Analysis</h3>
+<ul>
+<li><strong>Metrics</strong>: Track key performance metrics</li>
+<li><strong>Attribution</strong>: Analyze performance attribution</li>
+<li><strong>Risk-Adjusted</strong>: Focus on risk-adjusted returns</li>
+<li><strong>Benchmarking</strong>: Compare against relevant benchmarks</li>
+</ul>
+<h2>🆘 Support &amp; Resources</h2>
+<h3>Documentation</h3>
+<ul>
+<li><a href="order-types.md">Order Types Guide</a> - Detailed order type explanations</li>
+<li><a href="risk-management.md">Risk Management</a> - Comprehensive risk management guide</li>
+<li><a href="portfolio.md">Portfolio Management</a> - Portfolio management strategies</li>
+<li><a href="../api/overview.md">API Documentation</a> - Complete API reference</li>
+</ul>
+<h3>Community</h3>
+<ul>
+<li><strong>Discord</strong>: <a href="https://discord.gg/quantdesk">Join our trading community</a></li>
+<li><strong>GitHub</strong>: <a href="https://github.com/dextrorsal/quantdesk/issues">Report issues and request features</a></li>
+<li><strong>Documentation</strong>: <a href="../README.md">Browse all documentation</a></li>
+<li><strong>Support</strong>: <a href="mailto:contact@quantdesk.io">contact@quantdesk.io</a></li>
+</ul>
+<h3>Professional Support</h3>
+<ul>
+<li><strong>Enterprise Support</strong>: Dedicated support for institutional clients</li>
+<li><strong>Custom Integrations</strong>: Custom integration development</li>
+<li><strong>Training</strong>: Professional trading platform training</li>
+<li><strong>Consulting</strong>: Trading strategy consulting services</li>
+</ul>
+<hr />
+<p><strong>Ready to start trading?</strong> Check out our <a href="order-types.md">Order Types Guide</a> or explore our <a href="../api/overview.md">API Documentation</a> for programmatic access.</p>
+    </div>
+</body>
+</html>

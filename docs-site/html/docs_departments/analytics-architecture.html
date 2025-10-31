@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics-Architecture - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/">&larr; Back to Documentation</a>
+        </div>
+        <h1>Analytics Department Architecture</h1>
+<h2>Overview</h2>
+<p>Comprehensive analytics platform providing market intelligence, trading performance analysis, user behavior insights, and business intelligence for QuantDesk trading operations.</p>
+<h2>Technology Stack</h2>
+<ul>
+<li><strong>Data Warehouse</strong>: Snowflake/BigQuery for analytical data</li>
+<li><strong>Business Intelligence</strong>: Tableau/Looker for dashboards</li>
+<li><strong>Time Series Analytics</strong>: TimescaleDB + Grafana</li>
+<li><strong>ML Platforms</strong>: MLflow for model tracking</li>
+<li><strong>Real-time Analytics</strong>: Apache Druid + Apache Superset</li>
+<li><strong>Visualization</strong>: D3.js + Chart.js for custom visualizations</li>
+</ul>
+<h2>Analytics Architecture Layers</h2>
+<h3>Data Collection Layer</h3>
+<div class="codehilite"><pre><span></span><code>Data Sources → Event Streamers → Data Lake → ETL Pipelines → 
+Analytics Storage → BI Tools → Dashboards &amp; Reports
+</code></pre></div>
+
+<h3>Core Analytics Domains</h3>
+<h2>1. Trading Analytics Engine</h2>
+<h3>Portfolio Performance Analytics</h3>
+<ul>
+<li><strong>Real-time P&amp;L</strong>: Live portfolio performance tracking</li>
+<li><strong>Risk Metrics</strong>: VaR, Sharpe ratio, max drawdown calculation</li>
+<li><strong>Strategy Performance</strong>: Individual strategy performance analysis</li>
+<li><strong>Attribution Analysis</strong>: Performance attribution by strategy/asset</li>
+<li><strong>Benchmark Comparison</strong>: Compare against market benchmarks</li>
+</ul>
+<h3>Market Analytics</h3>
+<ul>
+<li><strong>Market Microstructure</strong>: Order book depth, spread analysis</li>
+<li><strong>Liquidity Analysis</strong>: Market liquidity and impact modeling</li>
+<li><strong>Volatility Analytics</strong>: Real-time volatility surface modeling</li>
+<li><strong>Correlation Analysis</strong>: Asset correlation and covariance matrices</li>
+<li><strong>Regime Detection</strong>: Market regime identification and switching</li>
+</ul>
+<h3>Trade Execution Analytics</h3>
+<ul>
+<li><strong>Execution Quality</strong>: Slippage analysis, execution costs</li>
+<li><strong>Fill Rate Analysis</strong>: Order fill rate statistics</li>
+<li><strong>Timing Analysis</strong>: Best execution timing identification</li>
+<li><strong>Venue Performance</strong>: Trading venue performance comparison</li>
+<li><strong>Cost Analysis</strong>: Comprehensive trading cost breakdown</li>
+</ul>
+<h2>2. User Behavior Analytics</h2>
+<h3>User Engagement Analytics</h3>
+<ul>
+<li><strong>Trading Activity</strong>: User trading pattern analysis</li>
+<li><strong>Feature Adoption</strong>: Feature usage and adoption rates</li>
+<li><strong>Session Analytics</strong>: User session analysis and cohorts</li>
+<li><strong>Conversion Metrics</strong>: User conversion and retention analysis</li>
+<li><strong>Behavioral Segmentation</strong>: User behavior-based segmentation</li>
+</ul>
+<h3>Portfolio Analytics</h3>
+<ul>
+<li><strong>User Portfolios</strong>: Aggregate user portfolio analysis</li>
+<li><strong>Risk Taking</strong>: User risk assessment and profiling</li>
+<li><strong>Trading Patterns</strong>: User trading behavior analysis</li>
+<li><strong>Performance Comparison</strong>: User performance vs benchmarks</li>
+<li><strong>Lifecycles</strong>: User trading lifecycle analysis</li>
+</ul>
+<h2>3. Business Intelligence</h2>
+<h3>Financial Analytics</h3>
+<ul>
+<li><strong>Revenue Analytics</strong>: Trading revenue and fee analytics</li>
+<li><strong>Cost Analytics</strong>: Operating costs and profitability analysis</li>
+<li><strong>Growth Metrics</strong>: User growth and market penetration</li>
+<li><strong>Unit Economics</strong>: Per-user economics and LTV analysis</li>
+<li><strong>Forecasting</strong>: Revenue and growth projections</li>
+</ul>
+<h3>Operational Analytics</h3>
+<ul>
+<li><strong>System Performance</strong>: Trading system performance metrics</li>
+<li><strong>Capacity Planning</strong>: System capacity utilization analysis</li>
+<li><strong>Incident Analytics</strong>: System incident analysis and MTTR</li>
+<li><strong>Compliance Analytics</strong>: Regulatory compliance reporting</li>
+<li><strong>Risk Analytics</strong>: Systematic and operational risk analysis</li>
+</ul>
+<h2>Analytics Infrastructure</h2>
+<h3>Data Storage Architecture</h3>
+<div class="codehilite"><pre><span></span><code>Raw Data → Processing → Analytics Storage → Query Layer → Visualization
+</code></pre></div>
+
+<h4>Real-time Data Storage</h4>
+<ul>
+<li><strong>TimescaleDB</strong>: Time-series data for live dashboards</li>
+<li><strong>Redis Analytics</strong>: High-speed analytics cache</li>
+<li><strong>Druid</strong>: Real-time OLAP for ad-hoc analytics</li>
+<li><strong>ClickHouse</strong>: High-performance analytical database</li>
+</ul>
+<h4>Historical Data Storage</h4>
+<ul>
+<li><strong>Snowflake</strong>: Enterprise data warehouse for historical analysis</li>
+<li><strong>BigQuery</strong>: Cloud-based analytical data warehouse</li>
+<li><strong>S3 Data Lake</strong>: Raw and processed data storage</li>
+<li><strong>Hadoop</strong>: Big data processing framework</li>
+</ul>
+<h3>Processing Architecture</h3>
+<h4>Stream Processing</h4>
+<div class="codehilite"><pre><span></span><code><span class="n">Stream</span><span class="w"> </span><span class="n">Processing</span><span class="o">/</span>
+<span class="err">├──</span><span class="w"> </span><span class="kt">real</span><span class="o">-</span><span class="kt">time</span><span class="o">-</span><span class="n">analytics</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">market</span><span class="o">-</span><span class="n">metrics</span><span class="o">/</span><span class="w">            </span><span class="p">#</span><span class="w"> </span><span class="n">Real</span><span class="o">-</span><span class="kt">time</span><span class="w"> </span><span class="n">market</span><span class="w"> </span><span class="n">analytics</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">portfolio</span><span class="o">-</span><span class="n">updates</span><span class="o">/</span><span class="w">         </span><span class="p">#</span><span class="w"> </span><span class="n">Live</span><span class="w"> </span><span class="n">portfolio</span><span class="w"> </span><span class="n">updates</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">risk</span><span class="o">-</span><span class="n">monitoring</span><span class="o">/</span><span class="w">           </span><span class="p">#</span><span class="w"> </span><span class="n">Real</span><span class="o">-</span><span class="kt">time</span><span class="w"> </span><span class="n">risk</span><span class="w"> </span><span class="n">monitoring</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└</span><span class="w"> </span><span class="n">trading</span><span class="o">-</span><span class="n">metrics</span><span class="o">/</span><span class="w">             </span><span class="p">#</span><span class="w"> </span><span class="n">Live</span><span class="w"> </span><span class="n">trading</span><span class="w"> </span><span class="n">metrics</span>
+<span class="err">├──</span><span class="w"> </span><span class="k">event</span><span class="o">-</span><span class="n">processing</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">user</span><span class="o">-</span><span class="n">events</span><span class="o">/</span><span class="w">               </span><span class="p">#</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="n">behavior</span><span class="w"> </span><span class="n">events</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">trading</span><span class="o">-</span><span class="n">events</span><span class="o">/</span><span class="w">            </span><span class="p">#</span><span class="w"> </span><span class="n">Trading</span><span class="w"> </span><span class="n">operation</span><span class="w"> </span><span class="n">events</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">system</span><span class="o">-</span><span class="n">events</span><span class="o">/</span><span class="w">             </span><span class="p">#</span><span class="w"> </span><span class="n">System</span><span class="w"> </span><span class="n">operation</span><span class="w"> </span><span class="n">events</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└</span><span class="w"> </span><span class="n">business</span><span class="o">-</span><span class="n">events</span><span class="o">/</span><span class="w">             </span><span class="p">#</span><span class="w"> </span><span class="n">Business</span><span class="w"> </span><span class="n">metric</span><span class="w"> </span><span class="n">events</span>
+<span class="err">└──</span><span class="w"> </span><span class="n">enrichment</span><span class="o">/</span>
+<span class="w">    </span><span class="err">├──</span><span class="w"> </span><span class="n">feature</span><span class="o">-</span><span class="n">engineering</span><span class="o">/</span><span class="w">       </span><span class="p">#</span><span class="w"> </span><span class="n">ML</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="n">generation</span>
+<span class="w">    </span><span class="err">├──</span><span class="w"> </span><span class="n">dimensional</span><span class="o">-</span><span class="n">modeling</span><span class="o">/</span><span class="w">      </span><span class="p">#</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="n">warehouse</span><span class="w"> </span><span class="n">modeling</span>
+<span class="w">    </span><span class="err">├──</span><span class="w"> </span><span class="n">aggregation</span><span class="o">/</span><span class="w">               </span><span class="p">#</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="n">aggregation</span><span class="w"> </span><span class="n">pipelines</span>
+<span class="w">    </span><span class="err">└──</span><span class="w"> </span><span class="n">computation</span><span class="o">/</span><span class="w">               </span><span class="p">#</span><span class="w"> </span><span class="n">Analytical</span><span class="w"> </span><span class="n">computations</span>
+</code></pre></div>
+
+<h4>Batch Processing</h4>
+<div class="codehilite"><pre><span></span><code>Batch Processing/
+├── daily-analytics/
+│   ├── daily-reports/             # Daily analytical reports
+│   ├── performance-reports/       # Performance reports
+│   ├── risk-reports/              # Risk analysis reports
+│   └ compliance-reports/          # Compliance reports
+├── historical-analysis/
+│   ├── trend-analysis/            # Historical trend analysis
+│   ├── seasonality/               # Seasonal pattern analysis
+│   ├── correlation-studies/       # Correlation studies
+│   └ backtesting-metrics/         # Backtesting performance
+└── ml-pipelines/
+    ├── model-training/            # ML model training pipelines
+    ├── feature-validation/        # Feature validation pipelines
+    ├── model-evaluation/          # Model evaluation pipelines
+    └── deployment-monitoring/     # Model deployment monitoring
+</code></pre></div>
+
+<h2>Visualization &amp; Reporting</h2>
+<h3>Dashboard Architecture</h3>
+<h4>Trading Dashboards</h4>
+<ul>
+<li><strong>Live Trading Dashboard</strong>: Real-time trading metrics and KPIs</li>
+<li><strong>Portfolio Dashboard</strong>: Portfolio performance and analytics</li>
+<li><strong>Risk Dashboard</strong>: Real-time risk monitoring and alerts</li>
+<li><strong>Market Dashboard</strong>: Market conditions and sentiment analysis</li>
+</ul>
+<h4>Business Dashboards</h4>
+<ul>
+<li><strong>Executive Dashboard</strong>: High-level business metrics and KPIs</li>
+<li><strong>Operations Dashboard</strong>: System performance and operational metrics</li>
+<li><strong>Finance Dashboard</strong>: Financial metrics and profitability analysis</li>
+<li><strong>User Dashboard</strong>: User metrics and engagement analytics</li>
+</ul>
+<h4>Customer-Facing Analytics</h4>
+<ul>
+<li><strong>User Trading Analytics</strong>: Personal trading performance analytics</li>
+<li><strong>Portfolio Insights</strong>: AI-powered portfolio insights</li>
+<li><strong>Market Intelligence</strong>: Market news and analysis</li>
+<li><strong>Educational Analytics</strong>: Trading education and tutorials</li>
+</ul>
+<h3>Reporting System</h3>
+<h4>Automated Reports</h4>
+<ul>
+<li><strong>Daily Reports</strong>: Daily trading and system performance</li>
+<li><strong>Weekly Reports</strong>: Weekly business and user analytics</li>
+<li><strong>Monthly Reports</strong>: Monthly strategic and financial reports</li>
+<li><strong>Custom Reports</strong>: On-demand custom analytical reports</li>
+</ul>
+<h4>Ad-hoc Analytics</h4>
+<ul>
+<li><strong>Self-service Analytics</strong>: User-configurable analytics</li>
+<li><strong>Query Interface</strong>: SQL and No-SQL query interfaces</li>
+<li><strong>Data Explorer</strong>: Interactive data exploration tools</li>
+<li><strong>API Access</strong>: Analytical data API access</li>
+</ul>
+<h2>Machine Learning Analytics</h2>
+<h3>Predictive Analytics</h3>
+<ul>
+<li><strong>Market Prediction</strong>: ML models for market direction prediction</li>
+<li><strong>Risk Prediction</strong>: Predict risk metrics and drawdowns</li>
+<li><strong>User Behavior</strong>: Predict user trading behavior and churn</li>
+<li><strong>Performance Forecast</strong>: Forecast strategy performance</li>
+</ul>
+<h3>Anomaly Detection</h3>
+<ul>
+<li><strong>Trading Anomalies</strong>: Detect unusual trading patterns</li>
+<li><strong>Market Anomalies</strong>: Identify market anomalies and opportunities</li>
+<li><strong>System Anomalies</strong>: Detect system performance anomalies</li>
+<li><strong>Fraud Detection</strong>: Identify potential fraudulent activities</li>
+</ul>
+<h3>Optimization Analytics</h3>
+<ul>
+<li><strong>Strategy Optimization</strong>: Optimize trading strategy parameters</li>
+<li><strong>Portfolio Optimization</strong>: Optimize portfolio allocation</li>
+<li><strong>Execution Optimization</strong>: Optimize trade execution timing</li>
+<li><strong>Cost Optimization</strong>: Minimize trading and operational costs</li>
+</ul>
+<h2>Real-time Analytics</h2>
+<h3>Streaming Analytics</h3>
+<ul>
+<li><strong>Market Streams</strong>: Real-time market data analytics</li>
+<li><strong>Trading Streams</strong>: Live trading analytics and monitoring</li>
+<li><strong>User Streams</strong>: Real-time user behavior tracking</li>
+<li><strong>System Streams</strong>: Live system performance monitoring</li>
+</ul>
+<h3>Alerting System</h3>
+<ul>
+<li><strong>Risk Alerts</strong>: Real-time risk threshold breaches</li>
+<li><strong>Performance Alerts</strong>: Performance degradation alerts</li>
+<li><strong>Opportunity Alerts</strong>: Trading opportunity identification</li>
+<li><strong>System Alerts</strong>: System health and operational alerts</li>
+</ul>
+<h2>Integration Architecture</h2>
+<h3>External Data Integration</h3>
+<ul>
+<li><strong>Market Data Providers</strong>: Bloomberg, Reuters, CoinGecko</li>
+<li><strong>Economic Data</strong>: Federal Reserve, World Bank, IMF</li>
+<li><strong>Alternative Data</strong>: Satellite, weather, social media data</li>
+<li><strong>Third-party Analytics</strong>: Moody's, S&amp;P, Morningstar</li>
+</ul>
+<h3>Internal System Integration</h3>
+<ul>
+<li><strong>MIKEY-AI</strong>: Integration with AI analytics and insights</li>
+<li><strong>Trading Engine</strong>: Real-time trade execution analytics</li>
+<li><strong>User Management</strong>: User behavior analytics integration</li>
+<li><strong>Risk Management</strong>: Risk analytics integration</li>
+</ul>
+<h3>API Architecture</h3>
+<ul>
+<li><strong>RESTful APIs</strong>: Standard analytics data access</li>
+<li><strong>GraphQL APIs</strong>: Flexible analytics queries</li>
+<li><strong>Streaming APIs</strong>: Real-time analytics streaming</li>
+<li><strong>Batch APIs</strong>: Bulk analytics data access</li>
+</ul>
+<h2>Performance &amp; Security</h2>
+<h3>Performance Optimization</h3>
+<ul>
+<li><strong>Query Optimization</strong>: Optimized SQL and NoSQL queries</li>
+<li><strong>Caching Strategy</strong>: Multi-level caching for analytics</li>
+<li><strong>Data Partitioning</strong>: Optimized data partitioning for performance</li>
+<li><strong>Parallel Processing</strong>: Parallel analytics processing</li>
+</ul>
+<h3>Security &amp; Compliance</h3>
+<ul>
+<li><strong>Data Privacy</strong>: Anonymization and privacy protection</li>
+<li><strong>Access Control</strong>: Role-based access to analytics data</li>
+<li><strong>Audit Logging</strong>: Complete analytics access audit trail</li>
+<li><strong>Compliance</strong>: Regulatory compliance for financial analytics</li>
+</ul>
+<h2>Development &amp; Deployment</h2>
+<h3>Analytics Engineering</h3>
+<ul>
+<li><strong>Data Modeling</strong>: Dimensional and analytical modeling</li>
+<li><strong>ETL Development</strong>: ETL pipeline development and maintenance</li>
+<li><strong>Data Quality</strong>: Data quality monitoring and improvement</li>
+<li><strong>Performance Tuning</strong>: Analytics performance optimization</li>
+</ul>
+<h3>Deployment Strategy</h3>
+<ul>
+<li><strong>CI/CD Pipelines</strong>: Automated analytics deployment</li>
+<li><strong>Monitoring</strong>: Analytics system health monitoring</li>
+<li><strong>Testing</strong>: Comprehensive analytics testing strategy</li>
+<li><strong>Rollback</strong>: Fast rollback for analytics deployments</li>
+</ul>
+    </div>
+</body>
+</html>

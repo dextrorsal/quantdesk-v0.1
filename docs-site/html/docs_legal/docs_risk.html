@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Disclosure - QuantDesk</title>
+    <link rel="icon" type="image/png" href="../../quantdesk-icon.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            background: #000000;
+            font-size: 14px;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 300px;
+            background: #111111;
+            border-right: 1px solid #333333;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #333333;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+        }
+
+        .logo h1 {
+            color: #00ff88;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .nav-item {
+            display: block;
+            color: #cccccc;
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 5px 0;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover {
+            background: #222222;
+            color: #00ff88;
+        }
+
+        .nav-item.active {
+            background: #00ff88;
+            color: #000000;
+        }
+
+        h1 {
+            color: #00ff88;
+            font-size: 32px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #00ff88;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #00ff88;
+            font-size: 24px;
+            margin: 30px 0 15px 0;
+        }
+
+        h3 {
+            color: #ffffff;
+            font-size: 18px;
+            margin: 20px 0 10px 0;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #cccccc;
+        }
+
+        .highlight {
+            background: #1a1a1a;
+            border: 1px solid #333333;
+            border-radius: 4px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .warning {
+            background: #2a1a00;
+            border: 1px solid #ff8800;
+            border-radius: 4px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .warning h3 {
+            color: #ff8800;
+        }
+
+        .back-link {
+            color: #00ff88;
+            text-decoration: none;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .legal-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #1a1a1a;
+            border: 1px solid #333333;
+            border-radius: 4px;
+        }
+
+        .legal-section h3 {
+            color: #00ff88;
+            margin-bottom: 15px;
+        }
+
+        .legal-section p {
+            margin-bottom: 10px;
+        }
+
+        ul {
+            margin-left: 20px;
+            color: #cccccc;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .risk-level {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .risk-high {
+            background: #ff4444;
+            color: #ffffff;
+        }
+
+        .risk-medium {
+            background: #ff8800;
+            color: #ffffff;
+        }
+
+        .risk-low {
+            background: #00ff88;
+            color: #000000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo">
+                <img src="../../quantdesk-icon.png" alt="QuantDesk">
+                <h1>QuantDesk</h1>
+            </div>
+            <nav>
+                <a href="/docs" class="nav-item">← Back to Docs</a>
+                <a href="/docs/about" class="nav-item">About QuantDesk</a>
+                <a href="/docs/legal/terms" class="nav-item">Terms of Service</a>
+                <a href="/docs/legal/privacy" class="nav-item">Privacy Policy</a>
+                <a href="/docs/legal/risk" class="nav-item active">Risk Disclosure</a>
+            </nav>
+        </div>
+
+        <div class="main-content">
+            <a href="/docs" class="back-link">← Back to Documentation</a>
+            
+            <h1>Risk Disclosure</h1>
+            
+            <div class="warning">
+                <h3>⚠️ IMPORTANT RISK WARNING</h3>
+                <p><strong>Trading cryptocurrencies and perpetual contracts involves substantial risk of loss and is not suitable for all investors. You should carefully consider whether trading is suitable for you in light of your circumstances, knowledge, and financial resources.</strong></p>
+            </div>
+
+            <div class="highlight">
+                <p><strong>Last Updated:</strong> December 25, 2024</p>
+                <p>This Risk Disclosure outlines the significant risks associated with using QuantDesk for cryptocurrency trading. Please read this carefully before using our platform.</p>
+            </div>
+
+            <div class="legal-section">
+                <h3>1. Market Risk <span class="risk-level risk-high">HIGH</span></h3>
+                <p>Cryptocurrency markets are highly volatile and unpredictable:</p>
+                <ul>
+                    <li>Prices can fluctuate dramatically in short periods</li>
+                    <li>Market movements can result in significant losses</li>
+                    <li>Past performance does not guarantee future results</li>
+                    <li>External factors (regulations, news, market sentiment) can cause sudden price changes</li>
+                </ul>
+            </div>
+
+            <div class="legal-section">
+                <h3>2. Leverage Risk <span class="risk-level risk-high">HIGH</span></h3>
+                <p>Perpetual contracts allow for leveraged trading, which amplifies both gains and losses:</p>
+                <ul>
+                    <li>Small price movements can result in large losses</li>
+                    <li>You may lose more than your initial investment</li>
+                    <li>Margin calls and liquidations can occur rapidly</li>
+                    <li>Leverage increases the risk of total loss of capital</li>
+                </ul>
+            </div>
+
+            <div class="legal-section">
+                <h3>3. Liquidation Risk <span class="risk-level risk-high">HIGH</span></h3>
+                <p>Your positions may be automatically liquidated if:</p>
+                <ul>
+                    <li>Your margin falls below maintenance requirements</li>
+                    <li>Market conditions deteriorate rapidly</li>
+                    <li>Oracle price feeds show adverse movements</li>
+                    <li>Network congestion delays your transactions</li>
+                </ul>
+            </div>
+
+            <div class="legal-section">
+                <h3>4. Smart Contract Risk <span class="risk-level risk-medium">MEDIUM</span></h3>
+                <p>QuantDesk operates on smart contracts deployed on Solana blockchain:</p>
+                <ul>
+                    <li>Smart contracts may contain bugs or vulnerabilities</li>
+                    <li>Code upgrades may introduce new risks</li>
+                    <li>Third-party dependencies may fail</li>
+                    <li>Despite audits, risks may still exist</li>
+                </ul>
+            </div>
+
+            <div class="legal-section">
+                <h3>5. Oracle Risk <span class="risk-level risk-medium">MEDIUM</span></h3>
+                <p>Price feeds and data sources may be unreliable:</p>
+                <ul>
+                    <li>Oracle manipulation or failure</li>
+                    <li>Stale or incorrect price data</li>
+                    <li>Network connectivity issues</li>
+                    <li>Data source outages</li>
+                </ul>
+            </div>
+
+            <div class="legal-section">
+                <h3>6. Technology Risk <span class="risk-level risk-medium">MEDIUM</span></h3>
+                <p>Technical issues may affect platform operation:</p>
+                <ul>
+                    <li>Network congestion and high transaction fees</li>
+                    <li>Platform downtime or maintenance</li>
+                    <li>Browser or device compatibility issues</li>
+                    <li>Internet connectivity problems</li>
+                </ul>
+            </div>
+
+            <div class="legal-section">
+                <h3>7. Regulatory Risk <span class="risk-level risk-medium">MEDIUM</span></h3>
+                <p>Cryptocurrency regulations are evolving and may impact trading:</p>
+                <ul>
+                    <li>Changes in laws and regulations</li>
+                    <li>Government restrictions or bans</li>
+                    <li>Tax implications of trading activities</li>
+                    <li>Compliance requirements</li>
+                </ul>
+            </div>
+
+            <div class="legal-section">
+                <h3>8. Counterparty Risk <span class="risk-level risk-low">LOW</span></h3>
+                <p>As a decentralized platform, QuantDesk minimizes counterparty risk:</p>
+                <ul>
+                    <li>Non-custodial - you control your private keys</li>
+                    <li>Smart contracts execute trades automatically</li>
+                    <li>No central authority controls your funds</li>
+                    <li>Transparent and auditable operations</li>
+                </ul>
+            </div>
+
+            <div class="legal-section">
+                <h3>9. User Error Risk <span class="risk-level risk-medium">MEDIUM</span></h3>
+                <p>User mistakes can result in losses:</p>
+                <ul>
+                    <li>Incorrect transaction parameters</li>
+                    <li>Wrong wallet addresses</li>
+                    <li>Insufficient gas fees</li>
+                    <li>Misunderstanding of platform features</li>
+                </ul>
+            </div>
+
+            <div class="legal-section">
+                <h3>10. Risk Mitigation Measures</h3>
+                <p>QuantDesk implements several risk mitigation measures:</p>
+                <ul>
+                    <li><strong>Multi-layer Circuit Breaker:</strong> Automatic risk management</li>
+                    <li><strong>Advanced Keeper Authorization:</strong> Enhanced security protocols</li>
+                    <li><strong>Dynamic Oracle Protection:</strong> Staleness detection and prevention</li>
+                    <li><strong>95/100 QA Score:</strong> Comprehensive security auditing</li>
+                    <li><strong>Real-time Monitoring:</strong> Continuous risk assessment</li>
+                </ul>
+            </div>
+
+            <div class="warning">
+                <h3>⚠️ RECOMMENDATIONS</h3>
+                <ul>
+                    <li><strong>Only trade with funds you can afford to lose completely</strong></li>
+                    <li><strong>Start with small amounts to understand the platform</strong></li>
+                    <li><strong>Never invest more than you can afford to lose</strong></li>
+                    <li><strong>Educate yourself about cryptocurrency trading risks</strong></li>
+                    <li><strong>Consider seeking professional financial advice</strong></li>
+                    <li><strong>Monitor your positions regularly</strong></li>
+                    <li><strong>Use appropriate risk management strategies</strong></li>
+                </ul>
+            </div>
+
+            <div class="legal-section">
+                <h3>11. No Investment Advice</h3>
+                <p>QuantDesk does not provide investment advice. All trading decisions are your own responsibility. The platform is a tool for executing trades based on your own analysis and risk tolerance.</p>
+            </div>
+
+            <div class="legal-section">
+                <h3>12. Contact Information</h3>
+                <p>If you have questions about these risks, please contact us:</p>
+                <ul>
+                    <li><strong>Email:</strong> risk@quantdesk.app</li>
+                    <li><strong>Telegram:</strong> <a href="https://t.me/QuantDeskapp" style="color: #00ff88;">t.me/QuantDeskapp</a></li>
+                    <li><strong>Twitter:</strong> <a href="https://x.com/QuantDeskApp" style="color: #00ff88;">@QuantDeskApp</a></li>
+                </ul>
+            </div>
+
+            <div class="highlight" style="margin-top: 40px;">
+                <p><strong>By using QuantDesk, you acknowledge that you have read, understood, and accept all risks outlined in this disclosure. Trading cryptocurrencies involves substantial risk of loss and is not suitable for all investors.</strong></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

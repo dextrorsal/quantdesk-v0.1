@@ -1,0 +1,124 @@
+// QuantDesk Terminal Theme Variables
+// Black background with neon/pastel accents and monospace font
+
+// QuantDesk Terminal Theme Variables
+// Black background with white/light inside boxes and dark text
+
+// Match frontend theme colors
+$terminal-black: #000000 !default;      // Pure black like frontend
+$terminal-dark-gray: #0a0a0a !default;  // Near black like frontend
+$terminal-medium-gray: #1a1a1a !default; // Dark gray like frontend
+$terminal-light-gray: #333333 !default; // Lighter gray for borders
+
+// Card backgrounds matching frontend
+$card-light-bg: #0a0a0a !default;       // Same as frontend bg-secondary
+$card-light-border: #1a1a1a !default;   // Same as frontend bg-tertiary
+$card-light-header-bg: #1a1a1a !default; // Same as frontend bg-tertiary
+
+// Accent Colors matching frontend theme
+$accent-green: #22c55e !default;        // Frontend success color
+$accent-blue: #3b82f6 !default;        // Frontend primary blue
+$accent-purple: #8b5cf6 !default;      // Frontend purple
+$accent-orange: #f97316 !default;       // Frontend orange
+$accent-red: #ef4444 !default;         // Frontend danger color
+$accent-yellow: #facc15 !default;       // Frontend warning color
+$accent-cyan: #06b6d4 !default;         // Frontend cyan
+
+// Text Colors matching frontend theme
+$text-on-dark-primary: #ffffff !default;   // Pure white like frontend
+$text-on-dark-secondary: #e5e5e5 !default; // Light gray like frontend
+$text-on-dark-muted: #a3a3a3 !default;     // Medium gray like frontend
+
+$text-on-light-primary: #ffffff !default;   // White text on dark cards
+$text-on-light-secondary: #e5e5e5 !default; // Light gray text on dark cards
+$text-on-light-muted: #a3a3a3 !default;    // Muted text on dark cards
+
+// Status Colors (keep as is, they are accents)
+$success: $accent-green !default;
+$warning: $accent-yellow !default;
+$danger: $accent-red !default;
+$info: $accent-cyan !default;
+$primary: $accent-blue !default;
+$secondary: $terminal-light-gray !default; // This is a generic secondary, might need adjustment
+
+// Background Colors - Dark theme like docs
+// Align with frontend CSS variables for seamless theming
+$body-bg: #000000 !default; // Black background
+$body-color: $text-on-dark-primary !default; // Light text on dark
+
+$card-bg: $terminal-dark-gray !default; // Dark cards
+$modal-bg: $terminal-dark-gray !default; // Dark modals
+$dropdown-bg: $terminal-dark-gray !default; // Dark dropdowns
+
+// Text Colors (re-map to contextual)
+$text-muted: $text-on-dark-muted !default; // Generic muted text, assume for dark backgrounds
+$text-white: $text-on-dark-primary !default; // Used for text that should always be white/light
+$text-success: $accent-green !default;
+$text-warning: $accent-yellow !default;
+$text-danger: $accent-red !default;
+$text-info: $accent-cyan !default;
+
+// Border Colors
+$border-color: $card-light-border !default; // Default border for light elements
+$border-color-translucent: rgba($card-light-border, 0.175) !default; // For light elements
+
+// Fonts (keep as is)
+$font-family-monospace: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace !default;
+$font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !default;
+$font-family-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !default;
+
+// Terminal-specific variables - Dark theme
+$terminal-cursor: $accent-green !default;
+$terminal-glow: 0 0 8px rgba($accent-green, 0.3) !default;
+$terminal-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); // Darker shadow for dark cards
+
+// Button Styles (keep as is, they are accent-based, text should be light on colored buttons)
+$btn-primary-bg: $accent-blue !default;
+$btn-primary-border: $accent-blue !default;
+$btn-primary-color: $text-on-dark-primary !default;
+
+$btn-success-bg: $accent-green !default;
+$btn-success-border: $accent-green !default;
+$btn-success-color: $text-on-dark-primary !default;
+
+$btn-warning-bg: $accent-yellow !default;
+$btn-warning-border: $accent-yellow !default;
+$btn-warning-color: $text-on-dark-primary !default;
+
+$btn-danger-bg: $accent-red !default;
+$btn-danger-border: $accent-red !default;
+$btn-danger-color: $text-on-dark-primary !default;
+
+// Input Styles - Dark theme
+$input-bg: $terminal-dark-gray !default; // Dark input background
+$input-border-color: $terminal-medium-gray !default; // Dark border
+$input-color: $text-on-dark-primary !default; // Light text
+$input-focus-border-color: $accent-blue !default;
+$input-focus-box-shadow: 0 0 0 0.2rem rgba($accent-blue, 0.25) !default;
+
+// Table Styles - Dark theme
+$table-bg: $terminal-dark-gray !default; // Dark table background
+$table-color: $text-on-dark-primary !default; // Light text
+$table-border-color: $terminal-medium-gray !default; // Dark border
+$table-hover-bg: rgba($accent-blue, 0.1) !default; // Dark hover
+$table-striped-bg: rgba($terminal-medium-gray, 0.3) !default; // Dark stripe
+
+// Card Styles - Dark theme
+$card-bg: $terminal-dark-gray !default;
+$card-border-color: $terminal-medium-gray !default;
+$card-color: $text-on-dark-primary !default;
+
+// Navbar Styles - Dark theme
+$navbar-bg: $terminal-dark-gray !default;
+$navbar-color: $text-on-dark-primary !default;
+$navbar-hover-color: $accent-blue !default;
+
+// Sidebar Styles - Dark theme
+$sidebar-bg: $terminal-dark-gray !default;
+$sidebar-color: $text-on-dark-primary !default;
+$sidebar-hover-bg: rgba($accent-blue, 0.1) !default;
+$sidebar-active-bg: rgba($accent-blue, 0.2) !default;
+
+// Terminal-specific components
+$terminal-prompt: 'quantdesk@admin:~$ ' !default;
+$terminal-blink: 1s infinite !default;

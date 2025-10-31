@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lite Mode Color Scheme - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/">&larr; Back to Documentation</a>
+        </div>
+        <h1>🎨 QuantDesk Lite Mode - Complete Color Scheme Documentation</h1>
+<h2>📍 <strong>Color Definition Locations</strong></h2>
+<h3>1. <strong>Main CSS Variables</strong> (<code>frontend/src/index.css</code>)</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">:</span><span class="nd">root</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c">/* Lite Theme Variables (Default) - Minimal */</span>
+<span class="w">  </span><span class="nv">--primary-50</span><span class="p">:</span><span class="w"> </span><span class="mh">#f0f9ff</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--primary-100</span><span class="p">:</span><span class="w"> </span><span class="mh">#e0f2fe</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--primary-200</span><span class="p">:</span><span class="w"> </span><span class="mh">#bae6fd</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--primary-300</span><span class="p">:</span><span class="w"> </span><span class="mh">#7dd3fc</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--primary-400</span><span class="p">:</span><span class="w"> </span><span class="mh">#38bdf8</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--primary-500</span><span class="p">:</span><span class="w"> </span><span class="mh">#0ea5e9</span><span class="p">;</span><span class="w">  </span><span class="c">/* Subtle blue accent */</span>
+<span class="w">  </span><span class="nv">--primary-600</span><span class="p">:</span><span class="w"> </span><span class="mh">#0284c7</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--primary-700</span><span class="p">:</span><span class="w"> </span><span class="mh">#0369a1</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--primary-800</span><span class="p">:</span><span class="w"> </span><span class="mh">#075985</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--primary-900</span><span class="p">:</span><span class="w"> </span><span class="mh">#0c4a6e</span><span class="p">;</span>
+
+<span class="w">  </span><span class="nv">--bg-primary</span><span class="p">:</span><span class="w"> </span><span class="mh">#000000</span><span class="p">;</span><span class="w">      </span><span class="c">/* Pure black */</span>
+<span class="w">  </span><span class="nv">--bg-secondary</span><span class="p">:</span><span class="w"> </span><span class="mh">#0a0a0a</span><span class="p">;</span><span class="w">   </span><span class="c">/* Near black */</span>
+<span class="w">  </span><span class="nv">--bg-tertiary</span><span class="p">:</span><span class="w"> </span><span class="mh">#1a1a1a</span><span class="p">;</span><span class="w">    </span><span class="c">/* Dark gray */</span>
+<span class="w">  </span><span class="nv">--text-primary</span><span class="p">:</span><span class="w"> </span><span class="mh">#ffffff</span><span class="p">;</span><span class="w">   </span><span class="c">/* Pure white */</span>
+<span class="w">  </span><span class="nv">--text-secondary</span><span class="p">:</span><span class="w"> </span><span class="mh">#e5e5e5</span><span class="p">;</span><span class="w"> </span><span class="c">/* Light gray */</span>
+<span class="w">  </span><span class="nv">--text-muted</span><span class="p">:</span><span class="w"> </span><span class="mh">#a3a3a3</span><span class="p">;</span><span class="w">     </span><span class="c">/* Medium gray */</span>
+
+<span class="w">  </span><span class="nv">--success-500</span><span class="p">:</span><span class="w"> </span><span class="mh">#22c55e</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--danger-500</span><span class="p">:</span><span class="w"> </span><span class="mh">#ef4444</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--warning-500</span><span class="p">:</span><span class="w"> </span><span class="mh">#f59e0b</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3>2. <strong>Tailwind Config</strong> (<code>frontend/tailwind.config.js</code>)</h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">colors</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="s1">&#39;lite-primary&#39;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="mf">50</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#eff6ff&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#dbeafe&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">200</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#bfdbfe&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">300</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#93c5fd&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="mf">400</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#60a5fa&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">500</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#3b82f6&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">600</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#2563eb&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">700</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#1d4ed8&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="mf">800</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#1e40af&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">900</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#1e3a8a&#39;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="s1">&#39;pro-primary&#39;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* Orange theme for Pro mode */</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">primary</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="mf">50</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;var(--primary-50)&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">100</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;var(--primary-100)&#39;</span><span class="p">,</span><span class="w"> </span><span class="cm">/* ... */</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="s1">&#39;bg-primary&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;var(--bg-primary)&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="s1">&#39;bg-secondary&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;var(--bg-secondary)&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="s1">&#39;bg-tertiary&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;var(--bg-tertiary)&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="s1">&#39;text-primary&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;var(--text-primary)&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="s1">&#39;text-secondary&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;var(--text-secondary)&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="s1">&#39;text-muted&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;var(--text-muted)&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2>🎯 <strong>Component-Specific Color Usage</strong></h2>
+<h3><strong>Header Component</strong> (<code>frontend/src/components/Header.tsx</code>)</h3>
+<ul>
+<li><strong>Background</strong>: <code>var(--bg-secondary)</code> (#0a0a0a)</li>
+<li><strong>Border</strong>: <code>var(--bg-tertiary)</code> (#1a1a1a)</li>
+<li><strong>Active Tab</strong>: <code>var(--primary-500)</code> (#0ea5e9)</li>
+<li><strong>Inactive Tab</strong>: <code>var(--bg-secondary)</code> (#0a0a0a)</li>
+<li><strong>Logo Text</strong>: <code>gradient-text</code> (white to blue gradient)</li>
+</ul>
+<h3><strong>LiteRouter Component</strong> (<code>frontend/src/lite/LiteRouter.tsx</code>)</h3>
+<p><strong>Current Usage Count:</strong>
+- <code>bg-gray-*</code>: 255 instances
+- <code>text-gray-*</code>: 255 instances<br />
+- <code>border-gray-*</code>: 255 instances
+- <code>bg-primary-*</code>: 63 instances
+- <code>text-primary-*</code>: 63 instances
+- <code>border-primary-*</code>: 63 instances</p>
+<p><strong>Key Color Patterns:</strong>
+- <strong>Market Data Cards</strong>: <code>bg-gray-800</code> with <code>border-gray-700</code>
+- <strong>Active States</strong>: <code>text-primary-500</code> (blue)
+- <strong>Price Changes</strong>: <code>text-primary-500</code> (positive), <code>text-red-400</code> (negative)
+- <strong>Loading States</strong>: <code>border-blue-500</code>
+- <strong>Hover States</strong>: <code>hover:bg-gray-700</code></p>
+<h3><strong>Theme Toggle</strong> (<code>frontend/src/components/ThemeToggle.tsx</code>)</h3>
+<ul>
+<li><strong>Active Button</strong>: <code>var(--primary-500)</code> background</li>
+<li><strong>Inactive Button</strong>: <code>transparent</code> background</li>
+<li><strong>Border</strong>: <code>var(--bg-tertiary)</code> for inactive, <code>var(--primary-500)</code> for active</li>
+</ul>
+<h2>🔧 <strong>Easy Color Customization Guide</strong></h2>
+<h3><strong>To Change Primary Accent Color:</strong></h3>
+<ol>
+<li>
+<p><strong>Update CSS Variables</strong> in <code>frontend/src/index.css</code>:
+   <code>css
+   --primary-500: #0ea5e9;  /* Change this to your desired blue */</code></p>
+</li>
+<li>
+<p><strong>Update Tailwind Config</strong> in <code>frontend/tailwind.config.js</code>:
+   <code>javascript
+   'lite-primary': {
+     500: '#0ea5e9',  // Change this to match
+   }</code></p>
+</li>
+</ol>
+<h3><strong>To Change Background Colors:</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="nt">--bg-primary</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">000000</span><span class="o">;</span><span class="w">      </span><span class="c">/* Main background */</span>
+<span class="nt">--bg-secondary</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">0a0a0a</span><span class="o">;</span><span class="w">   </span><span class="c">/* Card backgrounds */</span>
+<span class="nt">--bg-tertiary</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">1a1a1a</span><span class="o">;</span><span class="w">    </span><span class="c">/* Borders, dividers */</span>
+</code></pre></div>
+
+<h3><strong>To Change Text Colors:</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="nt">--text-primary</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">ffffff</span><span class="o">;</span><span class="w">   </span><span class="c">/* Main text */</span>
+<span class="nt">--text-secondary</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">e5e5e5</span><span class="o">;</span><span class="w"> </span><span class="c">/* Secondary text */</span>
+<span class="nt">--text-muted</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">a3a3a3</span><span class="o">;</span><span class="w">     </span><span class="c">/* Muted text */</span>
+</code></pre></div>
+
+<h2>📊 <strong>Color Usage Statistics</strong></h2>
+<h3><strong>Most Used Colors in Lite Mode:</strong></h3>
+<ol>
+<li><strong>Gray Scale</strong>: 255+ instances</li>
+<li><code>bg-gray-800</code>: Card backgrounds</li>
+<li><code>text-gray-400</code>: Secondary text</li>
+<li>
+<p><code>border-gray-700</code>: Card borders</p>
+</li>
+<li>
+<p><strong>Primary Blue</strong>: 63 instances</p>
+</li>
+<li><code>text-primary-500</code>: Active states, positive changes</li>
+<li><code>bg-primary-500</code>: Active buttons</li>
+<li>
+<p><code>border-primary-500</code>: Active borders</p>
+</li>
+<li>
+<p><strong>Status Colors</strong>: </p>
+</li>
+<li><code>text-red-400</code>: Negative changes, sell orders</li>
+<li><code>text-green-400</code>: Success states (now changed to primary-500)</li>
+</ol>
+<h2>🎨 <strong>Design System Hierarchy</strong></h2>
+<h3><strong>Background Hierarchy:</strong></h3>
+<ul>
+<li><strong>Level 1</strong>: <code>--bg-primary</code> (#000000) - Main page background</li>
+<li><strong>Level 2</strong>: <code>--bg-secondary</code> (#0a0a0a) - Card backgrounds  </li>
+<li><strong>Level 3</strong>: <code>--bg-tertiary</code> (#1a1a1a) - Borders, dividers</li>
+</ul>
+<h3><strong>Text Hierarchy:</strong></h3>
+<ul>
+<li><strong>Primary</strong>: <code>--text-primary</code> (#ffffff) - Headings, important text</li>
+<li><strong>Secondary</strong>: <code>--text-secondary</code> (#e5e5e5) - Body text</li>
+<li><strong>Muted</strong>: <code>--text-muted</code> (#a3a3a3) - Labels, captions</li>
+</ul>
+<h3><strong>Accent Colors:</strong></h3>
+<ul>
+<li><strong>Primary</strong>: <code>--primary-500</code> (#0ea5e9) - Active states, CTAs</li>
+<li><strong>Success</strong>: <code>--success-500</code> (#22c55e) - Positive indicators</li>
+<li><strong>Danger</strong>: <code>--danger-500</code> (#ef4444) - Negative indicators</li>
+<li><strong>Warning</strong>: <code>--warning-500</code> (#f59e0b) - Caution states</li>
+</ul>
+<h2>🚀 <strong>Quick Redesign Commands</strong></h2>
+<h3><strong>Change to Dark Purple Theme:</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="nt">--primary-500</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">8b5cf6</span><span class="o">;</span><span class="w">  </span><span class="c">/* Purple accent */</span>
+<span class="nt">--bg-secondary</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">0f0a1a</span><span class="o">;</span><span class="w"> </span><span class="c">/* Slightly purple tint */</span>
+</code></pre></div>
+
+<h3><strong>Change to Dark Green Theme:</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="nt">--primary-500</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">10b981</span><span class="o">;</span><span class="w">  </span><span class="c">/* Green accent */</span>
+<span class="nt">--bg-secondary</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">0a1a0f</span><span class="o">;</span><span class="w"> </span><span class="c">/* Slightly green tint */</span>
+</code></pre></div>
+
+<h3><strong>Change to Minimal Gray Theme:</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="nt">--primary-500</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">6b7280</span><span class="o">;</span><span class="w">  </span><span class="c">/* Gray accent */</span>
+<span class="nt">--bg-secondary</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">111111</span><span class="o">;</span><span class="w"> </span><span class="c">/* Pure dark gray */</span>
+</code></pre></div>
+
+<h2>📝 <strong>Notes for Future Updates</strong></h2>
+<ol>
+<li><strong>Always update both CSS variables AND Tailwind config</strong> for consistency</li>
+<li><strong>Test both light and dark text contrast</strong> with new backgrounds</li>
+<li><strong>Maintain the 3-level background hierarchy</strong> for visual depth</li>
+<li><strong>Keep accent colors minimal</strong> - only for active states and CTAs</li>
+<li><strong>Use CSS variables</strong> instead of hardcoded colors for easy theming</li>
+</ol>
+<hr />
+<p><strong>Last Updated</strong>: $(date)
+<strong>Total Color Instances</strong>: 500+ across Lite mode components
+<strong>Main Files</strong>: <code>index.css</code>, <code>tailwind.config.js</code>, <code>LiteRouter.tsx</code>, <code>Header.tsx</code></p>
+    </div>
+</body>
+</html>

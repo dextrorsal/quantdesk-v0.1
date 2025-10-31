@@ -1,0 +1,24 @@
+{
+  "scenario": "spike",
+  "orders": 1000,
+  "durationMs": 10000,
+  "processed": 348,
+  "cadence": {
+    "p95": 1,
+    "p99": 1,
+    "avg": 1,
+    "samples": 51
+  },
+  "triggerLatency": {
+    "p95": 0,
+    "p99": 28001,
+    "avg": 1115,
+    "samples": 348
+  },
+  "resources": {
+    "rss": 186716160,
+    "heapUsed": 97571528,
+    "cpuCount": 12
+  },
+  "timestamp": "2025-10-29T23:13:17.164Z"
+}

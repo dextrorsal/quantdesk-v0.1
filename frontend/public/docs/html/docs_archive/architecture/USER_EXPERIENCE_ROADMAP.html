@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Experience Roadmap - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/docs">&larr; Back to Documentation</a>
+        </div>
+        <h1>QuantDesk User Experience Roadmap</h1>
+<h2>Social Trading Platform Vision</h2>
+<h3>🎯 <strong>Core Vision</strong></h3>
+<p>Transform QuantDesk into a social trading platform where users connect their wallet, create profiles, and trade through a master account system - similar to Drift Protocol and Hyperliquid but with social features.</p>
+<hr />
+<h2>📱 <strong>Phase 1: User Onboarding &amp; Social Features</strong></h2>
+<p><em>Priority: HIGH - Foundation for user engagement</em></p>
+<h3>1.1 Wallet Connection &amp; Profile Creation</h3>
+<ul>
+<li>[ ] <strong>Enhanced Wallet Connection Flow</strong></li>
+<li>[ ] Multi-wallet support (Phantom, Solflare, Trust, etc.)</li>
+<li>[ ] Wallet verification with message signing</li>
+<li>
+<p>[ ] Seamless connection persistence</p>
+</li>
+<li>
+<p>[ ] <strong>User Profile System</strong></p>
+</li>
+<li>[ ] Profile creation after wallet connection</li>
+<li>[ ] Username, bio, profile picture</li>
+<li>[ ] Trading statistics display</li>
+<li>
+<p>[ ] Public/private profile settings</p>
+</li>
+<li>
+<p>[ ] <strong>Social Integration</strong></p>
+</li>
+<li>[ ] X (Twitter) connection for social features</li>
+<li>[ ] Telegram integration for notifications</li>
+<li>[ ] Social media sharing of trades/achievements</li>
+<li>[ ] Follow/unfollow other traders</li>
+</ul>
+<h3>1.2 Social Features</h3>
+<ul>
+<li>[ ] <strong>Trading Leaderboards</strong></li>
+<li>[ ] Daily/weekly/monthly PnL rankings</li>
+<li>[ ] Most profitable traders</li>
+<li>[ ] Most active traders</li>
+<li>
+<p>[ ] Social proof and credibility</p>
+</li>
+<li>
+<p>[ ] <strong>Social Trading</strong></p>
+</li>
+<li>[ ] Copy trading functionality</li>
+<li>[ ] Trade sharing and commentary</li>
+<li>[ ] Community discussions</li>
+<li>[ ] Mentorship programs</li>
+</ul>
+<hr />
+<h2>🏦 <strong>Phase 2: Master Trading Account System</strong></h2>
+<p><em>Priority: HIGH - Core trading functionality</em></p>
+<h3>2.1 Master Account Creation</h3>
+<ul>
+<li>[ ] <strong>Side Panel Account Management</strong></li>
+<li>[ ] Master account creation flow</li>
+<li>[ ] Account verification process</li>
+<li>[ ] Account settings and preferences</li>
+<li>
+<p>[ ] Multi-account support (if needed)</p>
+</li>
+<li>
+<p>[ ] <strong>Account State Management</strong></p>
+</li>
+<li>[ ] Real-time account status</li>
+<li>[ ] Account health monitoring</li>
+<li>[ ] Risk level indicators</li>
+<li>[ ] Liquidation warnings</li>
+</ul>
+<h3>2.2 Smart Contract Integration</h3>
+<ul>
+<li>[ ] <strong>Solana Program Deployment</strong></li>
+<li>[ ] Deploy user account program to devnet/mainnet</li>
+<li>[ ] PDA-based account management</li>
+<li>[ ] Account initialization and updates</li>
+<li>
+<p>[ ] Permission and access control</p>
+</li>
+<li>
+<p>[ ] <strong>Account Lifecycle</strong></p>
+</li>
+<li>[ ] Account creation transaction</li>
+<li>[ ] Account state synchronization</li>
+<li>[ ] Account recovery mechanisms</li>
+<li>[ ] Account closure/deactivation</li>
+</ul>
+<hr />
+<h2>💰 <strong>Phase 3: Collateral &amp; Trading Engine</strong></h2>
+<p><em>Priority: HIGH - Core trading functionality</em></p>
+<h3>3.1 Collateral Management</h3>
+<ul>
+<li>[ ] <strong>Multi-Asset Collateral</strong></li>
+<li>[ ] USDC, SOL, BTC, ETH support</li>
+<li>[ ] Cross-collateralization</li>
+<li>[ ] Collateral ratios and limits</li>
+<li>
+<p>[ ] Real-time collateral valuation</p>
+</li>
+<li>
+<p>[ ] <strong>Deposit/Withdrawal System</strong></p>
+</li>
+<li>[ ] Seamless deposit flow</li>
+<li>[ ] Withdrawal processing</li>
+<li>[ ] Transaction confirmation</li>
+<li>[ ] Balance synchronization</li>
+</ul>
+<h3>3.2 Trading Engine</h3>
+<ul>
+<li>[ ] <strong>Order Management</strong></li>
+<li>[ ] Market orders</li>
+<li>[ ] Limit orders</li>
+<li>[ ] Stop-loss and take-profit</li>
+<li>
+<p>[ ] Advanced order types (TWAP, Iceberg, etc.)</p>
+</li>
+<li>
+<p>[ ] <strong>Position Management</strong></p>
+</li>
+<li>[ ] Long/short positions</li>
+<li>[ ] Leverage management</li>
+<li>[ ] Position sizing</li>
+<li>
+<p>[ ] PnL calculation</p>
+</li>
+<li>
+<p>[ ] <strong>Risk Management</strong></p>
+</li>
+<li>[ ] Liquidation engine</li>
+<li>[ ] Margin requirements</li>
+<li>[ ] Risk monitoring</li>
+<li>[ ] Emergency procedures</li>
+</ul>
+<hr />
+<h2>🚀 <strong>Phase 4: Advanced Features &amp; Optimization</strong></h2>
+<p><em>Priority: MEDIUM - Enhanced user experience</em></p>
+<h3>4.1 Advanced Trading Features</h3>
+<ul>
+<li>[ ] <strong>Portfolio Analytics</strong></li>
+<li>[ ] Performance metrics</li>
+<li>[ ] Risk analysis</li>
+<li>[ ] Historical data</li>
+<li>
+<p>[ ] Reporting tools</p>
+</li>
+<li>
+<p>[ ] <strong>Social Trading Features</strong></p>
+</li>
+<li>[ ] Copy trading signals</li>
+<li>[ ] Social sentiment analysis</li>
+<li>[ ] Community insights</li>
+<li>[ ] Trading competitions</li>
+</ul>
+<h3>4.2 Platform Optimization</h3>
+<ul>
+<li>[ ] <strong>Performance Optimization</strong></li>
+<li>[ ] Real-time data feeds</li>
+<li>[ ] Low-latency execution</li>
+<li>[ ] Scalability improvements</li>
+<li>
+<p>[ ] Mobile optimization</p>
+</li>
+<li>
+<p>[ ] <strong>Security &amp; Compliance</strong></p>
+</li>
+<li>[ ] Security audits</li>
+<li>[ ] Compliance checks</li>
+<li>[ ] Insurance integration</li>
+<li>[ ] Regulatory compliance</li>
+</ul>
+<hr />
+<h2>🎨 <strong>User Experience Flow</strong></h2>
+<h3><strong>Step 1: Wallet Connection</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="nv">User</span><span class="w"> </span><span class="nv">visits</span><span class="w"> </span><span class="nv">QuantDesk</span><span class="w"> </span>→<span class="w"> </span><span class="k">Connect</span><span class="w"> </span><span class="nv">Wallet</span><span class="w"> </span>→<span class="w"> </span><span class="nv">Verify</span><span class="w"> </span><span class="nv">Identity</span><span class="w"> </span>→<span class="w"> </span><span class="nv">Create</span><span class="w"> </span><span class="nv">Profile</span>
+</code></pre></div>
+
+<h3><strong>Step 2: Social Setup</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="nv">Profile</span><span class="w"> </span><span class="nv">Creation</span><span class="w"> </span>→<span class="w"> </span><span class="k">Connect</span><span class="w"> </span><span class="nv">Social</span><span class="w"> </span><span class="nv">Media</span><span class="w"> </span>→<span class="w"> </span><span class="nv">Set</span><span class="w"> </span><span class="nv">Trading</span><span class="w"> </span><span class="nv">Preferences</span><span class="w"> </span>→<span class="w"> </span><span class="nv">Explore</span><span class="w"> </span><span class="nv">Community</span>
+</code></pre></div>
+
+<h3><strong>Step 3: Master Account Creation</strong></h3>
+<div class="codehilite"><pre><span></span><code>Side Panel → Create Master Account → Verify Account → Set Risk Parameters
+</code></pre></div>
+
+<h3><strong>Step 4: Trading Setup</strong></h3>
+<div class="codehilite"><pre><span></span><code>Deposit Collateral → Configure Trading Settings → Start Trading → Share Success
+</code></pre></div>
+
+<hr />
+<h2>🔧 <strong>Technical Implementation</strong></h2>
+<h3><strong>Frontend Architecture</strong></h3>
+<ul>
+<li>React + TypeScript for UI components</li>
+<li>Wallet adapter integration</li>
+<li>Real-time state management</li>
+<li>Social media API integration</li>
+</ul>
+<h3><strong>Backend Architecture</strong></h3>
+<ul>
+<li>Express.js API server</li>
+<li>PostgreSQL database</li>
+<li>WebSocket for real-time updates</li>
+<li>Social media webhook handling</li>
+</ul>
+<h3><strong>Smart Contract Architecture</strong></h3>
+<ul>
+<li>Solana Anchor framework</li>
+<li>PDA-based account management</li>
+<li>Cross-program invocations</li>
+<li>Oracle price feeds integration</li>
+</ul>
+<h3><strong>Infrastructure</strong></h3>
+<ul>
+<li>Railway deployment</li>
+<li>Supabase for database</li>
+<li>Pyth Network for price feeds</li>
+<li>Social media APIs</li>
+</ul>
+<hr />
+<h2>📊 <strong>Success Metrics</strong></h2>
+<h3><strong>User Engagement</strong></h3>
+<ul>
+<li>Daily active users</li>
+<li>Wallet connection rate</li>
+<li>Profile completion rate</li>
+<li>Social feature usage</li>
+</ul>
+<h3><strong>Trading Activity</strong></h3>
+<ul>
+<li>Master account creation rate</li>
+<li>Collateral deposit volume</li>
+<li>Trading volume</li>
+<li>User retention</li>
+</ul>
+<h3><strong>Social Features</strong></h3>
+<ul>
+<li>Social connections made</li>
+<li>Copy trading adoption</li>
+<li>Community engagement</li>
+<li>Leaderboard participation</li>
+</ul>
+<hr />
+<h2>🎯 <strong>Next Steps</strong></h2>
+<ol>
+<li><strong>Immediate Priority</strong>: Fix smart contract deployment and account creation</li>
+<li><strong>Short Term</strong>: Implement social profile features</li>
+<li><strong>Medium Term</strong>: Build master account system</li>
+<li><strong>Long Term</strong>: Advanced trading features and optimization</li>
+</ol>
+<p>This roadmap ensures we build a comprehensive social trading platform that rivals Drift Protocol and Hyperliquid while adding unique social features that enhance user engagement and trading success.</p>
+    </div>
+</body>
+</html>

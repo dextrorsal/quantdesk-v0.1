@@ -1,0 +1,13 @@
+{
+  "name": "quantdesk-docs",
+  "version": "1.0.0",
+  "description": "QuantDesk Protocol Documentation",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'Static HTML site - no build needed'",
+    "start": "python3 serve.py"
+  },
+  "keywords": ["quantdesk", "documentation", "solana", "trading"],
+  "author": "QuantDesk Team",
+  "license": "Apache-2.0"
+}

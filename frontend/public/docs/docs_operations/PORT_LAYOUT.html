@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Port Layout - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/">&larr; Back to Documentation</a>
+        </div>
+        <h2>Port Layout (Local Dev)</h2>
+<p>Authoritative map of local service ports and how to override them. Keep this up to date when adding or changing services.</p>
+<ul>
+<li>Frontend (Vite dev server)</li>
+<li>Default: 3001</li>
+<li>Config: <code>frontend/vite.config.ts</code> → <code>server.port</code></li>
+<li>Start: <code>frontend/start-frontend.sh</code></li>
+<li>
+<p>Health: open <code>http://localhost:3001/</code></p>
+</li>
+<li>
+<p>Backend API</p>
+</li>
+<li>Default: 3002</li>
+<li>Env: <code>PORT</code></li>
+<li>Code: <code>backend/src/server.ts</code> (defaults to 3002)</li>
+<li>Start: <code>backend/start-backend.sh</code></li>
+<li>
+<p>Health: <code>GET http://localhost:3002/health</code></p>
+</li>
+<li>
+<p>MIKEY Bridge (integration)</p>
+</li>
+<li>Default: 3000</li>
+<li>Env: <code>PORT</code></li>
+<li>Config: <code>MIKEY-AI/integration/mikey-bridge/src/config/index.ts</code></li>
+<li>Start: <code>MIKEY-AI/integration/mikey-bridge/start-bridge.sh</code></li>
+<li>
+<p>Health: <code>GET http://localhost:3000/health</code></p>
+</li>
+<li>
+<p>Data Ingestion Monitoring Dashboard</p>
+</li>
+<li>Default: 3003</li>
+<li>Env: <code>METRICS_PORT</code></li>
+<li>Code: <code>data-ingestion/src/monitoring/dashboard.js</code></li>
+<li>Start: <code>data-ingestion/start-pipeline.sh</code></li>
+<li>Health: open <code>http://localhost:3003/</code></li>
+</ul>
+<p>Notes
+- Frontend proxies API requests to <code>http://localhost:3002</code> (see <code>frontend/vite.config.ts</code>).
+- Update this document whenever ports change to keep a single source of truth.</p>
+    </div>
+</body>
+</html>

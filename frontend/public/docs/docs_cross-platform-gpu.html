@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cross-Platform-Gpu - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/">&larr; Back to Documentation</a>
+        </div>
+        <h1>Cross-Platform GPU Project Migration Roadmap</h1>
+<h2>Phase 1: Project Analysis &amp; Setup</h2>
+<h3>1.1 Current State Assessment</h3>
+<ul>
+<li>[ ] <strong>Audit existing codebase</strong> for Linux/AMD-specific dependencies</li>
+<li>[ ] <strong>Identify ROCm-specific calls</strong> and GPU operations</li>
+<li>[ ] <strong>Document current ML model requirements</strong> and GPU memory usage</li>
+<li>[ ] <strong>List all Python packages</strong> and their versions in requirements.txt</li>
+<li>[ ] <strong>Map file paths</strong> that use Linux-specific separators</li>
+</ul>
+<h3>1.2 Repository Structure Reorganization</h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">project</span><span class="o">/</span>
+<span class="err">├──</span><span class="w"> </span><span class="nx">requirements</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">requirements</span><span class="o">-</span><span class="kd">base</span><span class="p">.</span><span class="nx">txt</span><span class="w">      </span><span class="err">#</span><span class="w"> </span><span class="nx">Common</span><span class="w"> </span><span class="nx">packages</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">requirements</span><span class="o">-</span><span class="nx">amd</span><span class="p">.</span><span class="nx">txt</span><span class="w">       </span><span class="err">#</span><span class="w"> </span><span class="nx">ROCm</span><span class="o">/</span><span class="nx">AMD</span><span class="w"> </span><span class="nx">specific</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">requirements</span><span class="o">-</span><span class="nx">nvidia</span><span class="p">.</span><span class="nx">txt</span><span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="nx">CUDA</span><span class="o">/</span><span class="nx">NVIDIA</span><span class="w"> </span><span class="nx">specific</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="nx">requirements</span><span class="o">-</span><span class="nx">cpu</span><span class="p">.</span><span class="nx">txt</span><span class="w">       </span><span class="err">#</span><span class="w"> </span><span class="nx">CPU</span><span class="w"> </span><span class="nx">fallback</span>
+<span class="err">├──</span><span class="w"> </span><span class="nx">src</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">gpu</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">__init__</span><span class="p">.</span><span class="nx">py</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="kd">base</span><span class="p">.</span><span class="nx">py</span><span class="w">               </span><span class="err">#</span><span class="w"> </span><span class="nx">Abstract</span><span class="w"> </span><span class="nx">GPU</span><span class="w"> </span><span class="kd">interface</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">amd_backend</span><span class="p">.</span><span class="nx">py</span><span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="nx">ROCm</span><span class="w"> </span><span class="nx">implementation</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">nvidia_backend</span><span class="p">.</span><span class="nx">py</span><span class="w">     </span><span class="err">#</span><span class="w"> </span><span class="nx">CUDA</span><span class="w"> </span><span class="nx">implementation</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="nx">cpu_backend</span><span class="p">.</span><span class="nx">py</span><span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="nx">CPU</span><span class="w"> </span><span class="nx">fallback</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">config</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">gpu_config</span><span class="p">.</span><span class="nx">py</span><span class="w">         </span><span class="err">#</span><span class="w"> </span><span class="nx">GPU</span><span class="w"> </span><span class="nx">detection</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nx">config</span>
+<span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="nx">platform_config</span><span class="p">.</span><span class="nx">py</span><span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="nx">OS</span><span class="o">-</span><span class="nx">specific</span><span class="w"> </span><span class="nx">settings</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="nx">utils</span><span class="o">/</span>
+<span class="err">│</span><span class="w">       </span><span class="err">├──</span><span class="w"> </span><span class="nx">platform_utils</span><span class="p">.</span><span class="nx">py</span><span class="w">     </span><span class="err">#</span><span class="w"> </span><span class="nx">OS</span><span class="w"> </span><span class="nx">detection</span><span class="w"> </span><span class="nx">utilities</span>
+<span class="err">│</span><span class="w">       </span><span class="err">└──</span><span class="w"> </span><span class="nx">gpu_detector</span><span class="p">.</span><span class="nx">py</span><span class="w">       </span><span class="err">#</span><span class="w"> </span><span class="nx">GPU</span><span class="w"> </span><span class="nx">hardware</span><span class="w"> </span><span class="nx">detection</span>
+<span class="err">├──</span><span class="w"> </span><span class="nx">scripts</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">setup_windows</span><span class="p">.</span><span class="nx">bat</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">setup_linux</span><span class="p">.</span><span class="nx">sh</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="nx">install_gpu_drivers</span><span class="p">.</span><span class="nx">py</span>
+<span class="err">├──</span><span class="w"> </span><span class="nx">docs</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">WINDOWS_SETUP</span><span class="p">.</span><span class="nx">md</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="nx">LINUX_SETUP</span><span class="p">.</span><span class="nx">md</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="nx">GPU_SETUP</span><span class="p">.</span><span class="nx">md</span>
+<span class="err">└──</span><span class="w"> </span><span class="nx">tests</span><span class="o">/</span>
+<span class="w">    </span><span class="err">├──</span><span class="w"> </span><span class="nx">test_gpu_backends</span><span class="p">.</span><span class="nx">py</span>
+<span class="w">    </span><span class="err">└──</span><span class="w"> </span><span class="nx">test_platform_compatibility</span><span class="p">.</span><span class="nx">py</span>
+</code></pre></div>
+
+<h2>Phase 2: GPU Backend Abstraction</h2>
+<h3>2.1 Create GPU Backend Interface</h3>
+<p>Create <code>src/gpu/base.py</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="k">class</span> <span class="nc">GPUBackend</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_device</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">memory_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">clear_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+</code></pre></div>
+
+<h3>2.2 Implement Platform-Specific Backends</h3>
+<p><strong>AMD Backend (<code>src/gpu/amd_backend.py</code>)</strong>:
+- Wrap ROCm-specific operations
+- Handle HIP memory management
+- Implement AMD-specific optimizations</p>
+<p><strong>NVIDIA Backend (<code>src/gpu/nvidia_backend.py</code>)</strong>:
+- Wrap CUDA-specific operations
+- Handle CUDA memory management
+- Implement NVIDIA-specific optimizations</p>
+<p><strong>CPU Backend (<code>src/gpu/cpu_backend.py</code>)</strong>:
+- Fallback for systems without compatible GPUs
+- CPU-optimized operations</p>
+<h3>2.3 GPU Detection System</h3>
+<p>Create <code>src/utils/gpu_detector.py</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">detect_gpu_type</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Detect available GPU and return appropriate backend&quot;&quot;&quot;</span>
+    <span class="c1"># Check for NVIDIA GPUs</span>
+    <span class="c1"># Check for AMD GPUs</span>
+    <span class="c1"># Return appropriate backend class</span>
+    <span class="k">pass</span>
+</code></pre></div>
+
+<h2>Phase 3: Dependency Management (Conda + Pip Hybrid)</h2>
+<h3>3.1 Environment Files Structure</h3>
+<p><strong>environment-base.yml</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yourproject-base</span>
+<span class="nt">channels</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">defaults</span>
+<span class="nt">dependencies</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python=3.9</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pandas&gt;=1.5.0</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">numpy&gt;=1.21.0</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pyyaml&gt;=6.0</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">click&gt;=8.0.0</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">pip</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ccxt&gt;=4.0.0</span>
+</code></pre></div>
+
+<p><strong>environment-amd.yml</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yourproject-amd</span>
+<span class="nt">channels</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytorch</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">defaults</span>
+<span class="nt">dependencies</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python=3.9</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pandas&gt;=1.5.0</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">numpy&gt;=1.21.0</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytorch-rocm</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">torchvision</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">pip</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ccxt&gt;=4.0.0</span>
+</code></pre></div>
+
+<p><strong>environment-nvidia.yml</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yourproject-nvidia</span>
+<span class="nt">channels</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytorch</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nvidia</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">defaults</span>
+<span class="nt">dependencies</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python=3.9</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pandas&gt;=1.5.0</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">numpy&gt;=1.21.0</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytorch-cuda=11.8</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytorch</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">torchvision</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">pip</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ccxt&gt;=4.0.0</span>
+</code></pre></div>
+
+<p><strong>environment-cpu.yml</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yourproject-cpu</span>
+<span class="nt">channels</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytorch</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">defaults</span>
+<span class="nt">dependencies</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python=3.9</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pandas&gt;=1.5.0</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">numpy&gt;=1.21.0</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytorch-cpu</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">torchvision-cpu</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">pip</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ccxt&gt;=4.0.0</span>
+</code></pre></div>
+
+<h3>3.2 Fallback Requirements Files (for pip-only users)</h3>
+<p>Keep traditional requirements.txt files for users who prefer pip:</p>
+<p><strong>requirements-base.txt</strong>:</p>
+<div class="codehilite"><pre><span></span><code>pandas&gt;=1.5.0
+numpy&gt;=1.21.0
+ccxt&gt;=4.0.0
+pyyaml&gt;=6.0
+click&gt;=8.0.0
+</code></pre></div>
+
+<p><strong>requirements-amd.txt</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">torch</span><span class="o">&gt;=</span><span class="m m-Double">2.0.0</span><span class="o">+</span><span class="nx">rocm5</span><span class="m m-Double">.4.2</span>
+<span class="nx">torchvision</span><span class="o">&gt;=</span><span class="m m-Double">0.15.0</span><span class="o">+</span><span class="nx">rocm5</span><span class="m m-Double">.4.2</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">ROCm</span><span class="o">-</span><span class="nx">specific</span><span class="w"> </span><span class="nx">packages</span>
+</code></pre></div>
+
+<p><strong>requirements-nvidia.txt</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">torch</span><span class="o">&gt;=</span><span class="m m-Double">2.0.0</span><span class="o">+</span><span class="nx">cu118</span>
+<span class="nx">torchvision</span><span class="o">&gt;=</span><span class="m m-Double">0.15.0</span><span class="o">+</span><span class="nx">cu118</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">CUDA</span><span class="o">-</span><span class="nx">specific</span><span class="w"> </span><span class="nx">packages</span>
+</code></pre></div>
+
+<p><strong>requirements-cpu.txt</strong>:</p>
+<div class="codehilite"><pre><span></span><code>torch&gt;=2.0.0+cpu
+torchvision&gt;=0.15.0+cpu
+</code></pre></div>
+
+<h3>3.3 Smart Installation Script (Conda + Pip Support)</h3>
+<p>Create <code>scripts/install_dependencies.py</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">platform</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+
+<span class="k">def</span> <span class="nf">check_conda_available</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if conda is available&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">shutil</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="s1">&#39;conda&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+<span class="k">def</span> <span class="nf">install_for_platform</span><span class="p">():</span>
+    <span class="n">os_type</span> <span class="o">=</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span>
+    <span class="n">gpu_type</span> <span class="o">=</span> <span class="n">detect_gpu</span><span class="p">()</span>
+    <span class="n">use_conda</span> <span class="o">=</span> <span class="n">check_conda_available</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">use_conda</span><span class="p">:</span>
+        <span class="n">install_conda_environment</span><span class="p">(</span><span class="n">os_type</span><span class="p">,</span> <span class="n">gpu_type</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">install_pip_requirements</span><span class="p">(</span><span class="n">os_type</span><span class="p">,</span> <span class="n">gpu_type</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">install_conda_environment</span><span class="p">(</span><span class="n">os_type</span><span class="p">,</span> <span class="n">gpu_type</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Install using conda environment files&quot;&quot;&quot;</span>
+    <span class="n">env_file</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;environment-</span><span class="si">{</span><span class="n">gpu_type</span><span class="si">}</span><span class="s2">.yml&quot;</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span>
+        <span class="s1">&#39;conda&#39;</span><span class="p">,</span> <span class="s1">&#39;env&#39;</span><span class="p">,</span> <span class="s1">&#39;create&#39;</span><span class="p">,</span> <span class="s1">&#39;-f&#39;</span><span class="p">,</span> <span class="n">env_file</span><span class="p">,</span> <span class="s1">&#39;--force&#39;</span>
+    <span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">install_pip_requirements</span><span class="p">(</span><span class="n">os_type</span><span class="p">,</span> <span class="n">gpu_type</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fallback to pip installation&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">os_type</span> <span class="o">==</span> <span class="s2">&quot;Windows&quot;</span><span class="p">:</span>
+        <span class="n">install_windows_dependencies</span><span class="p">(</span><span class="n">gpu_type</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">os_type</span> <span class="o">==</span> <span class="s2">&quot;Linux&quot;</span><span class="p">:</span>
+        <span class="n">install_linux_dependencies</span><span class="p">(</span><span class="n">gpu_type</span><span class="p">)</span>
+</code></pre></div>
+
+<h2>Phase 4: Configuration Management</h2>
+<h3>4.1 Platform Configuration</h3>
+<p>Create <code>src/config/platform_config.py</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">platform</span>
+
+<span class="k">class</span> <span class="nc">PlatformConfig</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">os_type</span> <span class="o">=</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gpu_backend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_detect_gpu_backend</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">paths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_setup_paths</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_setup_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">os_type</span> <span class="o">==</span> <span class="s2">&quot;Windows&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;APPDATA&#39;</span><span class="p">),</span> <span class="s1">&#39;YourProject&#39;</span><span class="p">),</span>
+                <span class="s1">&#39;cache&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;LOCALAPPDATA&#39;</span><span class="p">),</span> <span class="s1">&#39;YourProject&#39;</span><span class="p">,</span> <span class="s1">&#39;cache&#39;</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s1">&#39;~/.yourproject&#39;</span><span class="p">),</span>
+                <span class="s1">&#39;cache&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s1">&#39;~/.cache/yourproject&#39;</span><span class="p">)</span>
+            <span class="p">}</span>
+</code></pre></div>
+
+<h3>4.2 GPU Configuration</h3>
+<p>Create <code>src/config/gpu_config.py</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">GPUConfig</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">backend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_backend</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">get_device</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">memory_limit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_memory_limit</span><span class="p">()</span>
+</code></pre></div>
+
+<h2>Phase 5: Windows-Specific Adaptations</h2>
+<h3>5.1 Windows Setup Script</h3>
+<p>Create <code>scripts/setup_windows.bat</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">@</span><span class="k">echo</span> off
+<span class="k">echo</span> Setting up project for Windows...
+
+<span class="p">:</span><span class="c1">: Check if conda is available</span>
+where conda <span class="p">&gt;</span>nul <span class="mi">2</span><span class="p">&gt;</span>nul
+<span class="k">if</span> <span class="nv">%errorlevel%</span> <span class="o">==</span> 0 <span class="p">(</span>
+    <span class="k">echo</span> Using conda environment...
+    python scripts/install_dependencies.py --use-conda
+<span class="p">)</span> <span class="k">else</span> <span class="p">(</span>
+    <span class="k">echo</span> Using pip installation...
+    python scripts/install_dependencies.py --use-pip
+<span class="p">)</span>
+
+<span class="p">:</span><span class="c1">: Create necessary directories</span>
+<span class="k">mkdir</span> data
+<span class="k">mkdir</span> cache
+<span class="k">mkdir</span> logs
+
+<span class="k">echo</span> Setup complete!
+<span class="k">echo</span>.
+<span class="k">echo</span> To activate conda environment: conda activate yourproject-[gpu-type]
+<span class="k">echo</span> To run with pip: python src/main.py
+</code></pre></div>
+
+<h3>5.2 Windows Installation Guide</h3>
+<p>Create <code>docs/WINDOWS_SETUP.md</code> with:
+- Prerequisites (Python, Visual Studio Build Tools)
+- GPU driver installation instructions
+- Step-by-step setup process
+- Troubleshooting common issues</p>
+<h2>Phase 6: Cross-Platform Testing</h2>
+<h3>6.1 Automated Testing</h3>
+<p>Create <code>tests/test_platform_compatibility.py</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">import</span> <span class="nn">platform</span>
+<span class="kn">from</span> <span class="nn">src.gpu.base</span> <span class="kn">import</span> <span class="n">GPUBackend</span>
+
+<span class="k">class</span> <span class="nc">TestPlatformCompatibility</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_gpu_detection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Test GPU detection works on current platform</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">test_backend_initialization</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Test backend initializes correctly</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">test_memory_management</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Test memory operations work</span>
+        <span class="k">pass</span>
+</code></pre></div>
+
+<h3>6.2 Integration Testing</h3>
+<ul>
+<li>Test CCXT integration on both platforms</li>
+<li>Test data processing pipeline</li>
+<li>Test GPU memory management</li>
+<li>Test error handling and fallbacks</li>
+</ul>
+<h2>Phase 7: Documentation &amp; User Experience</h2>
+<h3>7.1 Setup Documentation</h3>
+<p>Create comprehensive guides:
+- <strong>WINDOWS_SETUP.md</strong>: Windows-specific instructions
+- <strong>LINUX_SETUP.md</strong>: Linux-specific instructions<br />
+- <strong>GPU_SETUP.md</strong>: GPU driver and library setup
+- <strong>TROUBLESHOOTING.md</strong>: Common issues and solutions</p>
+<h3>7.2 Auto-Configuration Script</h3>
+<p>Create <code>setup.py</code> or <code>configure.py</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">auto_setup</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🚀 Setting up cross-platform GPU project...&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Detect platform</span>
+    <span class="n">os_type</span> <span class="o">=</span> <span class="n">detect_platform</span><span class="p">()</span>
+
+    <span class="c1"># Detect GPU</span>
+    <span class="n">gpu_info</span> <span class="o">=</span> <span class="n">detect_gpu</span><span class="p">()</span>
+
+    <span class="c1"># Install appropriate dependencies</span>
+    <span class="n">install_dependencies</span><span class="p">(</span><span class="n">os_type</span><span class="p">,</span> <span class="n">gpu_info</span><span class="p">)</span>
+
+    <span class="c1"># Configure project</span>
+    <span class="n">configure_project</span><span class="p">(</span><span class="n">os_type</span><span class="p">,</span> <span class="n">gpu_info</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Setup complete!&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h2>Phase 9: Docker Strategy (Post Cross-Platform Implementation)</h2>
+<h3>9.1 Why Docker After Cross-Platform?</h3>
+<ul>
+<li><strong>Consistent environments</strong>: Eliminates "works on my machine" issues</li>
+<li><strong>Easy deployment</strong>: Single command to run anywhere</li>
+<li><strong>Dependency isolation</strong>: No conflicts with host system</li>
+<li><strong>GPU passthrough</strong>: Modern Docker supports GPU acceleration</li>
+<li><strong>CI/CD friendly</strong>: Easy to test and deploy</li>
+</ul>
+<h3>9.2 Docker Architecture Strategy</h3>
+<p><strong>Multi-stage Dockerfile approach</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="c"># Base stage - common dependencies</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">python:3.9-slim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">base</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+<span class="k">COPY</span><span class="w"> </span>requirements/requirements-base.txt<span class="w"> </span>.
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements-base.txt
+
+<span class="c"># AMD GPU stage</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">amd</span>
+<span class="k">COPY</span><span class="w"> </span>requirements/requirements-amd.txt<span class="w"> </span>.
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements-amd.txt
+
+<span class="c"># NVIDIA GPU stage  </span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">nvidia</span>
+<span class="k">COPY</span><span class="w"> </span>requirements/requirements-nvidia.txt<span class="w"> </span>.
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements-nvidia.txt
+
+<span class="c"># CPU stage</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">cpu</span>
+<span class="k">COPY</span><span class="w"> </span>requirements/requirements-cpu.txt<span class="w"> </span>.
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements-cpu.txt
+
+<span class="c"># Final stage - copy application</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">${GPU_TYPE:-cpu}</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">final</span>
+<span class="k">COPY</span><span class="w"> </span>src/<span class="w"> </span>./src/
+<span class="k">COPY</span><span class="w"> </span>scripts/<span class="w"> </span>./scripts/
+<span class="k">COPY</span><span class="w"> </span>config/<span class="w"> </span>./config/
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;python&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;src/main.py&quot;</span><span class="p">]</span>
+</code></pre></div>
+
+<h3>9.3 Docker Compose for Different Configurations</h3>
+<p><strong>docker-compose.yml</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3.8&#39;</span>
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">app-nvidia</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">      </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">final</span>
+<span class="w">      </span><span class="nt">args</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">GPU_TYPE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nvidia</span>
+<span class="w">    </span><span class="nt">runtime</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nvidia</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NVIDIA_VISIBLE_DEVICES=all</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./data:/app/data</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./logs:/app/logs</span>
+
+<span class="w">  </span><span class="nt">app-amd</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">      </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">final</span>
+<span class="w">      </span><span class="nt">args</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">GPU_TYPE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amd</span>
+<span class="w">    </span><span class="nt">devices</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/dev/kfd</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/dev/dri</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./data:/app/data</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./logs:/app/logs</span>
+
+<span class="w">  </span><span class="nt">app-cpu</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">      </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">final</span>
+<span class="w">      </span><span class="nt">args</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">GPU_TYPE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cpu</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./data:/app/data</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./logs:/app/logs</span>
+</code></pre></div>
+
+<h3>9.4 Docker Benefits for Your Use Case</h3>
+<p><strong>For Development</strong>:
+- New developers can start with <code>docker-compose up</code>
+- No need to install ROCm/CUDA on host system
+- Consistent Python/package versions</p>
+<p><strong>For Production</strong>:
+- Easy deployment to cloud services
+- Kubernetes compatibility
+- Auto-scaling capabilities</p>
+<p><strong>For Distribution</strong>:
+- Pre-built images on Docker Hub
+- Users don't need to manage dependencies
+- Works on any Docker-supported platform</p>
+<h3>9.5 Docker Implementation Timeline</h3>
+<p><strong>After Phase 8 completion</strong>:
+1. <strong>Week 1</strong>: Create basic Dockerfiles
+2. <strong>Week 2</strong>: Test GPU passthrough on different platforms
+3. <strong>Week 3</strong>: Optimize image sizes and build times
+4. <strong>Week 4</strong>: Create Docker Hub automation
+5. <strong>Week 5</strong>: Update documentation with Docker instructions</p>
+<h3>9.6 Docker vs Native Installation</h3>
+<p><strong>Provide both options</strong>:
+- <strong>Docker</strong>: For users who want simple deployment
+- <strong>Native</strong>: For users who want maximum performance or need system integration</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Docker approach</span>
+docker-compose<span class="w"> </span>up<span class="w"> </span>app-nvidia
+
+<span class="c1"># Native approach  </span>
+conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>environment-nvidia.yml
+conda<span class="w"> </span>activate<span class="w"> </span>yourproject-nvidia
+python<span class="w"> </span>src/main.py
+</code></pre></div>
+
+<h2>Implementation Priority</h2>
+<h3>High Priority (Week 1-2):</h3>
+<ol>
+<li>GPU backend abstraction</li>
+<li>Platform detection system</li>
+<li>Basic Windows compatibility</li>
+<li>Core dependency management</li>
+</ol>
+<h3>Medium Priority (Week 3-4):</h3>
+<ol>
+<li>Comprehensive testing suite</li>
+<li>Installation scripts</li>
+<li>Documentation</li>
+<li>Error handling improvements</li>
+</ol>
+<h3>Low Priority (Week 5+):</h3>
+<ol>
+<li>Performance optimizations</li>
+<li>Advanced GPU features</li>
+<li>Docker containers</li>
+<li>Package distribution</li>
+</ol>
+<h2>Success Metrics</h2>
+<ul>
+<li>[ ] Project runs on Windows with NVIDIA GPU</li>
+<li>[ ] Project runs on Windows with AMD GPU</li>
+<li>[ ] Project runs on Windows with CPU fallback</li>
+<li>[ ] Installation process takes &lt;10 minutes</li>
+<li>[ ] Documentation allows new developers to contribute</li>
+<li>[ ] Test suite passes on all target platforms</li>
+</ul>
+<h2>Notes for AI Agent Implementation</h2>
+<ol>
+<li><strong>Start with Phase 1</strong>: Focus on analyzing existing code first</li>
+<li><strong>Implement incrementally</strong>: Don't try to do everything at once</li>
+<li><strong>Test frequently</strong>: Run tests after each major change</li>
+<li><strong>Document as you go</strong>: Keep docs updated with changes</li>
+<li><strong>Handle edge cases</strong>: Consider older GPU drivers, different Windows versions</li>
+<li><strong>Performance monitoring</strong>: Track GPU utilization and memory usage</li>
+<li><strong>User feedback</strong>: Collect feedback from early Windows users</li>
+</ol>
+<p>This roadmap provides a systematic approach to making your project cross-platform while maintaining the ML flexibility you need.</p>
+    </div>
+</body>
+</html>

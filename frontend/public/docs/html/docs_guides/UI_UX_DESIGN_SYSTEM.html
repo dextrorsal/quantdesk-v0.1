@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ui Ux Design System - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/docs">&larr; Back to Documentation</a>
+        </div>
+        <h1>QuantDesk UI/UX Design System</h1>
+<h2>🎯 Vision &amp; Goals</h2>
+<p><strong>Mission</strong>: Create a professional, cohesive trading platform that instills confidence and clarity in financial decision-making.</p>
+<p><strong>Core Principles</strong>:
+- <strong>Clarity</strong>: Information should be immediately understandable
+- <strong>Confidence</strong>: Visual design should convey stability and professionalism<br />
+- <strong>Efficiency</strong>: Users should accomplish tasks with minimal friction
+- <strong>Consistency</strong>: Every interaction should feel familiar and predictable</p>
+<hr />
+<h2>🎨 Color Palette &amp; Themes</h2>
+<h3>Lite Theme: Professional Blue</h3>
+<p><strong>Target Audience</strong>: Casual traders, beginners, mobile users
+<strong>Personality</strong>: Clean, approachable, trustworthy</p>
+<div class="codehilite"><pre><span></span><code><span class="c">/* Lite Theme Colors */</span>
+<span class="p">:</span><span class="nd">root</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c">/* Primary Blues */</span>
+<span class="w">  </span><span class="nv">--lite-primary-50</span><span class="p">:</span><span class="w"> </span><span class="mh">#eff6ff</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--lite-primary-100</span><span class="p">:</span><span class="w"> </span><span class="mh">#dbeafe</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--lite-primary-200</span><span class="p">:</span><span class="w"> </span><span class="mh">#bfdbfe</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--lite-primary-300</span><span class="p">:</span><span class="w"> </span><span class="mh">#93c5fd</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--lite-primary-400</span><span class="p">:</span><span class="w"> </span><span class="mh">#60a5fa</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--lite-primary-500</span><span class="p">:</span><span class="w"> </span><span class="mh">#3b82f6</span><span class="p">;</span><span class="w">  </span><span class="c">/* Main brand blue */</span>
+<span class="w">  </span><span class="nv">--lite-primary-600</span><span class="p">:</span><span class="w"> </span><span class="mh">#2563eb</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--lite-primary-700</span><span class="p">:</span><span class="w"> </span><span class="mh">#1d4ed8</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--lite-primary-800</span><span class="p">:</span><span class="w"> </span><span class="mh">#1e40af</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--lite-primary-900</span><span class="p">:</span><span class="w"> </span><span class="mh">#1e3a8a</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c">/* Base Colors */</span>
+<span class="w">  </span><span class="nv">--lite-bg-primary</span><span class="p">:</span><span class="w"> </span><span class="mh">#0f172a</span><span class="p">;</span><span class="w">    </span><span class="c">/* Deep slate */</span>
+<span class="w">  </span><span class="nv">--lite-bg-secondary</span><span class="p">:</span><span class="w"> </span><span class="mh">#1e293b</span><span class="p">;</span><span class="w">   </span><span class="c">/* Slate 800 */</span>
+<span class="w">  </span><span class="nv">--lite-bg-tertiary</span><span class="p">:</span><span class="w"> </span><span class="mh">#334155</span><span class="p">;</span><span class="w">    </span><span class="c">/* Slate 700 */</span>
+<span class="w">  </span><span class="nv">--lite-text-primary</span><span class="p">:</span><span class="w"> </span><span class="mh">#f8fafc</span><span class="p">;</span><span class="w">   </span><span class="c">/* Slate 50 */</span>
+<span class="w">  </span><span class="nv">--lite-text-secondary</span><span class="p">:</span><span class="w"> </span><span class="mh">#cbd5e1</span><span class="p">;</span><span class="w"> </span><span class="c">/* Slate 300 */</span>
+<span class="w">  </span><span class="nv">--lite-text-muted</span><span class="p">:</span><span class="w"> </span><span class="mh">#94a3b8</span><span class="p">;</span><span class="w">     </span><span class="c">/* Slate 400 */</span>
+
+<span class="w">  </span><span class="c">/* Accent Colors */</span>
+<span class="w">  </span><span class="nv">--lite-success</span><span class="p">:</span><span class="w"> </span><span class="mh">#10b981</span><span class="p">;</span><span class="w">        </span><span class="c">/* Emerald 500 */</span>
+<span class="w">  </span><span class="nv">--lite-danger</span><span class="p">:</span><span class="w"> </span><span class="mh">#ef4444</span><span class="p">;</span><span class="w">         </span><span class="c">/* Red 500 */</span>
+<span class="w">  </span><span class="nv">--lite-warning</span><span class="p">:</span><span class="w"> </span><span class="mh">#f59e0b</span><span class="p">;</span><span class="w">        </span><span class="c">/* Amber 500 */</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3>Pro Theme: Premium Orange</h3>
+<p><strong>Target Audience</strong>: Professional traders, power users, desktop users
+<strong>Personality</strong>: Bold, sophisticated, high-performance</p>
+<div class="codehilite"><pre><span></span><code><span class="c">/* Pro Theme Colors */</span>
+<span class="p">:</span><span class="nd">root</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c">/* Primary Oranges */</span>
+<span class="w">  </span><span class="nv">--pro-primary-50</span><span class="p">:</span><span class="w"> </span><span class="mh">#fff7ed</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--pro-primary-100</span><span class="p">:</span><span class="w"> </span><span class="mh">#ffedd5</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--pro-primary-200</span><span class="p">:</span><span class="w"> </span><span class="mh">#fed7aa</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--pro-primary-300</span><span class="p">:</span><span class="w"> </span><span class="mh">#fdba74</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--pro-primary-400</span><span class="p">:</span><span class="w"> </span><span class="mh">#fb923c</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--pro-primary-500</span><span class="p">:</span><span class="w"> </span><span class="mh">#f97316</span><span class="p">;</span><span class="w">  </span><span class="c">/* Main brand orange */</span>
+<span class="w">  </span><span class="nv">--pro-primary-600</span><span class="p">:</span><span class="w"> </span><span class="mh">#ea580c</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--pro-primary-700</span><span class="p">:</span><span class="w"> </span><span class="mh">#c2410c</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--pro-primary-800</span><span class="p">:</span><span class="w"> </span><span class="mh">#9a3412</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--pro-primary-900</span><span class="p">:</span><span class="w"> </span><span class="mh">#7c2d12</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c">/* Base Colors */</span>
+<span class="w">  </span><span class="nv">--pro-bg-primary</span><span class="p">:</span><span class="w"> </span><span class="mh">#000000</span><span class="p">;</span><span class="w">       </span><span class="c">/* Pure black */</span>
+<span class="w">  </span><span class="nv">--pro-bg-secondary</span><span class="p">:</span><span class="w"> </span><span class="mh">#0a0a0a</span><span class="p">;</span><span class="w">    </span><span class="c">/* Near black */</span>
+<span class="w">  </span><span class="nv">--pro-bg-tertiary</span><span class="p">:</span><span class="w"> </span><span class="mh">#1a1a1a</span><span class="p">;</span><span class="w">     </span><span class="c">/* Dark gray */</span>
+<span class="w">  </span><span class="nv">--pro-text-primary</span><span class="p">:</span><span class="w"> </span><span class="mh">#ffffff</span><span class="p">;</span><span class="w">    </span><span class="c">/* Pure white */</span>
+<span class="w">  </span><span class="nv">--pro-text-secondary</span><span class="p">:</span><span class="w"> </span><span class="mh">#e5e5e5</span><span class="p">;</span><span class="w">  </span><span class="c">/* Light gray */</span>
+<span class="w">  </span><span class="nv">--pro-text-muted</span><span class="p">:</span><span class="w"> </span><span class="mh">#a3a3a3</span><span class="p">;</span><span class="w">      </span><span class="c">/* Medium gray */</span>
+
+<span class="w">  </span><span class="c">/* Accent Colors */</span>
+<span class="w">  </span><span class="nv">--pro-success</span><span class="p">:</span><span class="w"> </span><span class="mh">#10b981</span><span class="p">;</span><span class="w">         </span><span class="c">/* Emerald 500 */</span>
+<span class="w">  </span><span class="nv">--pro-danger</span><span class="p">:</span><span class="w"> </span><span class="mh">#ef4444</span><span class="p">;</span><span class="w">          </span><span class="c">/* Red 500 */</span>
+<span class="w">  </span><span class="nv">--pro-warning</span><span class="p">:</span><span class="w"> </span><span class="mh">#f59e0b</span><span class="p">;</span><span class="w">         </span><span class="c">/* Amber 500 */</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3>Universal Accent Colors</h3>
+<p><strong>Green</strong>: Used for positive financial indicators (profits, gains, success)</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">--success-50</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">f0fdf4</span><span class="o">;</span>
+<span class="nt">--success-500</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">22c55e</span><span class="o">;</span><span class="w">  </span><span class="c">/* Main success green */</span>
+<span class="nt">--success-600</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">16a34a</span><span class="o">;</span>
+<span class="nt">--success-700</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">15803d</span><span class="o">;</span>
+</code></pre></div>
+
+<hr />
+<h2>🔤 Typography</h2>
+<h3>Font Family</h3>
+<p><strong>Primary</strong>: Inter (Google Fonts)
+- Clean, modern, excellent readability
+- Professional appearance
+- Great for both UI and data display</p>
+<p><strong>Monospace</strong>: JetBrains Mono
+- For code, trading data, numbers
+- Clear character distinction
+- Professional developer aesthetic</p>
+<h3>Typography Scale</h3>
+<div class="codehilite"><pre><span></span><code><span class="c">/* Text Sizes */</span>
+<span class="nt">--text-xs</span><span class="o">:</span><span class="w"> </span><span class="nt">0</span><span class="p">.</span><span class="nc">75rem</span><span class="o">;</span><span class="w">     </span><span class="c">/* 12px - Labels, captions */</span>
+<span class="nt">--text-sm</span><span class="o">:</span><span class="w"> </span><span class="nt">0</span><span class="p">.</span><span class="nc">875rem</span><span class="o">;</span><span class="w">    </span><span class="c">/* 14px - Body text, buttons */</span>
+<span class="nt">--text-base</span><span class="o">:</span><span class="w"> </span><span class="nt">1rem</span><span class="o">;</span><span class="w">      </span><span class="c">/* 16px - Default body */</span>
+<span class="nt">--text-lg</span><span class="o">:</span><span class="w"> </span><span class="nt">1</span><span class="p">.</span><span class="nc">125rem</span><span class="o">;</span><span class="w">    </span><span class="c">/* 18px - Subheadings */</span>
+<span class="nt">--text-xl</span><span class="o">:</span><span class="w"> </span><span class="nt">1</span><span class="p">.</span><span class="nc">25rem</span><span class="o">;</span><span class="w">     </span><span class="c">/* 20px - Headings */</span>
+<span class="nt">--text-2xl</span><span class="o">:</span><span class="w"> </span><span class="nt">1</span><span class="p">.</span><span class="nc">5rem</span><span class="o">;</span><span class="w">     </span><span class="c">/* 24px - Large headings */</span>
+<span class="nt">--text-3xl</span><span class="o">:</span><span class="w"> </span><span class="nt">1</span><span class="p">.</span><span class="nc">875rem</span><span class="o">;</span><span class="w">   </span><span class="c">/* 30px - Page titles */</span>
+<span class="nt">--text-4xl</span><span class="o">:</span><span class="w"> </span><span class="nt">2</span><span class="p">.</span><span class="nc">25rem</span><span class="o">;</span><span class="w">    </span><span class="c">/* 36px - Hero text */</span>
+
+<span class="c">/* Font Weights */</span>
+<span class="nt">--font-light</span><span class="o">:</span><span class="w"> </span><span class="nt">300</span><span class="o">;</span>
+<span class="nt">--font-normal</span><span class="o">:</span><span class="w"> </span><span class="nt">400</span><span class="o">;</span>
+<span class="nt">--font-medium</span><span class="o">:</span><span class="w"> </span><span class="nt">500</span><span class="o">;</span>
+<span class="nt">--font-semibold</span><span class="o">:</span><span class="w"> </span><span class="nt">600</span><span class="o">;</span>
+<span class="nt">--font-bold</span><span class="o">:</span><span class="w"> </span><span class="nt">700</span><span class="o">;</span>
+</code></pre></div>
+
+<hr />
+<h2>🧩 Component Design System</h2>
+<h3>Buttons</h3>
+<h4>Primary Button</h4>
+<div class="codehilite"><pre><span></span><code><span class="p">.</span><span class="nc">btn-primary</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nb">linear-gradient</span><span class="p">(</span><span class="mi">135</span><span class="kt">deg</span><span class="p">,</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--primary-</span><span class="mi">600</span><span class="p">),</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--primary-</span><span class="mi">700</span><span class="p">));</span>
+<span class="w">  </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="kc">white</span><span class="p">;</span>
+<span class="w">  </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mf">0.75</span><span class="kt">rem</span><span class="w"> </span><span class="mf">1.5</span><span class="kt">rem</span><span class="p">;</span>
+<span class="w">  </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="kt">rem</span><span class="p">;</span>
+<span class="w">  </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="mi">600</span><span class="p">;</span>
+<span class="w">  </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mf">0.875</span><span class="kt">rem</span><span class="p">;</span>
+<span class="w">  </span><span class="k">transition</span><span class="p">:</span><span class="w"> </span><span class="kc">all</span><span class="w"> </span><span class="mf">0.2</span><span class="kt">s</span><span class="w"> </span><span class="kc">ease</span><span class="p">;</span>
+<span class="w">  </span><span class="k">box-shadow</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4</span><span class="kt">px</span><span class="w"> </span><span class="mi">6</span><span class="kt">px</span><span class="w"> </span><span class="mi">-1</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">btn-primary</span><span class="p">:</span><span class="nd">hover</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nb">linear-gradient</span><span class="p">(</span><span class="mi">135</span><span class="kt">deg</span><span class="p">,</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--primary-</span><span class="mi">700</span><span class="p">),</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--primary-</span><span class="mi">800</span><span class="p">));</span>
+<span class="w">  </span><span class="k">transform</span><span class="p">:</span><span class="w"> </span><span class="nb">translateY</span><span class="p">(</span><span class="mi">-1</span><span class="kt">px</span><span class="p">);</span>
+<span class="w">  </span><span class="k">box-shadow</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">10</span><span class="kt">px</span><span class="w"> </span><span class="mi">15</span><span class="kt">px</span><span class="w"> </span><span class="mi">-3</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>Secondary Button</h4>
+<div class="codehilite"><pre><span></span><code><span class="p">.</span><span class="nc">btn-secondary</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--bg-secondary</span><span class="p">);</span>
+<span class="w">  </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--text-primary</span><span class="p">);</span>
+<span class="w">  </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--bg-tertiary</span><span class="p">);</span>
+<span class="w">  </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mf">0.75</span><span class="kt">rem</span><span class="w"> </span><span class="mf">1.5</span><span class="kt">rem</span><span class="p">;</span>
+<span class="w">  </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="kt">rem</span><span class="p">;</span>
+<span class="w">  </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">;</span>
+<span class="w">  </span><span class="k">transition</span><span class="p">:</span><span class="w"> </span><span class="kc">all</span><span class="w"> </span><span class="mf">0.2</span><span class="kt">s</span><span class="w"> </span><span class="kc">ease</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">btn-secondary</span><span class="p">:</span><span class="nd">hover</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--bg-tertiary</span><span class="p">);</span>
+<span class="w">  </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--primary-</span><span class="mi">500</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>Success Button (Green Accent)</h4>
+<div class="codehilite"><pre><span></span><code><span class="p">.</span><span class="nc">btn-success</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nb">linear-gradient</span><span class="p">(</span><span class="mi">135</span><span class="kt">deg</span><span class="p">,</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--success-</span><span class="mi">600</span><span class="p">),</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--success-</span><span class="mi">700</span><span class="p">));</span>
+<span class="w">  </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="kc">white</span><span class="p">;</span>
+<span class="w">  </span><span class="c">/* Same styling as primary but with success colors */</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3>Cards</h3>
+<h4>Standard Card</h4>
+<div class="codehilite"><pre><span></span><code><span class="p">.</span><span class="nc">card</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--bg-secondary</span><span class="p">);</span>
+<span class="w">  </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--bg-tertiary</span><span class="p">);</span>
+<span class="w">  </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mf">0.75</span><span class="kt">rem</span><span class="p">;</span>
+<span class="w">  </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mf">1.5</span><span class="kt">rem</span><span class="p">;</span>
+<span class="w">  </span><span class="k">box-shadow</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4</span><span class="kt">px</span><span class="w"> </span><span class="mi">6</span><span class="kt">px</span><span class="w"> </span><span class="mi">-1</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">);</span>
+<span class="w">  </span><span class="n">backdrop-filter</span><span class="p">:</span><span class="w"> </span><span class="nb">blur</span><span class="p">(</span><span class="mi">8</span><span class="kt">px</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>Trading Card (Elevated)</h4>
+<div class="codehilite"><pre><span></span><code><span class="p">.</span><span class="nc">trading-card</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--bg-secondary</span><span class="p">);</span>
+<span class="w">  </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--bg-tertiary</span><span class="p">);</span>
+<span class="w">  </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">rem</span><span class="p">;</span>
+<span class="w">  </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mf">1.25</span><span class="kt">rem</span><span class="p">;</span>
+<span class="w">  </span><span class="k">box-shadow</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">20</span><span class="kt">px</span><span class="w"> </span><span class="mi">25</span><span class="kt">px</span><span class="w"> </span><span class="mi">-5</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">);</span>
+<span class="w">  </span><span class="n">backdrop-filter</span><span class="p">:</span><span class="w"> </span><span class="nb">blur</span><span class="p">(</span><span class="mi">12</span><span class="kt">px</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3>Input Fields</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">.</span><span class="nc">input</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--bg-tertiary</span><span class="p">);</span>
+<span class="w">  </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--bg-tertiary</span><span class="p">);</span>
+<span class="w">  </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--text-primary</span><span class="p">);</span>
+<span class="w">  </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mf">0.75</span><span class="kt">rem</span><span class="w"> </span><span class="mi">1</span><span class="kt">rem</span><span class="p">;</span>
+<span class="w">  </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="kt">rem</span><span class="p">;</span>
+<span class="w">  </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mf">0.875</span><span class="kt">rem</span><span class="p">;</span>
+<span class="w">  </span><span class="k">transition</span><span class="p">:</span><span class="w"> </span><span class="kc">all</span><span class="w"> </span><span class="mf">0.2</span><span class="kt">s</span><span class="w"> </span><span class="kc">ease</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">input</span><span class="p">:</span><span class="nd">focus</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">outline</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="p">;</span>
+<span class="w">  </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--primary-</span><span class="mi">500</span><span class="p">);</span>
+<span class="w">  </span><span class="k">box-shadow</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">3</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="nf">var</span><span class="p">(</span><span class="nv">--primary-</span><span class="mi">500</span><span class="p">),</span><span class="w"> </span><span class="mf">0.1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2>📊 Financial Data Visualization</h2>
+<h3>Price Indicators</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">.</span><span class="nc">price-positive</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--success-</span><span class="mi">500</span><span class="p">);</span>
+<span class="w">  </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="mi">600</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">price-negative</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--danger-</span><span class="mi">500</span><span class="p">);</span>
+<span class="w">  </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="mi">600</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">price-neutral</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--text-muted</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3>Status Indicators</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">.</span><span class="nc">status-indicator</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">inline-block</span><span class="p">;</span>
+<span class="w">  </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="kt">%</span><span class="p">;</span>
+<span class="w">  </span><span class="k">margin-right</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="kt">rem</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">status-active</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--success-</span><span class="mi">500</span><span class="p">);</span>
+<span class="w">  </span><span class="k">animation</span><span class="p">:</span><span class="w"> </span><span class="n">pulse</span><span class="w"> </span><span class="mi">2</span><span class="kt">s</span><span class="w"> </span><span class="kc">infinite</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">status-inactive</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--text-muted</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">status-warning</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--warning-</span><span class="mi">500</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2>🎭 Theme Implementation Strategy</h2>
+<h3>CSS Custom Properties Approach</h3>
+<div class="codehilite"><pre><span></span><code><span class="c">/* Theme Variables */</span>
+<span class="o">[</span><span class="nt">data-theme</span><span class="o">=</span><span class="s2">&quot;lite&quot;</span><span class="o">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nv">--primary-500</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--lite-primary-</span><span class="mi">500</span><span class="p">);</span>
+<span class="w">  </span><span class="nv">--primary-600</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--lite-primary-</span><span class="mi">600</span><span class="p">);</span>
+<span class="w">  </span><span class="nv">--bg-primary</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--lite-bg-primary</span><span class="p">);</span>
+<span class="w">  </span><span class="nv">--bg-secondary</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--lite-bg-secondary</span><span class="p">);</span>
+<span class="w">  </span><span class="nv">--text-primary</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--lite-text-primary</span><span class="p">);</span>
+<span class="w">  </span><span class="c">/* ... other lite variables */</span>
+<span class="p">}</span>
+
+<span class="o">[</span><span class="nt">data-theme</span><span class="o">=</span><span class="s2">&quot;pro&quot;</span><span class="o">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nv">--primary-500</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--pro-primary-</span><span class="mi">500</span><span class="p">);</span>
+<span class="w">  </span><span class="nv">--primary-600</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--pro-primary-</span><span class="mi">600</span><span class="p">);</span>
+<span class="w">  </span><span class="nv">--bg-primary</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--pro-bg-primary</span><span class="p">);</span>
+<span class="w">  </span><span class="nv">--bg-secondary</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--pro-bg-secondary</span><span class="p">);</span>
+<span class="w">  </span><span class="nv">--text-primary</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--pro-text-primary</span><span class="p">);</span>
+<span class="w">  </span><span class="c">/* ... other pro variables */</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3>Tailwind Configuration</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">// tailwind.config.js</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">theme</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">extend</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">colors</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">primary</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="mf">50</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;var(--primary-50)&#39;</span><span class="p">,</span>
+<span class="w">          </span><span class="mf">500</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;var(--primary-500)&#39;</span><span class="p">,</span>
+<span class="w">          </span><span class="mf">600</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;var(--primary-600)&#39;</span><span class="p">,</span>
+<span class="w">          </span><span class="c1">// ... etc</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nx">success</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="mf">500</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;var(--success-500)&#39;</span><span class="p">,</span>
+<span class="w">          </span><span class="mf">600</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;var(--success-600)&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2>📱 Responsive Design Principles</h2>
+<h3>Breakpoints</h3>
+<ul>
+<li><strong>Mobile</strong>: &lt; 640px</li>
+<li><strong>Tablet</strong>: 640px - 1024px  </li>
+<li><strong>Desktop</strong>: 1024px - 1440px</li>
+<li><strong>Large Desktop</strong>: &gt; 1440px</li>
+</ul>
+<h3>Layout Guidelines</h3>
+<ul>
+<li><strong>Lite</strong>: Mobile-first, simplified layouts</li>
+<li><strong>Pro</strong>: Desktop-optimized, information-dense layouts</li>
+<li><strong>Consistent spacing</strong>: 4px base unit (0.25rem)</li>
+<li><strong>Touch targets</strong>: Minimum 44px for mobile</li>
+</ul>
+<hr />
+<h2>🎨 Visual Hierarchy</h2>
+<h3>Z-Index Scale</h3>
+<div class="codehilite"><pre><span></span><code><span class="nt">--z-dropdown</span><span class="o">:</span><span class="w"> </span><span class="nt">1000</span><span class="o">;</span>
+<span class="nt">--z-sticky</span><span class="o">:</span><span class="w"> </span><span class="nt">1020</span><span class="o">;</span>
+<span class="nt">--z-fixed</span><span class="o">:</span><span class="w"> </span><span class="nt">1030</span><span class="o">;</span>
+<span class="nt">--z-modal-backdrop</span><span class="o">:</span><span class="w"> </span><span class="nt">1040</span><span class="o">;</span>
+<span class="nt">--z-modal</span><span class="o">:</span><span class="w"> </span><span class="nt">1050</span><span class="o">;</span>
+<span class="nt">--z-popover</span><span class="o">:</span><span class="w"> </span><span class="nt">1060</span><span class="o">;</span>
+<span class="nt">--z-tooltip</span><span class="o">:</span><span class="w"> </span><span class="nt">1070</span><span class="o">;</span>
+</code></pre></div>
+
+<h3>Shadow System</h3>
+<div class="codehilite"><pre><span></span><code><span class="nt">--shadow-sm</span><span class="o">:</span><span class="w"> </span><span class="nt">0</span><span class="w"> </span><span class="nt">1px</span><span class="w"> </span><span class="nt">2px</span><span class="w"> </span><span class="nt">0</span><span class="w"> </span><span class="nt">rgba</span><span class="o">(</span><span class="nt">0</span><span class="o">,</span><span class="w"> </span><span class="nt">0</span><span class="o">,</span><span class="w"> </span><span class="nt">0</span><span class="o">,</span><span class="w"> </span><span class="nt">0</span><span class="p">.</span><span class="nc">05</span><span class="o">);</span>
+<span class="nt">--shadow-md</span><span class="o">:</span><span class="w"> </span><span class="nt">0</span><span class="w"> </span><span class="nt">4px</span><span class="w"> </span><span class="nt">6px</span><span class="w"> </span><span class="nt">-1px</span><span class="w"> </span><span class="nt">rgba</span><span class="o">(</span><span class="nt">0</span><span class="o">,</span><span class="w"> </span><span class="nt">0</span><span class="o">,</span><span class="w"> </span><span class="nt">0</span><span class="o">,</span><span class="w"> </span><span class="nt">0</span><span class="p">.</span><span class="nc">1</span><span class="o">);</span>
+<span class="nt">--shadow-lg</span><span class="o">:</span><span class="w"> </span><span class="nt">0</span><span class="w"> </span><span class="nt">10px</span><span class="w"> </span><span class="nt">15px</span><span class="w"> </span><span class="nt">-3px</span><span class="w"> </span><span class="nt">rgba</span><span class="o">(</span><span class="nt">0</span><span class="o">,</span><span class="w"> </span><span class="nt">0</span><span class="o">,</span><span class="w"> </span><span class="nt">0</span><span class="o">,</span><span class="w"> </span><span class="nt">0</span><span class="p">.</span><span class="nc">1</span><span class="o">);</span>
+<span class="nt">--shadow-xl</span><span class="o">:</span><span class="w"> </span><span class="nt">0</span><span class="w"> </span><span class="nt">20px</span><span class="w"> </span><span class="nt">25px</span><span class="w"> </span><span class="nt">-5px</span><span class="w"> </span><span class="nt">rgba</span><span class="o">(</span><span class="nt">0</span><span class="o">,</span><span class="w"> </span><span class="nt">0</span><span class="o">,</span><span class="w"> </span><span class="nt">0</span><span class="o">,</span><span class="w"> </span><span class="nt">0</span><span class="p">.</span><span class="nc">1</span><span class="o">);</span>
+</code></pre></div>
+
+<hr />
+<h2>🚀 Implementation Roadmap</h2>
+<h3>Phase 1: Foundation</h3>
+<ol>
+<li>✅ Create design system documentation</li>
+<li>🔄 Implement CSS custom properties</li>
+<li>🔄 Update Tailwind configuration</li>
+<li>🔄 Standardize typography</li>
+</ol>
+<h3>Phase 2: Components</h3>
+<ol>
+<li>🔄 Update button components</li>
+<li>🔄 Standardize card components</li>
+<li>🔄 Implement input field styling</li>
+<li>🔄 Update navigation components</li>
+</ol>
+<h3>Phase 3: Themes</h3>
+<ol>
+<li>🔄 Implement Lite theme (blue)</li>
+<li>🔄 Implement Pro theme (orange)</li>
+<li>🔄 Add theme switching logic</li>
+<li>🔄 Test across all components</li>
+</ol>
+<h3>Phase 4: Polish</h3>
+<ol>
+<li>🔄 Add animations and transitions</li>
+<li>🔄 Implement responsive optimizations</li>
+<li>🔄 Add accessibility improvements</li>
+<li>🔄 Performance optimization</li>
+</ol>
+<hr />
+<h2>📋 Component Checklist</h2>
+<h3>Before Implementation</h3>
+<ul>
+<li>[ ] Does it follow the color palette?</li>
+<li>[ ] Is typography consistent?</li>
+<li>[ ] Does it work in both themes?</li>
+<li>[ ] Is it accessible?</li>
+<li>[ ] Is it responsive?</li>
+</ul>
+<h3>After Implementation</h3>
+<ul>
+<li>[ ] Tested in Lite theme</li>
+<li>[ ] Tested in Pro theme</li>
+<li>[ ] Tested on mobile</li>
+<li>[ ] Tested on desktop</li>
+<li>[ ] Accessibility verified</li>
+<li>[ ] Performance checked</li>
+</ul>
+<hr />
+<h2>🎯 Success Metrics</h2>
+<h3>Visual Consistency</h3>
+<ul>
+<li>All components use the same color palette</li>
+<li>Typography is consistent across the platform</li>
+<li>Spacing follows the 4px grid system</li>
+<li>Shadows and borders are standardized</li>
+</ul>
+<h3>User Experience</h3>
+<ul>
+<li>Theme switching is seamless</li>
+<li>Components feel cohesive</li>
+<li>Information hierarchy is clear</li>
+<li>Interactions are predictable</li>
+</ul>
+<h3>Technical</h3>
+<ul>
+<li>CSS is maintainable and scalable</li>
+<li>Theme switching is performant</li>
+<li>Components are reusable</li>
+<li>Code is well-documented</li>
+</ul>
+<hr />
+<p><em>This design system is a living document. Update it as the platform evolves and new patterns emerge.</em></p>
+    </div>
+</body>
+</html>

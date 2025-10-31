@@ -1,0 +1,481 @@
+/* @import 'antd/dist/reset.css'; */
+
+/* Terminal Theme CSS Variables */
+:root {
+  /* Blue accent colors (matching docs site and Tailwind) */
+  --primary-blue: #3b82f6;
+  --primary-blue-hover: #2563eb;
+  --primary-blue-focus: #1d4ed8;
+  
+  /* Existing colors maintained */
+  --success-green: #52c41a;
+  --danger-red: #ff4d4f;
+  --warning-yellow: #faad14;
+  --neutral-gray: #d9d9d9;
+  
+  /* Background colors */
+  --bg-primary: #000;
+  --bg-secondary: #0f0f0f;
+  --bg-tertiary: #141414;
+  --bg-card: #1a1a1a;
+  --bg-gradient-start: #1a1a1a;
+  --bg-gradient-end: #2d2d2d;
+  
+  /* Border colors */
+  --border-base: #333;
+  --border-accent: #3b82f6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  /* Terminal font - JetBrains Mono for terminal aesthetic */
+  font-family: 'JetBrains Mono', 'Monaco', 'Consolas', 'Courier New', monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #000;
+  color: #fff;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.trading-card {
+  background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+  border: 1px solid var(--border-base);
+  /* border-radius: 8px; */ /* DISABLED - terminal aesthetic */
+  transition: all 0.2s ease;
+}
+
+.trading-card:hover {
+  border-color: var(--border-accent);
+  background: linear-gradient(135deg, var(--bg-gradient-start) 0%, #1f1f1f 100%);
+}
+
+.profit-text {
+  color: var(--success-green);
+}
+
+.loss-text {
+  color: var(--danger-red);
+}
+
+.neutral-text {
+  color: var(--neutral-gray);
+}
+
+/* Blue accent text for active/highlighted elements */
+.accent-blue {
+  color: var(--primary-blue);
+}
+
+.accent-blue-hover:hover {
+  color: var(--primary-blue-hover);
+}
+
+.status-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.status-running {
+  background-color: var(--success-green);
+  animation: pulse 2s infinite;
+}
+
+.status-stopped {
+  background-color: var(--danger-red);
+}
+
+.status-warning {
+  background-color: var(--warning-yellow);
+}
+
+/* Blue active status */
+.status-active {
+  background-color: var(--primary-blue);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.metric-card {
+  text-align: center;
+  padding: 16px;
+  background: var(--bg-card);
+  /* border-radius: 8px; */ /* DISABLED - terminal aesthetic */
+  border: 1px solid var(--border-base);
+  transition: all 0.2s ease;
+}
+
+.metric-card:hover {
+  border-color: var(--border-accent);
+  background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-gradient-end) 100%);
+}
+
+.metric-value {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.metric-label {
+  color: #999;
+  font-size: 12px;
+}
+
+.chart-container {
+  background: var(--bg-card);
+  /* border-radius: 8px; */ /* DISABLED - terminal aesthetic */
+  padding: 16px;
+  border: 1px solid var(--border-base);
+  transition: all 0.2s ease;
+}
+
+.chart-container:hover {
+  border-color: var(--border-accent);
+}
+
+.sidebar {
+  background: #0f0f0f;
+  border-right: 1px solid #333;
+}
+
+.main-content {
+  background: #141414;
+  min-height: calc(100vh - 64px);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-blue);
+}
+
+/* JetBrains Mono for numbers and terminal displays */
+.metric-value,
+.price-display,
+.ticker-value,
+.terminal-text {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ProTerminal Window Polish */
+.pro-terminal-window {
+  border: 1px solid var(--border-base) !important;
+  background: var(--bg-secondary) !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pro-terminal-window:focus,
+.pro-terminal-window:hover {
+  border-color: var(--border-accent) !important;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.pro-terminal-window.active {
+  border-color: var(--border-accent) !important;
+  box-shadow: 0 0 0 1px var(--border-accent), 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Window Header */
+.pro-terminal-header {
+  background: var(--bg-secondary) !important;
+  border-bottom: 1px solid var(--border-base) !important;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Search Results Polish */
+.pro-search-results {
+  border: 1px solid var(--border-base);
+  background: var(--bg-secondary);
+  border-radius: 4px;
+  padding: 12px;
+  max-height: 70vh;
+  overflow: auto;
+}
+
+.pro-search-results-category {
+  padding: 10px;
+  border-bottom: 1px solid var(--border-base);
+  font-weight: bold;
+  font-size: 12px;
+  color: var(--primary-blue);
+}
+
+/* Command Prompt Polish */
+.pro-command-prompt {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--success-green);
+  font-weight: bold;
+}
+
+.pro-command-input {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  outline: none;
+}
+
+/* Blue accent on active state */
+.pro-command-active {
+  color: var(--primary-blue);
+}
+
+/* Terminal button hover states */
+.pro-terminal-button {
+  transition: all 0.2s ease;
+  color: #999;
+  border-color: #333;
+}
+
+.pro-terminal-button:hover {
+  color: var(--primary-blue);
+  border-color: var(--border-accent);
+  background: rgba(59, 130, 246, 0.1);
+}
+
+/* Terminal Data Display Polish */
+/* Professional data table styling */
+.terminal-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+}
+
+.terminal-table th {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-base);
+  padding: 8px;
+  text-align: left;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.terminal-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.terminal-table tr:hover td {
+  background: rgba(59, 130, 246, 0.05);
+  border-bottom-color: var(--border-accent);
+}
+
+/* Order book depth visualization (terminal style) */
+.orderbook-bid {
+  background: linear-gradient(90deg, rgba(34, 197, 94, 0.1) 0%, transparent 100%);
+}
+
+.orderbook-ask {
+  background: linear-gradient(90deg, transparent 0%, rgba(239, 68, 68, 0.1) 100%);
+}
+
+/* Real-time price flash animation */
+@keyframes priceFlash {
+  0% { background-color: transparent; }
+  50% { background-color: var(--primary-blue); }
+  100% { background-color: transparent; }
+}
+
+.price-positive-flash {
+  animation: priceFlash 0.3s ease-in-out;
+}
+
+.price-negative-flash {
+  animation: priceFlash 0.3s ease-in-out;
+}
+
+/* Status bar / ticker tape style */
+.terminal-status-bar {
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-base);
+  padding: 4px 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* Terminal loading spinner */
+.terminal-spinner {
+  border: 2px solid var(--bg-tertiary);
+  border-top: 2px solid var(--primary-blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Keyboard shortcut hints */
+.shortcut-hint {
+  font-size: 9px;
+  color: var(--text-muted);
+  background: var(--bg-tertiary);
+  padding: 2px 4px;
+  border: 1px solid var(--border-base);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Terminal button groups */
+.btn-group {
+  display: inline-flex;
+  border: 1px solid var(--border-base);
+}
+
+.btn-group button {
+  border: none;
+  border-right: 1px solid var(--border-base);
+}
+
+.btn-group button:last-child {
+  border-right: none;
+}
+
+.btn-group button.active {
+  background: var(--primary-blue);
+  color: white;
+}
+
+/* Data stream ticker */
+.data-stream {
+  white-space: nowrap;
+  overflow: hidden;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+}
+
+/* Price change color coding */
+.price-change-up {
+  color: var(--success-green);
+  font-weight: 600;
+}
+
+.price-change-down {
+  color: var(--danger-red);
+  font-weight: 600;
+}
+
+.price-change-neutral {
+  color: var(--text-muted);
+}
+
+/* Form inputs with terminal aesthetic */
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-base);
+  color: var(--text-primary);
+  font-family: 'JetBrains Mono', monospace;
+  padding: 8px;
+  transition: all 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--border-accent);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+/* Terminal tab system */
+.terminal-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border-base);
+}
+
+.terminal-tab {
+  padding: 8px 16px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.terminal-tab:hover {
+  color: var(--text-primary);
+}
+
+.terminal-tab.active {
+  color: var(--primary-blue);
+  border-bottom-color: var(--primary-blue);
+}
+
+/* Ant Design customizations */
+.ant-layout {
+  background: #000 !important;
+}
+
+.ant-layout-sider {
+  background: #0f0f0f !important;
+}
+
+.ant-menu-dark {
+  background: #0f0f0f !important;
+}
+
+.ant-card {
+  background: #1a1a1a !important;
+  border: 1px solid #333 !important;
+}
+
+.ant-table-thead > tr > th {
+  background: #1a1a1a !important;
+  border-bottom: 1px solid #333 !important;
+}
+
+.ant-table-tbody > tr > td {
+  border-bottom: 1px solid #333 !important;
+}
+
+.ant-table-tbody > tr:hover > td {
+  background: #262626 !important;
+}

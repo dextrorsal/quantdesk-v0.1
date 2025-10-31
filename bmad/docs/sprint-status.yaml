@@ -1,0 +1,173 @@
+# Sprint Status for QuantDesk - Phase 4 Implementation
+# Generated: 2025-10-30
+# Project: QuantDesk
+
+# generated: 2025-10-30
+# project: QuantDesk
+# project_key: QuantDesk
+# tracking_system: file-system
+# story_location: "{project-root}/docs/stories"
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic exists in epic file but not contexted
+#   - contexted: Epic tech context created (required before drafting stories)
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - drafted: Story file created in stories folder
+#   - ready-for-dev: Draft approved and story context created
+#   - in-progress: Developer actively working on implementation
+#   - review: Under SM review (via review-story workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - completed: Retrospective has been completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epics should be 'contexted' before stories can be 'drafted'
+# - Stories can be worked in parallel if team capacity allows
+# - SM typically drafts next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', SM reviews, then Dev moves to 'done'
+
+project_name: QuantDesk
+project_level: 3
+status_date: 2025-10-30
+current_sprint: Sprint 1 - Advanced Orders & Production Readiness
+tracking_system: file-system
+story_location: "{project-root}/docs/stories"
+
+development_status:
+  # PRIORITY: CRITICAL — Epic 0: Restore Trading E2E and Data Parity
+  # Epic 0: Restore Trading E2E and Data Parity
+  epic-0: contexted
+  0-1-stabilize-backend-oracle-price-apis: ready-for-dev  # Story context created
+  0-2-market-data-websocket-reliability-pro-terminal: ready-for-dev  # Story context created
+  0-3-expose-withdraw-native-sol-program-idl: ready-for-dev  # Story context created
+  0-4-ui-guard-missing-withdraw-instruction: ready-for-dev  # Story context created
+  0-5-qm-shows-complete-live-prices-no-na: done  # CRITICAL: Recently completed - Quote Monitor showing correct prices via Pyth/Oracle integration
+  0-6-mikey-monitor-theming-fonts: ready-for-dev  # Story context created
+  0-7-mikey-tools-fetch-live-prices-tweets-news-backend: ready-for-dev  # Story context created
+  0-8-deposit-withdraw-cli-tests-ui-e2e: ready-for-dev  # Story context created
+  0-9-drift-parity-review-deposit-withdraw: ready-for-dev  # Story context created
+  0-10-expert-confirmation-native-sol-patterns: ready-for-dev  # Story context created
+  epic-0-retrospective: optional
+
+  # Demo Validation Story
+  0-validate-demo-functionality: in-progress  # CRITICAL: Validate integration & flows - Story file exists, manual testing in progress (see MANUAL_TESTING_GUIDE.md)
+  
+  # Additional Stories Not in Epic Structure
+  STORY_fix-sol-collateral-deposit: drafted  # Story file exists, fixes AccountNotSigner error for SOL deposit
+
+  # PRIORITY: CRITICAL — Epic 1: Complete Advanced Order Types
+  epic-1: contexted
+  1-1-monitor-conditional-orders: in-progress
+  1-2-redis-enable: in-progress
+  1-3-loadtest-monitor: ready-for-dev
+  1-4-authoritative-price-hub: drafted  # Story file exists, not in previous sprint status
+  epic-1-retrospective: optional
+
+  # PRIORITY: CRITICAL — Epic 2: Enhance AI Assistant Intelligence
+  epic-2: contexted
+  2-1-enhanced-technical-analysis: ready-for-dev
+  2-2-portfolio-risk-calculation: ready-for-dev
+  2-3-improved-trade-suggestions: ready-for-dev
+  epic-2-retrospective: optional
+
+  # PRIORITY: HIGH — Epic 3: Mainnet Deployment Readiness
+  epic-3: contexted
+  3-1-security-audit-fixes: ready-for-dev
+  3-2-performance-optimization: ready-for-dev
+  3-3-comprehensive-testing: ready-for-dev
+  epic-3-retrospective: optional
+
+  # PRIORITY: MEDIUM — Epic 4: Beta User Feedback Integration
+  epic-4: contexted
+  4-1-feedback-system: ready-for-dev
+  4-analytics-tracking: backlog
+  4-beta-support: backlog
+  epic-4-retrospective: optional
+
+  # PRIORITY: LOW — Epic 5: Advanced Analytics and Reporting
+  epic-5: contexted
+  5-1-trade-history-analytics: ready-for-dev
+  5-performance-attribution: backlog
+  5-advanced-charting: backlog
+  epic-5-retrospective: optional
+
+  # Demo Polish Stories (Styling Only - Need Validation)
+  demo-sprint-story-1-visual-theme: review  # Styling complete, needs integration validation
+  demo-sprint-story-2-proterminal-layout: review  # Styling complete, needs functionality validation
+  demo-sprint-story-3-trading-forms: review  # Styling complete, needs end-to-end validation
+  demo-sprint-story-4-mikey-chat-ui: review  # Styling complete, needs backend validation
+  demo-sprint-story-5-demo-data-prep: backlog  # Story file exists, not in previous sprint status
+  demo-sprint-story-6-record-demo-video: backlog  # Story file exists, not in previous sprint status
+
+notes:
+  - Sprint 1 focuses on Epic 1 (Advanced Orders) with 3 stories ready for development
+  - Demo stories (1-4) show styling complete but integration NOT validated
+  - MUST validate demo functionality before considering stories complete
+  - All acceptance criteria documented per story file
+  - Architecture guidance available in docs/architecture.md
+  - Implementation pattern: databaseService only, custom error classes, tiered rate limiting
+  - ⚠️ RISK: Demo may not actually work despite "complete" status
+  - Priorities set: Critical (Epics 0, 1, 2, Demo), High (Epic 3), Medium (Epic 4), Low (Epic 5)
+  - "WIP policy: in-progress limit 3 (scope: critical); active -> 1-1-monitor-conditional-orders, 1-2-redis-enable, 0-validate-demo-functionality"
+  - 🎉 RECENT WIN: Epic 0 Story 0-5 (QM Quote Monitor) completed - Pyth/Oracle integration working, showing correct prices in Pro Terminal
+  - Epic 0 (Trading E2E) - All 10 stories drafted (files created 2025-10-30)
+  - Missing files added to sprint status: 1-4-authoritative-price-hub, demo-sprint-story-5, demo-sprint-story-6, STORY_fix-sol-collateral-deposit
+
+# Explicit priorities map for automation
+priorities:
+  # Critical
+  epic-0: critical
+  0-1-stabilize-backend-oracle-price-apis: critical
+  0-2-market-data-websocket-reliability-pro-terminal: critical
+  0-3-expose-withdraw-native-sol-program-idl: critical
+  0-4-ui-guard-missing-withdraw-instruction: critical
+  0-5-qm-shows-complete-live-prices-no-na: critical
+  0-6-mikey-monitor-theming-fonts: critical
+  0-7-mikey-tools-fetch-live-prices-tweets-news-backend: critical
+  0-8-deposit-withdraw-cli-tests-ui-e2e: critical
+  0-9-drift-parity-review-deposit-withdraw: critical
+  0-10-expert-confirmation-native-sol-patterns: critical
+  epic-0-retrospective: critical
+  0-validate-demo-functionality: critical
+  epic-1: critical
+  1-1-monitor-conditional-orders: critical
+  1-2-redis-enable: critical
+  1-3-loadtest-monitor: critical
+  epic-1-retrospective: critical
+  epic-2: critical
+  2-1-enhanced-technical-analysis: critical
+  2-2-portfolio-risk-calculation: critical
+  2-3-improved-trade-suggestions: critical
+  epic-2-retrospective: critical
+  demo-sprint-story-1-visual-theme: critical
+  demo-sprint-story-2-proterminal-layout: critical
+  demo-sprint-story-3-trading-forms: critical
+  demo-sprint-story-4-mikey-chat-ui: critical
+
+  # High
+  epic-3: high
+  3-1-security-audit-fixes: high
+  3-2-performance-optimization: high
+  3-3-comprehensive-testing: high
+  epic-3-retrospective: high
+
+  # Medium
+  epic-4: medium
+  4-1-feedback-system: medium
+  4-analytics-tracking: medium
+  4-beta-support: medium
+  epic-4-retrospective: medium
+
+  # Low
+  epic-5: low
+  5-1-trade-history-analytics: low
+  5-performance-attribution: low
+  5-advanced-charting: low
+  epic-5-retrospective: low

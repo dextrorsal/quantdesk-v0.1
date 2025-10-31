@@ -1,0 +1,53 @@
+/*
+=========================================================
+* Dash UI - Bootstrap 5 Admin & Dashboard Theme
+=========================================================
+* Product Page: https://codescandy.com/dashui/index.html
+* Copyright 2023 Codescandy (https://codescandy.com/)
+* Designed and coded by https://codescandy.com
+========================================================= */
+
+// Inter Fonts
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+// Font Awesome
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css");
+
+// Material Design Icons
+@import url("https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.2.96/css/materialdesignicons.min.css");
+
+// Bootstrap functions
+@import "../../node_modules/bootstrap/scss/functions";
+
+// QuantDesk theme variables
+@import "theme/quantdesk-variables";
+
+// Bootstrap
+// @import "bootstrap/scss/bootstrap";
+// @import "bootstrap/scss/bootstrap";
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+// @import "bootstrap-icons/font/bootstrap-icons";
+// @import "simplebar/dist/simplebar.min.css";
+@import "../../node_modules/simplebar-react/dist/simplebar.min.css";
+
+// QuantDesk theme
+@import "theme/quantdesk-theme";
+
+// QuantDesk admin styles
+@import "quantdesk-admin";
+
+.heading-permalink {
+  color: transparent;
+  margin-left: -2rem;
+  &:hover {
+    color: transparent;
+  }
+
+  &::before {
+    color: rgba(82, 95, 127, 0);
+    content: "#";
+  }
+  &:hover:before {
+    color: #007bff;
+  }
+}
