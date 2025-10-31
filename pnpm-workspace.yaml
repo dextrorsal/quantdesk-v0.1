@@ -4,3 +4,6 @@ packages:
   - 'MIKEY-AI'
   - 'data-ingestion'
   - 'contracts'
+  - 'admin-dashboard'
+  - 'docs-site'
+  - 'sdk/typescript'
