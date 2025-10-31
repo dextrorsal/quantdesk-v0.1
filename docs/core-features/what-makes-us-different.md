@@ -25,7 +25,7 @@ QuantDesk brings everything traders need into one powerful terminal:
 **What It Does**: Live price feeds and order book data from major perpetual DEX protocols.
 
 **Why It Matters to You**:
-- **Live Price Feeds**: Real-time pricing from Drift, Jupiter, Raydium, Orca
+- **Live Price Feeds**: Real-time pricing from major perpetual DEX protocols
 - **Order Book Depth**: See bid/ask liquidity across all DEX protocols
 - **Volume & Market Stats**: Trading volume, funding rates, open interest
 - **Cross-Protocol Comparison**: Compare prices and liquidity across DEXs

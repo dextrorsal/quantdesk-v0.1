@@ -354,9 +354,9 @@ use crate::state::PriceCache;   // From module?
 
 ## 7. Large Program Organization (10+ Instructions)
 
-### 7.1 Drift Protocol Pattern (Production Example)
+### 7.1 Production Example Pattern
 
-Drift organizes a massive program (~100+ instructions) like this:
+Large Solana programs (~100+ instructions) are typically organized like this:
 
 ```
 src/
