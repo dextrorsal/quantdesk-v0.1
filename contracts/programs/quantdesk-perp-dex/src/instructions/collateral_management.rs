@@ -3,7 +3,8 @@
 
 use anchor_lang::prelude::*;
 use crate::{
-    collateral::{CollateralAccount, CollateralType},
+    collateral::CollateralType,
+    state::CollateralAccount,
     ErrorCode,
 };
 use crate::instructions::vault_management::ProtocolSolVault;
@@ -424,14 +425,28 @@ pub struct UpdateCollateralValue<'info> {
 
 #[derive(Accounts)]
 pub struct DepositNativeSol<'info> {
+    // CRITICAL: Account order MUST match IDL exactly to fix AccountNotSigner error
+    // IDL order: user_account, user, protocol_vault, collateral_account, sol_usd_price_feed, system_program, rent
+    
     #[account(
         init_if_needed,
         payer = user,
-        space = 8 + crate::user_accounts::UserAccount::INIT_SPACE,
+        space = 8 + crate::state::UserAccount::INIT_SPACE,
         seeds = [b"user_account", user.key().as_ref(), &[0u8, 0u8]], // Account index 0
         bump
     )]
-    pub user_account: Account<'info, crate::user_accounts::UserAccount>,
+    pub user_account: Account<'info, crate::state::UserAccount>,
+    
+    // Position 1 in IDL - MUST be here for signer validation
+    #[account(mut)]
+    pub user: Signer<'info>,
+    
+    #[account(
+        mut,
+        seeds = [b"protocol_sol_vault"],
+        bump,
+    )]
+    pub protocol_vault: Account<'info, ProtocolSolVault>,
     
     #[account(
         init_if_needed,
@@ -442,27 +457,20 @@ pub struct DepositNativeSol<'info> {
     )]
     pub collateral_account: Account<'info, CollateralAccount>,
     
-    #[account(
-        mut,
-        seeds = [b"protocol_sol_vault"],
-        bump,
-    )]
-    pub protocol_vault: Account<'info, ProtocolSolVault>,
-    
-    #[account(mut)]
-    pub user: Signer<'info>,
-    
     /// Pyth SOL/USD price feed account
     /// CHECK: Validated by Pyth SDK in get_usd_value_from_sol
     pub sol_usd_price_feed: AccountInfo<'info>,
     
     pub system_program: Program<'info, System>,
+    
+    // Note: IDL shows rent but it may be optional - checking IDL
+    pub rent: Sysvar<'info, Rent>,
 }
 
 #[derive(Accounts)]
 pub struct WithdrawNativeSol<'info> {
     #[account(mut)]
-    pub user_account: Account<'info, crate::user_accounts::UserAccount>,
+    pub user_account: Account<'info, crate::state::UserAccount>,
     
     #[account(mut)]
     pub collateral_account: Account<'info, CollateralAccount>,

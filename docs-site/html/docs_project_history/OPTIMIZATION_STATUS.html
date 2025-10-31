@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimization Status - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/">&larr; Back to Documentation</a>
+        </div>
+        <h1>🔄 HFT Model Optimization Status</h1>
+<p><strong>Status</strong>: Running<br />
+<strong>Started</strong>: 15:46<br />
+<strong>Duration</strong>: ~4 minutes<br />
+<strong>Expected Duration</strong>: 10-20 minutes  </p>
+<hr />
+<h2>📊 <strong>What We're Optimizing</strong></h2>
+<h3><strong>Data Being Used</strong></h3>
+<ul>
+<li><strong>Symbol</strong>: BTC (Bitcoin)</li>
+<li><strong>Timeframe</strong>: 5-minute candles</li>
+<li><strong>Exchange</strong>: Binance</li>
+<li><strong>Date Range</strong>: April 18, 2025 → July 16, 2025 (3 months)</li>
+<li><strong>Total Rows</strong>: 25,805 candles</li>
+<li><strong>Price Range</strong>: $84,527 → $119,217 (40% increase)</li>
+</ul>
+<h3><strong>Current Performance</strong></h3>
+<ul>
+<li><strong>Baseline Win Rate</strong>: 53.37%</li>
+<li><strong>Target Win Rate</strong>: 60%</li>
+<li><strong>Improvement Needed</strong>: +6.63%</li>
+</ul>
+<hr />
+<h2>🎯 <strong>Optimization Parameters Being Tested</strong></h2>
+<h3><strong>Lorentzian Model Parameters</strong></h3>
+<ul>
+<li><strong>Lookback Periods</strong>: [10, 15, 20, 25, 30]</li>
+<li><strong>Prediction Bars</strong>: [2, 4, 6, 8]</li>
+<li><strong>K-Neighbors</strong>: [10, 15, 20, 25, 30]</li>
+</ul>
+<h3><strong>Feature Combinations</strong></h3>
+<ol>
+<li><strong>RSI Features</strong>: rsi, rsi_buy, rsi_sell</li>
+<li><strong>ADX Features</strong>: adx, adx_buy, adx_sell</li>
+<li><strong>CCI Features</strong>: cci, cci_buy, cci_sell</li>
+<li><strong>WaveTrend Features</strong>: wave_trend, wt_buy, wt_sell</li>
+<li><strong>Price Features</strong>: price_change, volume_change</li>
+<li><strong>Volatility Features</strong>: volatility, volatility_5</li>
+<li><strong>Momentum Features</strong>: momentum_5, momentum_10, momentum_20</li>
+<li><strong>Ratio Features</strong>: high_low_ratio, close_open_ratio</li>
+</ol>
+<h3><strong>Total Combinations</strong></h3>
+<ul>
+<li><strong>Parameter Combinations</strong>: 5 × 4 × 5 = 100</li>
+<li><strong>Feature Combinations</strong>: 8 groups (testing different combinations)</li>
+<li><strong>Cross-Validation</strong>: 5-fold time series split</li>
+<li><strong>Total Tests</strong>: ~500+ model evaluations</li>
+</ul>
+<hr />
+<h2>🔍 <strong>What the Optimization is Doing</strong></h2>
+<ol>
+<li><strong>Loading Data</strong>: ✅ Complete (25,805 rows loaded)</li>
+<li><strong>Feature Preparation</strong>: ✅ Complete (all indicators calculated)</li>
+<li><strong>Hyperparameter Testing</strong>: 🔄 In Progress</li>
+<li><strong>Cross-Validation</strong>: 🔄 In Progress</li>
+<li><strong>Best Model Selection</strong>: ⏳ Pending</li>
+<li><strong>Final Training</strong>: ⏳ Pending</li>
+<li><strong>Report Generation</strong>: ⏳ Pending</li>
+</ol>
+<hr />
+<h2>📈 <strong>Expected Outcomes</strong></h2>
+<h3><strong>Best Case Scenario</strong></h3>
+<ul>
+<li><strong>Win Rate</strong>: 60-65%</li>
+<li><strong>Accuracy</strong>: 35-40%</li>
+<li><strong>Precision</strong>: 60-70%</li>
+<li><strong>Target Achieved</strong>: ✅ Yes</li>
+</ul>
+<h3><strong>Realistic Scenario</strong></h3>
+<ul>
+<li><strong>Win Rate</strong>: 55-60%</li>
+<li><strong>Accuracy</strong>: 30-35%</li>
+<li><strong>Precision</strong>: 55-65%</li>
+<li><strong>Target Achieved</strong>: Maybe (close)</li>
+</ul>
+<h3><strong>Worst Case Scenario</strong></h3>
+<ul>
+<li><strong>Win Rate</strong>: 53-55%</li>
+<li><strong>Accuracy</strong>: 25-30%</li>
+<li><strong>Precision</strong>: 50-55%</li>
+<li><strong>Target Achieved</strong>: ❌ No (but still improvement)</li>
+</ul>
+<hr />
+<h2>🚀 <strong>Next Steps After Optimization</strong></h2>
+<h3><strong>If Target Achieved (60%+)</strong></h3>
+<ol>
+<li>✅ Save optimized model</li>
+<li>✅ Generate detailed report</li>
+<li>✅ Test on validation set</li>
+<li>✅ Prepare for paper trading</li>
+<li>✅ Integrate with risk management</li>
+</ol>
+<h3><strong>If Close to Target (55-59%)</strong></h3>
+<ol>
+<li>✅ Save best model so far</li>
+<li>✅ Analyze feature importance</li>
+<li>✅ Try additional optimizations</li>
+<li>✅ Test different timeframes</li>
+<li>✅ Consider ensemble methods</li>
+</ol>
+<h3><strong>If Below Target (&lt;55%)</strong></h3>
+<ol>
+<li>✅ Save best model so far</li>
+<li>✅ Analyze what's working/not working</li>
+<li>✅ Try different approaches</li>
+<li>✅ Consider different indicators</li>
+<li>✅ Test on different symbols</li>
+</ol>
+<hr />
+<h2>💡 <strong>Key Insights So Far</strong></h2>
+<h3><strong>What's Working</strong></h3>
+<ul>
+<li>✅ <strong>Data quality</strong>: Clean, consolidated 5m data</li>
+<li>✅ <strong>Feature engineering</strong>: Core indicators working</li>
+<li>✅ <strong>Lorentzian model</strong>: Shows promise (53.37% baseline)</li>
+<li>✅ <strong>Cross-validation</strong>: Proper time series validation</li>
+</ul>
+<h3><strong>Optimization Potential</strong></h3>
+<ul>
+<li>🔍 <strong>Hyperparameter tuning</strong>: Finding optimal model parameters</li>
+<li>🔍 <strong>Feature selection</strong>: Finding best feature combinations</li>
+<li>🔍 <strong>Time series validation</strong>: Ensuring robustness</li>
+<li>🔍 <strong>Early stopping</strong>: Stop when target achieved</li>
+</ul>
+<hr />
+<h2>⏰ <strong>Estimated Completion</strong></h2>
+<p><strong>Current Progress</strong>: ~25% (based on time elapsed)<br />
+<strong>Expected Completion</strong>: 15:55-16:05<br />
+<strong>Total Duration</strong>: 10-20 minutes  </p>
+<p><strong>Note</strong>: The optimization will stop early if it achieves the 60% target win rate!</p>
+<hr />
+<h2>📊 <strong>Monitoring Commands</strong></h2>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Check if still running</span>
+ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>optimize_hft_simple
+
+<span class="c1"># Check for results</span>
+ls<span class="w"> </span>-la<span class="w"> </span>results/hft_optimization_report_BTC_5m.md
+
+<span class="c1"># Check for saved model</span>
+ls<span class="w"> </span>-la<span class="w"> </span>models/hft_optimized/binance/BTC/5m/
+</code></pre></div>
+
+<p><strong>Status</strong>: 🔄 <strong>Optimization in Progress - Looking Good!</strong> </p>
+    </div>
+</body>
+</html>

@@ -5,7 +5,7 @@ use anchor_lang::prelude::*;
 use crate::{
     state::order::{Order, OrderType, OrderStatus, TimeInForce},
     state::position::PositionSide,
-    markets::Market,
+    state::Market,
     ErrorCode,
     margin::*,
 };

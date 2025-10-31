@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 use crate::{
-    markets::Market,
+    state::Market,
     state::{
         protocol::ProgramState,
         advanced::{CircuitBreaker, JitProvider, MarketMakerVault, PointsSystem},

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devnet Quickstart - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/">&larr; Back to Documentation</a>
+        </div>
+        <h1>QuantDesk Devnet Quick Start</h1>
+<h2>🚀 What We've Built</h2>
+<p>Your QuantDesk perpetual DEX is now ready for devnet testing! Here's what's been implemented:</p>
+<h3>✅ Completed</h3>
+<ol>
+<li><strong>Frontend Fixes</strong></li>
+<li>✅ Fixed PDA derivation in <code>ProgramContext.tsx</code> (proper u16 encoding)</li>
+<li>✅ Implemented <code>accountHelpers.ts</code> with all PDA derivation functions</li>
+<li>✅ Added <code>createUserAccount</code> method to ProgramContext</li>
+<li>✅ Integrated collateral account creation</li>
+<li>
+<p>✅ Added Pyth price feed integration</p>
+</li>
+<li>
+<p><strong>Backend Setup</strong></p>
+</li>
+<li>✅ Updated <code>environment.ts</code> with correct Program ID</li>
+<li>✅ Created devnet initialization script (<code>init-devnet.ts</code>)</li>
+<li>
+<p>✅ Added <code>pnpm run init:devnet</code> command</p>
+</li>
+<li>
+<p><strong>Testing Infrastructure</strong></p>
+</li>
+<li>✅ Created comprehensive E2E test in sandbox</li>
+<li>✅ Added <code>pnpm run test:flow</code> command</li>
+<li>
+<p>✅ Sandbox tools ready for debugging</p>
+</li>
+<li>
+<p><strong>Documentation</strong></p>
+</li>
+<li>✅ Complete devnet deployment guide</li>
+<li>✅ Comprehensive troubleshooting runbook</li>
+<li>✅ MCP tool integration guidance</li>
+</ol>
+<hr />
+<h2>🎯 Next Steps (In Order)</h2>
+<h3>Step 1: Verify Your Environment (5 min)</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 1. Check Solana CLI</span>
+solana<span class="w"> </span>--version<span class="w">  </span><span class="c1"># Should be &gt;= 1.14</span>
+solana<span class="w"> </span>config<span class="w"> </span>get<span class="w">  </span><span class="c1"># Should show devnet</span>
+
+<span class="c1"># 2. Check wallet balance</span>
+solana<span class="w"> </span>balance<span class="w">  </span><span class="c1"># Should have &gt;= 2 SOL</span>
+<span class="c1"># If not: solana airdrop 2</span>
+
+<span class="c1"># 3. Verify Program ID</span>
+<span class="nb">cd</span><span class="w"> </span>contracts
+anchor<span class="w"> </span>keys<span class="w"> </span>list
+<span class="c1"># Should show: GcpEyGMJg9AvEx8LgAyzyUNTPWFxovHxtmQ4vVWuWu3a</span>
+</code></pre></div>
+
+<h3>Step 2: Configure Backend (10 min)</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 1. Create backend .env</span>
+<span class="nb">cd</span><span class="w"> </span>backend
+cp<span class="w"> </span>.env.example<span class="w"> </span>.env
+
+<span class="c1"># 2. Edit .env with your values:</span>
+<span class="c1"># - SUPABASE_URL</span>
+<span class="c1"># - SUPABASE_ANON_KEY  </span>
+<span class="c1"># - SUPABASE_ACCESS_TOKEN</span>
+<span class="c1"># - JWT_SECRET (generate random string)</span>
+<span class="c1"># - Verify PROGRAM_ID matches</span>
+
+<span class="c1"># 3. Apply database schema</span>
+<span class="c1"># In Supabase SQL Editor, run:</span>
+<span class="c1"># - database/production-schema.sql</span>
+<span class="c1"># - database/security-audit-fixes.sql</span>
+</code></pre></div>
+
+<h3>Step 3: Deploy Smart Contract (if not deployed)</h3>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>contracts
+
+<span class="c1"># Build</span>
+anchor<span class="w"> </span>build
+
+<span class="c1"># Deploy to devnet</span>
+anchor<span class="w"> </span>deploy<span class="w"> </span>--provider.cluster<span class="w"> </span>devnet
+
+<span class="c1"># Copy IDL to frontend</span>
+cp<span class="w"> </span>target/idl/quantdesk_perp_dex.json<span class="w"> </span>../../frontend/src/types/
+</code></pre></div>
+
+<h3>Step 4: Initialize Backend (5 min)</h3>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>backend
+
+<span class="c1"># This will:</span>
+<span class="c1"># - Verify database connection</span>
+<span class="c1"># - Check Solana devnet connection</span>
+<span class="c1"># - Verify program deployment</span>
+<span class="c1"># - Seed SOL/USD, BTC/USD, ETH/USD markets</span>
+pnpm<span class="w"> </span>run<span class="w"> </span>init:devnet
+</code></pre></div>
+
+<p>Expected output:</p>
+<div class="codehilite"><pre><span></span><code>✅ Database connected
+✅ Connected to Solana devnet
+✅ Program deployed
+✅ Created SOL/USD
+✅ Created BTC/USD
+✅ Created ETH/USD
+✅ Devnet initialization complete!
+</code></pre></div>
+
+<h3>Step 5: Test with Sandbox (10 min)</h3>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>solana-sandbox
+
+<span class="c1"># Setup sandbox</span>
+cp<span class="w"> </span>env.example<span class="w"> </span>.env
+pnpm<span class="w"> </span>run<span class="w"> </span>setup
+
+<span class="c1"># Verify program deployment</span>
+pnpm<span class="w"> </span>run<span class="w"> </span>check-program
+
+<span class="c1"># Validate IDL consistency</span>
+pnpm<span class="w"> </span>run<span class="w"> </span>validate-idl
+
+<span class="c1"># Run end-to-end test</span>
+pnpm<span class="w"> </span>run<span class="w"> </span>test:flow
+</code></pre></div>
+
+<p>Expected output:</p>
+<div class="codehilite"><pre><span></span><code>✓ User Account PDA derivation
+✓ Market PDA derivation  
+✓ Position PDA derivation
+✓ Collateral PDA derivation
+✓ Program verification
+</code></pre></div>
+
+<h3>Step 6: Start Services (2 min)</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Terminal 1: Start backend</span>
+<span class="nb">cd</span><span class="w"> </span>backend
+pnpm<span class="w"> </span>run<span class="w"> </span>dev
+<span class="c1"># Should show: Server listening on port 3002</span>
+
+<span class="c1"># Terminal 2: Start frontend</span>
+<span class="nb">cd</span><span class="w"> </span>frontend
+pnpm<span class="w"> </span>run<span class="w"> </span>dev
+<span class="c1"># Should show: Local: http://localhost:3001</span>
+</code></pre></div>
+
+<h3>Step 7: Test Frontend (15 min)</h3>
+<ol>
+<li><strong>Open Browser</strong></li>
+<li>Navigate to http://localhost:3001</li>
+<li>
+<p>Open DevTools Console</p>
+</li>
+<li>
+<p><strong>Connect Wallet</strong></p>
+</li>
+<li>Click "Connect Wallet"</li>
+<li>Select Phantom or Solflare</li>
+<li>Ensure wallet is on <strong>devnet</strong></li>
+<li>
+<p>Approve connection</p>
+</li>
+<li>
+<p><strong>Create User Account</strong></p>
+</li>
+<li>If prompt appears, click "Create Account"</li>
+<li>Approve transaction in wallet</li>
+<li>Wait for confirmation</li>
+<li>
+<p>Check console for: "User account created: <tx_signature>"</p>
+</li>
+<li>
+<p><strong>Verify Markets</strong></p>
+</li>
+<li>Should see SOL/USD, BTC/USD, ETH/USD</li>
+<li>Check prices are displayed</li>
+<li>
+<p>Verify oracle data loading</p>
+</li>
+<li>
+<p><strong>Test Position (Optional)</strong></p>
+</li>
+<li>Try opening a small position</li>
+<li>Check position appears in portfolio</li>
+<li>Try closing position</li>
+</ol>
+<hr />
+<h2>🔍 Troubleshooting</h2>
+<h3>Issue: Program Not Found</h3>
+<p><strong>Check:</strong></p>
+<div class="codehilite"><pre><span></span><code>solana<span class="w"> </span>program<span class="w"> </span>show<span class="w"> </span>GcpEyGMJg9AvEx8LgAyzyUNTPWFxovHxtmQ4vVWuWu3a
+</code></pre></div>
+
+<p><strong>Fix:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>contracts
+anchor<span class="w"> </span>deploy<span class="w"> </span>--provider.cluster<span class="w"> </span>devnet
+</code></pre></div>
+
+<h3>Issue: Account Creation Fails</h3>
+<p><strong>Check Browser Console for:</strong>
+- "Invalid seeds for PDA" → PDA derivation issue
+- "Insufficient funds" → Need more devnet SOL
+- "Account already exists" → Already created!</p>
+<p><strong>Quick Fix:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Get more SOL</span>
+solana<span class="w"> </span>airdrop<span class="w"> </span><span class="m">2</span>
+
+<span class="c1"># Verify PDA derivation</span>
+<span class="nb">cd</span><span class="w"> </span>solana-sandbox
+pnpm<span class="w"> </span>run<span class="w"> </span>derive<span class="w"> </span>--<span class="w"> </span>--wallet<span class="w"> </span>&lt;YOUR_WALLET&gt;<span class="w"> </span>--index<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+
+<h3>Issue: Markets Not Loading</h3>
+<p><strong>Check:</strong></p>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>http://localhost:3002/api/markets
+</code></pre></div>
+
+<p><strong>Fix:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>backend
+pnpm<span class="w"> </span>run<span class="w"> </span>init:devnet
+</code></pre></div>
+
+<h3>Issue: IDL Mismatch / Deserialization Error</h3>
+<p><strong>Fix:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>contracts
+anchor<span class="w"> </span>build
+cp<span class="w"> </span>target/idl/quantdesk_perp_dex.json<span class="w"> </span>../../frontend/src/types/
+
+<span class="c1"># Restart frontend</span>
+<span class="nb">cd</span><span class="w"> </span>frontend
+pnpm<span class="w"> </span>run<span class="w"> </span>dev
+</code></pre></div>
+
+<h3>Full Troubleshooting Guide</h3>
+<p>For detailed troubleshooting, see:
+- <strong>Full Guide</strong>: <code>/docs/debugging/devnet-troubleshooting.md</code>
+- <strong>Deployment Guide</strong>: <code>/docs/deployment/devnet-deployment-guide.md</code></p>
+<hr />
+<h2>🛠 Useful Commands</h2>
+<h3>Debugging</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Check program status</span>
+<span class="nb">cd</span><span class="w"> </span>solana-sandbox<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pnpm<span class="w"> </span>run<span class="w"> </span>check-program
+
+<span class="c1"># Validate IDL</span>
+<span class="nb">cd</span><span class="w"> </span>solana-sandbox<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pnpm<span class="w"> </span>run<span class="w"> </span>validate-idl
+
+<span class="c1"># Inspect account</span>
+<span class="nb">cd</span><span class="w"> </span>solana-sandbox<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pnpm<span class="w"> </span>run<span class="w"> </span>inspect<span class="w"> </span>--<span class="w"> </span>&lt;ACCOUNT_PUBKEY&gt;
+
+<span class="c1"># View transaction</span>
+<span class="nb">cd</span><span class="w"> </span>solana-sandbox<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pnpm<span class="w"> </span>run<span class="w"> </span>analyze<span class="w"> </span>--<span class="w"> </span>&lt;TX_SIGNATURE&gt;
+
+<span class="c1"># Backend health</span>
+curl<span class="w"> </span>http://localhost:3002/api/health
+
+<span class="c1"># Market data</span>
+curl<span class="w"> </span>http://localhost:3002/api/markets
+</code></pre></div>
+
+<h3>Logs</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Watch Solana program logs</span>
+solana<span class="w"> </span>logs<span class="w"> </span>GcpEyGMJg9AvEx8LgAyzyUNTPWFxovHxtmQ4vVWuWu3a
+
+<span class="c1"># Backend logs</span>
+tail<span class="w"> </span>-f<span class="w"> </span>backend/logs/backend-dev.log
+
+<span class="c1"># Frontend logs</span>
+<span class="c1"># Check browser DevTools console</span>
+</code></pre></div>
+
+<hr />
+<h2>📚 Documentation</h2>
+<ul>
+<li><strong>Deployment Guide</strong>: <code>/docs/deployment/devnet-deployment-guide.md</code></li>
+<li><strong>Troubleshooting</strong>: <code>/docs/debugging/devnet-troubleshooting.md</code></li>
+<li><strong>User Monitoring</strong>: <code>/docs/monitoring/USER_MONITORING_GUIDE.md</code></li>
+<li><strong>Protocol Monitoring</strong>: <code>/docs/monitoring/PROTOCOL_MONITORING_GUIDE.md</code></li>
+<li><strong>Contract Docs</strong>: <code>/contracts/docs/</code></li>
+<li><strong>API Documentation</strong>: http://localhost:3002/api/docs/swagger</li>
+</ul>
+<hr />
+<h2>🎓 Using MCP Expert Tools</h2>
+<p>You have Solana and Anchor experts available via MCP:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Ask for help</span>
+<span class="s2">&quot;How do I debug AccountDidNotDeserialize error?&quot;</span>
+<span class="s2">&quot;Why is my PDA derivation failing?&quot;</span>
+<span class="s2">&quot;How to handle transaction retries in Solana?&quot;</span>
+</code></pre></div>
+
+<p><strong>Available Tools:</strong>
+- Solana Expert: General Solana questions
+- Anchor Framework Expert: Anchor-specific issues
+- Supabase: Database queries and schema
+- Documentation Search: Official docs lookup</p>
+<hr />
+<h2>✅ Pre-Flight Checklist</h2>
+<p>Before testing:
+- [ ] Solana CLI configured for devnet
+- [ ] Wallet has &gt;= 2 SOL devnet balance
+- [ ] Program deployed to devnet
+- [ ] Backend <code>.env</code> configured with Supabase
+- [ ] Database schema applied
+- [ ] Markets initialized (<code>init:devnet</code> ran)
+- [ ] IDL synced to frontend
+- [ ] Backend running on port 3002
+- [ ] Frontend running on port 3001</p>
+<hr />
+<h2>🚨 Known Issues</h2>
+<ol>
+<li><strong>Expected Warnings in Devnet</strong>:</li>
+<li>Missing <code>execute_sql</code> function → OK for devnet</li>
+<li>
+<p>Missing <code>auth_nonces</code> table → OK for devnet</p>
+</li>
+<li>
+<p><strong>Common Errors</strong>:</p>
+</li>
+<li>First transaction timeout → Retry after 30s</li>
+<li>Occasional RPC rate limits → Wait and retry</li>
+<li>Airdrop cooldown → Use faucet instead</li>
+</ol>
+<hr />
+<h2>📞 Support</h2>
+<p>If you encounter issues:</p>
+<ol>
+<li><strong>Check documentation</strong> (see above)</li>
+<li><strong>Use sandbox diagnostic tools</strong></li>
+<li><strong>Ask MCP experts</strong> for Solana-specific questions</li>
+<li><strong>Check browser/backend logs</strong></li>
+<li><strong>Verify all checklist items</strong></li>
+</ol>
+<hr />
+<h2>🎉 Success Criteria</h2>
+<p>You're ready for devnet when:
+- ✅ Wallet connects successfully
+- ✅ User account creates without errors
+- ✅ Markets load with prices
+- ✅ Can view transaction on Solana Explorer
+- ✅ All sandbox tests pass
+- ✅ No critical errors in logs</p>
+<hr />
+<p><strong>Version</strong>: 1.0.6<br />
+<strong>Last Updated</strong>: October 2025<br />
+<strong>Status</strong>: Ready for Devnet Testing 🚀</p>
+<p>Happy Testing! 🎊</p>
+    </div>
+</body>
+</html>

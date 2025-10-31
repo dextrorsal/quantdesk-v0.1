@@ -4,8 +4,8 @@
 use anchor_lang::prelude::*;
 use crate::{
     state::position::{Position, PositionSide, PositionStatus},
-    markets::Market,
-    user_accounts::UserAccount,
+    state::Market,
+    state::UserAccount,
     ErrorCode,
     margin::*,
 };

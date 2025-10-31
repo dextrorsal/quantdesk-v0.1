@@ -215,4 +215,6 @@ pub enum ErrorCode {
     EmergencyPriceNotAvailable,
     #[msg("Too many keepers authorized")]
     TooManyKeepers,
+    #[msg("All oracle providers failed")]
+    AllOraclesFailed,
 }

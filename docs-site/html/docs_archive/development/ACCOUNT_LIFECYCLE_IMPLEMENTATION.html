@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Lifecycle Implementation - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/">&larr; Back to Documentation</a>
+        </div>
+        <h1>Account Lifecycle Implementation Plan</h1>
+<h2>Current State Analysis</h2>
+<h3>What's Already Implemented:</h3>
+<p>✅ <strong>Basic User Authentication</strong>
+- Wallet connection via Solana wallet adapter
+- JWT token generation and validation
+- User creation in database
+- Basic user management</p>
+<p>✅ <strong>Database Schema</strong>
+- Users table with wallet addresses
+- Trading accounts table (multi-account support)
+- Deposits/withdrawals tables
+- User balances table
+- Positions and orders tables</p>
+<p>✅ <strong>Backend API Structure</strong>
+- Authentication endpoints
+- Account management endpoints
+- Deposit/withdrawal endpoints
+- Basic trading endpoints</p>
+<h3>What's Missing:</h3>
+<p>❌ <strong>Account State Management</strong>
+❌ <strong>Frontend State Integration</strong>
+❌ <strong>Deposit Flow Implementation</strong>
+❌ <strong>Account Creation Flow</strong>
+❌ <strong>Balance Display System</strong></p>
+<h2>Implementation Plan</h2>
+<h3>Phase 1: Account State Management (Priority: HIGH)</h3>
+<h4>1.1 Backend Account State Service</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1">// backend/src/services/accountStateService.ts</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">AccountStateService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="nx">getUserAccountState</span><span class="p">(</span><span class="nx">userId</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">AccountState</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Check if user has trading accounts</span>
+<span class="w">    </span><span class="c1">// Check if user has deposits</span>
+<span class="w">    </span><span class="c1">// Check if user can trade</span>
+<span class="w">    </span><span class="c1">// Return complete state</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>1.2 Account State Types</h4>
+<div class="codehilite"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">AccountState</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">walletConnected</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">accountCreated</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">hasDeposits</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">canTrade</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">tradingAccounts</span><span class="o">:</span><span class="w"> </span><span class="kt">TradingAccount</span><span class="p">[];</span>
+<span class="w">  </span><span class="nx">balances</span><span class="o">:</span><span class="w"> </span><span class="kt">UserBalance</span><span class="p">[];</span>
+<span class="w">  </span><span class="nx">riskLevel</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;safe&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;warning&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;danger&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>1.3 API Endpoints</h4>
+<ul>
+<li><code>GET /api/account/state</code> - Get complete account state</li>
+<li><code>POST /api/account/create</code> - Create trading account</li>
+<li><code>GET /api/account/balances</code> - Get account balances</li>
+</ul>
+<h3>Phase 2: Frontend State Management (Priority: HIGH)</h3>
+<h4>2.1 Account Context Provider</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1">// frontend/src/contexts/AccountContext.tsx</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">AccountProvider</span><span class="o">:</span><span class="w"> </span><span class="kt">React.FC</span><span class="o">&lt;</span><span class="p">{</span><span class="w"> </span><span class="nx">children</span><span class="o">:</span><span class="w"> </span><span class="kt">React.ReactNode</span><span class="w"> </span><span class="p">}</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">children</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">accountState</span><span class="p">,</span><span class="w"> </span><span class="nx">setAccountState</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="o">&lt;</span><span class="nx">AccountState</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="o">&gt;</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">loading</span><span class="p">,</span><span class="w"> </span><span class="nx">setLoading</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Fetch account state</span>
+<span class="w">  </span><span class="c1">// Handle state transitions</span>
+<span class="w">  </span><span class="c1">// Provide state to components</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>2.2 State-Based UI Components</h4>
+<ul>
+<li><strong>DisconnectedState</strong>: Show wallet connection modal</li>
+<li><strong>NoAccountState</strong>: Show account creation flow</li>
+<li><strong>NoDepositsState</strong>: Show deposit modal</li>
+<li><strong>ReadyToTradeState</strong>: Show trading interface</li>
+</ul>
+<h3>Phase 3: Deposit System Implementation (Priority: HIGH)</h3>
+<h4>3.1 Deposit Modal Component</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1">// frontend/src/components/DepositModal.tsx</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">DepositModal</span><span class="o">:</span><span class="w"> </span><span class="kt">React.FC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Asset selection (USDC, SOL, etc.)</span>
+<span class="w">  </span><span class="c1">// Amount input</span>
+<span class="w">  </span><span class="c1">// Deposit confirmation</span>
+<span class="w">  </span><span class="c1">// Transaction signing</span>
+<span class="w">  </span><span class="c1">// Status updates</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>3.2 Deposit Service</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1">// frontend/src/services/depositService.ts</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">DepositService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="nx">initiateDeposit</span><span class="p">(</span><span class="nx">asset</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">DepositResult</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="nx">confirmDeposit</span><span class="p">(</span><span class="nx">depositId</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">signature</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="ow">void</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="nx">getDepositStatus</span><span class="p">(</span><span class="nx">depositId</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">DepositStatus</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3>Phase 4: Account Creation Flow (Priority: MEDIUM)</h3>
+<h4>4.1 Account Creation Modal</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1">// frontend/src/components/AccountCreationModal.tsx</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">AccountCreationModal</span><span class="o">:</span><span class="w"> </span><span class="kt">React.FC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Account name input</span>
+<span class="w">  </span><span class="c1">// Account type selection</span>
+<span class="w">  </span><span class="c1">// Creation confirmation</span>
+<span class="w">  </span><span class="c1">// Success/error handling</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>4.2 Account Creation Service</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1">// frontend/src/services/accountService.ts</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">AccountService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="nx">createTradingAccount</span><span class="p">(</span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">TradingAccount</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="nx">getTradingAccounts</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">TradingAccount</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="nx">switchAccount</span><span class="p">(</span><span class="nx">accountId</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="ow">void</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3>Phase 5: Balance Display System (Priority: MEDIUM)</h3>
+<h4>5.1 Balance Components</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1">// frontend/src/components/BalanceDisplay.tsx</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">BalanceDisplay</span><span class="o">:</span><span class="w"> </span><span class="kt">React.FC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Total balance</span>
+<span class="w">  </span><span class="c1">// Available balance</span>
+<span class="w">  </span><span class="c1">// Locked balance</span>
+<span class="w">  </span><span class="c1">// Asset breakdown</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>5.2 Balance Service</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1">// frontend/src/services/balanceService.ts</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">BalanceService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="nx">getBalances</span><span class="p">(</span><span class="nx">accountId?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">UserBalance</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="nx">getTotalBalance</span><span class="p">(</span><span class="nx">accountId?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="kt">number</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="nx">getAvailableBalance</span><span class="p">(</span><span class="nx">accountId?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="kt">number</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2>Implementation Steps</h2>
+<h3>Step 1: Backend Account State Service</h3>
+<ol>
+<li>Create <code>AccountStateService</code> class</li>
+<li>Implement state calculation logic</li>
+<li>Add API endpoints</li>
+<li>Test with existing data</li>
+</ol>
+<h3>Step 2: Frontend Account Context</h3>
+<ol>
+<li>Create <code>AccountContext</code> provider</li>
+<li>Implement state fetching</li>
+<li>Add error handling</li>
+<li>Test state transitions</li>
+</ol>
+<h3>Step 3: State-Based UI Components</h3>
+<ol>
+<li>Create state-specific components</li>
+<li>Implement conditional rendering</li>
+<li>Add loading states</li>
+<li>Test user flows</li>
+</ol>
+<h3>Step 4: Deposit System</h3>
+<ol>
+<li>Create deposit modal</li>
+<li>Implement deposit service</li>
+<li>Add transaction handling</li>
+<li>Test deposit flow</li>
+</ol>
+<h3>Step 5: Account Creation</h3>
+<ol>
+<li>Create account creation modal</li>
+<li>Implement account service</li>
+<li>Add account switching</li>
+<li>Test account management</li>
+</ol>
+<h3>Step 6: Balance Display</h3>
+<ol>
+<li>Create balance components</li>
+<li>Implement balance service</li>
+<li>Add real-time updates</li>
+<li>Test balance display</li>
+</ol>
+<h2>Testing Strategy</h2>
+<h3>Unit Tests</h3>
+<ul>
+<li>Account state calculations</li>
+<li>Service methods</li>
+<li>Component rendering</li>
+<li>State transitions</li>
+</ul>
+<h3>Integration Tests</h3>
+<ul>
+<li>API endpoints</li>
+<li>Database operations</li>
+<li>Frontend-backend communication</li>
+<li>User flows</li>
+</ul>
+<h3>E2E Tests</h3>
+<ul>
+<li>Complete user journeys</li>
+<li>Wallet connection flow</li>
+<li>Account creation flow</li>
+<li>Deposit flow</li>
+<li>Trading flow</li>
+</ul>
+<h2>Security Considerations</h2>
+<h3>Backend Security</h3>
+<ul>
+<li>Input validation</li>
+<li>Authorization checks</li>
+<li>Rate limiting</li>
+<li>Audit logging</li>
+</ul>
+<h3>Frontend Security</h3>
+<ul>
+<li>State validation</li>
+<li>Error boundary handling</li>
+<li>Secure communication</li>
+<li>Wallet integration security</li>
+</ul>
+<h2>Performance Considerations</h2>
+<h3>Backend Performance</h3>
+<ul>
+<li>Database query optimization</li>
+<li>Caching strategies</li>
+<li>Connection pooling</li>
+<li>Response time optimization</li>
+</ul>
+<h3>Frontend Performance</h3>
+<ul>
+<li>Component optimization</li>
+<li>State management efficiency</li>
+<li>Bundle size optimization</li>
+<li>Lazy loading</li>
+</ul>
+<h2>Monitoring and Analytics</h2>
+<h3>Key Metrics</h3>
+<ul>
+<li>Account creation rate</li>
+<li>Deposit success rate</li>
+<li>User engagement</li>
+<li>Error rates</li>
+<li>Performance metrics</li>
+</ul>
+<h3>Monitoring Tools</h3>
+<ul>
+<li>Application performance monitoring</li>
+<li>Error tracking</li>
+<li>User analytics</li>
+<li>Database monitoring</li>
+</ul>
+<h2>Documentation Requirements</h2>
+<h3>Technical Documentation</h3>
+<ul>
+<li>API documentation</li>
+<li>Component documentation</li>
+<li>Service documentation</li>
+<li>Architecture diagrams</li>
+</ul>
+<h3>User Documentation</h3>
+<ul>
+<li>User guides</li>
+<li>FAQ</li>
+<li>Troubleshooting</li>
+<li>Feature explanations</li>
+</ul>
+<hr />
+<p><em>This implementation plan will be updated as development progresses and requirements evolve.</em></p>
+    </div>
+</body>
+</html>

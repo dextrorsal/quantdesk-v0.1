@@ -156,7 +156,7 @@ pub struct WithdrawNativeSol<'info> {
         seeds = [b"user_account", user.key().as_ref(), &[0u8, 0u8]], // Account index 0
         bump = user_account.bump,
     )]
-    pub user_account: Account<'info, crate::user_accounts::UserAccount>,
+    pub user_account: Account<'info, crate::state::UserAccount>,
     
     #[account(mut)]
     pub user: Signer<'info>,
@@ -175,7 +175,7 @@ pub struct WithdrawNativeSol<'info> {
         seeds = [b"collateral", user.key().as_ref(), b"SOL"],
         bump = collateral_account.bump,
     )]
-    pub collateral_account: Account<'info, crate::CollateralAccount>,
+    pub collateral_account: Account<'info, crate::state::CollateralAccount>,
     
     /// Pyth SOL/USD price feed account
     /// CHECK: Validated by Pyth SDK in get_sol_from_usd_value
@@ -196,7 +196,7 @@ pub struct FixCorruptedCollateral<'info> {
         seeds = [b"collateral", user.key().as_ref(), b"SOL"],
         bump = collateral_account.bump,
     )]
-    pub collateral_account: Account<'info, crate::CollateralAccount>,
+    pub collateral_account: Account<'info, crate::state::CollateralAccount>,
     
     /// Protocol SOL vault (to check actual balance)
     #[account(
@@ -218,46 +218,7 @@ pub struct CloseCollateralAccount<'info> {
         seeds = [b"collateral", user.key().as_ref(), b"SOL"],
         bump = collateral_account.bump,
     )]
-    pub collateral_account: Account<'info, crate::CollateralAccount>,
-}
-
-/// Deposit Native SOL Context
-#[derive(Accounts)]
-pub struct DepositNativeSol<'info> {
-    #[account(
-        mut,
-        seeds = [b"user_account", user.key().as_ref(), &[0u8, 0u8]], // Account index 0
-        bump = user_account.bump,
-    )]
-    pub user_account: Account<'info, crate::user_accounts::UserAccount>,
-    
-    #[account(mut)]
-    pub user: Signer<'info>,
-    
-    /// Protocol SOL vault PDA - this will hold the deposited SOL
-    #[account(
-        mut,
-        seeds = [b"protocol_sol_vault"],
-        bump = protocol_vault.bump,
-    )]
-    pub protocol_vault: Account<'info, crate::ProtocolSolVault>,
-    
-    /// SOL collateral account for the user - will be initialized if needed
-    #[account(
-        init_if_needed,
-        payer = user,
-        space = 8 + crate::CollateralAccount::INIT_SPACE,
-        seeds = [b"collateral", user.key().as_ref(), b"SOL"],
-        bump
-    )]
-    pub collateral_account: Account<'info, crate::CollateralAccount>,
-    
-    /// Pyth SOL/USD price feed account
-    /// CHECK: Validated by Pyth SDK in get_usd_value_from_sol
-    pub sol_usd_price_feed: AccountInfo<'info>,
-    
-    pub system_program: Program<'info, System>,
-    pub rent: Sysvar<'info, Rent>,
+    pub collateral_account: Account<'info, crate::state::CollateralAccount>,
 }
 
 /// Token-specific error codes

@@ -1,0 +1,24 @@
+{
+  "scenario": "trend",
+  "orders": 1000,
+  "durationMs": 10000,
+  "processed": 334,
+  "cadence": {
+    "p95": 1,
+    "p99": 1,
+    "avg": 0,
+    "samples": 51
+  },
+  "triggerLatency": {
+    "p95": 1,
+    "p99": 1,
+    "avg": 1,
+    "samples": 334
+  },
+  "resources": {
+    "rss": 183934976,
+    "heapUsed": 96833712,
+    "cpuCount": 12
+  },
+  "timestamp": "2025-10-29T23:12:05.824Z"
+}

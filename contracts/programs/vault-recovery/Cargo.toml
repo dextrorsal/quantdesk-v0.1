@@ -1,0 +1,16 @@
+[package]
+name = "vault-recovery"
+version = "0.1.0"
+description = "Minimal program to recover SOL from old vault"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "vault_recovery"
+
+[features]
+idl-build = ["anchor-lang/idl-build"]
+
+[dependencies]
+anchor-lang = { version = "0.32.1", features = ["init-if-needed"] }
+

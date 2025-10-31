@@ -8,7 +8,7 @@ use crate::ErrorCode;
 /// Switchboard Aggregator Account Data Structure
 /// Based on Switchboard V2 aggregator account format
 #[repr(C)]
-#[derive(Clone, Copy, Debug, Default, PartialEq)]
+#[derive(Clone, Copy, Debug, PartialEq)]
 pub struct SwitchboardAggregatorAccount {
     pub magic: u32,           // Magic number: 0x5b4c4c4c
     pub version: u32,          // Version: 2

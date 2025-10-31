@@ -199,7 +199,7 @@ fn cache_prices(cache_account: &mut AccountInfo, prices: &[OraclePrice]) -> Resu
 /// 
 /// # Returns
 /// * `Result<()>` - Success if caching completed
-fn cache_single_price(cache_account: &mut AccountInfo, price: &OraclePrice) -> Result<()> {
+fn cache_single_price(_cache_account: &mut AccountInfo, price: &OraclePrice) -> Result<()> {
     msg!("💾 Caching single price: ${:.2}", price.get_scaled_price());
     
     // TODO: Implement actual caching logic when price cache account structure is defined
@@ -215,7 +215,7 @@ fn cache_single_price(cache_account: &mut AccountInfo, price: &OraclePrice) -> R
 /// 
 /// # Returns
 /// * `Result<OraclePrice>` - Cached price if available and fresh
-fn get_cached_price(cache_account: &AccountInfo) -> Result<OraclePrice> {
+fn get_cached_price(_cache_account: &AccountInfo) -> Result<OraclePrice> {
     // TODO: Implement actual cache reading logic when price cache account structure is defined
     // This is a placeholder for the cache reading functionality
     

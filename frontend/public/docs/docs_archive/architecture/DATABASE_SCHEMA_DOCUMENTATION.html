@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Schema Documentation - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/">&larr; Back to Documentation</a>
+        </div>
+        <h1>QuantDesk Database Schema Documentation</h1>
+<h2>🏗️ Architecture Overview</h2>
+<p><strong>Database</strong>: Supabase PostgreSQL 17<br />
+<strong>Connection</strong>: Direct Postgres via <code>DATABASE_URL</code> (fast path) + Supabase JS client (auth/realtime)<br />
+<strong>Extensions</strong>: <code>uuid-ossp</code>, <code>pgcrypto</code><br />
+<strong>RLS</strong>: Enabled for user data isolation  </p>
+<h2>📊 Core Tables</h2>
+<h3>1. <strong>Users &amp; Authentication</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">users</span><span class="w"> </span><span class="p">(</span><span class="n">wallet</span><span class="o">-</span><span class="n">based</span><span class="w"> </span><span class="n">auth</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">PK</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">wallet_address</span><span class="w"> </span><span class="p">(</span><span class="nb">TEXT</span><span class="p">,</span><span class="w"> </span><span class="k">UNIQUE</span><span class="p">)</span><span class="w"> </span><span class="c1">-- Primary identifier</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">username</span><span class="w"> </span><span class="p">(</span><span class="nb">TEXT</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">email</span><span class="w"> </span><span class="p">(</span><span class="nb">TEXT</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">kyc_status</span><span class="w"> </span><span class="p">(</span><span class="nb">TEXT</span><span class="p">)</span><span class="w"> </span><span class="c1">-- pending, verified, rejected</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">risk_level</span><span class="w"> </span><span class="p">(</span><span class="nb">TEXT</span><span class="p">)</span><span class="w"> </span><span class="c1">-- low, medium, high</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">total_volume</span><span class="w"> </span><span class="p">(</span><span class="nb">DECIMAL</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">total_trades</span><span class="w"> </span><span class="p">(</span><span class="nb">INTEGER</span><span class="p">)</span>
+<span class="err">└──</span><span class="w"> </span><span class="n">metadata</span><span class="w"> </span><span class="p">(</span><span class="n">JSONB</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>2. <strong>Markets &amp; Trading</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">markets</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">PK</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">symbol</span><span class="w"> </span><span class="p">(</span><span class="nb">TEXT</span><span class="p">,</span><span class="w"> </span><span class="k">UNIQUE</span><span class="p">)</span><span class="w"> </span><span class="c1">-- BTC-PERP, ETH-PERP</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">base_asset</span><span class="p">,</span><span class="w"> </span><span class="n">quote_asset</span><span class="w"> </span><span class="p">(</span><span class="nb">TEXT</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">program_id</span><span class="w"> </span><span class="p">(</span><span class="nb">TEXT</span><span class="p">)</span><span class="w"> </span><span class="c1">-- Solana program</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">market_account</span><span class="p">,</span><span class="w"> </span><span class="n">oracle_account</span><span class="w"> </span><span class="p">(</span><span class="nb">TEXT</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">max_leverage</span><span class="w"> </span><span class="p">(</span><span class="nb">INTEGER</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">initial_margin_ratio</span><span class="p">,</span><span class="w"> </span><span class="n">maintenance_margin_ratio</span><span class="w"> </span><span class="p">(</span><span class="nb">INTEGER</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">tick_size</span><span class="p">,</span><span class="w"> </span><span class="n">step_size</span><span class="p">,</span><span class="w"> </span><span class="n">min_order_size</span><span class="p">,</span><span class="w"> </span><span class="n">max_order_size</span><span class="w"> </span><span class="p">(</span><span class="nb">DECIMAL</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">funding_interval</span><span class="w"> </span><span class="p">(</span><span class="nb">INTEGER</span><span class="p">)</span><span class="w"> </span><span class="c1">-- seconds</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">current_funding_rate</span><span class="w"> </span><span class="p">(</span><span class="nb">DECIMAL</span><span class="p">)</span>
+<span class="err">└──</span><span class="w"> </span><span class="n">metadata</span><span class="w"> </span><span class="p">(</span><span class="n">JSONB</span><span class="p">)</span>
+
+<span class="n">user_balances</span><span class="w"> </span><span class="p">(</span><span class="n">collateral</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">PK</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">FK</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">users</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">asset</span><span class="w"> </span><span class="p">(</span><span class="nb">TEXT</span><span class="p">)</span><span class="w"> </span><span class="c1">-- USDC, SOL</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="p">(</span><span class="nb">DECIMAL</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">locked_balance</span><span class="w"> </span><span class="p">(</span><span class="nb">DECIMAL</span><span class="p">)</span>
+<span class="err">└──</span><span class="w"> </span><span class="n">available_balance</span><span class="w"> </span><span class="p">(</span><span class="nb">DECIMAL</span><span class="p">)</span><span class="w"> </span><span class="c1">-- GENERATED COLUMN</span>
+
+<span class="n">positions</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">PK</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">FK</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">users</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">market_id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">FK</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">markets</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">position_account</span><span class="w"> </span><span class="p">(</span><span class="nb">TEXT</span><span class="p">)</span><span class="w"> </span><span class="c1">-- Solana account</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">side</span><span class="w"> </span><span class="p">(</span><span class="n">ENUM</span><span class="p">)</span><span class="w"> </span><span class="c1">-- long, short</span>
+<span class="err">├──</span><span class="w"> </span><span class="k">size</span><span class="p">,</span><span class="w"> </span><span class="n">entry_price</span><span class="p">,</span><span class="w"> </span><span class="n">current_price</span><span class="w"> </span><span class="p">(</span><span class="nb">DECIMAL</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">margin</span><span class="p">,</span><span class="w"> </span><span class="n">leverage</span><span class="w"> </span><span class="p">(</span><span class="nb">DECIMAL</span><span class="p">,</span><span class="w"> </span><span class="nb">INTEGER</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">unrealized_pnl</span><span class="p">,</span><span class="w"> </span><span class="n">realized_pnl</span><span class="p">,</span><span class="w"> </span><span class="n">funding_fees</span><span class="w"> </span><span class="p">(</span><span class="nb">DECIMAL</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">is_liquidated</span><span class="w"> </span><span class="p">(</span><span class="nb">BOOLEAN</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">liquidation_price</span><span class="p">,</span><span class="w"> </span><span class="n">health_factor</span><span class="w"> </span><span class="p">(</span><span class="nb">DECIMAL</span><span class="p">)</span>
+<span class="err">└──</span><span class="w"> </span><span class="n">closed_at</span><span class="w"> </span><span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">)</span>
+
+<span class="n">orders</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">PK</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">FK</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">users</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">market_id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">FK</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">markets</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">order_account</span><span class="w"> </span><span class="p">(</span><span class="nb">TEXT</span><span class="p">)</span><span class="w"> </span><span class="c1">-- Solana account</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">order_type</span><span class="w"> </span><span class="p">(</span><span class="n">ENUM</span><span class="p">)</span><span class="w"> </span><span class="c1">-- market, limit, stop_loss, etc.</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">side</span><span class="w"> </span><span class="p">(</span><span class="n">ENUM</span><span class="p">)</span><span class="w"> </span><span class="c1">-- long, short</span>
+<span class="err">├──</span><span class="w"> </span><span class="k">size</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="p">,</span><span class="w"> </span><span class="n">stop_price</span><span class="p">,</span><span class="w"> </span><span class="n">trailing_distance</span><span class="w"> </span><span class="p">(</span><span class="nb">DECIMAL</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">leverage</span><span class="w"> </span><span class="p">(</span><span class="nb">INTEGER</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="p">(</span><span class="n">ENUM</span><span class="p">)</span><span class="w"> </span><span class="c1">-- pending, filled, cancelled, etc.</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">filled_size</span><span class="p">,</span><span class="w"> </span><span class="n">remaining_size</span><span class="p">,</span><span class="w"> </span><span class="n">average_fill_price</span><span class="w"> </span><span class="p">(</span><span class="nb">DECIMAL</span><span class="p">)</span>
+<span class="err">└──</span><span class="w"> </span><span class="n">expires_at</span><span class="p">,</span><span class="w"> </span><span class="n">filled_at</span><span class="p">,</span><span class="w"> </span><span class="n">cancelled_at</span><span class="w"> </span><span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">)</span>
+
+<span class="n">trades</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">PK</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">FK</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">users</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">market_id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">FK</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">markets</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">position_id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">FK</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">positions</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">order_id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">FK</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">orders</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">trade_account</span><span class="w"> </span><span class="p">(</span><span class="nb">TEXT</span><span class="p">)</span><span class="w"> </span><span class="c1">-- Solana account</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">side</span><span class="w"> </span><span class="p">(</span><span class="n">ENUM</span><span class="p">)</span><span class="w"> </span><span class="c1">-- buy, sell</span>
+<span class="err">├──</span><span class="w"> </span><span class="k">size</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="p">,</span><span class="w"> </span><span class="n">fees</span><span class="p">,</span><span class="w"> </span><span class="n">pnl</span><span class="w"> </span><span class="p">(</span><span class="nb">DECIMAL</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="p">(</span><span class="nb">DECIMAL</span><span class="p">)</span><span class="w"> </span><span class="c1">-- GENERATED COLUMN</span>
+<span class="err">└──</span><span class="w"> </span><span class="n">metadata</span><span class="w"> </span><span class="p">(</span><span class="n">JSONB</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>3. <strong>Time-Series Data</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">oracle_prices</span><span class="w"> </span><span class="p">(</span><span class="n">price</span><span class="w"> </span><span class="n">feeds</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">PK</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">market_id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">FK</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">markets</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">price</span><span class="p">,</span><span class="w"> </span><span class="n">confidence</span><span class="w"> </span><span class="p">(</span><span class="nb">DECIMAL</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">exponent</span><span class="w"> </span><span class="p">(</span><span class="nb">INTEGER</span><span class="p">)</span>
+<span class="err">└──</span><span class="w"> </span><span class="n">created_at</span><span class="w"> </span><span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">)</span>
+
+<span class="n">funding_rates</span><span class="w"> </span><span class="p">(</span><span class="n">funding</span><span class="w"> </span><span class="n">history</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">PK</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">market_id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">FK</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">markets</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">funding_rate</span><span class="p">,</span><span class="w"> </span><span class="n">premium_index</span><span class="w"> </span><span class="p">(</span><span class="nb">DECIMAL</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">oracle_price</span><span class="p">,</span><span class="w"> </span><span class="n">mark_price</span><span class="w"> </span><span class="p">(</span><span class="nb">DECIMAL</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">total_funding</span><span class="w"> </span><span class="p">(</span><span class="nb">DECIMAL</span><span class="p">)</span>
+<span class="err">└──</span><span class="w"> </span><span class="n">created_at</span><span class="w"> </span><span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">)</span>
+
+<span class="n">liquidations</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">PK</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">FK</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">users</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">market_id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">FK</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">markets</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">position_id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">FK</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">positions</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">liquidator_address</span><span class="w"> </span><span class="p">(</span><span class="nb">TEXT</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">liquidation_type</span><span class="w"> </span><span class="p">(</span><span class="n">ENUM</span><span class="p">)</span><span class="w"> </span><span class="c1">-- market, backstop</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">liquidated_size</span><span class="p">,</span><span class="w"> </span><span class="n">liquidation_price</span><span class="p">,</span><span class="w"> </span><span class="n">liquidation_fee</span><span class="w"> </span><span class="p">(</span><span class="nb">DECIMAL</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">remaining_margin</span><span class="w"> </span><span class="p">(</span><span class="nb">DECIMAL</span><span class="p">)</span>
+<span class="err">└──</span><span class="w"> </span><span class="n">metadata</span><span class="w"> </span><span class="p">(</span><span class="n">JSONB</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>4. <strong>Analytics &amp; Statistics</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">market_stats</span><span class="w"> </span><span class="p">(</span><span class="n">daily</span><span class="w"> </span><span class="n">rollups</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">PK</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">market_id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">FK</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">markets</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="nb">date</span><span class="w"> </span><span class="p">(</span><span class="nb">DATE</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">open_price</span><span class="p">,</span><span class="w"> </span><span class="n">high_price</span><span class="p">,</span><span class="w"> </span><span class="n">low_price</span><span class="p">,</span><span class="w"> </span><span class="n">close_price</span><span class="w"> </span><span class="p">(</span><span class="nb">DECIMAL</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">volume</span><span class="p">,</span><span class="w"> </span><span class="n">volume_usd</span><span class="w"> </span><span class="p">(</span><span class="nb">DECIMAL</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">trades_count</span><span class="w"> </span><span class="p">(</span><span class="nb">INTEGER</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">open_interest</span><span class="p">,</span><span class="w"> </span><span class="n">funding_rate</span><span class="w"> </span><span class="p">(</span><span class="nb">DECIMAL</span><span class="p">)</span>
+<span class="err">└──</span><span class="w"> </span><span class="k">UNIQUE</span><span class="p">(</span><span class="n">market_id</span><span class="p">,</span><span class="w"> </span><span class="nb">date</span><span class="p">)</span>
+
+<span class="n">user_stats</span><span class="w"> </span><span class="p">(</span><span class="n">daily</span><span class="w"> </span><span class="n">rollups</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">PK</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">FK</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">users</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="nb">date</span><span class="w"> </span><span class="p">(</span><span class="nb">DATE</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">total_volume</span><span class="p">,</span><span class="w"> </span><span class="n">total_volume_usd</span><span class="w"> </span><span class="p">(</span><span class="nb">DECIMAL</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">trades_count</span><span class="w"> </span><span class="p">(</span><span class="nb">INTEGER</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">realized_pnl</span><span class="p">,</span><span class="w"> </span><span class="n">unrealized_pnl</span><span class="p">,</span><span class="w"> </span><span class="n">fees_paid</span><span class="w"> </span><span class="p">(</span><span class="nb">DECIMAL</span><span class="p">)</span>
+<span class="err">└──</span><span class="w"> </span><span class="k">UNIQUE</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="nb">date</span><span class="p">)</span>
+
+<span class="n">system_events</span><span class="w"> </span><span class="p">(</span><span class="n">monitoring</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">PK</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">event_type</span><span class="w"> </span><span class="p">(</span><span class="nb">TEXT</span><span class="p">)</span><span class="w"> </span><span class="c1">-- liquidation, funding, oracle_update, error</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">event_data</span><span class="w"> </span><span class="p">(</span><span class="n">JSONB</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">severity</span><span class="w"> </span><span class="p">(</span><span class="nb">TEXT</span><span class="p">)</span><span class="w"> </span><span class="c1">-- info, warning, error, critical</span>
+<span class="err">└──</span><span class="w"> </span><span class="n">created_at</span><span class="w"> </span><span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>5. <strong>Admin &amp; Audit</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">admin_users</span><span class="w"> </span><span class="p">(</span><span class="k">admin</span><span class="w"> </span><span class="n">panel</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">PK</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">username</span><span class="w"> </span><span class="p">(</span><span class="nb">TEXT</span><span class="p">,</span><span class="w"> </span><span class="k">UNIQUE</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">password_hash</span><span class="w"> </span><span class="p">(</span><span class="nb">TEXT</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="k">role</span><span class="w"> </span><span class="p">(</span><span class="nb">TEXT</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">permissions</span><span class="w"> </span><span class="p">(</span><span class="n">JSONB</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">is_active</span><span class="w"> </span><span class="p">(</span><span class="nb">BOOLEAN</span><span class="p">)</span>
+<span class="err">└──</span><span class="w"> </span><span class="n">created_by</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">FK</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">admin_users</span><span class="p">)</span>
+
+<span class="n">admin_audit_logs</span><span class="w"> </span><span class="p">(</span><span class="k">admin</span><span class="w"> </span><span class="n">actions</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">PK</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">admin_user_id</span><span class="w"> </span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">FK</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">admin_users</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">action</span><span class="w"> </span><span class="p">(</span><span class="nb">TEXT</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">resource</span><span class="w"> </span><span class="p">(</span><span class="nb">TEXT</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">details</span><span class="w"> </span><span class="p">(</span><span class="n">JSONB</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">ip_address</span><span class="w"> </span><span class="p">(</span><span class="n">INET</span><span class="p">)</span>
+<span class="err">└──</span><span class="w"> </span><span class="n">user_agent</span><span class="w"> </span><span class="p">(</span><span class="nb">TEXT</span><span class="p">)</span>
+</code></pre></div>
+
+<h2>🔍 Views (Pre-computed Queries)</h2>
+<h3>1. <strong>Trading Views</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">active_positions</span>
+<span class="c1">-- JOIN positions + users + markets</span>
+<span class="c1">-- WHERE size &gt; 0 AND NOT is_liquidated</span>
+
+<span class="n">pending_orders</span><span class="w">  </span>
+<span class="c1">-- JOIN orders + users + markets</span>
+<span class="c1">-- WHERE status = &#39;pending&#39; AND expires_at &gt; NOW()</span>
+
+<span class="n">market_summary</span>
+<span class="c1">-- JOIN markets + positions</span>
+<span class="c1">-- GROUP BY market with open_interest, active_traders, avg_leverage</span>
+
+<span class="n">safe_markets</span>
+<span class="c1">-- SELECT FROM markets WHERE is_active = true</span>
+</code></pre></div>
+
+<h2>🚀 Performance Indexes</h2>
+<h3><strong>Time-Series Indexes</strong> (Critical for speed)</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Oracle prices (most queried)</span>
+<span class="n">idx_oracle_prices_market_time</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">market_id</span><span class="p">,</span><span class="w"> </span><span class="n">created_at</span><span class="w"> </span><span class="k">DESC</span><span class="p">)</span>
+
+<span class="c1">-- Trades (user + market queries)</span>
+<span class="n">idx_trades_user_id</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+<span class="n">idx_trades_market_id</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">market_id</span><span class="p">)</span>
+<span class="n">idx_trades_created_at</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">created_at</span><span class="p">)</span>
+
+<span class="c1">-- Orders (status + expiration)</span>
+<span class="n">idx_orders_status</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
+<span class="n">idx_orders_expires_at</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">expires_at</span><span class="p">)</span>
+<span class="n">idx_orders_market_id</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">market_id</span><span class="p">)</span>
+
+<span class="c1">-- Positions (health monitoring)</span>
+<span class="n">idx_positions_health_factor</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">health_factor</span><span class="p">)</span>
+<span class="n">idx_positions_is_liquidated</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">is_liquidated</span><span class="p">)</span>
+</code></pre></div>
+
+<h3><strong>Lookup Indexes</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Users</span>
+<span class="n">idx_users_wallet_address</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">wallet_address</span><span class="p">)</span><span class="w"> </span><span class="c1">-- UNIQUE</span>
+
+<span class="c1">-- Markets  </span>
+<span class="n">idx_markets_symbol</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span><span class="w"> </span><span class="c1">-- UNIQUE</span>
+<span class="n">idx_markets_is_active</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">is_active</span><span class="p">)</span>
+
+<span class="c1">-- Balances</span>
+<span class="n">idx_user_balances_user_id</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+<span class="n">idx_user_balances_asset</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">asset</span><span class="p">)</span>
+</code></pre></div>
+
+<h2>🔒 Security (Row Level Security)</h2>
+<h3><strong>User Data Isolation</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Users can only see their own data</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="n">POLICY</span><span class="w"> </span><span class="ss">&quot;Users can view own data&quot;</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">users</span>
+<span class="w">    </span><span class="k">FOR</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="p">(</span><span class="n">auth</span><span class="p">.</span><span class="n">jwt</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;&gt;</span><span class="w"> </span><span class="s1">&#39;wallet_address&#39;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wallet_address</span><span class="p">);</span>
+
+<span class="c1">-- Same for balances, positions, orders, trades, user_stats</span>
+</code></pre></div>
+
+<h3><strong>Admin Access</strong></h3>
+<ul>
+<li>Admin tables have no RLS (admin-only access)</li>
+<li>Admin users managed separately from trading users</li>
+</ul>
+<h2>📈 Data Flow</h2>
+<h3><strong>Trading Flow</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="n">connects</span><span class="w"> </span><span class="n">wallet</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="nb">tab</span><span class="n">le</span>
+<span class="mf">2.</span><span class="w"> </span><span class="n">Deposit</span><span class="w"> </span><span class="n">collateral</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">user_balances</span><span class="w"> </span><span class="nb">tab</span><span class="n">le</span><span class="w">  </span>
+<span class="mf">3.</span><span class="w"> </span><span class="n">Place</span><span class="w"> </span><span class="ow">or</span><span class="n">der</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="ow">or</span><span class="n">ders</span><span class="w"> </span><span class="nb">tab</span><span class="n">le</span>
+<span class="mf">4.</span><span class="w"> </span><span class="ow">Or</span><span class="n">der</span><span class="w"> </span><span class="n">fills</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">trades</span><span class="w"> </span><span class="nb">tab</span><span class="n">le</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">pos</span><span class="n">itions</span><span class="w"> </span><span class="nb">tab</span><span class="n">le</span>
+<span class="mf">5.</span><span class="w"> </span><span class="n">Price</span><span class="w"> </span><span class="n">updates</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="ow">or</span><span class="n">acle_prices</span><span class="w"> </span><span class="nb">tab</span><span class="n">le</span>
+<span class="mf">6.</span><span class="w"> </span><span class="n">Funding</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">funding_rates</span><span class="w"> </span><span class="nb">tab</span><span class="n">le</span>
+<span class="mf">7.</span><span class="w"> </span><span class="n">Liquidations</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">liquidations</span><span class="w"> </span><span class="nb">tab</span><span class="n">le</span>
+</code></pre></div>
+
+<h3><strong>Analytics Flow</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">Raw</span><span class="w"> </span><span class="kd">data</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">time</span><span class="o">-</span><span class="n">series</span><span class="w"> </span><span class="nb">tab</span><span class="n">les</span>
+<span class="mf">2.</span><span class="w"> </span><span class="n">Daily</span><span class="w"> </span><span class="n">rollups</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">market_stats</span><span class="p">,</span><span class="w"> </span><span class="n">user_stats</span><span class="w"> </span><span class="nb">tab</span><span class="n">les</span>
+<span class="mf">3.</span><span class="w"> </span><span class="n">Views</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">pre</span><span class="o">-</span><span class="n">computed</span><span class="w"> </span><span class="n">aggregations</span>
+<span class="mf">4.</span><span class="w"> </span><span class="n">Admin</span><span class="w"> </span><span class="n">monitoring</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="kr">sys</span><span class="n">tem_events</span><span class="w"> </span><span class="nb">tab</span><span class="n">le</span>
+</code></pre></div>
+
+<h2>🎯 Query Patterns</h2>
+<h3><strong>Hot Queries</strong> (Optimized)</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Latest price for market</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">oracle_prices</span><span class="w"> </span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">market_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">created_at</span><span class="w"> </span><span class="k">DESC</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="c1">-- User&#39;s active positions  </span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">active_positions</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">?</span><span class="p">;</span>
+
+<span class="c1">-- Market summary</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">market_summary</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">symbol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">?</span><span class="p">;</span>
+
+<span class="c1">-- User&#39;s recent trades</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">trades</span><span class="w"> </span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">created_at</span><span class="w"> </span><span class="k">DESC</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
+</code></pre></div>
+
+<h3><strong>Analytics Queries</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Price history</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">price</span><span class="p">,</span><span class="w"> </span><span class="n">created_at</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">oracle_prices</span><span class="w"> </span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">market_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">created_at</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="o">?</span><span class="w"> </span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">created_at</span><span class="w"> </span><span class="k">DESC</span><span class="p">;</span>
+
+<span class="c1">-- Volume by day</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="nb">date</span><span class="p">,</span><span class="w"> </span><span class="n">volume_usd</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">market_stats</span><span class="w"> </span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">market_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="nb">date</span><span class="w"> </span><span class="k">DESC</span><span class="p">;</span>
+</code></pre></div>
+
+<h2>🔧 Maintenance</h2>
+<h3><strong>Cleanup Jobs</strong> (pg_cron)</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Archive old oracle prices (keep 30 days)</span>
+<span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">oracle_prices</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">created_at</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="s1">&#39;30 days&#39;</span><span class="p">;</span>
+
+<span class="c1">-- Archive old system events (keep 7 days)  </span>
+<span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">system_events</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">created_at</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="s1">&#39;7 days&#39;</span><span class="p">;</span>
+</code></pre></div>
+
+<h3><strong>Monitoring</strong></h3>
+<ul>
+<li>Watch <code>idx_oracle_prices_market_time</code> usage</li>
+<li>Monitor <code>health_factor</code> indexes for liquidations</li>
+<li>Track <code>system_events</code> for errors</li>
+</ul>
+<hr />
+<h2>🚨 REDUNDANCY ISSUES TO FIX</h2>
+<ol>
+<li><strong>Remove duplicate <code>users</code> table</strong> (keep QuantDesk version)</li>
+<li><strong>Consolidate audit tables</strong> (keep <code>admin_audit_logs</code>)</li>
+<li><strong>Add missing JIT liquidity tables</strong> (<code>auctions</code>, <code>auction_quotes</code>, <code>auction_settlements</code>)</li>
+</ol>
+<p>This schema supports:
+- ✅ High-frequency trading
+- ✅ Real-time price feeds<br />
+- ✅ Position management
+- ✅ Risk monitoring
+- ✅ Analytics &amp; reporting
+- ✅ Admin operations</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deployment Guide - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/">&larr; Back to Documentation</a>
+        </div>
+        <h1>🚀 QuantDesk Deployment Guide</h1>
+<h2>Pre-Deployment Setup</h2>
+<h3>1. Security Configuration</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Copy environment template</span>
+cp<span class="w"> </span>env.example<span class="w"> </span>.env
+
+<span class="c1"># Edit .env with your actual values</span>
+nano<span class="w"> </span>.env
+</code></pre></div>
+
+<h3>2. Required Environment Variables</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Essential for deployment</span>
+<span class="nv">JWT_SECRET</span><span class="o">=</span>your-super-secret-jwt-key-minimum-32-chars
+<span class="nv">DATABASE_URL</span><span class="o">=</span>postgresql://user:password@host:port/database
+<span class="nv">SUPABASE_URL</span><span class="o">=</span>https://your-project.supabase.co
+<span class="nv">SUPABASE_ANON_KEY</span><span class="o">=</span>your_supabase_anon_key
+<span class="nv">NODE_ENV</span><span class="o">=</span>production
+<span class="nv">PORT</span><span class="o">=</span><span class="m">3002</span>
+</code></pre></div>
+
+<h3>3. Verify Security</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Check no sensitive files are tracked</span>
+git<span class="w"> </span>status
+git<span class="w"> </span>check-ignore<span class="w"> </span>test-ledger/
+git<span class="w"> </span>check-ignore<span class="w"> </span>*.env
+
+<span class="c1"># Verify .gitignore is working</span>
+git<span class="w"> </span>check-ignore<span class="w"> </span>node_modules/
+git<span class="w"> </span>check-ignore<span class="w"> </span>__pycache__/
+</code></pre></div>
+
+<h2>🐳 Docker Deployment</h2>
+<h3>Option 1: Docker Compose (Recommended)</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Build and start all services</span>
+docker-compose<span class="w"> </span>up<span class="w"> </span>--build<span class="w"> </span>-d
+
+<span class="c1"># Check logs</span>
+docker-compose<span class="w"> </span>logs<span class="w"> </span>-f
+
+<span class="c1"># Stop services</span>
+docker-compose<span class="w"> </span>down
+</code></pre></div>
+
+<h3>Option 2: Individual Containers</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Build backend</span>
+<span class="nb">cd</span><span class="w"> </span>backend
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>quantdesk-backend<span class="w"> </span>.
+
+<span class="c1"># Build frontend</span>
+<span class="nb">cd</span><span class="w"> </span>../frontend
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>quantdesk-frontend<span class="w"> </span>.
+
+<span class="c1"># Run with environment</span>
+docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--env-file<span class="w"> </span>../.env<span class="w"> </span>-p<span class="w"> </span><span class="m">3002</span>:3002<span class="w"> </span>quantdesk-backend
+docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>-p<span class="w"> </span><span class="m">3000</span>:3000<span class="w"> </span>quantdesk-frontend
+</code></pre></div>
+
+<h2>☁️ Cloud Deployment</h2>
+<h3>Vercel (Frontend)</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Install Vercel CLI</span>
+npm<span class="w"> </span>i<span class="w"> </span>-g<span class="w"> </span>vercel
+
+<span class="c1"># Deploy frontend</span>
+<span class="nb">cd</span><span class="w"> </span>frontend
+vercel<span class="w"> </span>--prod
+</code></pre></div>
+
+<h3>Railway (Backend)</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Install Railway CLI</span>
+npm<span class="w"> </span>i<span class="w"> </span>-g<span class="w"> </span>@railway/cli
+
+<span class="c1"># Deploy backend</span>
+<span class="nb">cd</span><span class="w"> </span>backend
+railway<span class="w"> </span>login
+railway<span class="w"> </span>init
+railway<span class="w"> </span>up
+</code></pre></div>
+
+<h3>DigitalOcean App Platform</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># .do/app.yaml</span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quantdesk</span>
+<span class="nt">services</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">backend</span>
+<span class="w">  </span><span class="nt">source_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">backend</span>
+<span class="w">  </span><span class="nt">github</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">your-username/quantdesk</span>
+<span class="w">    </span><span class="nt">branch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">main</span>
+<span class="w">  </span><span class="nt">run_command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm start</span>
+<span class="w">  </span><span class="nt">environment_slug</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node-js</span>
+<span class="w">  </span><span class="nt">instance_count</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">instance_size_slug</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">basic-xxs</span>
+<span class="w">  </span><span class="nt">envs</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NODE_ENV</span>
+<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">production</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DATABASE_URL</span>
+<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${db.DATABASE_URL}</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SECRET</span>
+</code></pre></div>
+
+<h2>🗄️ Database Setup</h2>
+<h3>PostgreSQL (Production)</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Create database</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">quantdesk</span><span class="p">;</span>
+
+<span class="c1">-- Create user</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">quantdesk_user</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">PASSWORD</span><span class="w"> </span><span class="s1">&#39;secure_password&#39;</span><span class="p">;</span>
+
+<span class="c1">-- Grant permissions</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">quantdesk</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">quantdesk_user</span><span class="p">;</span>
+</code></pre></div>
+
+<h3>Supabase (Recommended)</h3>
+<ol>
+<li>Create new project at <a href="https://supabase.com">supabase.com</a></li>
+<li>Get connection details from Settings &gt; Database</li>
+<li>Update <code>.env</code> with Supabase credentials</li>
+</ol>
+<h2>🔧 Environment-Specific Configuration</h2>
+<h3>Development</h3>
+<div class="codehilite"><pre><span></span><code><span class="nv">NODE_ENV</span><span class="o">=</span>development
+<span class="nv">DEBUG</span><span class="o">=</span><span class="nb">true</span>
+<span class="nv">LOG_LEVEL</span><span class="o">=</span>debug
+</code></pre></div>
+
+<h3>Staging</h3>
+<div class="codehilite"><pre><span></span><code><span class="nv">NODE_ENV</span><span class="o">=</span>staging
+<span class="nv">DEBUG</span><span class="o">=</span><span class="nb">false</span>
+<span class="nv">LOG_LEVEL</span><span class="o">=</span>info
+</code></pre></div>
+
+<h3>Production</h3>
+<div class="codehilite"><pre><span></span><code><span class="nv">NODE_ENV</span><span class="o">=</span>production
+<span class="nv">DEBUG</span><span class="o">=</span><span class="nb">false</span>
+<span class="nv">LOG_LEVEL</span><span class="o">=</span>warn
+</code></pre></div>
+
+<h2>📊 Monitoring &amp; Health Checks</h2>
+<h3>Health Endpoints</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Backend health</span>
+curl<span class="w"> </span>http://localhost:3002/health
+
+<span class="c1"># Database health</span>
+curl<span class="w"> </span>http://localhost:3002/api/health/db
+
+<span class="c1"># WebSocket health</span>
+curl<span class="w"> </span>http://localhost:3002/api/health/ws
+</code></pre></div>
+
+<h3>Logging</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># View logs</span>
+docker-compose<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>backend
+docker-compose<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>frontend
+
+<span class="c1"># Log levels</span>
+<span class="nv">LOG_LEVEL</span><span class="o">=</span>error<span class="w">    </span><span class="c1"># Only errors</span>
+<span class="nv">LOG_LEVEL</span><span class="o">=</span>warn<span class="w">     </span><span class="c1"># Warnings and errors</span>
+<span class="nv">LOG_LEVEL</span><span class="o">=</span>info<span class="w">     </span><span class="c1"># Info, warnings, errors</span>
+<span class="nv">LOG_LEVEL</span><span class="o">=</span>debug<span class="w">    </span><span class="c1"># All logs</span>
+</code></pre></div>
+
+<h2>🔒 Security Checklist</h2>
+<ul>
+<li>[ ] Environment variables configured</li>
+<li>[ ] No secrets in code</li>
+<li>[ ] HTTPS enabled (production)</li>
+<li>[ ] Rate limiting configured</li>
+<li>[ ] CORS properly set</li>
+<li>[ ] Database SSL enabled</li>
+<li>[ ] JWT secrets are strong</li>
+<li>[ ] API keys are secure</li>
+<li>[ ] Logs don't expose secrets</li>
+</ul>
+<h2>🚀 Quick Deploy Commands</h2>
+<h3>Local Development</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Backend</span>
+<span class="nb">cd</span><span class="w"> </span>backend<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>npm<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>npm<span class="w"> </span>run<span class="w"> </span>dev
+
+<span class="c1"># Frontend</span>
+<span class="nb">cd</span><span class="w"> </span>frontend<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>npm<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>npm<span class="w"> </span>run<span class="w"> </span>dev
+</code></pre></div>
+
+<h3>Production Build</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Backend</span>
+<span class="nb">cd</span><span class="w"> </span>backend<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>npm<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>npm<span class="w"> </span>run<span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>npm<span class="w"> </span>start
+
+<span class="c1"># Frontend</span>
+<span class="nb">cd</span><span class="w"> </span>frontend<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>npm<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>npm<span class="w"> </span>run<span class="w"> </span>build
+</code></pre></div>
+
+<h3>Docker Production</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Build and deploy</span>
+docker-compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.prod.yml<span class="w"> </span>up<span class="w"> </span>--build<span class="w"> </span>-d
+
+<span class="c1"># Scale services</span>
+docker-compose<span class="w"> </span>up<span class="w"> </span>--scale<span class="w"> </span><span class="nv">backend</span><span class="o">=</span><span class="m">3</span><span class="w"> </span>-d
+</code></pre></div>
+
+<h2>🔍 Troubleshooting</h2>
+<h3>Common Issues</h3>
+<ol>
+<li>
+<p><strong>Database Connection Failed</strong>
+   <code>bash
+   # Check DATABASE_URL format
+   echo $DATABASE_URL
+   # Should be: postgresql://user:pass@host:port/db</code></p>
+</li>
+<li>
+<p><strong>JWT Secret Missing</strong>
+   <code>bash
+   # Generate new secret
+   node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"</code></p>
+</li>
+<li>
+<p><strong>Port Already in Use</strong>
+   <code>bash
+   # Kill process on port 3002
+   lsof -ti:3002 | xargs kill -9</code></p>
+</li>
+<li>
+<p><strong>Environment Variables Not Loading</strong>
+   ```bash
+   # Check .env file exists
+   ls -la .env</p>
+</li>
+</ol>
+<p># Verify format
+   cat .env | grep -v '^#' | grep -v '^$'
+   ```</p>
+<h3>Health Checks</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Backend health</span>
+curl<span class="w"> </span>-f<span class="w"> </span>http://localhost:3002/health<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Backend down&quot;</span>
+
+<span class="c1"># Database health</span>
+curl<span class="w"> </span>-f<span class="w"> </span>http://localhost:3002/api/health/db<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Database down&quot;</span>
+
+<span class="c1"># WebSocket health</span>
+curl<span class="w"> </span>-f<span class="w"> </span>http://localhost:3002/api/health/ws<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;WebSocket down&quot;</span>
+</code></pre></div>
+
+<h2>📈 Performance Optimization</h2>
+<h3>Backend</h3>
+<ul>
+<li>Enable gzip compression</li>
+<li>Use Redis for caching</li>
+<li>Implement connection pooling</li>
+<li>Enable request logging</li>
+</ul>
+<h3>Frontend</h3>
+<ul>
+<li>Enable code splitting</li>
+<li>Use CDN for assets</li>
+<li>Implement service workers</li>
+<li>Optimize bundle size</li>
+</ul>
+<h3>Database</h3>
+<ul>
+<li>Create proper indexes</li>
+<li>Use connection pooling</li>
+<li>Enable query optimization</li>
+<li>Set up read replicas</li>
+</ul>
+<h2>🔄 CI/CD Pipeline</h2>
+<h3>GitHub Actions Example</h3>
+<div class="codehilite"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy</span>
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">main</span><span class="p p-Indicator">]</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">deploy</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v2</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy to production</span>
+<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">docker-compose up --build -d</span>
+</code></pre></div>
+
+<hr />
+<p><strong>Ready to deploy! 🚀</strong></p>
+<p>Remember to:
+1. Test in staging first
+2. Monitor logs after deployment
+3. Set up alerts for errors
+4. Keep backups of your database
+5. Update documentation</p>
+    </div>
+</body>
+</html>

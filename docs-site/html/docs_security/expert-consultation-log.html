@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert-Consultation-Log - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/">&larr; Back to Documentation</a>
+        </div>
+        <h1>Expert Consultation Log</h1>
+<h2>Overview</h2>
+<p>This document tracks all expert consultations and their recommendations for the QuantDesk project. It serves as a historical record and reference for future development decisions.</p>
+<h2>Consultation #1: Solana Architecture &amp; Database Design</h2>
+<h3>Date: January 15, 2025</h3>
+<h3>Expert: Solana Expert via MCP Tools</h3>
+<h3>Topic: On-chain vs Off-chain Data Architecture</h3>
+<h3>Question Asked:</h3>
+<p>"In a Solana perpetual DEX using Anchor, which data should live on-chain in program accounts vs off-chain in PostgreSQL? We currently store positions, orders, trades, liquidations, funding_rates, oracle_prices in Postgres. Is this the correct architecture or should some be on-chain only? What's the best practice for data separation between on-chain state and off-chain analytics/history?"</p>
+<h3>Expert Response Summary:</h3>
+<p><strong>Recommended Architecture: Hybrid Approach</strong></p>
+<h4>Current State (Mirror in PostgreSQL):</h4>
+<ul>
+<li><strong>Positions</strong>: Mirror essential current state for fast UI queries</li>
+<li><strong>Orders</strong>: Mirror active orders for order book display</li>
+<li><strong>Market Data</strong>: Mirror current market state for UI performance</li>
+<li><strong>User Balances</strong>: Mirror for fast balance checks</li>
+</ul>
+<h4>Historical Data (Store in PostgreSQL):</h4>
+<ul>
+<li><strong>Trades</strong>: All trade history for analytics</li>
+<li><strong>Order History</strong>: Complete order lifecycle tracking</li>
+<li><strong>Liquidations</strong>: Historical liquidation data</li>
+<li><strong>Funding Rates</strong>: Historical funding calculations</li>
+<li><strong>Oracle Prices</strong>: Historical price data for charts/analytics</li>
+</ul>
+<h4>Oracle Price Caching Strategy:</h4>
+<ul>
+<li>Store Pyth oracle prices in PostgreSQL with public read access</li>
+<li>Oracle prices are public on-chain data, caching improves performance</li>
+<li>Keep current prices synchronized with on-chain state</li>
+</ul>
+<h4>User Privacy vs Blockchain Transparency:</h4>
+<ul>
+<li>User positions and liquidations are public on Solana blockchain</li>
+<li>Database should protect user privacy with RLS policies</li>
+<li>Make aggregated data (total open interest, funding rates) public</li>
+</ul>
+<h3>Implementation Impact:</h3>
+<ul>
+<li>✅ Confirmed current architecture approach</li>
+<li>✅ Validated PostgreSQL storage for historical data</li>
+<li>✅ Justified public read access for oracle prices</li>
+<li>✅ Emphasized importance of RLS policies for user privacy</li>
+</ul>
+<hr />
+<h2>Consultation #2: Anchor Framework &amp; Event Synchronization</h2>
+<h3>Date: January 15, 2025</h3>
+<h3>Expert: Anchor Framework Expert via MCP Tools</h3>
+<h3>Topic: Event-Driven Synchronization and RLS Policies</h3>
+<h3>Question Asked:</h3>
+<p>"In our Anchor perpetual DEX with Position, Order, and Market accounts: Should PostgreSQL mirror current on-chain state exactly, or only store historical data and analytics while current state lives on-chain? How should we handle the sync between on-chain program accounts and off-chain database? What's the best practice for emitting Anchor events and indexing them to PostgreSQL with proper RLS policies?"</p>
+<h3>Expert Response Summary:</h3>
+<p><strong>Recommended Synchronization Strategy: Event-Driven Architecture</strong></p>
+<h4>Event-Driven Architecture Benefits:</h4>
+<ul>
+<li>Most reliable and scalable synchronization method</li>
+<li>Real-time updates without polling</li>
+<li>Efficient data transfer</li>
+<li>Built-in retry mechanisms</li>
+</ul>
+<h4>Implementation Approach:</h4>
+<ol>
+<li>
+<p><strong>Anchor Events</strong>: Emit events for all significant state changes
+   <code>rust
+   #[event]
+   pub struct OrderFilled {
+       pub market: Pubkey,
+       pub position_id: u64,
+       pub order_id: u64,
+       pub price: u64,
+       pub quantity: u64,
+       pub taker_fee: u64,
+       pub maker_fee: u64,
+   }</code></p>
+</li>
+<li>
+<p><strong>Off-Chain Listener</strong>: Subscribe to program events using Anchor event listeners
+   <code>typescript
+   program.addEventListener("OrderFilled", async (event, slot, signature) =&gt; {
+     await insertOrderFilledEvent(event, signature);
+   });</code></p>
+</li>
+<li>
+<p><strong>PostgreSQL Schema</strong>: Create tables to store mirrored data and historical events
+   <code>sql
+   CREATE TABLE order_filled_events (
+       signature VARCHAR(64) PRIMARY KEY,
+       slot BIGINT NOT NULL,
+       market VARCHAR(44) NOT NULL,
+       position_id BIGINT NOT NULL,
+       order_id BIGINT NOT NULL,
+       price BIGINT NOT NULL,
+       quantity BIGINT NOT NULL,
+       taker_fee BIGINT NOT NULL,
+       maker_fee BIGINT NOT NULL,
+       event_timestamp TIMESTAMP WITHOUT TIME ZONE DEFAULT (now() at time zone 'utc')
+   );</code></p>
+</li>
+<li>
+<p><strong>RLS Policies</strong>: Control access to sensitive data
+   <code>sql
+   CREATE POLICY "Users can view own order fills" ON order_filled_events
+   FOR SELECT
+   USING (market = current_user);</code></p>
+</li>
+</ol>
+<h4>Key Considerations:</h4>
+<ul>
+<li><strong>Error Handling</strong>: Implement robust error handling in synchronization service</li>
+<li><strong>Idempotency</strong>: Ensure database updates are idempotent</li>
+<li><strong>Security</strong>: Protect database credentials and implement proper authentication</li>
+<li><strong>Testing</strong>: Thoroughly test synchronization logic</li>
+<li><strong>Compute Budget</strong>: Be mindful of compute budget when emitting events</li>
+</ul>
+<h3>Implementation Impact:</h3>
+<ul>
+<li>✅ Validated event-driven synchronization approach</li>
+<li>✅ Provided specific implementation examples</li>
+<li>✅ Emphasized importance of error handling and idempotency</li>
+<li>✅ Confirmed RLS policy approach for user data protection</li>
+</ul>
+<hr />
+<h2>Consultation #3: Database Security &amp; RLS Policies</h2>
+<h3>Date: January 15, 2025</h3>
+<h3>Expert: Combined recommendations from both experts</h3>
+<h3>Topic: Comprehensive RLS Policy Implementation</h3>
+<h3>Expert Consensus:</h3>
+<p>Both experts emphasized the importance of comprehensive RLS policies for protecting user data while maintaining public access to appropriate data.</p>
+<h4>Public Data (No RLS needed):</h4>
+<ul>
+<li><code>markets</code> - Market specifications</li>
+<li><code>oracle_prices</code> - Public price data</li>
+<li><code>funding_rates</code> - Public funding calculations</li>
+<li><code>market_stats</code> - Aggregated market statistics</li>
+</ul>
+<h4>User-Specific Data (RLS Required):</h4>
+<ul>
+<li><code>positions</code> - Users can only see their own positions</li>
+<li><code>orders</code> - Users can only see their own orders</li>
+<li><code>trades</code> - Users can only see their own trades</li>
+<li><code>liquidations</code> - Users can only see their own liquidations</li>
+<li><code>user_balances</code> - Users can only see their own balances</li>
+</ul>
+<h4>Admin-Only Data (Service Role Only):</h4>
+<ul>
+<li><code>admin_users</code> - Admin authentication data</li>
+<li><code>admin_audit_logs</code> - Admin action logs</li>
+<li><code>system_events</code> - System debugging information</li>
+</ul>
+<h3>Implementation Impact:</h3>
+<ul>
+<li>✅ Created comprehensive RLS policies</li>
+<li>✅ Implemented service role isolation</li>
+<li>✅ Protected sensitive admin data</li>
+<li>✅ Maintained public access to appropriate data</li>
+</ul>
+<hr />
+<h2>Implementation Status</h2>
+<h3>Completed Implementations:</h3>
+<ul>
+<li>✅ <strong>Database Security Audit</strong>: Applied comprehensive RLS policies</li>
+<li>✅ <strong>Event-Driven Architecture</strong>: Prepared for Anchor event implementation</li>
+<li>✅ <strong>Hybrid Data Architecture</strong>: Confirmed current approach</li>
+<li>✅ <strong>Oracle Price Caching</strong>: Validated public read access</li>
+<li>✅ <strong>User Privacy Protection</strong>: Implemented RLS policies</li>
+<li>✅ <strong>Admin Data Security</strong>: Service role isolation</li>
+</ul>
+<h3>Pending Implementations:</h3>
+<ul>
+<li>⏳ <strong>Anchor Event Implementation</strong>: Need to add events to smart contracts</li>
+<li>⏳ <strong>Event Listener Service</strong>: Need to implement off-chain event processing</li>
+<li>⏳ <strong>Performance Optimization</strong>: Need to add database indexes</li>
+<li>⏳ <strong>Caching Implementation</strong>: Need to implement Redis caching</li>
+<li>⏳ <strong>Monitoring Setup</strong>: Need to implement comprehensive monitoring</li>
+</ul>
+<h3>Future Consultations Needed:</h3>
+<ul>
+<li><strong>Performance Optimization</strong>: Consult on database optimization strategies</li>
+<li><strong>Scaling Architecture</strong>: Consult on horizontal scaling approaches</li>
+<li><strong>Advanced Security</strong>: Consult on additional security measures</li>
+<li><strong>Monitoring &amp; Alerting</strong>: Consult on production monitoring strategies</li>
+</ul>
+<hr />
+<h2>Key Takeaways</h2>
+<h3>Architecture Decisions:</h3>
+<ol>
+<li><strong>Hybrid Approach</strong>: Mirror current state, store historical data</li>
+<li><strong>Event-Driven Sync</strong>: Use Anchor events for reliable synchronization</li>
+<li><strong>RLS Security</strong>: Implement comprehensive row-level security</li>
+<li><strong>Public Data Access</strong>: Maintain public access to appropriate data</li>
+<li><strong>Service Role Isolation</strong>: Protect admin and system data</li>
+</ol>
+<h3>Implementation Priorities:</h3>
+<ol>
+<li><strong>Security First</strong>: Apply RLS policies and service role isolation</li>
+<li><strong>Event-Driven</strong>: Implement Anchor events and off-chain listeners</li>
+<li><strong>Performance</strong>: Add indexes and implement caching</li>
+<li><strong>Monitoring</strong>: Set up comprehensive monitoring and alerting</li>
+<li><strong>Testing</strong>: Thoroughly test all synchronization logic</li>
+</ol>
+<h3>Best Practices Established:</h3>
+<ul>
+<li>Always consult experts before major architectural decisions</li>
+<li>Document all expert recommendations for future reference</li>
+<li>Implement security measures from the ground up</li>
+<li>Use event-driven architecture for reliable synchronization</li>
+<li>Follow principle of least privilege for database access</li>
+<li>Maintain comprehensive logging and monitoring</li>
+</ul>
+<hr />
+<h2>Contact Information</h2>
+<h3>Expert Sources:</h3>
+<ul>
+<li><strong>Solana Expert</strong>: Via MCP Tools - Solana Expert: Ask For Help</li>
+<li><strong>Anchor Framework Expert</strong>: Via MCP Tools - Ask Solana Anchor Framework Expert</li>
+<li><strong>Documentation</strong>: Via MCP Tools - Solana Documentation Search</li>
+</ul>
+<h3>Internal Resources:</h3>
+<ul>
+<li><strong>Implementation Guide</strong>: <code>docs/security/solana-expert-implementation-guide.md</code></li>
+<li><strong>Security Recommendations</strong>: <code>docs/security/solana-expert-recommendations.md</code></li>
+<li><strong>Database Schema</strong>: <code>database/production-schema.sql</code></li>
+<li><strong>RLS Policies</strong>: <code>database/security-audit-fixes.sql</code></li>
+</ul>
+<hr />
+<h2>Update Log</h2>
+<h3>January 15, 2025</h3>
+<ul>
+<li>Initial expert consultations completed</li>
+<li>Architecture decisions documented</li>
+<li>Implementation guide created</li>
+<li>Security policies implemented</li>
+<li>Future consultation needs identified</li>
+</ul>
+<h3>Next Review Date: February 15, 2025</h3>
+<ul>
+<li>Review implementation progress</li>
+<li>Identify additional expert consultation needs</li>
+<li>Update recommendations based on implementation experience</li>
+<li>Plan next phase of expert consultations</li>
+</ul>
+    </div>
+</body>
+</html>

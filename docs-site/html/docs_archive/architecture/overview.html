@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overview - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/">&larr; Back to Documentation</a>
+        </div>
+        <h1>QuantDesk Perpetual Trading Platform - Complete System Architecture</h1>
+<h2>🚀 Professional Visual Architecture</h2>
+<p>QuantDesk is built with institutional-grade architecture, designed to handle the demands of professional trading with the reliability and performance that institutions expect.</p>
+<h3>🎯 <strong>System Overview Diagram</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">graph</span><span class="w"> </span><span class="n">TB</span>
+<span class="w">    </span><span class="o">%%</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="n">Layer</span>
+<span class="w">    </span><span class="n">subgraph</span><span class="w"> </span><span class="s">&quot;👥 USER LAYER&quot;</span>
+<span class="w">        </span><span class="n">U1</span><span class="p">[</span><span class="err">👤</span><span class="w"> </span><span class="n">Individual</span><span class="w"> </span><span class="n">Traders</span><span class="p">]</span>
+<span class="w">        </span><span class="n">U2</span><span class="p">[</span><span class="err">📱</span><span class="w"> </span><span class="n">Mobile</span><span class="w"> </span><span class="n">Apps</span><span class="p">]</span>
+<span class="w">        </span><span class="n">U3</span><span class="p">[</span><span class="err">🖥️</span><span class="w"> </span><span class="n">Desktop</span><span class="w"> </span><span class="n">Apps</span><span class="p">]</span>
+<span class="w">        </span><span class="n">U4</span><span class="p">[</span><span class="err">🏢</span><span class="w"> </span><span class="n">Institutional</span><span class="w"> </span><span class="n">Clients</span><span class="p">]</span>
+<span class="w">    </span><span class="n">end</span>
+
+<span class="w">    </span><span class="o">%%</span><span class="w"> </span><span class="n">Frontend</span><span class="w"> </span><span class="n">Layer</span>
+<span class="w">    </span><span class="n">subgraph</span><span class="w"> </span><span class="s">&quot;🎨 FRONTEND LAYER (Port 3001)&quot;</span>
+<span class="w">        </span><span class="n">F1</span><span class="p">[</span><span class="n">React</span><span class="w"> </span><span class="n">Trading</span><span class="w"> </span><span class="n">Interface</span><span class="p">]</span>
+<span class="w">        </span><span class="n">F2</span><span class="p">[</span><span class="n">TradingView</span><span class="w"> </span><span class="n">Charts</span><span class="p">]</span>
+<span class="w">        </span><span class="n">F3</span><span class="p">[</span><span class="n">Order</span><span class="w"> </span><span class="n">Management</span><span class="p">]</span>
+<span class="w">        </span><span class="n">F4</span><span class="p">[</span><span class="n">Portfolio</span><span class="w"> </span><span class="n">Dashboard</span><span class="p">]</span>
+<span class="w">        </span><span class="n">F5</span><span class="p">[</span><span class="n">WebSocket</span><span class="w"> </span><span class="n">Client</span><span class="p">]</span>
+<span class="w">        </span><span class="n">F6</span><span class="p">[</span><span class="n">Wallet</span><span class="w"> </span><span class="n">Integration</span><span class="p">]</span>
+<span class="w">    </span><span class="n">end</span>
+
+<span class="w">    </span><span class="o">%%</span><span class="w"> </span><span class="n">API</span><span class="w"> </span><span class="n">Gateway</span>
+<span class="w">    </span><span class="n">subgraph</span><span class="w"> </span><span class="s">&quot;🚀 API GATEWAY (Port 3002)&quot;</span>
+<span class="w">        </span><span class="n">A1</span><span class="p">[</span><span class="n">Express</span><span class="p">.</span><span class="n">js</span><span class="w"> </span><span class="n">Server</span><span class="p">]</span>
+<span class="w">        </span><span class="n">A2</span><span class="p">[</span><span class="n">Authentication</span><span class="w"> </span><span class="n">Middleware</span><span class="p">]</span>
+<span class="w">        </span><span class="n">A3</span><span class="p">[</span><span class="n">Rate</span><span class="w"> </span><span class="n">Limiting</span><span class="p">]</span>
+<span class="w">        </span><span class="n">A4</span><span class="p">[</span><span class="n">REST</span><span class="w"> </span><span class="n">API</span><span class="w"> </span><span class="n">Routes</span><span class="p">]</span>
+<span class="w">        </span><span class="n">A5</span><span class="p">[</span><span class="n">WebSocket</span><span class="w"> </span><span class="n">Server</span><span class="p">]</span>
+<span class="w">    </span><span class="n">end</span>
+
+<span class="w">    </span><span class="o">%%</span><span class="w"> </span><span class="n">Service</span><span class="w"> </span><span class="n">Layer</span>
+<span class="w">    </span><span class="n">subgraph</span><span class="w"> </span><span class="s">&quot;🔧 SERVICE LAYER&quot;</span>
+<span class="w">        </span><span class="n">S1</span><span class="p">[</span><span class="n">Pyth</span><span class="w"> </span><span class="n">Oracle</span><span class="w"> </span><span class="n">Service</span><span class="p">]</span>
+<span class="w">        </span><span class="n">S2</span><span class="p">[</span><span class="n">Solana</span><span class="w"> </span><span class="n">Service</span><span class="p">]</span>
+<span class="w">        </span><span class="n">S3</span><span class="p">[</span><span class="n">Database</span><span class="w"> </span><span class="n">Service</span><span class="p">]</span>
+<span class="w">        </span><span class="n">S4</span><span class="p">[</span><span class="n">Order</span><span class="w"> </span><span class="n">Service</span><span class="p">]</span>
+<span class="w">        </span><span class="n">S5</span><span class="p">[</span><span class="n">Risk</span><span class="w"> </span><span class="n">Management</span><span class="p">]</span>
+<span class="w">        </span><span class="n">S6</span><span class="p">[</span><span class="n">JIT</span><span class="w"> </span><span class="n">Liquidity</span><span class="p">]</span>
+<span class="w">        </span><span class="n">S7</span><span class="p">[</span><span class="n">Metrics</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Monitoring</span><span class="p">]</span>
+<span class="w">    </span><span class="n">end</span>
+
+<span class="w">    </span><span class="o">%%</span><span class="w"> </span><span class="n">Blockchain</span><span class="w"> </span><span class="n">Layer</span>
+<span class="w">    </span><span class="n">subgraph</span><span class="w"> </span><span class="s">&quot;⛓️ BLOCKCHAIN LAYER&quot;</span>
+<span class="w">        </span><span class="n">B1</span><span class="p">[</span><span class="n">Solana</span><span class="w"> </span><span class="n">Smart</span><span class="w"> </span><span class="n">Contracts</span><span class="p">]</span>
+<span class="w">        </span><span class="n">B2</span><span class="p">[</span><span class="n">Market</span><span class="w"> </span><span class="n">Management</span><span class="p">]</span>
+<span class="w">        </span><span class="n">B3</span><span class="p">[</span><span class="n">Position</span><span class="w"> </span><span class="n">Management</span><span class="p">]</span>
+<span class="w">        </span><span class="n">B4</span><span class="p">[</span><span class="n">Order</span><span class="w"> </span><span class="n">Management</span><span class="p">]</span>
+<span class="w">        </span><span class="n">B5</span><span class="p">[</span><span class="n">Cross</span><span class="o">-</span><span class="n">Collateralization</span><span class="p">]</span>
+<span class="w">        </span><span class="n">B6</span><span class="p">[</span><span class="n">Liquidation</span><span class="w"> </span><span class="n">Engine</span><span class="p">]</span>
+<span class="w">    </span><span class="n">end</span>
+
+<span class="w">    </span><span class="o">%%</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="n">Layer</span>
+<span class="w">    </span><span class="n">subgraph</span><span class="w"> </span><span class="s">&quot;💾 DATA LAYER&quot;</span>
+<span class="w">        </span><span class="n">D1</span><span class="p">[</span><span class="n">Supabase</span><span class="w"> </span><span class="n">PostgreSQL</span><span class="p">]</span>
+<span class="w">        </span><span class="n">D2</span><span class="p">[</span><span class="n">TimescaleDB</span><span class="p">]</span>
+<span class="w">        </span><span class="n">D3</span><span class="p">[</span><span class="n">User</span><span class="w"> </span><span class="n">Data</span><span class="p">]</span>
+<span class="w">        </span><span class="n">D4</span><span class="p">[</span><span class="n">Trading</span><span class="w"> </span><span class="n">History</span><span class="p">]</span>
+<span class="w">        </span><span class="n">D5</span><span class="p">[</span><span class="n">Price</span><span class="w"> </span><span class="n">Feeds</span><span class="p">]</span>
+<span class="w">        </span><span class="n">D6</span><span class="p">[</span><span class="n">Analytics</span><span class="p">]</span>
+<span class="w">    </span><span class="n">end</span>
+
+<span class="w">    </span><span class="o">%%</span><span class="w"> </span><span class="n">External</span><span class="w"> </span><span class="n">Integrations</span>
+<span class="w">    </span><span class="n">subgraph</span><span class="w"> </span><span class="s">&quot;🌐 EXTERNAL INTEGRATIONS&quot;</span>
+<span class="w">        </span><span class="n">E1</span><span class="p">[</span><span class="n">Pyth</span><span class="w"> </span><span class="n">Network</span><span class="p">]</span>
+<span class="w">        </span><span class="n">E2</span><span class="p">[</span><span class="n">CoinGecko</span><span class="w"> </span><span class="n">API</span><span class="p">]</span>
+<span class="w">        </span><span class="n">E3</span><span class="p">[</span><span class="n">TradingView</span><span class="p">]</span>
+<span class="w">        </span><span class="n">E4</span><span class="p">[</span><span class="n">Solana</span><span class="w"> </span><span class="n">RPC</span><span class="p">]</span>
+<span class="w">    </span><span class="n">end</span>
+
+<span class="w">    </span><span class="o">%%</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="n">Flow</span><span class="w"> </span><span class="n">Connections</span>
+<span class="w">    </span><span class="n">U1</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">F1</span>
+<span class="w">    </span><span class="n">U2</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">F1</span>
+<span class="w">    </span><span class="n">U3</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">F1</span>
+<span class="w">    </span><span class="n">U4</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">F1</span>
+
+<span class="w">    </span><span class="n">F1</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">A1</span>
+<span class="w">    </span><span class="n">F2</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">A1</span>
+<span class="w">    </span><span class="n">F3</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">A1</span>
+<span class="w">    </span><span class="n">F4</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">A1</span>
+<span class="w">    </span><span class="n">F5</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">A5</span>
+<span class="w">    </span><span class="n">F6</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">A1</span>
+
+<span class="w">    </span><span class="n">A1</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">S1</span>
+<span class="w">    </span><span class="n">A1</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">S2</span>
+<span class="w">    </span><span class="n">A1</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">S3</span>
+<span class="w">    </span><span class="n">A1</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">S4</span>
+<span class="w">    </span><span class="n">A1</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">S5</span>
+<span class="w">    </span><span class="n">A1</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">S6</span>
+<span class="w">    </span><span class="n">A1</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">S7</span>
+
+<span class="w">    </span><span class="n">S1</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">B1</span>
+<span class="w">    </span><span class="n">S2</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">B1</span>
+<span class="w">    </span><span class="n">S4</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">B1</span>
+<span class="w">    </span><span class="n">S5</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">B1</span>
+<span class="w">    </span><span class="n">S6</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">B1</span>
+
+<span class="w">    </span><span class="n">B1</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">D1</span>
+<span class="w">    </span><span class="n">B2</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">D1</span>
+<span class="w">    </span><span class="n">B3</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">D1</span>
+<span class="w">    </span><span class="n">B4</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">D1</span>
+<span class="w">    </span><span class="n">B5</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">D1</span>
+<span class="w">    </span><span class="n">B6</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">D1</span>
+
+<span class="w">    </span><span class="n">S1</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">E1</span>
+<span class="w">    </span><span class="n">S1</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">E2</span>
+<span class="w">    </span><span class="n">F2</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">E3</span>
+<span class="w">    </span><span class="n">S2</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">E4</span>
+
+<span class="w">    </span><span class="o">%%</span><span class="w"> </span><span class="n">Styling</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Terminal</span><span class="w"> </span><span class="n">Theme</span>
+<span class="w">    </span><span class="n">classDef</span><span class="w"> </span><span class="n">userLayer</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="mi">1</span><span class="n">a1a1a</span><span class="p">,</span><span class="n">stroke</span><span class="o">:</span><span class="err">#</span><span class="mi">3</span><span class="n">b82f6</span><span class="p">,</span><span class="n">stroke</span><span class="o">-</span><span class="n">width</span><span class="o">:</span><span class="mi">2</span><span class="n">px</span><span class="p">,</span><span class="n">color</span><span class="o">:</span><span class="err">#</span><span class="n">ffffff</span>
+<span class="w">    </span><span class="n">classDef</span><span class="w"> </span><span class="n">frontendLayer</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="mi">0</span><span class="n">a0a0a</span><span class="p">,</span><span class="n">stroke</span><span class="o">:</span><span class="err">#</span><span class="mi">3</span><span class="n">b82f6</span><span class="p">,</span><span class="n">stroke</span><span class="o">-</span><span class="n">width</span><span class="o">:</span><span class="mi">2</span><span class="n">px</span><span class="p">,</span><span class="n">color</span><span class="o">:</span><span class="err">#</span><span class="n">ffffff</span>
+<span class="w">    </span><span class="n">classDef</span><span class="w"> </span><span class="n">apiLayer</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="mi">1</span><span class="n">a1a1a</span><span class="p">,</span><span class="n">stroke</span><span class="o">:</span><span class="err">#</span><span class="mi">3</span><span class="n">b82f6</span><span class="p">,</span><span class="n">stroke</span><span class="o">-</span><span class="n">width</span><span class="o">:</span><span class="mi">2</span><span class="n">px</span><span class="p">,</span><span class="n">color</span><span class="o">:</span><span class="err">#</span><span class="n">ffffff</span>
+<span class="w">    </span><span class="n">classDef</span><span class="w"> </span><span class="n">serviceLayer</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="mi">0</span><span class="n">a0a0a</span><span class="p">,</span><span class="n">stroke</span><span class="o">:</span><span class="err">#</span><span class="mi">3</span><span class="n">b82f6</span><span class="p">,</span><span class="n">stroke</span><span class="o">-</span><span class="n">width</span><span class="o">:</span><span class="mi">2</span><span class="n">px</span><span class="p">,</span><span class="n">color</span><span class="o">:</span><span class="err">#</span><span class="n">ffffff</span>
+<span class="w">    </span><span class="n">classDef</span><span class="w"> </span><span class="n">blockchainLayer</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="mi">1</span><span class="n">a1a1a</span><span class="p">,</span><span class="n">stroke</span><span class="o">:</span><span class="err">#</span><span class="mi">3</span><span class="n">b82f6</span><span class="p">,</span><span class="n">stroke</span><span class="o">-</span><span class="n">width</span><span class="o">:</span><span class="mi">2</span><span class="n">px</span><span class="p">,</span><span class="n">color</span><span class="o">:</span><span class="err">#</span><span class="n">ffffff</span>
+<span class="w">    </span><span class="n">classDef</span><span class="w"> </span><span class="n">dataLayer</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="mi">0</span><span class="n">a0a0a</span><span class="p">,</span><span class="n">stroke</span><span class="o">:</span><span class="err">#</span><span class="mi">3</span><span class="n">b82f6</span><span class="p">,</span><span class="n">stroke</span><span class="o">-</span><span class="n">width</span><span class="o">:</span><span class="mi">2</span><span class="n">px</span><span class="p">,</span><span class="n">color</span><span class="o">:</span><span class="err">#</span><span class="n">ffffff</span>
+<span class="w">    </span><span class="n">classDef</span><span class="w"> </span><span class="n">externalLayer</span><span class="w"> </span><span class="n">fill</span><span class="o">:</span><span class="err">#</span><span class="mi">1</span><span class="n">a1a1a</span><span class="p">,</span><span class="n">stroke</span><span class="o">:</span><span class="err">#</span><span class="mi">3</span><span class="n">b82f6</span><span class="p">,</span><span class="n">stroke</span><span class="o">-</span><span class="n">width</span><span class="o">:</span><span class="mi">2</span><span class="n">px</span><span class="p">,</span><span class="n">color</span><span class="o">:</span><span class="err">#</span><span class="n">ffffff</span>
+
+<span class="w">    </span><span class="k">class</span><span class="w"> </span><span class="n">U1</span><span class="p">,</span><span class="n">U2</span><span class="p">,</span><span class="n">U3</span><span class="p">,</span><span class="n">U4</span><span class="w"> </span><span class="n">userLayer</span>
+<span class="w">    </span><span class="k">class</span><span class="w"> </span><span class="n">F1</span><span class="p">,</span><span class="n">F2</span><span class="p">,</span><span class="n">F3</span><span class="p">,</span><span class="n">F4</span><span class="p">,</span><span class="n">F5</span><span class="p">,</span><span class="n">F6</span><span class="w"> </span><span class="n">frontendLayer</span>
+<span class="w">    </span><span class="k">class</span><span class="w"> </span><span class="n">A1</span><span class="p">,</span><span class="n">A2</span><span class="p">,</span><span class="n">A3</span><span class="p">,</span><span class="n">A4</span><span class="p">,</span><span class="n">A5</span><span class="w"> </span><span class="n">apiLayer</span>
+<span class="w">    </span><span class="k">class</span><span class="w"> </span><span class="n">S1</span><span class="p">,</span><span class="n">S2</span><span class="p">,</span><span class="n">S3</span><span class="p">,</span><span class="n">S4</span><span class="p">,</span><span class="n">S5</span><span class="p">,</span><span class="n">S6</span><span class="p">,</span><span class="n">S7</span><span class="w"> </span><span class="n">serviceLayer</span>
+<span class="w">    </span><span class="k">class</span><span class="w"> </span><span class="n">B1</span><span class="p">,</span><span class="n">B2</span><span class="p">,</span><span class="n">B3</span><span class="p">,</span><span class="n">B4</span><span class="p">,</span><span class="n">B5</span><span class="p">,</span><span class="n">B6</span><span class="w"> </span><span class="n">blockchainLayer</span>
+<span class="w">    </span><span class="k">class</span><span class="w"> </span><span class="n">D1</span><span class="p">,</span><span class="n">D2</span><span class="p">,</span><span class="n">D3</span><span class="p">,</span><span class="n">D4</span><span class="p">,</span><span class="n">D5</span><span class="p">,</span><span class="n">D6</span><span class="w"> </span><span class="n">dataLayer</span>
+<span class="w">    </span><span class="k">class</span><span class="w"> </span><span class="n">E1</span><span class="p">,</span><span class="n">E2</span><span class="p">,</span><span class="n">E3</span><span class="p">,</span><span class="n">E4</span><span class="w"> </span><span class="n">externalLayer</span>
+</code></pre></div>
+
+<h3>📊 <strong>Data Flow Architecture</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">sequenceDiagram</span>
+<span class="w">    </span><span class="s">participant</span><span class="w"> </span><span class="s">U</span><span class="w"> </span><span class="s">as</span><span class="w"> </span><span class="s">👤</span><span class="w"> </span><span class="s">User</span>
+<span class="w">    </span><span class="n">participant</span><span class="w"> </span><span class="n">F</span><span class="w"> </span><span class="n">as</span><span class="w"> </span>🎨<span class="w"> </span><span class="n">Frontend</span>
+<span class="w">    </span><span class="n">participant</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="n">as</span><span class="w"> </span>🚀<span class="w"> </span><span class="n">API</span><span class="w"> </span><span class="n">Gateway</span>
+<span class="w">    </span><span class="n">participant</span><span class="w"> </span><span class="n">S</span><span class="w"> </span><span class="n">as</span><span class="w"> </span>🔧<span class="w"> </span><span class="n">Services</span>
+<span class="w">    </span><span class="n">participant</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="n">as</span><span class="w"> </span>⛓️<span class="w"> </span><span class="n">Blockchain</span>
+<span class="w">    </span><span class="n">participant</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="n">as</span><span class="w"> </span>💾<span class="w"> </span><span class="n">Database</span>
+<span class="w">    </span><span class="n">participant</span><span class="w"> </span><span class="n">E</span><span class="w"> </span><span class="n">as</span><span class="w"> </span>🌐<span class="w"> </span><span class="n">External</span><span class="w"> </span><span class="n">APIs</span>
+
+<span class="w">    </span><span class="c">%% Price Data Flow</span>
+<span class="w">    </span><span class="n">Note</span><span class="w"> </span><span class="n">over</span><span class="w"> </span><span class="n">E</span><span class="p">,</span><span class="n">D</span><span class="p">:</span><span class="w"> </span>📊<span class="w"> </span><span class="n">PRICE</span><span class="w"> </span><span class="n">DATA</span><span class="w"> </span><span class="n">FLOW</span>
+<span class="w">    </span><span class="n">E</span><span class="o">-&gt;&gt;</span><span class="n">S</span><span class="p">:</span><span class="w"> </span><span class="n">Pyth</span><span class="w"> </span><span class="n">Price</span><span class="w"> </span><span class="n">Updates</span>
+<span class="w">    </span><span class="n">S</span><span class="o">-&gt;&gt;</span><span class="n">D</span><span class="p">:</span><span class="w"> </span><span class="n">Store</span><span class="w"> </span><span class="n">Price</span><span class="w"> </span><span class="n">Data</span>
+<span class="w">    </span><span class="n">S</span><span class="o">-&gt;&gt;</span><span class="n">A</span><span class="p">:</span><span class="w"> </span><span class="n">Broadcast</span><span class="w"> </span><span class="n">Price</span><span class="w"> </span><span class="n">Updates</span>
+<span class="w">    </span><span class="n">A</span><span class="o">-&gt;&gt;</span><span class="n">F</span><span class="p">:</span><span class="w"> </span><span class="n">WebSocket</span><span class="w"> </span><span class="n">Price</span><span class="w"> </span><span class="n">Stream</span>
+<span class="w">    </span><span class="n">F</span><span class="o">-&gt;&gt;</span><span class="n">U</span><span class="p">:</span><span class="w"> </span><span class="n">Display</span><span class="w"> </span><span class="n">Live</span><span class="w"> </span><span class="n">Prices</span>
+
+<span class="w">    </span><span class="c">%% Order Execution Flow</span>
+<span class="w">    </span><span class="n">Note</span><span class="w"> </span><span class="n">over</span><span class="w"> </span><span class="n">U</span><span class="p">,</span><span class="n">B</span><span class="p">:</span><span class="w"> </span>💰<span class="w"> </span><span class="n">ORDER</span><span class="w"> </span><span class="n">EXECUTION</span><span class="w"> </span><span class="n">FLOW</span>
+<span class="w">    </span><span class="n">U</span><span class="o">-&gt;&gt;</span><span class="n">F</span><span class="p">:</span><span class="w"> </span><span class="n">Place</span><span class="w"> </span><span class="n">Order</span>
+<span class="w">    </span><span class="n">F</span><span class="o">-&gt;&gt;</span><span class="n">A</span><span class="p">:</span><span class="w"> </span><span class="n">Submit</span><span class="w"> </span><span class="n">Order</span><span class="w"> </span><span class="n">Request</span>
+<span class="w">    </span><span class="n">A</span><span class="o">-&gt;&gt;</span><span class="n">S</span><span class="p">:</span><span class="w"> </span><span class="n">Process</span><span class="w"> </span><span class="n">Order</span>
+<span class="w">    </span><span class="n">S</span><span class="o">-&gt;&gt;</span><span class="n">B</span><span class="p">:</span><span class="w"> </span><span class="nb">Execute</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">Blockchain</span>
+<span class="w">    </span><span class="n">B</span><span class="o">-&gt;&gt;</span><span class="n">D</span><span class="p">:</span><span class="w"> </span><span class="n">Update</span><span class="w"> </span><span class="n">Position</span><span class="w"> </span><span class="n">Data</span>
+<span class="w">    </span><span class="n">B</span><span class="o">-&gt;&gt;</span><span class="n">A</span><span class="p">:</span><span class="w"> </span><span class="n">Order</span><span class="w"> </span><span class="n">Confirmation</span>
+<span class="w">    </span><span class="n">A</span><span class="o">-&gt;&gt;</span><span class="n">F</span><span class="p">:</span><span class="w"> </span><span class="n">Order</span><span class="w"> </span><span class="n">Status</span><span class="w"> </span><span class="n">Update</span>
+<span class="w">    </span><span class="n">F</span><span class="o">-&gt;&gt;</span><span class="n">U</span><span class="p">:</span><span class="w"> </span><span class="n">Show</span><span class="w"> </span><span class="n">Order</span><span class="w"> </span><span class="n">Status</span>
+
+<span class="w">    </span><span class="c">%% Risk Management Flow</span>
+<span class="w">    </span><span class="n">Note</span><span class="w"> </span><span class="n">over</span><span class="w"> </span><span class="n">S</span><span class="p">,</span><span class="n">B</span><span class="p">:</span><span class="w"> </span>🛡️<span class="w"> </span><span class="n">RISK</span><span class="w"> </span><span class="n">MANAGEMENT</span><span class="w"> </span><span class="n">FLOW</span>
+<span class="w">    </span><span class="n">S</span><span class="o">-&gt;&gt;</span><span class="n">D</span><span class="p">:</span><span class="w"> </span><span class="n">Monitor</span><span class="w"> </span><span class="n">Position</span><span class="w"> </span><span class="n">Health</span>
+<span class="w">    </span><span class="n">S</span><span class="o">-&gt;&gt;</span><span class="n">B</span><span class="p">:</span><span class="w"> </span><span class="n">Check</span><span class="w"> </span><span class="n">Liquidation</span><span class="w"> </span><span class="n">Conditions</span>
+<span class="w">    </span><span class="n">B</span><span class="o">-&gt;&gt;</span><span class="n">S</span><span class="p">:</span><span class="w"> </span><span class="n">Liquidation</span><span class="w"> </span><span class="n">Trigger</span>
+<span class="w">    </span><span class="n">S</span><span class="o">-&gt;&gt;</span><span class="n">A</span><span class="p">:</span><span class="w"> </span><span class="n">Broadcast</span><span class="w"> </span><span class="n">Liquidation</span>
+<span class="w">    </span><span class="n">A</span><span class="o">-&gt;&gt;</span><span class="n">F</span><span class="p">:</span><span class="w"> </span><span class="n">Notify</span><span class="w"> </span><span class="n">User</span>
+<span class="w">    </span><span class="n">F</span><span class="o">-&gt;&gt;</span><span class="n">U</span><span class="p">:</span><span class="w"> </span><span class="n">Display</span><span class="w"> </span><span class="n">Liquidation</span><span class="w"> </span><span class="n">Alert</span>
+</code></pre></div>
+
+<h2>🏗️ Architecture Overview</h2>
+<h3>High-Level Architecture</h3>
+<div class="codehilite"><pre><span></span><code>┌─────────────────────────────────────────────────────────────────┐
+│                        QuantDesk Platform                      │
+├─────────────────────────────────────────────────────────────────┤
+│  Frontend (React)     │  Backend (Node.js)    │  Smart Contracts │
+│  - Trading Interface   │  - REST APIs          │  - Anchor Programs │
+│  - Real-time Updates   │  - WebSocket Server   │  - On-chain Logic  │
+│  - Multi-monitor       │  - Business Logic     │  - Risk Management │
+│  - Professional UI     │  - Authentication     │  - Order Matching  │
+└─────────────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    Infrastructure Layer                        │
+├─────────────────────────────────────────────────────────────────┤
+│  Supabase (PostgreSQL) │  Grafana (Monitoring) │  Solana Network │
+│  - User Data            │  - Real-time Metrics  │  - Blockchain    │
+│  - Trading History      │  - Performance Data    │  - Smart Contracts│
+│  - Risk Data            │  - System Health      │  - Transaction    │
+│  - Analytics            │  - Alerting          │  - Settlement     │
+└─────────────────────────────────────────────────────────────────┘
+</code></pre></div>
+
+<h2>🎯 Core Design Principles</h2>
+<h3>1. <strong>Institutional-Grade Reliability</strong></h3>
+<ul>
+<li><strong>99.9% Uptime SLA</strong>: Enterprise-grade availability</li>
+<li><strong>Fault Tolerance</strong>: Redundant systems and failover mechanisms</li>
+<li><strong>Data Integrity</strong>: ACID compliance and transaction safety</li>
+<li><strong>Disaster Recovery</strong>: Comprehensive backup and recovery procedures</li>
+</ul>
+<h3>2. <strong>High-Performance Trading</strong></h3>
+<ul>
+<li><strong>Sub-second Latency</strong>: Ultra-low latency order execution</li>
+<li><strong>High Throughput</strong>: Millions of transactions per day capacity</li>
+<li><strong>Real-time Processing</strong>: Stream processing for live data</li>
+<li><strong>Scalable Architecture</strong>: Horizontal scaling capabilities</li>
+</ul>
+<h3>3. <strong>Security First</strong></h3>
+<ul>
+<li><strong>End-to-End Encryption</strong>: All data encrypted in transit and at rest</li>
+<li><strong>Multi-layer Security</strong>: Defense in depth security model</li>
+<li><strong>Audit Trails</strong>: Complete transaction and access logging</li>
+<li><strong>Compliance Ready</strong>: Built-in compliance and regulatory features</li>
+</ul>
+<h3>4. <strong>Professional Integration</strong></h3>
+<ul>
+<li><strong>RESTful APIs</strong>: Standard HTTP APIs for easy integration</li>
+<li><strong>WebSocket Streams</strong>: Real-time data feeds</li>
+<li><strong>Multiple SDKs</strong>: Official SDKs for popular languages</li>
+<li><strong>Enterprise Support</strong>: Dedicated support for institutional clients</li>
+</ul>
+<h2>🏢 Frontend Architecture</h2>
+<h3>React-Based Trading Interface</h3>
+<div class="codehilite"><pre><span></span><code>┌─────────────────────────────────────────────────────────────────┐
+│                    Frontend Architecture                        │
+├─────────────────────────────────────────────────────────────────┤
+│  Trading Interface    │  Analytics Dashboard  │  Admin Panel    │
+│  - Order Management   │  - Performance Metrics │  - User Management│
+│  - Position Tracking  │  - Risk Analytics     │  - System Config │
+│  - Real-time Charts   │  - Portfolio Analysis │  - Monitoring    │
+│  - Market Data        │  - Custom Dashboards   │  - Reporting     │
+└─────────────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    Core Components                             │
+├─────────────────────────────────────────────────────────────────┤
+│  Wallet Integration   │  WebSocket Client    │  State Management│
+│  - Multi-wallet       │  - Real-time Data     │  - Redux Toolkit │
+│  - Authentication     │  - Order Updates      │  - Persistence   │
+│  - Transaction Signing │  - Price Feeds       │  - Caching       │
+└─────────────────────────────────────────────────────────────────┘
+</code></pre></div>
+
+<h3>Key Features</h3>
+<ul>
+<li><strong>Multi-Monitor Support</strong>: Optimized for professional trading setups</li>
+<li><strong>Customizable Layouts</strong>: Drag-and-drop interface customization</li>
+<li><strong>Real-time Updates</strong>: WebSocket-based live data feeds</li>
+<li><strong>Professional Charts</strong>: Advanced charting with technical indicators</li>
+<li><strong>Responsive Design</strong>: Works on desktop, tablet, and mobile</li>
+</ul>
+<h2>🔧 Backend Architecture</h2>
+<h3>Microservices Architecture</h3>
+<div class="codehilite"><pre><span></span><code>┌─────────────────────────────────────────────────────────────────┐
+│                    Backend Services                            │
+├─────────────────────────────────────────────────────────────────┤
+│  API Gateway        │  Trading Engine      │  Risk Management   │
+│  - Authentication   │  - Order Matching    │  - Position Risk   │
+│  - Rate Limiting    │  - Price Discovery   │  - Margin Calls    │
+│  - Load Balancing   │  - Liquidation       │  - Portfolio Risk  │
+│  - Request Routing  │  - Settlement        │  - Stress Testing  │
+├─────────────────────────────────────────────────────────────────┤
+│  Market Data        │  User Management     │  Analytics Engine │
+│  - Price Feeds       │  - User Profiles     │  - Performance     │
+│  - Order Book       │  - Authentication    │  - Risk Metrics    │
+│  - Trade History    │  - Authorization     │  - Reporting       │
+│  - Market Metrics   │  - Audit Logs       │  - Dashboards      │
+└─────────────────────────────────────────────────────────────────┘
+</code></pre></div>
+
+<h3>Service Architecture</h3>
+<ul>
+<li><strong>API Gateway</strong>: Central entry point with authentication and rate limiting</li>
+<li><strong>Trading Engine</strong>: Core trading logic and order matching</li>
+<li><strong>Risk Management</strong>: Real-time risk monitoring and management</li>
+<li><strong>Market Data</strong>: Real-time market data processing and distribution</li>
+<li><strong>User Management</strong>: User authentication, authorization, and profiles</li>
+<li><strong>Analytics Engine</strong>: Performance analytics and reporting</li>
+</ul>
+<h2>⛓️ Smart Contract Architecture</h2>
+<h3>Anchor-Based Programs</h3>
+<div class="codehilite"><pre><span></span><code>┌─────────────────────────────────────────────────────────────────┐
+│                    Smart Contract Layer                        │
+├─────────────────────────────────────────────────────────────────┤
+│  Perpetual DEX      │  Risk Management     │  Liquidation Engine│
+│  - Market Creation  │  - Position Tracking │  - Liquidation     │
+│  - Order Matching   │  - Margin Calls      │  - Settlement      │
+│  - Price Discovery  │  - Risk Limits       │  - Recovery        │
+│  - Settlement       │  - Portfolio Risk     │  - Dispute         │
+├─────────────────────────────────────────────────────────────────┤
+│  Oracle Integration │  JIT Liquidity       │  Governance        │
+│  - Price Feeds       │  - Auction System    │  - Voting          │
+│  - Data Validation  │  - Liquidity Pools   │  - Proposals       │
+│  - Fallback Oracles │  - Settlement        │  - Treasury        │
+└─────────────────────────────────────────────────────────────────┘
+</code></pre></div>
+
+<h3>Key Programs</h3>
+<ul>
+<li><strong>Perpetual DEX</strong>: Core trading and order matching logic</li>
+<li><strong>Risk Management</strong>: Position and portfolio risk management</li>
+<li><strong>Liquidation Engine</strong>: Automated liquidation and settlement</li>
+<li><strong>Oracle Integration</strong>: Price feed integration and validation</li>
+<li><strong>JIT Liquidity</strong>: Just-in-time liquidity auction system</li>
+<li><strong>Governance</strong>: Decentralized governance and voting</li>
+</ul>
+<h2>📊 Data Architecture</h2>
+<h3>Multi-Layer Data Strategy</h3>
+<div class="codehilite"><pre><span></span><code>┌─────────────────────────────────────────────────────────────────┐
+│                    Data Architecture                           │
+├─────────────────────────────────────────────────────────────────┤
+│  Real-time Layer    │  Analytics Layer     │  Storage Layer    │
+│  - WebSocket Streams│  - Time Series DB    │  - PostgreSQL     │
+│  - In-Memory Cache  │  - OLAP Processing   │  - Supabase       │
+│  - Message Queues   │  - Data Warehousing   │  - File Storage   │
+│  - Event Streaming  │  - ETL Pipelines      │  - Backup Systems │
+└─────────────────────────────────────────────────────────────────┘
+</code></pre></div>
+
+<h3>Data Layers</h3>
+<ul>
+<li><strong>Real-time Layer</strong>: WebSocket streams, in-memory caches, message queues</li>
+<li><strong>Analytics Layer</strong>: Time series databases, OLAP processing, data warehousing</li>
+<li><strong>Storage Layer</strong>: PostgreSQL, Supabase, file storage, backup systems</li>
+</ul>
+<h2>🔒 Security Architecture</h2>
+<h3>Defense in Depth</h3>
+<div class="codehilite"><pre><span></span><code>┌─────────────────────────────────────────────────────────────────┐
+│                    Security Architecture                       │
+├─────────────────────────────────────────────────────────────────┤
+│  Network Security   │  Application Security │  Data Security    │
+│  - DDoS Protection   │  - Authentication     │  - Encryption     │
+│  - Firewalls         │  - Authorization      │  - Key Management │
+│  - Load Balancers    │  - Input Validation   │  - Access Control │
+│  - CDN               │  - Rate Limiting      │  - Audit Logs     │
+├─────────────────────────────────────────────────────────────────┤
+│  Smart Contract      │  Infrastructure       │  Compliance       │
+│  - Formal Verification│  - Container Security│  - Regulatory     │
+│  - Audits            │  - Secrets Management │  - Reporting      │
+│  - Testing           │  - Monitoring         │  - Data Privacy   │
+└─────────────────────────────────────────────────────────────────┘
+</code></pre></div>
+
+<h3>Security Layers</h3>
+<ul>
+<li><strong>Network Security</strong>: DDoS protection, firewalls, load balancers</li>
+<li><strong>Application Security</strong>: Authentication, authorization, input validation</li>
+<li><strong>Data Security</strong>: Encryption, key management, access control</li>
+<li><strong>Smart Contract Security</strong>: Formal verification, audits, testing</li>
+<li><strong>Infrastructure Security</strong>: Container security, secrets management</li>
+<li><strong>Compliance</strong>: Regulatory compliance, reporting, data privacy</li>
+</ul>
+<h2>📈 Monitoring &amp; Observability</h2>
+<h3>Comprehensive Monitoring</h3>
+<div class="codehilite"><pre><span></span><code><span class="err">┌─────────────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w">                    </span><span class="n">Monitoring</span><span class="w"> </span><span class="n">Architecture</span><span class="w">                     </span><span class="err">│</span>
+<span class="err">├─────────────────────────────────────────────────────────────────┤</span>
+<span class="err">│</span><span class="w">  </span><span class="n">Application</span><span class="w"> </span><span class="n">Metrics</span><span class="w"> </span><span class="err">│</span><span class="w">  </span><span class="n">Infrastructure</span><span class="w">      </span><span class="err">│</span><span class="w">  </span><span class="n">Business</span><span class="w"> </span><span class="n">Metrics</span><span class="w">  </span><span class="err">│</span>
+<span class="err">│</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Performance</span><span class="w">       </span><span class="err">│</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">System</span><span class="w"> </span><span class="n">Health</span><span class="w">     </span><span class="err">│</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Trading</span><span class="w"> </span><span class="n">Volume</span><span class="w">  </span><span class="err">│</span>
+<span class="err">│</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Error</span><span class="w"> </span><span class="n">Rates</span><span class="w">       </span><span class="err">│</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Resource</span><span class="w"> </span><span class="n">Usage</span><span class="w">    </span><span class="err">│</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="n">Activity</span><span class="w">   </span><span class="err">│</span>
+<span class="err">│</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Response</span><span class="w"> </span><span class="n">Times</span><span class="w">    </span><span class="err">│</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Network</span><span class="w"> </span><span class="n">Traffic</span><span class="w">   </span><span class="err">│</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Risk</span><span class="w"> </span><span class="n">Metrics</span><span class="w">    </span><span class="err">│</span>
+<span class="err">│</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Throughput</span><span class="w">        </span><span class="err">│</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Storage</span><span class="w"> </span><span class="n">Usage</span><span class="w">     </span><span class="err">│</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Performance</span><span class="w">     </span><span class="err">│</span>
+<span class="err">├─────────────────────────────────────────────────────────────────┤</span>
+<span class="err">│</span><span class="w">  </span><span class="n">Alerting</span><span class="w"> </span><span class="n">System</span><span class="w">     </span><span class="err">│</span><span class="w">  </span><span class="n">Logging</span><span class="w"> </span><span class="n">System</span><span class="w">      </span><span class="err">│</span><span class="w">  </span><span class="n">Dashboard</span><span class="w"> </span><span class="n">System</span><span class="w">  </span><span class="err">│</span>
+<span class="err">│</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Real</span><span class="o">-</span><span class="kt">time</span><span class="w"> </span><span class="n">Alerts</span><span class="w">  </span><span class="err">│</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Centralized</span><span class="w"> </span><span class="n">Logs</span><span class="w">   </span><span class="err">│</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Grafana</span><span class="w">         </span><span class="err">│</span>
+<span class="err">│</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Escalation</span><span class="w">        </span><span class="err">│</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Log</span><span class="w"> </span><span class="n">Aggregation</span><span class="w">   </span><span class="err">│</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Custom</span><span class="w"> </span><span class="n">Views</span><span class="w">    </span><span class="err">│</span>
+<span class="err">│</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Notification</span><span class="w">      </span><span class="err">│</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Search</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Analysis</span><span class="w"> </span><span class="err">│</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Real</span><span class="o">-</span><span class="kt">time</span><span class="w"> </span><span class="n">Data</span><span class="w">  </span><span class="err">│</span>
+<span class="err">└─────────────────────────────────────────────────────────────────┘</span>
+</code></pre></div>
+
+<h3>Monitoring Components</h3>
+<ul>
+<li><strong>Application Metrics</strong>: Performance, error rates, response times</li>
+<li><strong>Infrastructure Metrics</strong>: System health, resource usage, network traffic</li>
+<li><strong>Business Metrics</strong>: Trading volume, user activity, risk metrics</li>
+<li><strong>Alerting System</strong>: Real-time alerts, escalation, notifications</li>
+<li><strong>Logging System</strong>: Centralized logs, aggregation, search and analysis</li>
+<li><strong>Dashboard System</strong>: Grafana dashboards, custom views, real-time data</li>
+</ul>
+<h2>🚀 Scalability &amp; Performance</h2>
+<h3>Horizontal Scaling Strategy</h3>
+<div class="codehilite"><pre><span></span><code>┌─────────────────────────────────────────────────────────────────┐
+│                    Scaling Architecture                       │
+├─────────────────────────────────────────────────────────────────┤
+│  Load Balancing     │  Auto Scaling        │  Database Scaling  │
+│  - Multiple Regions  │  - CPU-based        │  - Read Replicas   │
+│  - Health Checks     │  - Memory-based     │  - Sharding        │
+│  - Failover          │  - Custom Metrics   │  - Partitioning    │
+│  - Session Affinity  │  - Predictive       │  - Caching         │
+└─────────────────────────────────────────────────────────────────┘
+</code></pre></div>
+
+<h3>Scaling Strategies</h3>
+<ul>
+<li><strong>Load Balancing</strong>: Multiple regions, health checks, failover</li>
+<li><strong>Auto Scaling</strong>: CPU-based, memory-based, custom metrics</li>
+<li><strong>Database Scaling</strong>: Read replicas, sharding, partitioning</li>
+<li><strong>Caching</strong>: Multi-layer caching for performance optimization</li>
+</ul>
+<h2>🔧 Development &amp; Deployment</h2>
+<h3>CI/CD Pipeline</h3>
+<div class="codehilite"><pre><span></span><code>┌─────────────────────────────────────────────────────────────────┐
+│                    CI/CD Pipeline                             │
+├─────────────────────────────────────────────────────────────────┤
+│  Source Control     │  Build &amp; Test        │  Deployment        │
+│  - Git Workflow     │  - Automated Tests  │  - Staging         │
+│  - Code Review      │  - Security Scans   │  - Production      │
+│  - Branch Protection│  - Quality Gates    │  - Rollback        │
+│  - Merge Policies   │  - Performance Tests │  - Monitoring      │
+└─────────────────────────────────────────────────────────────────┘
+</code></pre></div>
+
+<h3>Development Process</h3>
+<ul>
+<li><strong>Source Control</strong>: Git workflow, code review, branch protection</li>
+<li><strong>Build &amp; Test</strong>: Automated tests, security scans, quality gates</li>
+<li><strong>Deployment</strong>: Staging, production, rollback, monitoring</li>
+</ul>
+<h2>🎯 Key Benefits</h2>
+<h3>For Traders</h3>
+<ul>
+<li><strong>Professional Tools</strong>: Institutional-grade trading interface</li>
+<li><strong>Real-time Data</strong>: Sub-second latency market data</li>
+<li><strong>Advanced Analytics</strong>: Comprehensive market and portfolio analytics</li>
+<li><strong>Risk Management</strong>: Sophisticated risk management tools</li>
+</ul>
+<h3>For Developers</h3>
+<ul>
+<li><strong>Modern Architecture</strong>: Microservices, APIs, and modern frameworks</li>
+<li><strong>Comprehensive APIs</strong>: REST and WebSocket APIs for all features</li>
+<li><strong>Multiple SDKs</strong>: Official SDKs for popular languages</li>
+<li><strong>Extensive Documentation</strong>: Detailed documentation and examples</li>
+</ul>
+<h3>For Institutions</h3>
+<ul>
+<li><strong>Enterprise Features</strong>: Professional-grade features and support</li>
+<li><strong>Compliance Ready</strong>: Built with regulatory compliance in mind</li>
+<li><strong>Scalable Infrastructure</strong>: Handles institutional trading volumes</li>
+<li><strong>Professional Support</strong>: Dedicated support for enterprise clients</li>
+</ul>
+<h2>🆘 Support &amp; Resources</h2>
+<h3>Documentation</h3>
+<ul>
+<li><a href="smart-contracts.md">Smart Contracts</a> - Detailed smart contract architecture</li>
+<li><a href="backend.md">Backend Services</a> - Backend service architecture</li>
+<li><a href="frontend.md">Frontend Design</a> - Frontend architecture and design</li>
+<li><a href="../api/overview.md">API Documentation</a> - Complete API reference</li>
+</ul>
+<h3>Community</h3>
+<ul>
+<li><strong>Discord</strong>: <a href="https://discord.gg/quantdesk">Join our developer community</a></li>
+<li><strong>GitHub</strong>: <a href="https://github.com/dextrorsal/quantdesk/issues">Report issues and request features</a></li>
+<li><strong>Documentation</strong>: <a href="../README.md">Browse all documentation</a></li>
+<li><strong>Support</strong>: <a href="mailto:contact@quantdesk.io">contact@quantdesk.io</a></li>
+</ul>
+<hr />
+<p><strong>Ready to dive deeper?</strong> Check out our <a href="smart-contracts.md">Smart Contract Architecture</a> or explore our <a href="../api/overview.md">API Documentation</a> for technical details.</p>
+    </div>
+</body>
+</html>
