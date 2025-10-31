@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Environment Setup - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/">&larr; Back to Documentation</a>
+        </div>
+        <h1>Environment Setup Guide</h1>
+<h2>Required Environment Variables</h2>
+<h3>Backend (.env)</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Database Configuration</span>
+<span class="nv">SUPABASE_URL</span><span class="o">=</span>your_supabase_url
+<span class="nv">SUPABASE_ANON_KEY</span><span class="o">=</span>your_supabase_anon_key
+<span class="nv">SUPABASE_SERVICE_ROLE_KEY</span><span class="o">=</span>your_supabase_service_role_key
+<span class="nv">DATABASE_URL</span><span class="o">=</span>your_postgresql_connection_string
+
+<span class="c1"># Solana Configuration</span>
+<span class="nv">SOLANA_RPC_URL</span><span class="o">=</span>https://api.devnet.solana.com
+<span class="nv">SOLANA_PRIVATE_KEY</span><span class="o">=</span>your_base58_encoded_private_key
+<span class="nv">SOLANA_PROGRAM_ID</span><span class="o">=</span>your_program_id
+
+<span class="c1"># Backend Configuration</span>
+<span class="nv">PORT</span><span class="o">=</span><span class="m">3002</span>
+<span class="nv">NODE_ENV</span><span class="o">=</span>development
+<span class="nv">BACKEND_URL</span><span class="o">=</span>http://localhost:3002
+<span class="nv">FRONTEND_URL</span><span class="o">=</span>http://localhost:3001
+
+<span class="c1"># JWT Secrets</span>
+<span class="nv">JWT_SECRET</span><span class="o">=</span>your_jwt_secret_key
+<span class="nv">ADMIN_JWT_SECRET</span><span class="o">=</span>your_admin_jwt_secret_key
+
+<span class="c1"># OAuth Configuration (Admin)</span>
+<span class="nv">GOOGLE_CLIENT_ID</span><span class="o">=</span>your_google_client_id
+<span class="nv">GOOGLE_CLIENT_SECRET</span><span class="o">=</span>your_google_client_secret
+<span class="nv">GITHUB_CLIENT_ID</span><span class="o">=</span>your_github_client_id
+<span class="nv">GITHUB_CLIENT_SECRET</span><span class="o">=</span>your_github_client_secret
+
+<span class="c1"># AI Service Configuration</span>
+<span class="nv">MIKEY_AI_URL</span><span class="o">=</span>http://localhost:3000
+
+<span class="c1"># Redis Configuration</span>
+<span class="nv">REDIS_URL</span><span class="o">=</span>redis://localhost:6379
+<span class="nv">REDIS_PASSWORD</span><span class="o">=</span>your_redis_password
+
+<span class="c1"># Oracle Configuration</span>
+<span class="nv">PYTH_NETWORK_URL</span><span class="o">=</span>https://hermes.pyth.network/v2/updates/price
+<span class="nv">PYTH_NETWORK_WS_URL</span><span class="o">=</span>wss://hermes.pyth.network/v2/ws
+
+<span class="c1"># Security Configuration</span>
+<span class="nv">ADMIN_IP_WHITELIST</span><span class="o">=</span><span class="nb">false</span>
+<span class="nv">ADMIN_MFA_REQUIRED</span><span class="o">=</span><span class="nb">false</span>
+<span class="nv">RATE_LIMIT_ENABLED</span><span class="o">=</span><span class="nb">true</span>
+<span class="nv">RATE_LIMIT_WINDOW_MS</span><span class="o">=</span><span class="m">900000</span>
+<span class="nv">RATE_LIMIT_MAX_REQUESTS</span><span class="o">=</span><span class="m">100</span>
+
+<span class="c1"># Logging Configuration</span>
+<span class="nv">LOG_LEVEL</span><span class="o">=</span>info
+<span class="nv">LOG_FILE_PATH</span><span class="o">=</span>./logs/backend.log
+
+<span class="c1"># Development Configuration</span>
+<span class="nv">ENABLE_CHAT</span><span class="o">=</span><span class="nb">true</span>
+<span class="nv">ENABLE_AI_FEATURES</span><span class="o">=</span><span class="nb">true</span>
+<span class="nv">ENABLE_ADVANCED_ORDERS</span><span class="o">=</span><span class="nb">true</span>
+<span class="nv">ENABLE_CROSS_COLLATERAL</span><span class="o">=</span><span class="nb">true</span>
+<span class="nv">DEBUG_MODE</span><span class="o">=</span><span class="nb">false</span>
+<span class="nv">VERBOSE_LOGGING</span><span class="o">=</span><span class="nb">false</span>
+</code></pre></div>
+
+<h3>Frontend (.env)</h3>
+<div class="codehilite"><pre><span></span><code><span class="nv">VITE_BACKEND_URL</span><span class="o">=</span>http://localhost:3002
+<span class="nv">VITE_ADMIN_GOOGLE_AUTH_URL</span><span class="o">=</span>http://localhost:3002/api/admin/auth/google
+<span class="nv">VITE_ADMIN_GITHUB_AUTH_URL</span><span class="o">=</span>http://localhost:3002/api/admin/auth/github
+</code></pre></div>
+
+<h2>OAuth Setup Instructions</h2>
+<h3>Google OAuth Setup</h3>
+<ol>
+<li>Go to <a href="https://console.cloud.google.com/">Google Cloud Console</a></li>
+<li>Create a new project or select existing one</li>
+<li>Enable Google+ API</li>
+<li>Go to Credentials → Create Credentials → OAuth 2.0 Client ID</li>
+<li>Set application type to "Web application"</li>
+<li>Add authorized redirect URIs:</li>
+<li><code>http://localhost:3002/api/admin/auth/google/callback</code> (development)</li>
+<li><code>https://your-domain.com/api/admin/auth/google/callback</code> (production)</li>
+<li>Copy Client ID and Client Secret to environment variables</li>
+</ol>
+<h3>GitHub OAuth Setup</h3>
+<ol>
+<li>Go to <a href="https://github.com/settings/developers">GitHub Developer Settings</a></li>
+<li>Click "New OAuth App"</li>
+<li>Fill in application details:</li>
+<li>Application name: QuantDesk Admin</li>
+<li>Homepage URL: <code>http://localhost:3001</code> (development)</li>
+<li>Authorization callback URL: <code>http://localhost:3002/api/admin/auth/github/callback</code></li>
+<li>Copy Client ID and Client Secret to environment variables</li>
+</ol>
+<h2>Database Setup</h2>
+<h3>Apply Security Fixes</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Apply RLS policies and security fixes</span>
+psql<span class="w"> </span>-d<span class="w"> </span>your_database<span class="w"> </span>-f<span class="w"> </span>database/security-audit-fixes.sql
+
+<span class="c1"># Run security verification tests</span>
+psql<span class="w"> </span>-d<span class="w"> </span>your_database<span class="w"> </span>-f<span class="w"> </span>database/security-verification-tests.sql
+</code></pre></div>
+
+<h3>Add OAuth Columns to Admin Users</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Add OAuth columns to admin_users table</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">admin_users</span><span class="w"> </span>
+<span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">google_id</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">UNIQUE</span><span class="p">,</span>
+<span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">github_id</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">UNIQUE</span><span class="p">,</span>
+<span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">avatar_url</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">oauth_provider</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">;</span>
+
+<span class="c1">-- Create indexes</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">idx_admin_users_google_id</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">admin_users</span><span class="p">(</span><span class="n">google_id</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">idx_admin_users_github_id</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">admin_users</span><span class="p">(</span><span class="n">github_id</span><span class="p">);</span>
+</code></pre></div>
+
+<h2>Installation Commands</h2>
+<h3>Install Dependencies</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Install all dependencies using pnpm workspace</span>
+pnpm<span class="w"> </span>install
+
+<span class="c1"># Or install individually</span>
+<span class="nb">cd</span><span class="w"> </span>backend<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pnpm<span class="w"> </span>install
+<span class="nb">cd</span><span class="w"> </span>frontend<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pnpm<span class="w"> </span>install
+<span class="nb">cd</span><span class="w"> </span>MIKEY-AI<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pnpm<span class="w"> </span>install
+<span class="nb">cd</span><span class="w"> </span>data-ingestion<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pnpm<span class="w"> </span>install
+</code></pre></div>
+
+<h3>Start Services</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Start all services (development)</span>
+pnpm<span class="w"> </span>run<span class="w"> </span>dev
+
+<span class="c1"># Or start individually</span>
+<span class="nb">cd</span><span class="w"> </span>backend<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pnpm<span class="w"> </span>run<span class="w"> </span>dev
+<span class="nb">cd</span><span class="w"> </span>frontend<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pnpm<span class="w"> </span>run<span class="w"> </span>dev
+<span class="nb">cd</span><span class="w"> </span>MIKEY-AI<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pnpm<span class="w"> </span>run<span class="w"> </span>dev
+<span class="nb">cd</span><span class="w"> </span>data-ingestion<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pnpm<span class="w"> </span>start
+</code></pre></div>
+
+<h2>Admin Dashboard Access</h2>
+<ol>
+<li>Navigate to <code>http://localhost:3001/admin</code></li>
+<li>Use Google or GitHub OAuth to login</li>
+<li>Ensure your email is added to the <code>admin_users</code> table with appropriate role</li>
+</ol>
+<h2>Security Notes</h2>
+<ul>
+<li>Never commit <code>.env</code> files to version control</li>
+<li>Use strong, unique JWT secrets in production</li>
+<li>Enable MFA for admin accounts in production</li>
+<li>Use IP whitelisting for admin access in production</li>
+<li>Regularly rotate OAuth client secrets</li>
+<li>Monitor admin access logs for suspicious activity</li>
+</ul>
+    </div>
+</body>
+</html>

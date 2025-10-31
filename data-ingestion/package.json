@@ -1,0 +1,63 @@
+{
+  "name": "quantdesk-data-ingestion",
+  "version": "1.0.0",
+  "description": "High-throughput data ingestion pipeline for QuantDesk trading platform",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run start:collectors",
+    "dev": "npm run start:full",
+    "build": "echo 'No build step required for data-ingestion'",
+    "test": "node test/pipeline-test.js",
+    "lint": "echo 'No lint script configured'",
+    "type-check": "echo 'No TypeScript configured'",
+    "start:collectors": "concurrently \"npm run price-collector\" \"npm run whale-monitor\" \"npm run news-scraper\" \"npm run defillama-service\" \"npm run coinalyze-service\"",
+    "start:api": "node src/api/server.js",
+    "start:full": "concurrently \"npm run start:api\" \"npm run start:collectors\"",
+    "start:workers": "concurrently \"npm run price-writer\" \"npm run analytics-writer\" \"npm run alert-processor\"",
+    "start:monitoring": "node src/monitoring/dashboard.js",
+    "price-collector": "node src/collectors/price-collector.js",
+    "whale-monitor": "node src/collectors/whale-monitor.js",
+    "real-whale-monitor": "node src/collectors/real-whale-monitor.js",
+    "trench-watcher": "node src/collectors/trench-watcher.js",
+    "advanced-trench-watcher": "node src/collectors/advanced-trench-watcher.js",
+    "news-scraper": "node src/collectors/news-scraper.js",
+    "defillama-service": "node src/collectors/defillama-service.js",
+    "dune-analytics-service": "node src/collectors/dune-analytics-service.js",
+    "artemis-analytics-service": "node src/collectors/artemis-analytics-service.js",
+    "coinpaprika-service": "node src/collectors/coinpaprika-service.js",
+    "coinalyze-service": "node src/collectors/coinalyze-service.js",
+    "price-writer": "node src/workers/price-writer.js",
+    "analytics-writer": "node src/workers/analytics-writer.js",
+    "alert-processor": "node src/workers/alert-processor.js"
+  },
+  "dependencies": {
+    "@pythnetwork/hermes-client": "^2.0.0",
+    "@solana/web3.js": "1.87.0",
+    "axios": "^1.6.0",
+    "bull": "^4.12.0",
+    "concurrently": "^8.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.0",
+    "express": "^4.18.2",
+    "ioredis": "^5.3.0",
+    "node-cron": "^3.0.3",
+    "pg": "^8.11.0",
+    "redis": "^4.6.0",
+    "winston": "^3.11.0",
+    "ws": "^8.14.0",
+    "xml2js": "^0.6.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0"
+  },
+  "keywords": [
+    "trading",
+    "data-ingestion",
+    "redis-streams",
+    "solana",
+    "pyth",
+    "whale-monitoring"
+  ],
+  "author": "QuantDesk Team",
+  "license": "MIT"
+}

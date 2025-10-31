@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick-Start - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/docs">&larr; Back to Documentation</a>
+        </div>
+        <h1>Quick Start Guide</h1>
+<p>Welcome to QuantDesk - <strong>The Bloomberg Terminal for Crypto</strong>. This guide will get you up and running in under 10 minutes.</p>
+<h2>🎯 What You'll Build</h2>
+<p>By the end of this guide, you'll have:
+- ✅ QuantDesk running locally
+- ✅ Connected to Solana devnet
+- ✅ Made your first trade
+- ✅ Viewed real-time analytics</p>
+<h2>📋 Prerequisites</h2>
+<p>Before we begin, ensure you have:</p>
+<ul>
+<li><strong>Node.js 18+</strong> and npm</li>
+<li><strong>Rust 1.70+</strong> and Cargo</li>
+<li><strong>Solana CLI tools</strong> installed</li>
+<li><strong>Anchor Framework</strong> installed</li>
+<li><strong>Git</strong> for cloning the repository</li>
+</ul>
+<h3>Quick Prerequisites Check</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Check Node.js version</span>
+node<span class="w"> </span>--version<span class="w">  </span><span class="c1"># Should be 18+</span>
+
+<span class="c1"># Check Rust version</span>
+rustc<span class="w"> </span>--version<span class="w">  </span><span class="c1"># Should be 1.70+</span>
+
+<span class="c1"># Check Solana CLI</span>
+solana<span class="w"> </span>--version<span class="w">  </span><span class="c1"># Should be 1.17+</span>
+
+<span class="c1"># Check Anchor</span>
+anchor<span class="w"> </span>--version<span class="w">  </span><span class="c1"># Should be 0.31+</span>
+</code></pre></div>
+
+<h2>🚀 Step 1: Clone and Setup</h2>
+<h3>Clone the Repository</h3>
+<div class="codehilite"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/dextrorsal/quantdesk.git
+<span class="nb">cd</span><span class="w"> </span>quantdesk
+</code></pre></div>
+
+<h3>Install Dependencies</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Install backend dependencies</span>
+<span class="nb">cd</span><span class="w"> </span>backend<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>npm<span class="w"> </span>install
+
+<span class="c1"># Install frontend dependencies</span>
+<span class="nb">cd</span><span class="w"> </span>../frontend<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>npm<span class="w"> </span>install
+
+<span class="c1"># Install smart contract dependencies</span>
+<span class="nb">cd</span><span class="w"> </span>../contracts/smart-contracts<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>npm<span class="w"> </span>install
+</code></pre></div>
+
+<h2>⚙️ Step 2: Environment Configuration</h2>
+<h3>Create Environment File</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Copy the environment template</span>
+cp<span class="w"> </span>env.example<span class="w"> </span>.env
+</code></pre></div>
+
+<h3>Configure Environment Variables</h3>
+<p>Edit <code>.env</code> with your configuration:</p>
+<div class="codehilite"><pre><span></span><code>#<span class="w"> </span><span class="nv">Solana</span><span class="w"> </span><span class="nv">Configuration</span>
+<span class="nv">SOLANA_RPC_URL</span><span class="o">=</span><span class="nv">https</span>:<span class="o">//</span><span class="nv">api</span>.<span class="nv">devnet</span>.<span class="nv">solana</span>.<span class="nv">com</span>
+<span class="nv">SOLANA_WALLET_PATH</span><span class="o">=~/</span>.<span class="nv">config</span><span class="o">/</span><span class="nv">solana</span><span class="o">/</span><span class="nv">id</span>.<span class="nv">json</span>
+
+#<span class="w"> </span><span class="nv">Supabase</span><span class="w"> </span><span class="nv">Configuration</span><span class="w"> </span><span class="ss">(</span><span class="nv">Optional</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nv">local</span><span class="w"> </span><span class="nv">development</span><span class="ss">)</span>
+<span class="nv">SUPABASE_URL</span><span class="o">=</span><span class="nv">your_supabase_url</span>
+<span class="nv">SUPABASE_ANON_KEY</span><span class="o">=</span><span class="nv">your_supabase_anon_key</span>
+
+#<span class="w"> </span><span class="nv">Backend</span><span class="w"> </span><span class="nv">Configuration</span>
+<span class="nv">PORT</span><span class="o">=</span><span class="mi">3002</span>
+<span class="nv">NODE_ENV</span><span class="o">=</span><span class="nv">development</span>
+<span class="nv">JWT_SECRET</span><span class="o">=</span><span class="nv">your_jwt_secret</span>
+
+#<span class="w"> </span><span class="nv">Frontend</span><span class="w"> </span><span class="nv">Configuration</span>
+<span class="nv">VITE_API_URL</span><span class="o">=</span><span class="nv">http</span>:<span class="o">//</span><span class="nv">localhost</span>:<span class="mi">3002</span>
+<span class="nv">VITE_SOLANA_RPC_URL</span><span class="o">=</span><span class="nv">https</span>:<span class="o">//</span><span class="nv">api</span>.<span class="nv">devnet</span>.<span class="nv">solana</span>.<span class="nv">com</span>
+</code></pre></div>
+
+<h2>🏃‍♂️ Step 3: Start the Platform</h2>
+<h3>Terminal 1: Start Backend</h3>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>backend
+npm<span class="w"> </span>run<span class="w"> </span>dev
+</code></pre></div>
+
+<p>You should see:</p>
+<div class="codehilite"><pre><span></span><code>🚀 QuantDesk Backend API running on port 3002
+📊 Environment: development
+🔗 Frontend URL: http://localhost:3000
+📡 WebSocket enabled: Yes
+💰 Starting Pyth Oracle price feed service...
+✅ Pyth Oracle price feed service started
+</code></pre></div>
+
+<h3>Terminal 2: Start Frontend</h3>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>frontend
+npm<span class="w"> </span>run<span class="w"> </span>dev
+</code></pre></div>
+
+<p>You should see:</p>
+<div class="codehilite"><pre><span></span><code>  VITE v5.0.0  ready in 500 ms
+
+  ➜  Local:   http://localhost:3001/
+  ➜  Network: use --host to expose
+</code></pre></div>
+
+<h3>Terminal 3: Start Solana Validator (Optional)</h3>
+<p>For local testing with smart contracts:</p>
+<div class="codehilite"><pre><span></span><code>solana-test-validator
+</code></pre></div>
+
+<h2>🌐 Step 4: Access the Platform</h2>
+<h3>Open QuantDesk</h3>
+<p>Navigate to <strong>http://localhost:3001</strong> in your browser.</p>
+<p>You should see the QuantDesk trading interface with:
+- <strong>Market Overview</strong>: Real-time price feeds
+- <strong>Trading Panel</strong>: Order placement interface
+- <strong>Portfolio</strong>: Position and balance overview
+- <strong>Analytics</strong>: Market and trading metrics</p>
+<h3>Connect Your Wallet</h3>
+<ol>
+<li>Click <strong>"Connect Wallet"</strong> in the top right</li>
+<li>Select your preferred wallet (Phantom, Solflare, etc.)</li>
+<li>Approve the connection</li>
+<li>Your wallet address will appear in the interface</li>
+</ol>
+<h2>📊 Step 5: Explore the Features</h2>
+<h3>View Market Data</h3>
+<ul>
+<li><strong>Real-time Prices</strong>: Live BTC, ETH, SOL perpetual prices</li>
+<li><strong>Market Depth</strong>: Order book visualization</li>
+<li><strong>Volume Analytics</strong>: 24h volume and trading activity</li>
+</ul>
+<h3>Place Your First Order</h3>
+<ol>
+<li><strong>Select Market</strong>: Choose BTC-PERP, ETH-PERP, or SOL-PERP</li>
+<li><strong>Set Parameters</strong>:</li>
+<li>Side: Long or Short</li>
+<li>Size: Position size</li>
+<li>Leverage: Up to 100x</li>
+<li>Order Type: Market or Limit</li>
+<li><strong>Review</strong>: Check your order details</li>
+<li><strong>Submit</strong>: Confirm and place the order</li>
+</ol>
+<h3>Monitor Your Position</h3>
+<ul>
+<li><strong>Real-time P&amp;L</strong>: Live profit/loss updates</li>
+<li><strong>Risk Metrics</strong>: Margin requirements and liquidation risk</li>
+<li><strong>Position History</strong>: Complete trading history</li>
+</ul>
+<h2>🔍 Step 6: Explore Analytics</h2>
+<h3>Access Grafana Dashboard</h3>
+<p>If you have Grafana configured:</p>
+<ol>
+<li>Navigate to <strong>http://localhost:3000</strong></li>
+<li>Login to Grafana</li>
+<li>Import the QuantDesk dashboard</li>
+<li>View real-time trading metrics</li>
+</ol>
+<h3>API Endpoints</h3>
+<p>Test the API directly:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Health check</span>
+curl<span class="w"> </span>http://localhost:3002/health
+
+<span class="c1"># Get markets</span>
+curl<span class="w"> </span>http://localhost:3002/api/supabase-oracle/markets
+
+<span class="c1"># Get trading metrics</span>
+curl<span class="w"> </span>http://localhost:3002/api/metrics/trading
+</code></pre></div>
+
+<h2>🎉 Congratulations!</h2>
+<p>You've successfully set up QuantDesk! Here's what you've accomplished:</p>
+<ul>
+<li>✅ <strong>Platform Running</strong>: Full-stack application operational</li>
+<li>✅ <strong>Wallet Connected</strong>: Ready for trading</li>
+<li>✅ <strong>Market Data</strong>: Real-time price feeds active</li>
+<li>✅ <strong>Trading Ready</strong>: Can place orders and manage positions</li>
+<li>✅ <strong>Analytics Available</strong>: Monitoring and metrics accessible</li>
+</ul>
+<h2>🚀 Next Steps</h2>
+<h3>For Traders</h3>
+<ul>
+<li><a href="../trading/overview.html">Trading Guide</a> - Master advanced trading features</li>
+<li><a href="../trading/risk-management.html">Risk Management</a> - Learn risk management strategies</li>
+<li><a href="../trading/portfolio.html">Portfolio Analytics</a> - Optimize your portfolio</li>
+</ul>
+<h3>For Developers</h3>
+<ul>
+<li><a href="../api/overview.html">API Documentation</a> - Integrate with our APIs</li>
+<li><a href="../api/smart-contracts.html">Smart Contract Integration</a> - Direct blockchain integration</li>
+<li><a href="../api/sdks.html">SDK Libraries</a> - Use our official SDKs</li>
+</ul>
+<h3>For Institutions</h3>
+<ul>
+<li><a href="../deployment/production.html">Enterprise Features</a> - Production deployment</li>
+<li><a href="../security/compliance.html">Compliance Guide</a> - Regulatory compliance</li>
+<li><a href="mailto:contact@quantdesk.io">Professional Support</a> - Enterprise support</li>
+</ul>
+<h2>🆘 Need Help?</h2>
+<ul>
+<li><strong>Discord Community</strong>: <a href="https://discord.gg/quantdesk">Join our Discord</a></li>
+<li><strong>GitHub Issues</strong>: <a href="https://github.com/dextrorsal/quantdesk/issues">Report issues</a></li>
+<li><strong>Documentation</strong>: <a href="../README.html">Browse all docs</a></li>
+<li><strong>Email Support</strong>: <a href="mailto:contact@quantdesk.io">contact@quantdesk.io</a></li>
+</ul>
+<h2>🔧 Troubleshooting</h2>
+<h3>Common Issues</h3>
+<p><strong>Backend won't start</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Check if port 3002 is available</span>
+lsof<span class="w"> </span>-i<span class="w"> </span>:3002
+
+<span class="c1"># Kill any conflicting processes</span>
+pkill<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;node.*3002&quot;</span>
+</code></pre></div>
+
+<p><strong>Frontend won't start</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Clear npm cache</span>
+npm<span class="w"> </span>cache<span class="w"> </span>clean<span class="w"> </span>--force
+
+<span class="c1"># Reinstall dependencies</span>
+rm<span class="w"> </span>-rf<span class="w"> </span>node_modules<span class="w"> </span>package-lock.json
+npm<span class="w"> </span>install
+</code></pre></div>
+
+<p><strong>Wallet connection issues</strong>:
+- Ensure your wallet is unlocked
+- Check that you're on the correct network (Devnet)
+- Try refreshing the page</p>
+<p><strong>Smart contract errors</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Restart Solana validator</span>
+pkill<span class="w"> </span>solana-test-validator
+solana-test-validator
+</code></pre></div>
+
+<hr />
+<p><strong>Ready for more?</strong> Check out our <a href="../trading/overview.html">Trading Guide</a> or <a href="../api/overview.html">API Documentation</a>!</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collateral Fix Testing - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/">&larr; Back to Documentation</a>
+        </div>
+        <h1>✅ USD Collateral Display Fix - Quick Testing Guide</h1>
+<h2>🎯 What Was Fixed</h2>
+<p><strong>Problem</strong>: Frontend displayed <code>7,619,097 SOL</code> instead of <code>$93.00 USD</code></p>
+<p><strong>Root Cause</strong>: Treating USD (6 decimals) as lamports (9 decimals)
+- Bug: <code>value / 1e9</code> ❌
+- Fix: <code>value / 1e6</code> ✅</p>
+<p><strong>Solution</strong>: Following Drift Protocol patterns + Expert MCP guidance</p>
+<hr />
+<h2>🧪 Testing Status</h2>
+<h3>✅ Completed</h3>
+<ul>
+<li>[x] Consulted Solana/Anchor experts via MCP</li>
+<li>[x] Installed <code>decimal.js</code> for precise conversions</li>
+<li>[x] Created utility formatters (<code>frontend/src/utils/formatters.ts</code>)</li>
+<li>[x] Fixed smart contract service (read <code>value_usd</code> field)</li>
+<li>[x] Updated Account SlideOut display</li>
+<li>[x] Created sandbox validation tests</li>
+<li>[x] All 5 sandbox tests passing</li>
+</ul>
+<h3>📋 Ready for Manual Testing</h3>
+<ul>
+<li>[ ] Frontend UI shows correct USD values</li>
+<li>[ ] No garbage SOL values displayed</li>
+<li>[ ] Deposit flow works correctly</li>
+<li>[ ] Withdrawal flow works correctly</li>
+<li>[ ] Values match across all layers</li>
+</ul>
+<hr />
+<h2>🚀 Quick Test (2 minutes)</h2>
+<h3>Services Running</h3>
+<p>✅ Backend: http://localhost:3002<br />
+✅ Frontend: http://localhost:3001</p>
+<h3>Test Steps</h3>
+<ol>
+<li>
+<p><strong>Open Frontend</strong>
+   <code>http://localhost:3001</code></p>
+</li>
+<li>
+<p><strong>Connect Wallet</strong></p>
+</li>
+<li>Click "Connect Wallet"</li>
+<li>
+<p>Approve connection</p>
+</li>
+<li>
+<p><strong>Open Account Panel</strong></p>
+</li>
+<li>Click account button (top right)</li>
+<li>
+<p>Check "Total Collateral"</p>
+</li>
+<li>
+<p><strong>Expected Result</strong>
+   <code>Total Collateral: $XX.XX USD  ✅</code></p>
+</li>
+</ol>
+<p><strong>NOT</strong>:
+   <code>Total Collateral: X,XXX,XXX SOL  ❌</code></p>
+<hr />
+<h2>🔍 Validation Points</h2>
+<h3>Frontend Console Logs</h3>
+<p>Open browser console (F12) and verify:</p>
+<div class="codehilite"><pre><span></span><code>💰 USD collateral value from account data: 93 USD
+📊 Raw value (6 decimals): 93000000
+🔍 Conversion check: value / 1e6 = 93
+</code></pre></div>
+
+<h3>Backend API Check</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Replace YOUR_WALLET with your actual wallet address</span>
+curl<span class="w"> </span>http://localhost:3002/api/protocol/user/YOUR_WALLET_ADDRESS<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.account.total_collateral_usdc&#39;</span>
+
+<span class="c1"># Expected: 93.00 (USD value)</span>
+</code></pre></div>
+
+<h3>Sandbox Tests</h3>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>solana-sandbox
+npx<span class="w"> </span>ts-mocha<span class="w"> </span>-p<span class="w"> </span>./tsconfig.json<span class="w"> </span>tests/test-usd-collateral-display.ts
+
+<span class="c1"># Expected: 5 passing</span>
+</code></pre></div>
+
+<hr />
+<h2>📊 Before/After Comparison</h2>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Before (Bug)</th>
+<th>After (Fixed)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.45 SOL deposited @ $207</td>
+<td><code>0.093 SOL</code> ❌</td>
+<td><code>$93.15 USD</code> ✅</td>
+</tr>
+<tr>
+<td>Display format</td>
+<td>Large garbage values</td>
+<td>Clean USD format</td>
+</tr>
+<tr>
+<td>Backend consistency</td>
+<td>Mismatched</td>
+<td>Consistent ✅</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>🎬 Demo for Video</h2>
+<h3>Talking Points</h3>
+<ol>
+<li><strong>"We fixed a critical collateral display bug"</strong></li>
+<li>Show before: garbage values</li>
+<li>
+<p>Show after: clean USD display</p>
+</li>
+<li>
+<p><strong>"Following Drift Protocol patterns"</strong></p>
+</li>
+<li>Consulted Solana/Anchor experts via MCP</li>
+<li>Used <code>decimal.js</code> for precision</li>
+<li>
+<p>Proper USD conversion (6 decimals)</p>
+</li>
+<li>
+<p><strong>"Validated with comprehensive tests"</strong></p>
+</li>
+<li>Show sandbox tests passing</li>
+<li>Show frontend displaying correctly</li>
+<li>Show backend API consistency</li>
+</ol>
+<h3>Screen Recording Checklist</h3>
+<ul>
+<li>[ ] Show Account SlideOut with correct USD value</li>
+<li>[ ] Deposit 0.5 SOL and show USD conversion</li>
+<li>[ ] Show browser console logs (clean conversions)</li>
+<li>[ ] Show sandbox tests passing</li>
+<li>[ ] Show backend API response</li>
+</ul>
+<hr />
+<h2>📖 Documentation</h2>
+<p><strong>Full Implementation Details</strong>:
+- See: <code>docs/debugging/USD_COLLATERAL_FIX.md</code></p>
+<p><strong>Key Files Modified</strong>:
+1. <code>frontend/src/utils/formatters.ts</code> (CREATED)
+2. <code>frontend/src/services/smartContractService.ts</code> (FIXED)
+3. <code>frontend/src/components/AccountSlideOut.tsx</code> (FIXED)
+4. <code>solana-sandbox/tests/test-usd-collateral-display.ts</code> (CREATED)</p>
+<hr />
+<h2>🐛 Troubleshooting</h2>
+<h3>Still seeing large SOL values?</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Hard refresh browser</span>
+Ctrl+Shift+R<span class="w"> </span><span class="o">(</span>Windows/Linux<span class="o">)</span>
+Cmd+Shift+R<span class="w"> </span><span class="o">(</span>Mac<span class="o">)</span>
+</code></pre></div>
+
+<h3>Services not running?</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Restart services</span>
+<span class="nb">cd</span><span class="w"> </span>backend<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pnpm<span class="w"> </span>run<span class="w"> </span>dev<span class="w"> </span><span class="p">&amp;</span>
+<span class="nb">cd</span><span class="w"> </span>frontend<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pnpm<span class="w"> </span>run<span class="w"> </span>dev<span class="w"> </span><span class="p">&amp;</span>
+</code></pre></div>
+
+<h3>Tests failing?</h3>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>solana-sandbox
+npm<span class="w"> </span>install<span class="w"> </span>decimal.js
+npx<span class="w"> </span>ts-mocha<span class="w"> </span>-p<span class="w"> </span>./tsconfig.json<span class="w"> </span>tests/test-usd-collateral-display.ts
+</code></pre></div>
+
+<hr />
+<h2>✅ Sign-Off Checklist</h2>
+<p>Before considering this fix complete:</p>
+<ul>
+<li>[ ] Frontend displays USD values correctly</li>
+<li>[ ] No console errors</li>
+<li>[ ] Sandbox tests pass (5/5)</li>
+<li>[ ] Backend API returns correct values</li>
+<li>[ ] Deposit flow works</li>
+<li>[ ] Withdrawal flow works</li>
+<li>[ ] Ready for hackathon video recording</li>
+</ul>
+<hr />
+<h2>📞 Need Help?</h2>
+<p>Check the detailed docs:</p>
+<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>docs/debugging/USD_COLLATERAL_FIX.md
+</code></pre></div>
+
+<p>Run diagnostics:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Check services</span>
+ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;(pnpm|vite|nodemon)&quot;</span>
+
+<span class="c1"># Check frontend logs</span>
+tail<span class="w"> </span>-f<span class="w"> </span>logs/frontend.log
+
+<span class="c1"># Check backend logs</span>
+tail<span class="w"> </span>-f<span class="w"> </span>logs/backend-dev.log
+</code></pre></div>
+
+<hr />
+<p><strong>Status</strong>: ✅ READY FOR TESTING</p>
+<p><strong>Next Step</strong>: Open http://localhost:3001 and verify the fix! 🚀</p>
+    </div>
+</body>
+</html>

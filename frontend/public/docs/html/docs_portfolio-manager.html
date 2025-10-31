@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio-Manager - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/docs">&larr; Back to Documentation</a>
+        </div>
+        <h1>Portfolio Manager Implementation Specification</h1>
+<h2>Overview</h2>
+<p>Professional-grade algorithmic portfolio manager for institutional trading operations. Manages profit harvesting, loss recovery, and capital allocation across multiple strategy pools with focus on capital protection and black swan event mitigation.</p>
+<h2>Trader Profile &amp; Requirements</h2>
+<ul>
+<li><strong>Trading Volume</strong>: 20M+ annually (professional trader level)</li>
+<li><strong>Operation Scale</strong>: Institutional-grade multi-strategy deployment</li>
+<li><strong>Capital Allocation</strong>: $500-1K initial deployment, scalable architecture</li>
+<li><strong>Risk Philosophy</strong>: Profit protection over complex risk limits</li>
+<li><strong>Architecture Goal</strong>: Strategy pool isolation with emergency reserves</li>
+</ul>
+<h2>Architecture</h2>
+<h3>Professional Strategy Pool Structure</h3>
+<div class="codehilite"><pre><span></span><code>Bitget Professional Setup (Phase 1 Focus)
+├── Manual Trading Account (Discretionary trading)
+├── Emergency Reserve Pool (20% - $100-200)
+├── Low Frequency Pool (50% - $250-500)
+│   ├── 1h/4h Trend Strategies (Cross margin)
+│   ├── Daily Swing Strategies (Isolated margin)
+│   └── LF Pool Reserve (40% of pool)
+├── High Frequency Pool (30% - $150-300)
+│   ├── 1m/5m Scalping Bots (Isolated margin)
+│   ├── 15m Momentum Bots (Cross margin)
+│   └── HF Pool Reserve (30% of pool)
+└── Future Expansion Pools (Spot, other exchanges)
+</code></pre></div>
+
+<h3>Capital Allocation Philosophy</h3>
+<ul>
+<li><strong>20% Emergency Reserves</strong>: Black swan event protection</li>
+<li><strong>50% Low Frequency</strong>: Proven strategies (1h SOL Lorentzian)</li>
+<li><strong>30% High Frequency</strong>: Development/testing strategies</li>
+<li><strong>Profit Protection</strong>: Regular harvesting to prevent total loss</li>
+<li><strong>No Complex Risk Limits</strong>: Focus on profit preservation over restrictions</li>
+</ul>
+<h3>Exchange Integration Strategy</h3>
+<ul>
+<li><strong>Primary</strong>: Bitget (professional volume, sub-account support)</li>
+<li><strong>Secondary</strong>: Other exchanges as strategies mature</li>
+<li><strong>Account Types</strong>: Sub-accounts per strategy for isolation</li>
+<li><strong>API Requirements</strong>: Balance, transfers, position management</li>
+</ul>
+<h2>Implementation Requirements</h2>
+<h3>1. Database Schema</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Portfolio state tracking</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">portfolio_state</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">pot_balance</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span>
+<span class="w">    </span><span class="n">total_allocated</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span>
+<span class="w">    </span><span class="n">total_pnl</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span>
+<span class="w">    </span><span class="n">active_bots</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
+<span class="w">    </span><span class="k">timestamp</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span>
+<span class="p">);</span>
+
+<span class="c1">-- Bot performance tracking</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">bot_performance</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">bot_id</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
+<span class="w">    </span><span class="n">exchange</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+<span class="w">    </span><span class="n">current_balance</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span>
+<span class="w">    </span><span class="n">initial_investment</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span>
+<span class="w">    </span><span class="n">total_pnl</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span>
+<span class="w">    </span><span class="n">win_rate</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+<span class="w">    </span><span class="n">sharpe_ratio</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span>
+<span class="w">    </span><span class="n">max_drawdown</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+<span class="w">    </span><span class="n">last_updated</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span>
+<span class="p">);</span>
+
+<span class="c1">-- Transaction log</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">portfolio_transactions</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">bot_id</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
+<span class="w">    </span><span class="n">exchange</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+<span class="w">    </span><span class="n">transaction_type</span><span class="w"> </span><span class="n">ENUM</span><span class="p">(</span><span class="s1">&#39;harvest&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;refill&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;rebalance&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;allocation&#39;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">amount</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span>
+<span class="w">    </span><span class="n">pot_balance_before</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span>
+<span class="w">    </span><span class="n">pot_balance_after</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span>
+<span class="w">    </span><span class="n">reason</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">    </span><span class="k">timestamp</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span>
+<span class="p">);</span>
+</code></pre></div>
+
+<h3>2. Core Classes</h3>
+<h4>PortfolioManager</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">PortfolioManager</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">config</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">exchanges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initialize_exchanges</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bots</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pot_balance</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">monitoring_interval</span> <span class="o">=</span> <span class="mi">300</span>  <span class="c1"># 5 minutes</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">start_monitoring</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Main monitoring loop&quot;&quot;&quot;</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">register_bot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bot_id</span><span class="p">,</span> <span class="n">exchange</span><span class="p">,</span> <span class="n">initial_investment</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Register new bot for monitoring&quot;&quot;&quot;</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">get_portfolio_status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get current portfolio state&quot;&quot;&quot;</span>
+</code></pre></div>
+
+<h4>ProfitHarvester</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ProfitHarvester</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">portfolio_manager</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pm</span> <span class="o">=</span> <span class="n">portfolio_manager</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">harvest_threshold</span> <span class="o">=</span> <span class="mf">1.25</span>  <span class="c1"># 25% profit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">harvest_percentage</span> <span class="o">=</span> <span class="mf">0.80</span>  <span class="c1"># Take 80% of excess</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">check_harvest_opportunities</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check all bots for harvest opportunities&quot;&quot;&quot;</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">harvest_profits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bot_id</span><span class="p">,</span> <span class="n">current_balance</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute profit harvesting&quot;&quot;&quot;</span>
+</code></pre></div>
+
+<h4>LossRecoveryManager</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">LossRecoveryManager</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">portfolio_manager</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pm</span> <span class="o">=</span> <span class="n">portfolio_manager</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">intervention_threshold</span> <span class="o">=</span> <span class="mf">0.25</span>  <span class="c1"># 75% loss</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">refill_target</span> <span class="o">=</span> <span class="mf">0.75</span>  <span class="c1"># Refill to 75% of original</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">minimum_pot_reserve</span> <span class="o">=</span> <span class="mf">200.0</span>  <span class="c1"># Always keep reserve</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">check_recovery_needs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check bots needing capital injection&quot;&quot;&quot;</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">refill_bot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bot_id</span><span class="p">,</span> <span class="n">target_amount</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute capital injection&quot;&quot;&quot;</span>
+</code></pre></div>
+
+<h4>ExchangeCoordinator</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ExchangeCoordinator</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">exchange_clients</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">supported_exchanges</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;bitget&#39;</span><span class="p">,</span> <span class="s1">&#39;coinbase&#39;</span><span class="p">,</span> <span class="s1">&#39;kucoin&#39;</span><span class="p">,</span> <span class="s1">&#39;kraken&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;jupiter&#39;</span><span class="p">,</span> <span class="s1">&#39;drift&#39;</span><span class="p">,</span> <span class="s1">&#39;binance&#39;</span><span class="p">,</span> <span class="s1">&#39;mexc&#39;</span>
+        <span class="p">]</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">get_bot_balance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bot_id</span><span class="p">,</span> <span class="n">exchange</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get bot balance from specific exchange&quot;&quot;&quot;</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">transfer_funds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">from_account</span><span class="p">,</span> <span class="n">to_account</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="n">exchange</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute internal transfer&quot;&quot;&quot;</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">get_transfer_limits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exchange</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get exchange-specific transfer limits&quot;&quot;&quot;</span>
+</code></pre></div>
+
+<h3>3. Professional Configuration Structure</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">PORTFOLIO_CONFIG</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;capital_allocation&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;total_capital&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>  <span class="c1"># $1K initial deployment</span>
+        <span class="s1">&#39;emergency_reserve&#39;</span><span class="p">:</span> <span class="mf">0.20</span><span class="p">,</span>  <span class="c1"># 20% - $200</span>
+        <span class="s1">&#39;lf_pool&#39;</span><span class="p">:</span> <span class="mf">0.50</span><span class="p">,</span>  <span class="c1"># 50% - $500 (proven strategies)</span>
+        <span class="s1">&#39;hf_pool&#39;</span><span class="p">:</span> <span class="mf">0.30</span><span class="p">,</span>  <span class="c1"># 30% - $300 (development)</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;profit_protection&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;lf_harvest_threshold&#39;</span><span class="p">:</span> <span class="mf">1.25</span><span class="p">,</span>  <span class="c1"># 25% profit for LF strategies</span>
+        <span class="s1">&#39;lf_harvest_percentage&#39;</span><span class="p">:</span> <span class="mf">0.60</span><span class="p">,</span>  <span class="c1"># Take 60% of excess</span>
+        <span class="s1">&#39;hf_harvest_threshold&#39;</span><span class="p">:</span> <span class="mf">1.15</span><span class="p">,</span>  <span class="c1"># 15% profit for HF strategies</span>
+        <span class="s1">&#39;hf_harvest_percentage&#39;</span><span class="p">:</span> <span class="mf">0.80</span><span class="p">,</span>  <span class="c1"># Take 80% of excess</span>
+        <span class="s1">&#39;compound_threshold&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>  <span class="c1"># 100% profit = compound mode</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;black_swan_protection&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;drawdown_threshold&#39;</span><span class="p">:</span> <span class="mf">0.60</span><span class="p">,</span>  <span class="c1"># 40% loss triggers protection</span>
+        <span class="s1">&#39;safety_allocation&#39;</span><span class="p">:</span> <span class="mf">0.20</span><span class="p">,</span>  <span class="c1"># Move 20% to reserves</span>
+        <span class="s1">&#39;no_refill_policy&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="c1"># Don&#39;t throw good money after bad</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;strategy_pools&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;low_frequency&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;proven_strategies&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;1h_lorentzian_sol&#39;</span><span class="p">,</span> <span class="s1">&#39;4h_swing_btc&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;margin_mode&#39;</span><span class="p">:</span> <span class="s1">&#39;cross&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;max_leverage&#39;</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span>
+            <span class="s1">&#39;allocation_per_strategy&#39;</span><span class="p">:</span> <span class="mi">150</span><span class="p">,</span>  <span class="c1"># $150 per strategy</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;high_frequency&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;development_strategies&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;5m_scalping_sol&#39;</span><span class="p">,</span> <span class="s1">&#39;15m_momentum_eth&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;margin_mode&#39;</span><span class="p">:</span> <span class="s1">&#39;isolated&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;max_leverage&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+            <span class="s1">&#39;allocation_per_strategy&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>  <span class="c1"># $100 per strategy</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;monitoring&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;check_interval&#39;</span><span class="p">:</span> <span class="mi">900</span><span class="p">,</span>  <span class="c1"># 15 minutes</span>
+        <span class="s1">&#39;profit_harvest_frequency&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;black_swan_checks&#39;</span><span class="p">:</span> <span class="s1">&#39;every_cycle&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;exchanges&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;bitget&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;primary&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;sub_account_support&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;transfer_fee&#39;</span><span class="p">:</span> <span class="mf">0.001</span><span class="p">,</span>
+            <span class="s1">&#39;min_transfer&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+            <span class="s1">&#39;api_limits&#39;</span><span class="p">:</span> <span class="s1">&#39;professional_tier&#39;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3>4. Key Methods to Implement</h3>
+<h4>Monitoring Loop</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">portfolio_monitoring_cycle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Main monitoring cycle - run every 5 minutes&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Update all bot balances</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_bot_balances</span><span class="p">()</span>
+
+        <span class="c1"># Check harvest opportunities</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">profit_harvester</span><span class="o">.</span><span class="n">check_harvest_opportunities</span><span class="p">()</span>
+
+        <span class="c1"># Check recovery needs</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">loss_recovery</span><span class="o">.</span><span class="n">check_recovery_needs</span><span class="p">()</span>
+
+        <span class="c1"># Update performance metrics</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_performance_metrics</span><span class="p">()</span>
+
+        <span class="c1"># Log portfolio state</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_portfolio_state</span><span class="p">()</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Portfolio monitoring error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>Performance-Based Rebalancing</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">rebalance_based_on_performance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reallocate capital based on bot performance&quot;&quot;&quot;</span>
+    <span class="n">performance_data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_bot_performance_metrics</span><span class="p">()</span>
+
+    <span class="c1"># Calculate performance scores</span>
+    <span class="k">for</span> <span class="n">bot_id</span><span class="p">,</span> <span class="n">metrics</span> <span class="ow">in</span> <span class="n">performance_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_performance_score</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;performance_rebalance_threshold&#39;</span><span class="p">]:</span>
+            <span class="c1"># Increase allocation</span>
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">increase_bot_allocation</span><span class="p">(</span><span class="n">bot_id</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;performance_rebalance_threshold&#39;</span><span class="p">]:</span>
+            <span class="c1"># Decrease allocation</span>
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">decrease_bot_allocation</span><span class="p">(</span><span class="n">bot_id</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>5. Exchange-Specific Considerations</h3>
+<h4>API Rate Limits</h4>
+<ul>
+<li>Implement per-exchange rate limiting</li>
+<li>Queue transfers to avoid API limits</li>
+<li>Use exchange-specific error handling</li>
+</ul>
+<h4>Transfer Mechanisms</h4>
+<ul>
+<li><strong>Centralized Exchanges</strong>: Use sub-account transfers</li>
+<li><strong>DEX (Jupiter/Drift)</strong>: Handle wallet-to-wallet transfers</li>
+<li><strong>Fee Optimization</strong>: Calculate optimal transfer timing</li>
+</ul>
+<h4>Error Handling</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">safe_transfer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">from_account</span><span class="p">,</span> <span class="n">to_account</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="n">exchange</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Transfer with comprehensive error handling&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Check balance</span>
+        <span class="c1"># Validate transfer limits</span>
+        <span class="c1"># Execute transfer</span>
+        <span class="c1"># Verify completion</span>
+        <span class="c1"># Log transaction</span>
+    <span class="k">except</span> <span class="n">ExchangeAPIError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="c1"># Handle exchange-specific errors</span>
+    <span class="k">except</span> <span class="n">InsufficientFundsError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="c1"># Handle insufficient funds</span>
+    <span class="k">except</span> <span class="n">RateLimitError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="c1"># Handle rate limits</span>
+</code></pre></div>
+
+<h3>6. Monitoring &amp; Alerting</h3>
+<h4>Key Metrics to Track</h4>
+<ul>
+<li>Portfolio PnL</li>
+<li>Individual bot performance</li>
+<li>Pot balance utilization</li>
+<li>Transfer success rates</li>
+<li>API error rates</li>
+</ul>
+<h4>Alert Conditions</h4>
+<ul>
+<li>Pot balance below minimum reserve</li>
+<li>Bot performance degradation</li>
+<li>Transfer failures</li>
+<li>Unusual loss patterns</li>
+</ul>
+<h3>7. Testing Strategy</h3>
+<h4>Unit Tests</h4>
+<ul>
+<li>Test profit harvesting logic</li>
+<li>Test loss recovery mechanisms</li>
+<li>Test performance calculations</li>
+<li>Test exchange integrations</li>
+</ul>
+<h4>Integration Tests</h4>
+<ul>
+<li>End-to-end portfolio rebalancing</li>
+<li>Multi-exchange coordination</li>
+<li>Error recovery scenarios</li>
+</ul>
+<h4>Simulation Testing</h4>
+<ul>
+<li>Backtest with historical bot performance</li>
+<li>Stress test during market volatility</li>
+<li>Test various parameter configurations</li>
+</ul>
+<h3>8. Deployment Considerations</h3>
+<h4>Process Management</h4>
+<ul>
+<li>Run as separate service from trading bots</li>
+<li>Implement health checks</li>
+<li>Set up automatic restarts</li>
+</ul>
+<h4>Monitoring</h4>
+<ul>
+<li>Real-time dashboard for portfolio status</li>
+<li>Log aggregation for debugging</li>
+<li>Performance metrics collection</li>
+</ul>
+<h4>Security</h4>
+<ul>
+<li>Secure API key management</li>
+<li>Encrypted database connections</li>
+<li>Transfer amount validation</li>
+</ul>
+<h2>Implementation Priority</h2>
+<h3>Professional Deployment Strategy</h3>
+<ol>
+<li><strong>Phase 1</strong>: Deploy proven 1h SOL Lorentzian ($250 from LF pool)</li>
+<li><strong>Phase 2</strong>: Implement profit harvesting and black swan protection</li>
+<li><strong>Phase 3</strong>: Scale proven strategy to multiple symbols (BTC, ETH)</li>
+<li><strong>Phase 4</strong>: Deploy HF strategies as development completes</li>
+<li><strong>Phase 5</strong>: Cross-pool rebalancing and performance optimization</li>
+<li><strong>Phase 6</strong>: Multi-exchange expansion</li>
+</ol>
+<h3>Key Architectural Decisions</h3>
+<ul>
+<li><strong>Start Small</strong>: $500-1K total capital for proven concept validation</li>
+<li><strong>Profit First</strong>: Focus on protecting gains over complex risk management</li>
+<li><strong>Strategy Isolation</strong>: Sub-accounts prevent strategy interference</li>
+<li><strong>Emergency Reserves</strong>: Always maintain 20% for black swan events</li>
+<li><strong>Scalable Design</strong>: Architecture supports growth to larger capital</li>
+</ul>
+<h2>Success Metrics</h2>
+<ul>
+<li><strong>Profit Retention</strong>: % of profits successfully harvested</li>
+<li><strong>Loss Recovery</strong>: % of losing bots successfully recovered</li>
+<li><strong>System Uptime</strong>: 99.9% availability target</li>
+<li><strong>Transfer Success Rate</strong>: 99.5% success rate</li>
+<li><strong>Portfolio Growth</strong>: Consistent positive returns</li>
+</ul>
+<h2>Notes</h2>
+<ul>
+<li>Prioritize robust error handling due to exchange API volatility</li>
+<li>Consider implementing circuit breakers for problematic exchanges</li>
+<li>Build comprehensive logging for debugging and compliance</li>
+<li>Design for horizontal scaling as bot count increases</li>
+<li>Implement proper async/await patterns for concurrent operations</li>
+</ul>
+    </div>
+</body>
+</html>

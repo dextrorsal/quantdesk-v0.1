@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roadmap-And-Status - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/docs">&larr; Back to Documentation</a>
+        </div>
+        <h1>QuantDesk Build Status &amp; Roadmap</h1>
+<p>QuantDesk spans the terminal UI, backend services, smart data ingestion, and MIKEY intelligence. This roadmap captures the current footprint and the path toward the full “perpetual trading command center” vision.</p>
+<h2>✅ What’s Running Today</h2>
+<h3>Trading Experience</h3>
+<ul>
+<li>Perp terminal with market boards, execution desk, risk dashboard, and MIKEY insight cards.</li>
+<li>Wallet-driven authentication, sub-accounts, and collateral tracking surfaced in the UI.</li>
+<li>Supabase + Redis-backed APIs handling orders, portfolios, and live WebSocket updates.</li>
+</ul>
+<h3>Data &amp; Intelligence Pipeline</h3>
+<ul>
+<li>Redis-stream backbone collecting price ticks, whale activity, news, and user telemetry.</li>
+<li>Dedicated collectors for Pyth prices, Solana whale flows, and curated news feeds.</li>
+<li>MIKEY intelligence layer translating those streams into summaries, alerts, and chat responses.</li>
+</ul>
+<h3>Platform Reliability</h3>
+<ul>
+<li>Row Level Security enforced across Supabase tables with rate limits and audit logs.</li>
+<li>Dockerized worker fleet, observability dashboards, and CI checks protecting deployments.</li>
+<li>RPC load balancer blueprint implemented for multi-provider Solana connectivity.</li>
+</ul>
+<h2>🚧 Focus Areas in Flight</h2>
+<h3>Data Warehouse &amp; Alerting</h3>
+<ul>
+<li>Analytics writer service aggregating Redis streams into long-term analytics tables.</li>
+<li>Configurable routing so MIKEY alerts can push to Slack, Discord, and terminal notifications simultaneously.</li>
+</ul>
+<h3>Trading Workflow Enhancements</h3>
+<ul>
+<li>Expanded market coverage (additional SOL perps, cross listings) with deeper funding history overlays.</li>
+<li>Customizable risk templates and portfolio presets for different trading styles.</li>
+</ul>
+<h3>Deployment &amp; Operations</h3>
+<ul>
+<li>Hardened staging → production promotion scripts, including automated secret management.</li>
+<li>Health checks and alerting for ingestion workers, RPC latency, and WebSocket uptime.</li>
+</ul>
+<h2>🔮 Coming Up Next</h2>
+<h3>Intelligence Expansion</h3>
+<ul>
+<li>Coinglass, CryptoQuant, and Arkham integrations to enrich MIKEY’s market context.</li>
+<li>Pattern recognition tying whale flows to perp funding and liquidation cascades.</li>
+</ul>
+<h3>Experience Layer</h3>
+<ul>
+<li>Unified “mission control” dashboard marrying smart money data, MIKEY insights, and trade stats.</li>
+<li>Mobile companion for monitoring risk, positions, and alerts on the go.</li>
+</ul>
+<h3>Automation &amp; Advanced Analytics</h3>
+<ul>
+<li>Strategy tagging with performance breakdowns inside the trade journal.</li>
+<li>API hooks for partners who want to automate order execution or analytics (without exposing proprietary MIKEY prompts).</li>
+</ul>
+<h2>Stay in the Loop</h2>
+<ul>
+<li>Check the in-terminal changelog for each feature release.</li>
+<li>Join the community chat for rollout notices and direct feedback.</li>
+<li>Watch this roadmap—milestones move from “in flight” to “live” as the platform evolves.</li>
+</ul>
+<p>QuantDesk is a large, multi-service platform: the terminal you see today is backed by production ingestion pipelines, MIKEY intelligence, and hardened infrastructure. Each iteration tightens that loop between data, insights, and execution so traders get a truly professional Solana perp experience.</p>
+    </div>
+</body>
+</html>

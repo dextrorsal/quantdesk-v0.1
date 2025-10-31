@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hosting Strategy Guide - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/docs">&larr; Back to Documentation</a>
+        </div>
+        <h1>🚀 QuantDesk Hosting Strategy Guide</h1>
+<p><em>Comprehensive hosting recommendations for QuantDesk trading platform</em></p>
+<h2>📊 Project Analysis Summary</h2>
+<p><strong>QuantDesk</strong> is a sophisticated crypto trading platform with:
+- <strong>Frontend</strong>: React/TypeScript (currently on Vercel)
+- <strong>Backend</strong>: Node.js/TypeScript with Express (currently on Railway)
+- <strong>Database</strong>: PostgreSQL + Supabase
+- <strong>AI/ML Components</strong>: PyTorch-based trading models with GPU acceleration
+- <strong>Blockchain</strong>: Solana integration with multiple RPC providers
+- <strong>Real-time Features</strong>: WebSockets, live trading, portfolio analytics</p>
+<h2>🚨 Current Hosting Assessment</h2>
+<h3><strong>Vercel (Frontend)</strong> ✅</h3>
+<p><strong>Status</strong>: Generally Sustainable
+- <strong>Pros</strong>: Excellent for React apps, great DX, reliable CDN
+- <strong>Cons</strong>: Expensive for high-traffic apps, limited backend capabilities
+- <strong>Long-term</strong>: Good for frontend, but consider alternatives for cost optimization</p>
+<h3><strong>Railway (Backend)</strong> ⚠️</h3>
+<p><strong>Status</strong>: Concerning for Long-term
+- <strong>Recent Issues</strong>: Pricing changes, service reliability concerns
+- <strong>Competition</strong>: Better alternatives emerging
+- <strong>Recommendation</strong>: <strong>Plan migration</strong> within 6-12 months</p>
+<h2>🏆 Best Hosting Recommendations</h2>
+<h3><strong>Tier 1: Premium AI-Optimized Solutions</strong></h3>
+<h4><strong>1. AWS (Recommended for Production)</strong></h4>
+<div class="codehilite"><pre><span></span><code><span class="nt">Architecture</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">Frontend</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CloudFront + S3</span>
+<span class="w">  </span><span class="nt">Backend</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ECS Fargate + Application Load Balancer</span>
+<span class="w">  </span><span class="nt">Database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RDS PostgreSQL + ElastiCache Redis</span>
+<span class="w">  </span><span class="nt">AI/ML</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SageMaker + EC2 GPU instances</span>
+<span class="w">  </span><span class="nt">Monitoring</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CloudWatch + X-Ray</span>
+
+<span class="nt">Cost</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$200-800/month (scales with usage)</span>
+<span class="nt">Pros</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Enterprise-grade, GPU support, global scale</span>
+<span class="nt">Cons</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Complex setup, higher costs</span>
+</code></pre></div>
+
+<h4><strong>2. Google Cloud Platform</strong></h4>
+<div class="codehilite"><pre><span></span><code><span class="nt">Architecture</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">Frontend</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Cloud CDN + Cloud Storage</span>
+<span class="w">  </span><span class="nt">Backend</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Cloud Run + Cloud Load Balancing</span>
+<span class="w">  </span><span class="nt">Database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Cloud SQL + Memorystore</span>
+<span class="w">  </span><span class="nt">AI/ML</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Vertex AI + Compute Engine GPU</span>
+
+<span class="nt">Cost</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$150-600/month</span>
+<span class="nt">Pros</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Excellent AI/ML tools, competitive pricing</span>
+<span class="nt">Cons</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Learning curve, vendor lock-in</span>
+</code></pre></div>
+
+<h3><strong>Tier 2: Modern Platform Solutions</strong></h3>
+<h4><strong>3. DigitalOcean App Platform (Best Balance)</strong></h4>
+<div class="codehilite"><pre><span></span><code><span class="nt">Architecture</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">Frontend</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Static Site + CDN</span>
+<span class="w">  </span><span class="nt">Backend</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">App Platform + Managed Database</span>
+<span class="w">  </span><span class="nt">AI/ML</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Droplets with GPU support</span>
+<span class="w">  </span><span class="nt">Monitoring</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Built-in monitoring</span>
+
+<span class="nt">Cost</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$50-300/month</span>
+<span class="nt">Pros</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Simple setup, good pricing, reliable</span>
+<span class="nt">Cons</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Limited AI/ML features</span>
+</code></pre></div>
+
+<h4><strong>4. Render (Railway Alternative)</strong></h4>
+<div class="codehilite"><pre><span></span><code><span class="nt">Architecture</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">Frontend</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Static Sites</span>
+<span class="w">  </span><span class="nt">Backend</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Web Services + Background Workers</span>
+<span class="w">  </span><span class="nt">Database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Managed PostgreSQL</span>
+<span class="w">  </span><span class="nt">AI/ML</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Custom Docker containers</span>
+
+<span class="nt">Cost</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$25-200/month</span>
+<span class="nt">Pros</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Simple deployment, good pricing</span>
+<span class="nt">Cons</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Newer platform, limited GPU support</span>
+</code></pre></div>
+
+<h3><strong>Tier 3: Specialized AI Platforms</strong></h3>
+<h4><strong>5. Modal (AI-First Platform)</strong></h4>
+<div class="codehilite"><pre><span></span><code><span class="nt">Architecture</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">Frontend</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Vercel/Netlify</span>
+<span class="w">  </span><span class="nt">Backend</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Modal Functions</span>
+<span class="w">  </span><span class="nt">AI/ML</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Modal GPU instances</span>
+<span class="w">  </span><span class="nt">Database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">External (Supabase)</span>
+
+<span class="nt">Cost</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$100-500/month</span>
+<span class="nt">Pros</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Built for AI, GPU optimization</span>
+<span class="nt">Cons</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Newer platform, learning curve</span>
+</code></pre></div>
+
+<h4><strong>6. Replicate (AI Inference)</strong></h4>
+<div class="codehilite"><pre><span></span><code><span class="nt">Architecture</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">Frontend</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Vercel</span>
+<span class="w">  </span><span class="nt">Backend</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Railway/Render</span>
+<span class="w">  </span><span class="nt">AI/ML</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Replicate API</span>
+<span class="w">  </span><span class="nt">Database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Supabase</span>
+
+<span class="nt">Cost</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$50-300/month</span>
+<span class="nt">Pros</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Easy AI deployment, pay-per-use</span>
+<span class="nt">Cons</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Less control over infrastructure</span>
+</code></pre></div>
+
+<h2>🎯 Specific Recommendations for QuantDesk</h2>
+<h3><strong>Immediate (Next 3 months)</strong></h3>
+<ol>
+<li><strong>Keep Vercel</strong> for frontend (it's working well)</li>
+<li><strong>Migrate Railway backend</strong> to <strong>DigitalOcean App Platform</strong></li>
+<li><strong>Set up monitoring</strong> with proper alerting</li>
+</ol>
+<h3><strong>Medium-term (6-12 months)</strong></h3>
+<ol>
+<li><strong>Evaluate AWS/GCP</strong> for AI/ML components</li>
+<li><strong>Implement GPU-accelerated inference</strong> for trading models</li>
+<li><strong>Set up multi-region deployment</strong> for reliability</li>
+</ol>
+<h3><strong>Long-term (12+ months)</strong></h3>
+<ol>
+<li><strong>Consider hybrid architecture</strong> (frontend on CDN, backend on cloud)</li>
+<li><strong>Implement auto-scaling</strong> based on trading volume</li>
+<li><strong>Add edge computing</strong> for low-latency trading</li>
+</ol>
+<h2>💡 Migration Strategy</h2>
+<h3><strong>Phase 1: Backend Migration (Railway → DigitalOcean)</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 1. Set up DigitalOcean App Platform</span>
+<span class="c1"># 2. Migrate environment variables</span>
+<span class="c1"># 3. Update deployment scripts</span>
+<span class="c1"># 4. Test thoroughly</span>
+<span class="c1"># 5. Switch DNS</span>
+</code></pre></div>
+
+<h3><strong>Phase 2: AI/ML Optimization</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 1. Set up GPU instances for model training</span>
+<span class="c1"># 2. Implement model serving infrastructure</span>
+<span class="c1"># 3. Add model versioning and A/B testing</span>
+<span class="c1"># 4. Optimize inference latency</span>
+</code></pre></div>
+
+<h3><strong>Phase 3: Scaling &amp; Reliability</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 1. Implement auto-scaling</span>
+<span class="c1"># 2. Add multi-region support</span>
+<span class="c1"># 3. Set up disaster recovery</span>
+<span class="c1"># 4. Implement comprehensive monitoring</span>
+</code></pre></div>
+
+<h2>🔧 Technical Implementation</h2>
+<h3><strong>1. Containerization Strategy</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="c"># Multi-stage build for AI components</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">nvidia/cuda:11.8-devel-ubuntu20.04</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">ai-base</span>
+<span class="c"># ... AI/ML dependencies</span>
+
+<span class="k">FROM</span><span class="w"> </span><span class="s">node:20-slim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">backend</span>
+<span class="c"># ... Backend dependencies</span>
+<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>ai-base<span class="w"> </span>/opt/ai<span class="w"> </span>/opt/ai
+</code></pre></div>
+
+<h3><strong>2. Environment Configuration</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># docker-compose.yml</span>
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">backend</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quantdesk-backend:latest</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NODE_ENV=production</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GPU_ENABLED=true</span>
+<span class="w">    </span><span class="nt">deploy</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">resources</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">reservations</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">devices</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nvidia</span>
+<span class="w">              </span><span class="nt">count</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">              </span><span class="nt">capabilities</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">gpu</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+
+<h3><strong>3. Monitoring Setup</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Monitoring stack</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Prometheus</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Metrics collection</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Grafana</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Visualization</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">AlertManager</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Alerting</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Jaeger</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Distributed tracing</span>
+</code></pre></div>
+
+<h2>📊 Cost Comparison (Monthly)</h2>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Frontend</th>
+<th>Backend</th>
+<th>Database</th>
+<th>AI/ML</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Current</strong></td>
+<td>Vercel ($20)</td>
+<td>Railway ($25)</td>
+<td>Supabase ($25)</td>
+<td>-</td>
+<td><strong>$70</strong></td>
+</tr>
+<tr>
+<td><strong>DigitalOcean</strong></td>
+<td>App Platform ($12)</td>
+<td>App Platform ($25)</td>
+<td>Managed DB ($15)</td>
+<td>Droplet ($40)</td>
+<td><strong>$92</strong></td>
+</tr>
+<tr>
+<td><strong>AWS</strong></td>
+<td>CloudFront ($10)</td>
+<td>ECS ($50)</td>
+<td>RDS ($30)</td>
+<td>SageMaker ($100)</td>
+<td><strong>$190</strong></td>
+</tr>
+<tr>
+<td><strong>GCP</strong></td>
+<td>Cloud CDN ($8)</td>
+<td>Cloud Run ($30)</td>
+<td>Cloud SQL ($25)</td>
+<td>Vertex AI ($80)</td>
+<td><strong>$143</strong></td>
+</tr>
+</tbody>
+</table>
+<h2>🚀 Action Plan</h2>
+<h3><strong>Week 1-2: Assessment &amp; Planning</strong></h3>
+<ul>
+<li>[ ] Audit current Railway usage and costs</li>
+<li>[ ] Set up DigitalOcean account and test deployment</li>
+<li>[ ] Create migration timeline and rollback plan</li>
+</ul>
+<h3><strong>Week 3-4: Migration</strong></h3>
+<ul>
+<li>[ ] Deploy backend to DigitalOcean App Platform</li>
+<li>[ ] Migrate environment variables and secrets</li>
+<li>[ ] Update DNS and test thoroughly</li>
+</ul>
+<h3><strong>Week 5-8: Optimization</strong></h3>
+<ul>
+<li>[ ] Set up monitoring and alerting</li>
+<li>[ ] Implement GPU support for AI models</li>
+<li>[ ] Optimize performance and costs</li>
+</ul>
+<h3><strong>Month 3+: Scaling</strong></h3>
+<ul>
+<li>[ ] Evaluate AWS/GCP for advanced AI features</li>
+<li>[ ] Implement auto-scaling</li>
+<li>[ ] Add multi-region support</li>
+</ul>
+<h2>🎯 Final Recommendation</h2>
+<p><strong>For QuantDesk specifically</strong>, I recommend:</p>
+<ol>
+<li><strong>Short-term</strong>: Migrate from Railway to <strong>DigitalOcean App Platform</strong></li>
+<li><strong>Medium-term</strong>: Add <strong>Modal</strong> or <strong>AWS SageMaker</strong> for AI/ML components</li>
+<li><strong>Long-term</strong>: Consider <strong>AWS</strong> or <strong>GCP</strong> for enterprise-scale deployment</li>
+</ol>
+<p>This approach gives you:
+- ✅ <strong>Cost optimization</strong> (30-40% savings vs current setup)
+- ✅ <strong>Better reliability</strong> than Railway
+- ✅ <strong>GPU support</strong> for AI models
+- ✅ <strong>Easy migration path</strong> with minimal downtime
+- ✅ <strong>Future scalability</strong> options</p>
+<h2>📚 Additional Resources</h2>
+<ul>
+<li><a href="https://docs.digitalocean.com/products/app-platform/">DigitalOcean App Platform Documentation</a></li>
+<li><a href="https://docs.aws.amazon.com/ecs/latest/userguide/what-is-fargate.html">AWS ECS Fargate Guide</a></li>
+<li><a href="https://cloud.google.com/run/docs">Google Cloud Run Documentation</a></li>
+<li><a href="https://modal.com/docs">Modal Documentation</a></li>
+</ul>
+<hr />
+<p><em>This guide provides comprehensive hosting recommendations for QuantDesk. Update this document as your infrastructure evolves.</em></p>
+    </div>
+</body>
+</html>

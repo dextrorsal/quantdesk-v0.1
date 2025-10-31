@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantDesk Protocol - Documentation</title>
+    <link rel="icon" type="image/png" href="/quantdesk-icon.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            background: #000000;
+            font-size: 14px;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 350px;
+            background: #000000;
+            color: #ffffff;
+            padding: 20px;
+            overflow-y: auto;
+            position: fixed;
+            height: 100vh;
+            border-right: 1px solid #3b82f6;
+        }
+
+        .sidebar h1 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #3b82f6;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 10px;
+        }
+
+        .sidebar h2 {
+            font-size: 1.1em;
+            margin: 20px 0 10px 0;
+            color: #3b82f6;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            margin-left: 10px;
+        }
+
+        .sidebar li {
+            margin: 8px 0;
+        }
+
+        .sidebar a {
+            color: #ffffff;
+            text-decoration: none;
+            display: block;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            font-size: 13px;
+        }
+
+        .sidebar a:hover {
+            background: #1a1a1a;
+            color: #3b82f6;
+            border: 1px solid #3b82f6;
+        }
+
+        .sidebar a.active {
+            background: #3b82f6;
+            color: #000000;
+            border: 1px solid #3b82f6;
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 350px;
+            padding: 40px;
+            max-width: none;
+            width: calc(100vw - 350px);
+            background: #000000;
+            min-height: 100vh;
+            border-left: 1px solid #3b82f6;
+        }
+
+        .main-content h1 {
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            border-bottom: 3px solid #3b82f6;
+            padding-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .main-content h2 {
+            color: #3b82f6;
+            margin: 30px 0 15px 0;
+            font-size: 1.8em;
+            font-weight: 600;
+        }
+
+        .main-content h3 {
+            color: #ffffff;
+            margin: 20px 0 10px 0;
+            font-size: 1.4em;
+            font-weight: 600;
+        }
+
+        .main-content p {
+            margin: 15px 0;
+            color: #d9d9d9;
+        }
+
+        .main-content ul, .main-content ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+
+        .main-content li {
+            margin: 8px 0;
+            color: #d9d9d9;
+        }
+
+        .main-content code {
+            background: #1a1a1a;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            font-size: 13px;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+
+        .main-content pre {
+            background: #0a0a0a;
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border: 1px solid #333333;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .main-content pre code {
+            background: none;
+            color: #ffffff;
+            padding: 0;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid #333333;
+            background: transparent;
+            color: #ffffff;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .status-badge:hover {
+            background: #3b82f6;
+            color: #000000;
+            border-color: #3b82f6;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .status-in-progress {
+            background: #f39c12;
+            color: white;
+        }
+
+        .status-pending {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: #1a1a1a;
+            border: 1px solid #333333;
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59,130,246,0.2);
+            border-color: #3b82f6;
+        }
+
+        .feature-card h3 {
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: #d9d9d9;
+            font-size: 0.9em;
+        }
+
+        .quick-start {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border: 1px solid #333333;
+        }
+
+        .quick-start h2 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .quick-start code {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #3b82f6;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            background: #000000;
+            color: #ffffff;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #60a5fa;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+
+        pre[class*="language-"] code {
+            background: none !important;
+            color: #ffffff !important;
+            padding: 0 !important;
+            border: none !important;
+        }
+
+        /* Language-specific colors */
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .sidebar {
+                width: 300px;
+            }
+            .main-content {
+                margin-left: 300px;
+                width: calc(100vw - 300px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+                padding: 20px;
+            }
+            .container {
+                flex-direction: column;
+            }
+        }
+
+        .toc {
+            background: #1a1a1a;
+            border: 1px solid #333333;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .toc h3 {
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .toc a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+            
+            .container {
+                flex-direction: column;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Active section highlighting */
+        .section-highlight {
+            background: rgba(59, 130, 246, 0.1) !important;
+            border-left: 3px solid #3b82f6 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <h1><i class="fas fa-terminal"></i> QuantDesk Protocol</h1>
+
+            <input type="text" class="search-box" placeholder="Search documentation..." id="searchBox">
+
+            <h2><i class="fas fa-home"></i> Getting Started</h2>
+            <ul>
+                <li><a href="#overview" class="active">Project Overview</a></li>
+                <li><a href="#quick-start">Quick Start</a></li>
+                <li><a href="/docs/getting-started">Start Trading in 5 Minutes</a></li>
+                <li><a href="/docs/trading-capabilities">Terminal Shortcuts</a></li>
+            </ul>
+
+            <h2><i class="fas fa-layer-group"></i> Core Platform</h2>
+            <ul>
+                <li><a href="/docs/why-quantdesk">Why QuantDesk</a></li>
+                <li><a href="/docs/what-makes-us-different">What Makes Us Different</a></li>
+                <li><a href="/docs/architecture">Architecture at a Glance</a></li>
+                <li><a href="/docs/account-lifecycle">Account Lifecycle</a></li>
+                <li><a href="/docs/enterprise-readiness">Enterprise Readiness</a></li>
+            </ul>
+
+            <h2><i class="fas fa-chart-line"></i> Trading Capabilities</h2>
+            <ul>
+                <li><a href="/docs/how-quantdesk-powers-perps">How QuantDesk Powers Perps</a></li>
+                <li><a href="/docs/perp-terminal-toolbox">Perp Terminal Toolbox</a></li>
+                <li><a href="/docs/perp-market-coverage">Perp Market Coverage</a></li>
+                <li><a href="/docs/multi-account-control">Multi-Account Control</a></li>
+                <li><a href="/docs/live-market-data">Live Market Data</a></li>
+            </ul>
+
+            <h2><i class="fas fa-shield-alt"></i> Security & Trust</h2>
+            <ul>
+                <li><a href="/docs/security-trust-overview">Security & Trust Overview</a></li>
+                <li><a href="/docs/security-posture">Security Posture</a></li>
+                <li><a href="/docs/data-storage-blueprint">Data & Storage Blueprint</a></li>
+                <li><a href="/docs/admin-operations">Admin Operations</a></li>
+            </ul>
+
+            <h2><i class="fas fa-robot"></i> AI Engine</h2>
+            <ul>
+                <li><a href="/docs/meet-mikey">Meet MIKEY</a></li>
+                <li><a href="/docs/market-intelligence-pipeline">Market Intelligence Pipeline</a></li>
+            </ul>
+
+            <h2><i class="fas fa-users"></i> Success Stories</h2>
+            <ul>
+                <li><a href="/docs/roadmap-status">Roadmap & Status</a></li>
+                <li><a href="/docs/user-experience-roadmap">User Experience Roadmap</a></li>
+                <li><a href="/docs/early-tester-rewards">Early Tester Rewards</a></li>
+            </ul>
+
+            <h2><i class="fas fa-plug"></i> API & Integrations</h2>
+            <ul>
+                <li><a href="/docs/api">API Access</a></li>
+                <li><a href="/docs/api">Legacy API Overview</a></li>
+                <li><a href="/docs/api">Postman Collection Guide</a></li>
+            </ul>
+
+            <h2><i class="fas fa-tasks"></i> Operations & Reference</h2>
+            <ul>
+                <li><a href="/docs/port-layout">Port Layout</a></li>
+                <li><a href="/docs/api-integration-research">API Integration Research</a></li>
+                <li><a href="/docs/environment-variables">Environment Variables</a></li>
+            </ul>
+
+            <h2><i class="fas fa-archive"></i> Archive</h2>
+            <ul>
+                <li><a href="/docs/architecture-archive">Architecture Archive</a></li>
+                <li><a href="/docs/trading-archive">Trading Archive</a></li>
+                <li><a href="/docs/analysis-archive">Analysis Archive</a></li>
+                <li><a href="/docs/project-history">Project History</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1 id="overview">🚀 QuantDesk Protocol</h1>
+            
+            <p>The Bloomberg Terminal for Crypto - Professional-grade decentralized perpetual trading protocol with institutional features and advanced analytics.</p>
+
+            <div class="status-badge">Production Ready</div>
+            <div class="status-badge">Advanced Order Types</div>
+            <div class="status-badge">Cross-Collateralization</div>
+            <div class="status-badge">Decentralized Protocol</div>
+
+            <div class="toc">
+                <h3>📋 Table of Contents</h3>
+                <ul>
+                    <li><a href="#quick-start">Quick Start Guide</a></li>
+                    <li><a href="#features">Key Features</a></li>
+                    <li><a href="#why-quantdesk">Why Traders Choose QuantDesk</a></li>
+                    <li><a href="#technical-evolution">Technical Evolution</a></li>
+                    <li><a href="#performance">Performance Metrics</a></li>
+                    <li><a href="#architecture">System Architecture</a></li>
+                    <li><a href="#documentation">Complete Documentation</a></li>
+                </ul>
+            </div>
+
+            <h2 id="quick-start">🚀 Quick Start</h2>
+            
+            <div class="quick-start">
+                <h2>Start Trading in Minutes</h2>
+                <p>QuantDesk is built for active perp traders. Sign in with your Solana wallet and follow this flow:</p>
+                <ol>
+                <li><strong>Connect Wallet:</strong> Sign-in with Solana from the terminal landing page. Your Early Tester badge mints automatically and unlocks MIKEY AI points.</li>
+                <li><strong>Activate Rewards:</strong> Open the referral panel to grab your invite link. Every funded referral earns trading-fee rebates plus bonus MIKEY credits for both traders.</li>
+                <li><strong>Fund & Segment:</strong> Deposit USDC or SOL into your master account, then spin up sub-accounts to isolate strategies or desks.</li>
+                <li><strong>Spin Up MIKEY Intel:</strong> Spend badge points to run MIKEY smart-money scans, social sentiment sweeps, and funding outlooks before you size into a market.</li>
+                <li><strong>Execute the Trade:</strong> Use the command palette (`QM`, `ORDER`, `POSITIONS`) or the order ticket to enter bracketed long/shorts with real-time margin and funding previews.</li>
+                <li><strong>Share & Team Up:</strong> Drop alpha in the `CHAT`, ping teammates with `NOTE`, and explore multi-sig team account support coming soon for coordinated desks.</li>
+                </ol>
+                <p><strong>Example daily pipeline:</strong></p>
+                <ul>
+                    <li>Kick off with `QM BTC-PERP` to review depth, funding, and whale prints.</li>
+                    <li>Launch `FLOW` + `NEWS` to surface whale inflows and Solana ecosystem headlines, then tap `MIKEY` to benchmark sentiment.</li>
+                    <li>Submit an `ORDER` with protective brackets, confirm exposure in `POSITIONS`, set an `ALERT` on funding flips, and broadcast the playbook in `CHAT` for coordinated trades.</li>
+                </ul>
+                <p>QuantDesk bridges the pro trading desk experience with Solana speed—fast onboarding, built-in incentives, and intelligence that keeps you ahead of the tape.</p>
+            </div>
+
+            <h2 id="features">🌟 Features Traders Rely On</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3><i class="fas fa-terminal"></i> Terminal Experience</h3>
+                    <p>Command center interface - like a crypto trading terminal. Complete control over your trading universe.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3><i class="fas fa-bolt"></i> Real-Time Execution</h3>
+                    <p>Submit, adjust, and close perps with sub-second confirmation and clear risk math before every click.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3><i class="fas fa-key"></i> On-Chain Control</h3>
+                    <p>Wallet signatures stay client-side; trades settle through PDAs so custody never leaves your hands.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3><i class="fas fa-comment-dots"></i> Embedded Desk Workflow</h3>
+                    <p>Chat, share intel, tag trades, and coordinate teams directly inside the terminal with future multi-sig account support.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3><i class="fas fa-lightbulb"></i> MIKEY Intelligence Layer</h3>
+                    <p>Smart-money flow, social sentiment, and curated alerts that surface context before you press the button.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3><i class="fas fa-newspaper"></i> News & Feeds</h3>
+                    <p>Aggregated crypto news, Twitter trend scans, and DeFi analytics streams keep traders ahead of breaking themes.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3><i class="fas fa-stream"></i> Oracle Connectivity</h3>
+                    <p>Pyth Network provides reliable Solana pricing and confidence intervals that drive funding, risk, and liquidation logic.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3><i class="fas fa-water"></i> JIT Liquidity Access</h3>
+                    <p>Hook into JIT market makers for deeper books and tighter spreads whenever whales step in.</p>
+                </div>
+            </div>
+
+            <h2 id="why-quantdesk">💡 Why Traders Choose QuantDesk</h2>
+            
+            <div class="quick-start">
+                <h2>The Solana Perp Desk Built for Pros</h2>
+                <p><strong>QuantDesk marries on-chain execution with desk-grade tooling</strong> so traders can move fast, stay informed, and build community on Solana.</p>
+
+                <h3>⚡ On-Chain Execution That Scales</h3>
+                <ul>
+                    <li><strong>Direct custody:</strong> Wallet signatures stay client-side and PDAs enforce risk, so funds never leave your control.</li>
+                    <li><strong>Low-friction trading:</strong> USDC/SOL deposits, cross-margin, and JIT liquidity deliver deep books without centralized middlemen.</li>
+                    <li><strong>Curated markets:</strong> Perp listings feature transparent funding, guardrails, and roadmap visibility for upcoming listings.</li>
+                </ul>
+
+                <h3>🧠 Intelligence & Data Built In</h3>
+                <ul>
+                    <li><strong>MIKEY insights:</strong> Smart-money flow, sentiment heatmaps, and alerting keep the desk briefed before every decision.</li>
+                    <li><strong>News pipeline:</strong> Aggregated crypto headlines, Twitter trend scans, and DeFi analytics stream straight into the terminal.</li>
+                    <li><strong>Reliable pricing:</strong> Pyth oracle connectivity powers funding, liquidation checks, and risk dashboards with trustworthy data.</li>
+                </ul>
+
+                <h3>🤝 Community & Incentives</h3>
+                <ul>
+                    <li><strong>Collaborative desk:</strong> In-terminal chat, shared notes, and a growing multi-sig roadmap let teams operate from one command center.</li>
+                    <li><strong>Referral economy:</strong> Fee rebates, MIKEY credits, and Early Tester badges reward the community for onboarding active traders.</li>
+                    <li><strong>Transparent pipeline:</strong> Roadmap, status updates, and data releases keep quants aligned on what’s shipping next.</li>
+                </ul>
+            </div>
+
+            <h2 id="technical-evolution">🚀 Technical Evolution Portfolio</h2>
+            
+            <div class="quick-start">
+                <h2>From Scripts to a Solana Perp Terminal</h2>
+                <p><strong>This is the build journey behind QuantDesk</strong>—each milestone layered new capabilities that now power the terminal traders use today:</p>
+
+                <h3>📈 Project Evolution Timeline</h3>
+                <ul>
+                    <li><strong>Ultimate Data Fetcher:</strong> Foundations in market data collection, RPC handling, and automation.</li>
+                    <li><strong>D3X7-ALGO:</strong> Algorithmic execution, strategy backtesting, and operational runbooks.</li>
+                    <li><strong>ML-MODEL:</strong> GPU-accelerated research, Lorentzian classifiers, and risk analytics tooling.</li>
+                    <li><strong>QuantDesk-1.0.1:</strong> Early terminal UX, command palette workflows, and desk collaboration patterns.</li>
+                    <li><strong>QuantDesk (current):</strong> Solana PDAs, MIKEY intelligence, and on-chain perp execution with team incentives.</li>
+                </ul>
+
+                <h3>🏆 Key Technical Achievements</h3>
+                <ul>
+                    <li><strong>Performance:</strong> Real strategies with documented win rate (53.5%) and controlled drawdown (-4.7%).</li>
+                    <li><strong>Tooling:</strong> Full-stack TypeScript, Supabase, and Redis powering real-time risk and account states.</li>
+                    <li><strong>On-Chain:</strong> Anchor programs, Pyth connectivity, and JIT-ready market structure on Solana.</li>
+                    <li><strong>Intelligence:</strong> MIKEY ingestion, news pipelines, and alerting tied directly into the trader workflow.</li>
+                    <li><strong>Community:</strong> Referral engines, Early Tester rewards, and a path toward team-controlled books.</li>
+                </ul>
+
+                <p><strong>📚 <a href="/docs/technical-portfolio">Read the full evolution story</a></strong></p>
+                <p><strong>📊 <a href="/docs/performance-metrics">Review strategy performance metrics</a></strong></p>
+            </div>
+
+            <h2 id="performance">⚙️ Platform Performance & Data Edge</h2>
+
+            <h3>Execution & Latency</h3>
+            <ul>
+                <li><strong>API Response:</strong> Sub-150ms typical REST responses with WebSocket snapshots refreshing every second.</li>
+                <li><strong>Order Lifecycle:</strong> Sign, serialize, and dispatch Solana transactions in a few hundred milliseconds end-to-end.</li>
+                <li><strong>Risk Feedback:</strong> Margin, funding, and liquidation metrics recompute instantly on each position update.</li>
+            </ul>
+
+            <h3>Data Ingestion & Coverage</h3>
+            <ul>
+                <li><strong>News & Social:</strong> Crypto newswires, Twitter sentiment, and DeFi protocol feeds processed in real time for MIKEY alerts.</li>
+                <li><strong>Market Intelligence:</strong> Whale flow, on-chain wallets, and funding deltas captured through dedicated Solana scanners.</li>
+                <li><strong>Oracles & Prices:</strong> Pyth price feeds with confidence intervals, plus supplemental exchange data for redundancy.</li>
+            </ul>
+
+            <h3>AI Routing & Tooling</h3>
+            <ul>
+                <li><strong>MIKEY Graph:</strong> Context-aware routing taps news, sentiment, whale flow, and funding modules for concise desk briefings.</li>
+                <li><strong>Expansion Hooks:</strong> Additional APIs (Arkham, Dune, CryptoQuant) staged for future intelligence layers.</li>
+                <li><strong>Operator Controls:</strong> Badge-driven point system governs AI usage so every trader knows the costs and rewards.</li>
+            </ul>
+
+            <h2 id="architecture">🏗️ Architecture at a Glance</h2>
+
+            <div class="quick-start">
+                <h3>Trader-Facing Layers</h3>
+                <ul>
+                    <li><strong>Terminal & Command Palette:</strong> Keyboard-driven execution, risk dashboards, and collaboration tools.</li>
+                    <li><strong>Perp Markets:</strong> Solana PDAs manage collateral, positions, and liquidations with audit trails.</li>
+                    <li><strong>Data Fabric:</strong> MIKEY intelligence, news feeds, whale flow, and oracle prices blend into a single desk view.</li>
+                </ul>
+
+                <h3>Security & Reliability</h3>
+                <ul>
+                    <li><strong>Non-Custodial:</strong> Wallet signatures stay client-side; PDAs enforce limits without exposing keys.</li>
+                    <li><strong>Resilience:</strong> JIT liquidity, Pyth feeds, and multi-provider RPC keep execution steady.</li>
+                    <li><strong>Transparency:</strong> Admin monitoring, audit logs, and roadmap updates show how the desk evolves.</li>
+                </ul>
+
+                <p>For deeper technical details, explore <a href="/docs/html/docs_core-features/architecture-at-a-glance.html">Architecture at a Glance</a> and <a href="/docs/html/docs_security-trust/data-and-storage-blueprint.html">Data & Storage Blueprint</a>.</p>
+            </div>
+
+            <h2 id="web-ui">🖥️ Web Experience</h2>
+
+            <div class="quick-start">
+                <h3>Accessible by Design</h3>
+                <ul>
+                    <li><strong>Pro vs. Lite:</strong> Pro exposes the full terminal, command palette, and MIKEY panels; Lite distills key signals for mobile or casual monitoring.</li>
+                    <li><strong>One-Click Themes:</strong> Traders choose desk lighting, color palettes, and layout presets to make the workspace feel like home.</li>
+                    <li><strong>Modular Widgets:</strong> Pin, resize, or hide tiles (order book, news, whale flow) so only relevant signals stay in view.</li>
+                </ul>
+
+                <h3>Alpha Collaboration</h3>
+                <ul>
+                    <li><strong>Live Chat:</strong> Share trade plans, post MIKEY callouts, and coordinate entries without leaving the desk.</li>
+                    <li><strong>Shared Filters:</strong> Save screener filters, watchlists, and news feeds, then sync them with teammates.</li>
+                    <li><strong>Alpha Pipeline:</strong> Integrates crypto news, Twitter sentiment, DeFi stats, and whale alerts into a single discovery feed.</li>
+                </ul>
+
+                <h3>Always On, Everywhere</h3>
+                <ul>
+                    <li><strong>Responsive Layout:</strong> Works just as well on a trading rig with multiple monitors as it does on a tablet in Lite mode.</li>
+                    <li><strong>Keyboard & Touch:</strong> Full hotkey support plus touch-friendly actions for quick positioning.</li>
+                    <li><strong>Future Desk Sharing:</strong> Roadmap includes multi-sig teams managing shared layouts and permissions.</li>
+                </ul>
+            </div>
+
+            <h2 id="documentation">📚 Complete Documentation Showcase</h2>
+            
+            <div class="quick-start">
+                <h2>🌟 Documentation for Traders & Teams</h2>
+                <p>The library now spotlights the live terminal, Solana perp mechanics, MIKEY intelligence, and community programs. Technical history remains in the archive for anyone who wants the full origin story.</p>
+            </div>
+
+            <div class="toc">
+                <h3>🚀 Core Platform & Onboarding</h3>
+                <ul>
+                    <li><a href="/docs/why-quantdesk">Why QuantDesk</a></li>
+                    <li><a href="/docs/getting-started">Start Trading in 5 Minutes</a></li>
+                    <li><a href="/docs/what-makes-us-different">What Makes Us Different</a></li>
+                    <li><a href="/docs/architecture-at-a-glance">Architecture at a Glance</a></li>
+                    <li><a href="/docs/account-lifecycle">Account Lifecycle</a></li>
+                    <li><a href="/docs/enterprise-readiness">Enterprise Readiness</a></li>
+                </ul>
+
+                <h3>📈 Trading Capabilities</h3>
+                <ul>
+                    <li><a href="/docs/how-quantdesk-powers-perps">How QuantDesk Powers Perps</a></li>
+                    <li><a href="/docs/perp-terminal-toolbox">Perp Terminal Toolbox</a></li>
+                    <li><a href="/docs/perp-market-coverage">Perp Market Coverage</a></li>
+                    <li><a href="/docs/multi-account-control">Multi-Account Control</a></li>
+                    <li><a href="/docs/live-market-data">Live Market Data</a></li>
+                    <li><a href="/docs/terminal-shortcuts">Terminal Shortcuts & Commands</a></li>
+                    <li><a href="/docs/api-access">API Access & Integration</a></li>
+                </ul>
+
+                <h3>🛡️ Security & Trust</h3>
+                <ul>
+                    <li><a href="/docs/security-trust-overview">Security & Trust Overview</a></li>
+                    <li><a href="/docs/security-posture">Security Posture</a></li>
+                    <li><a href="/docs/data-storage-blueprint">Data & Storage Blueprint</a></li>
+                    <li><a href="/docs/admin-operations">Admin Operations</a></li>
+                </ul>
+
+                <h3>🤖 MIKEY & Intelligence</h3>
+                <ul>
+                    <li><a href="/docs/meet-mikey">Meet MIKEY</a></li>
+                    <li><a href="/docs/market-intelligence-pipeline">Market Intelligence Pipeline</a></li>
+                </ul>
+
+                <h3>🎁 Success & Incentives</h3>
+                <ul>
+                    <li><a href="/docs/roadmap-status">Roadmap & Status</a></li>
+                    <li><a href="/docs/user-experience-roadmap">User Experience Roadmap</a></li>
+                    <li><a href="/docs/early-tester-rewards">Early Tester Rewards & Referrals</a></li>
+                </ul>
+
+                <h3>🛠️ Operations & Reference</h3>
+                <ul>
+                    <li><a href="/docs/port-layout">Port Layout & Services</a></li>
+                    <li><a href="/docs/api-integration-research">Integration Research Notes</a></li>
+                    <li><a href="/docs/environment-variables">Environment Variables Reference</a></li>
+                </ul>
+
+                <h3>🗂️ Archive & History</h3>
+                <ul>
+                    <li><a href="/docs/project-history">Project History Overview</a></li>
+                    <li><a href="/docs/architecture-archive">Architecture Archive</a></li>
+                    <li><a href="/docs/trading-archive">Trading Archive</a></li>
+                    <li><a href="/docs/analysis-archive">Analysis Archive</a></li>
+                </ul>
+            </div>
+
+            <h2 id="next-steps">🎯 Next Steps</h2>
+            
+            <h3>High Priority</h3>
+            <ul>
+                <li><strong>Mock Data Elimination:</strong> Replace all mock data with real QuantDesk system connections</li>
+                <li><strong>Admin Panel:</strong> Create live/demo mode switching</li>
+                <li><strong>Chart Consolidation:</strong> Merge Market and Charts tabs</li>
+                <li><strong>Backtesting Integration:</strong> Connect buttons to actual scripts</li>
+            </ul>
+
+            <h3>Medium Priority</h3>
+            <ul>
+                <li><strong>Database Migration:</strong> Move from CSV to Supabase</li>
+                <li><strong>Authentication:</strong> Add user authentication</li>
+                <li><strong>Multi-Exchange:</strong> Extend beyond Bitget</li>
+            </ul>
+
+            <div style="margin-top: 50px; padding: 20px; background: #1a1a1a; border-radius: 8px; text-align: center; border: 1px solid #333333;">
+                <h3>🚀 Ready to Start Trading?</h3>
+                <p>Follow the Quick Start guide above to get your QuantDesk trading system running in minutes!</p>
+            </div>
+
+            <!-- Additional sections removed to keep focus on current QuantDesk experience -->
+        </main>
+    </div>
+
+    <script>
+        // Scroll position memory functionality
+        window.addEventListener('beforeunload', function() {
+            sessionStorage.setItem('docsScrollPosition', window.scrollY);
+        });
+
+        window.addEventListener('load', function() {
+            const savedScrollPosition = sessionStorage.getItem('docsScrollPosition');
+            if (savedScrollPosition) {
+                window.scrollTo(0, parseInt(savedScrollPosition));
+                sessionStorage.removeItem('docsScrollPosition'); // Clear after use
+            }
+        });
+
+        // Simple search functionality
+        document.getElementById('searchBox').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const links = document.querySelectorAll('.sidebar a');
+            
+            links.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                if (text.includes(searchTerm) || searchTerm === '') {
+                    link.style.display = 'block';
+                } else {
+                    link.style.display = 'none';
+                }
+            });
+        });
+
+        // Enhanced smooth scrolling for sidebar links
+        document.querySelectorAll('.sidebar a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    // Remove active class from all links
+                    document.querySelectorAll('.sidebar a').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Smooth scroll to target
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Update active link based on scroll position
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('h1[id], h2[id]');
+            const scrollPos = window.scrollY + 100;
+            
+            sections.forEach(section => {
+                const top = section.offsetTop;
+                const bottom = top + section.offsetHeight;
+                const id = section.getAttribute('id');
+                
+                if (scrollPos >= top && scrollPos <= bottom) {
+                    document.querySelectorAll('.sidebar a').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    const activeLink = document.querySelector(`.sidebar a[href="#${id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

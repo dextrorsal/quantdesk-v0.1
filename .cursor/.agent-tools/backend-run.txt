@@ -1,0 +1,934 @@
+⚠️  Skipping Redis imports in development mode
+🔓 HTTP server created for development
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+🚀 Auth middleware called for: /
+🔍 Auth middleware called with token: eyJhbGciOiJIUzI1NiIs...
+🔍 Debug: JWT_SECRET from config: test-jwt-secret
+🔍 Debug: JWT_SECRET from env: test-jwt-secret
+⚠️  Skipping Redis session check in development mode
+🔍 Looking up user for wallet_pubkey: test-wallet-address
+🔍 User found: {
+  id: '181a0e56-8edb-49f0-b273-13498a3dad88',
+  wallet_pubkey: 'test-wallet-address',
+  username: 'test-user',
+  email: null,
+  created_at: '2025-10-20T08:24:03.42587+00:00',
+  updated_at: '2025-10-20T08:25:54.150757+00:00',
+  last_login: null,
+  is_active: true,
+  kyc_status: 'verified',
+  risk_level: 'low',
+  total_volume: 0,
+  total_trades: 0,
+  metadata: {}
+}
+🔍 Order placement request received: {
+  symbol: 'BTC-PERP',
+  side: 'buy',
+  size: 0.1,
+  orderType: 'market',
+  leverage: 2
+}
+🔍 User from request: {
+  id: '181a0e56-8edb-49f0-b273-13498a3dad88',
+  wallet_pubkey: 'test-wallet-address'
+}
+🔍 Calling matchingService.placeOrder with: {
+  userId: '181a0e56-8edb-49f0-b273-13498a3dad88',
+  symbol: 'BTC-PERP',
+  side: 'buy',
+  size: 0.1,
+  orderType: 'market',
+  price: undefined,
+  leverage: 2
+}
+🔍 Looking up market for symbol: BTC-PERP
+🔍 Market found: {
+  id: 'd87a99b4-148a-49c2-a2ad-ca1ee17a9372',
+  symbol: 'BTC-PERP',
+  base_asset: 'BTC',
+  quote_asset: 'USDT',
+  is_active: true
+}
+🔍 Inserting order with data: {
+  user_id: '181a0e56-8edb-49f0-b273-13498a3dad88',
+  market_id: 'd87a99b4-148a-49c2-a2ad-ca1ee17a9372',
+  order_account: 'OFFCHAIN',
+  order_type: 'market',
+  side: 'long',
+  size: 0.1,
+  price: null,
+  leverage: 2,
+  status: 'pending'
+}
+🔍 Order insertion result: { id: 'b1d83933-8cf0-4908-9265-36e9c8943a23' }
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+🚀 Auth middleware called for: /
+🔍 Auth middleware called with token: eyJhbGciOiJIUzI1NiIs...
+🔍 Debug: JWT_SECRET from config: test-jwt-secret
+🔍 Debug: JWT_SECRET from env: test-jwt-secret
+⚠️  Skipping Redis session check in development mode
+🔍 Looking up user for wallet_pubkey: test-wallet-address
+🔍 User found: {
+  id: '181a0e56-8edb-49f0-b273-13498a3dad88',
+  wallet_pubkey: 'test-wallet-address',
+  username: 'test-user',
+  email: null,
+  created_at: '2025-10-20T08:24:03.42587+00:00',
+  updated_at: '2025-10-20T08:25:54.150757+00:00',
+  last_login: null,
+  is_active: true,
+  kyc_status: 'verified',
+  risk_level: 'low',
+  total_volume: 0,
+  total_trades: 0,
+  metadata: {}
+}
+🚀 Auth middleware called for: /
+🔍 Auth middleware called with token: eyJhbGciOiJIUzI1NiIs...
+🔍 Debug: JWT_SECRET from config: test-jwt-secret
+🔍 Debug: JWT_SECRET from env: test-jwt-secret
+⚠️  Skipping Redis session check in development mode
+🔍 Looking up user for wallet_pubkey: test-wallet-address
+🔍 User found: {
+  id: '181a0e56-8edb-49f0-b273-13498a3dad88',
+  wallet_pubkey: 'test-wallet-address',
+  username: 'test-user',
+  email: null,
+  created_at: '2025-10-20T08:24:03.42587+00:00',
+  updated_at: '2025-10-20T08:25:54.150757+00:00',
+  last_login: null,
+  is_active: true,
+  kyc_status: 'verified',
+  risk_level: 'low',
+  total_volume: 0,
+  total_trades: 0,
+  metadata: {}
+}
+🚀 Auth middleware called for: /
+🔍 Auth middleware called with token: test-token...
+🔍 Debug: JWT_SECRET from config: test-jwt-secret
+🔍 Debug: JWT_SECRET from env: test-jwt-secret
+🔍 JWT verification failed: jwt malformed
+🔍 Token being verified: test-token...
+🔍 JWT_SECRET being used: test-jwt-secret
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+🚀 Auth middleware called for: /
+🔍 Auth middleware called with token: eyJhbGciOiJIUzI1NiIs...
+🔍 Debug: JWT_SECRET from config: test-jwt-secret
+🔍 Debug: JWT_SECRET from env: test-jwt-secret
+⚠️  Skipping Redis session check in development mode
+🔍 Looking up user for wallet_pubkey: test-wallet-address
+🔍 User found: {
+  id: '181a0e56-8edb-49f0-b273-13498a3dad88',
+  wallet_pubkey: 'test-wallet-address',
+  username: 'test-user',
+  email: null,
+  created_at: '2025-10-20T08:24:03.42587+00:00',
+  updated_at: '2025-10-20T08:25:54.150757+00:00',
+  last_login: null,
+  is_active: true,
+  kyc_status: 'verified',
+  risk_level: 'low',
+  total_volume: 0,
+  total_trades: 0,
+  metadata: {}
+}
+🔍 Order placement request received: {
+  symbol: 'BTC-PERP',
+  side: 'buy',
+  size: 0.1,
+  orderType: 'market',
+  leverage: 2
+}
+🔍 User from request: {
+  id: '181a0e56-8edb-49f0-b273-13498a3dad88',
+  wallet_pubkey: 'test-wallet-address'
+}
+🔍 Calling matchingService.placeOrder with: {
+  userId: '181a0e56-8edb-49f0-b273-13498a3dad88',
+  symbol: 'BTC-PERP',
+  side: 'buy',
+  size: 0.1,
+  orderType: 'market',
+  price: undefined,
+  leverage: 2
+}
+🔍 Looking up market for symbol: BTC-PERP
+🔍 Market found: {
+  id: 'd87a99b4-148a-49c2-a2ad-ca1ee17a9372',
+  symbol: 'BTC-PERP',
+  base_asset: 'BTC',
+  quote_asset: 'USDT',
+  is_active: true
+}
+🔍 Inserting order with data: {
+  user_id: '181a0e56-8edb-49f0-b273-13498a3dad88',
+  market_id: 'd87a99b4-148a-49c2-a2ad-ca1ee17a9372',
+  order_account: 'OFFCHAIN',
+  order_type: 'market',
+  side: 'long',
+  size: 0.1,
+  price: null,
+  leverage: 2,
+  status: 'pending'
+}
+🔍 Order insertion result: { id: '0f7ed694-4c11-45d7-a3b4-eb9691c94fcd' }
+🚀 Auth middleware called for: /
+🔍 Auth middleware called with token: eyJhbGciOiJIUzI1NiIs...
+🔍 Debug: JWT_SECRET from config: test-jwt-secret
+🔍 Debug: JWT_SECRET from env: test-jwt-secret
+⚠️  Skipping Redis session check in development mode
+🔍 Looking up user for wallet_pubkey: test-wallet-address
+🔍 User found: {
+  id: '181a0e56-8edb-49f0-b273-13498a3dad88',
+  wallet_pubkey: 'test-wallet-address',
+  username: 'test-user',
+  email: null,
+  created_at: '2025-10-20T08:24:03.42587+00:00',
+  updated_at: '2025-10-20T08:25:54.150757+00:00',
+  last_login: null,
+  is_active: true,
+  kyc_status: 'verified',
+  risk_level: 'low',
+  total_volume: 0,
+  total_trades: 0,
+  metadata: {}
+}
+🚀 Auth middleware called for: /
+🔍 Auth middleware called with token: eyJhbGciOiJIUzI1NiIs...
+🔍 Debug: JWT_SECRET from config: test-jwt-secret
+🔍 Debug: JWT_SECRET from env: test-jwt-secret
+⚠️  Skipping Redis session check in development mode
+🔍 Looking up user for wallet_pubkey: test-wallet-address
+🔍 User found: {
+  id: '181a0e56-8edb-49f0-b273-13498a3dad88',
+  wallet_pubkey: 'test-wallet-address',
+  username: 'test-user',
+  email: null,
+  created_at: '2025-10-20T08:24:03.42587+00:00',
+  updated_at: '2025-10-20T08:25:54.150757+00:00',
+  last_login: null,
+  is_active: true,
+  kyc_status: 'verified',
+  risk_level: 'low',
+  total_volume: 0,
+  total_trades: 0,
+  metadata: {}
+}
+🚀 Auth middleware called for: /
+🔍 Auth middleware called with token: test-token...
+🔍 Debug: JWT_SECRET from config: test-jwt-secret
+🔍 Debug: JWT_SECRET from env: test-jwt-secret
+🔍 JWT verification failed: jwt malformed
+🔍 Token being verified: test-token...
+🔍 JWT_SECRET being used: test-jwt-secret
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+🚀 Auth middleware called for: /
+🔍 Auth middleware called with token: eyJhbGciOiJIUzI1NiIs...
+🔍 Debug: JWT_SECRET from config: test-jwt-secret
+🔍 Debug: JWT_SECRET from env: test-jwt-secret
+⚠️  Skipping Redis session check in development mode
+🔍 Looking up user for wallet_pubkey: test-wallet-address
+🔍 User found: {
+  id: '181a0e56-8edb-49f0-b273-13498a3dad88',
+  wallet_pubkey: 'test-wallet-address',
+  username: 'test-user',
+  email: null,
+  created_at: '2025-10-20T08:24:03.42587+00:00',
+  updated_at: '2025-10-20T08:25:54.150757+00:00',
+  last_login: null,
+  is_active: true,
+  kyc_status: 'verified',
+  risk_level: 'low',
+  total_volume: 0,
+  total_trades: 0,
+  metadata: {}
+}
+🔍 Order placement request received: {
+  symbol: 'BTC-PERP',
+  side: 'buy',
+  size: 0.1,
+  orderType: 'market',
+  leverage: 2
+}
+🔍 User from request: {
+  id: '181a0e56-8edb-49f0-b273-13498a3dad88',
+  wallet_pubkey: 'test-wallet-address'
+}
+🔍 Calling matchingService.placeOrder with: {
+  userId: '181a0e56-8edb-49f0-b273-13498a3dad88',
+  symbol: 'BTC-PERP',
+  side: 'buy',
+  size: 0.1,
+  orderType: 'market',
+  price: undefined,
+  leverage: 2
+}
+🔍 Looking up market for symbol: BTC-PERP
+🔍 Market found: {
+  id: 'd87a99b4-148a-49c2-a2ad-ca1ee17a9372',
+  symbol: 'BTC-PERP',
+  base_asset: 'BTC',
+  quote_asset: 'USDT',
+  is_active: true
+}
+🔍 Inserting order with data: {
+  user_id: '181a0e56-8edb-49f0-b273-13498a3dad88',
+  market_id: 'd87a99b4-148a-49c2-a2ad-ca1ee17a9372',
+  order_account: 'OFFCHAIN',
+  order_type: 'market',
+  side: 'long',
+  size: 0.1,
+  price: null,
+  leverage: 2,
+  status: 'pending'
+}
+🔍 Order insertion result: { id: '5e0c2c87-9006-4447-9f8f-3d844fbd5fb1' }
+🚀 Auth middleware called for: /
+🔍 Auth middleware called with token: eyJhbGciOiJIUzI1NiIs...
+🔍 Debug: JWT_SECRET from config: test-jwt-secret
+🔍 Debug: JWT_SECRET from env: test-jwt-secret
+⚠️  Skipping Redis session check in development mode
+🔍 Looking up user for wallet_pubkey: test-wallet-address
+🔍 User found: {
+  id: '181a0e56-8edb-49f0-b273-13498a3dad88',
+  wallet_pubkey: 'test-wallet-address',
+  username: 'test-user',
+  email: null,
+  created_at: '2025-10-20T08:24:03.42587+00:00',
+  updated_at: '2025-10-20T08:25:54.150757+00:00',
+  last_login: null,
+  is_active: true,
+  kyc_status: 'verified',
+  risk_level: 'low',
+  total_volume: 0,
+  total_trades: 0,
+  metadata: {}
+}
+🚀 Auth middleware called for: /
+🔍 Auth middleware called with token: eyJhbGciOiJIUzI1NiIs...
+🔍 Debug: JWT_SECRET from config: test-jwt-secret
+🔍 Debug: JWT_SECRET from env: test-jwt-secret
+⚠️  Skipping Redis session check in development mode
+🔍 Looking up user for wallet_pubkey: test-wallet-address
+🔍 User found: {
+  id: '181a0e56-8edb-49f0-b273-13498a3dad88',
+  wallet_pubkey: 'test-wallet-address',
+  username: 'test-user',
+  email: null,
+  created_at: '2025-10-20T08:24:03.42587+00:00',
+  updated_at: '2025-10-20T08:25:54.150757+00:00',
+  last_login: null,
+  is_active: true,
+  kyc_status: 'verified',
+  risk_level: 'low',
+  total_volume: 0,
+  total_trades: 0,
+  metadata: {}
+}
+🚀 Auth middleware called for: /
+🔍 Auth middleware called with token: test-token...
+🔍 Debug: JWT_SECRET from config: test-jwt-secret
+🔍 Debug: JWT_SECRET from env: test-jwt-secret
+🔍 JWT verification failed: jwt malformed
+🔍 Token being verified: test-token...
+🔍 JWT_SECRET being used: test-jwt-secret
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+🚀 Auth middleware called for: /
+🔍 Auth middleware called with token: eyJhbGciOiJIUzI1NiIs...
+🔍 Debug: JWT_SECRET from config: test-jwt-secret
+🔍 Debug: JWT_SECRET from env: test-jwt-secret
+⚠️  Skipping Redis session check in development mode
+🔍 Looking up user for wallet_pubkey: test-wallet-address
+🔍 User found: {
+  id: '181a0e56-8edb-49f0-b273-13498a3dad88',
+  wallet_pubkey: 'test-wallet-address',
+  username: 'test-user',
+  email: null,
+  created_at: '2025-10-20T08:24:03.42587+00:00',
+  updated_at: '2025-10-20T08:25:54.150757+00:00',
+  last_login: null,
+  is_active: true,
+  kyc_status: 'verified',
+  risk_level: 'low',
+  total_volume: 0,
+  total_trades: 0,
+  metadata: {}
+}
+🔍 Order placement request received: {
+  symbol: 'BTC-PERP',
+  side: 'buy',
+  size: 0.1,
+  orderType: 'market',
+  leverage: 2
+}
+🔍 User from request: {
+  id: '181a0e56-8edb-49f0-b273-13498a3dad88',
+  wallet_pubkey: 'test-wallet-address'
+}
+🔍 Calling matchingService.placeOrder with: {
+  userId: '181a0e56-8edb-49f0-b273-13498a3dad88',
+  symbol: 'BTC-PERP',
+  side: 'buy',
+  size: 0.1,
+  orderType: 'market',
+  price: undefined,
+  leverage: 2
+}
+🔍 Looking up market for symbol: BTC-PERP
+🔍 Market found: {
+  id: 'd87a99b4-148a-49c2-a2ad-ca1ee17a9372',
+  symbol: 'BTC-PERP',
+  base_asset: 'BTC',
+  quote_asset: 'USDT',
+  is_active: true
+}
+🔍 Inserting order with data: {
+  user_id: '181a0e56-8edb-49f0-b273-13498a3dad88',
+  market_id: 'd87a99b4-148a-49c2-a2ad-ca1ee17a9372',
+  order_account: 'OFFCHAIN',
+  order_type: 'market',
+  side: 'long',
+  size: 0.1,
+  price: null,
+  leverage: 2,
+  status: 'pending'
+}
+🔍 Order insertion result: { id: 'ccbac464-ace8-4afd-9fd1-ad3dc3e01328' }
+🚀 Auth middleware called for: /
+🔍 Auth middleware called with token: eyJhbGciOiJIUzI1NiIs...
+🔍 Debug: JWT_SECRET from config: test-jwt-secret
+🔍 Debug: JWT_SECRET from env: test-jwt-secret
+⚠️  Skipping Redis session check in development mode
+🔍 Looking up user for wallet_pubkey: test-wallet-address
+🔍 User found: {
+  id: '181a0e56-8edb-49f0-b273-13498a3dad88',
+  wallet_pubkey: 'test-wallet-address',
+  username: 'test-user',
+  email: null,
+  created_at: '2025-10-20T08:24:03.42587+00:00',
+  updated_at: '2025-10-20T08:25:54.150757+00:00',
+  last_login: null,
+  is_active: true,
+  kyc_status: 'verified',
+  risk_level: 'low',
+  total_volume: 0,
+  total_trades: 0,
+  metadata: {}
+}
+🚀 Auth middleware called for: /
+🔍 Auth middleware called with token: eyJhbGciOiJIUzI1NiIs...
+🔍 Debug: JWT_SECRET from config: test-jwt-secret
+🔍 Debug: JWT_SECRET from env: test-jwt-secret
+⚠️  Skipping Redis session check in development mode
+🔍 Looking up user for wallet_pubkey: test-wallet-address
+🔍 User found: {
+  id: '181a0e56-8edb-49f0-b273-13498a3dad88',
+  wallet_pubkey: 'test-wallet-address',
+  username: 'test-user',
+  email: null,
+  created_at: '2025-10-20T08:24:03.42587+00:00',
+  updated_at: '2025-10-20T08:25:54.150757+00:00',
+  last_login: null,
+  is_active: true,
+  kyc_status: 'verified',
+  risk_level: 'low',
+  total_volume: 0,
+  total_trades: 0,
+  metadata: {}
+}
+🚀 Auth middleware called for: /
+🔍 Auth middleware called with token: test-token...
+🔍 Debug: JWT_SECRET from config: test-jwt-secret
+🔍 Debug: JWT_SECRET from env: test-jwt-secret
+🔍 JWT verification failed: jwt malformed
+🔍 Token being verified: test-token...
+🔍 JWT_SECRET being used: test-jwt-secret
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.
+⚠️  Using deprecated query() method. Consider using fluent API methods instead.

@@ -1,0 +1,28 @@
+# Railway ignore file to force Docker deployment
+package.json
+package-lock.json
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore everything except Dockerfile and source code
+!backend/
+!backend/Dockerfile
+!backend/package.json
+!backend/package-lock.json
+!backend/src/
+!backend/tsconfig.json
+
+# Ignore other directories
+frontend/
+admin-dashboard/
+MIKEY-AI/
+docs/
+scripts/
+test-ledger/
+WSL/
+*.md
+*.txt
+.env*
+!.env.example

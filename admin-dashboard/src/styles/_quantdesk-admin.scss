@@ -1,0 +1,492 @@
+// QuantDesk Admin Dashboard Custom Styles
+// Additional styles for the admin dashboard
+
+// Import Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap');
+
+// Import theme variables
+@import 'theme/quantdesk-variables';
+
+// Admin Dashboard Container
+.admin-dashboard {
+  min-height: 100vh;
+  background: $body-bg;
+  color: $body-color;
+  font-family: $font-family-base;
+  line-height: 1.6;
+  
+  // Override Bootstrap dark theme for better contrast
+  .card {
+    background-color: #0a0a0a !important;
+    border-color: #1a1a1a !important;
+    color: #ffffff !important;
+    
+    .card-header {
+      background-color: #1a1a1a !important;
+      border-bottom-color: #1a1a1a !important;
+      color: #ffffff !important;
+    }
+    
+    .card-body {
+      background-color: #0a0a0a !important;
+      color: #ffffff !important;
+    }
+  }
+  
+  // Text colors with better contrast
+  h1, h2, h3, h4, h5, h6 {
+    color: #ffffff !important;
+  }
+  
+  p, span, div {
+    color: #e5e5e5 !important;
+  }
+  
+  .text-muted {
+    color: #a3a3a3 !important;
+  }
+  
+  // Blue accent colors
+  .text-primary {
+    color: #3b82f6 !important;
+  }
+  
+  .text-info {
+    color: #06b6d4 !important;
+  }
+  
+  .text-success {
+    color: #22c55e !important;
+  }
+  
+  .text-warning {
+    color: #facc15 !important;
+  }
+  
+  .text-danger {
+    color: #ef4444 !important;
+  }
+  
+  // Tables with better contrast
+  .table {
+    color: #ffffff !important;
+    
+    th {
+      color: #ffffff !important;
+      border-color: #1a1a1a !important;
+    }
+    
+    td {
+      color: #e5e5e5 !important;
+      border-color: #1a1a1a !important;
+    }
+  }
+  
+  // Navigation with blue accents
+  .nav-link {
+    color: #e5e5e5 !important;
+    
+    &:hover {
+      color: #3b82f6 !important;
+    }
+    
+    &.active {
+      color: #3b82f6 !important;
+      background-color: rgba(59, 130, 246, 0.1) !important;
+    }
+  }
+  
+  // Form controls
+  .form-control {
+    background-color: #1a1a1a !important;
+    border-color: #1a1a1a !important;
+    color: #ffffff !important;
+    
+    &:focus {
+      background-color: #1a1a1a !important;
+      border-color: #3b82f6 !important;
+      color: #ffffff !important;
+      box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25) !important;
+    }
+  }
+  
+  .form-label {
+    color: #ffffff !important;
+  }
+  
+  // Badges with blue accents
+  .badge {
+    &.bg-primary {
+      background-color: #3b82f6 !important;
+    }
+    
+    &.bg-success {
+      background-color: #22c55e !important;
+    }
+    
+    &.bg-warning {
+      background-color: #facc15 !important;
+      color: #000000 !important;
+    }
+    
+    &.bg-danger {
+      background-color: #ef4444 !important;
+    }
+  }
+}
+
+// Terminal Header (keep dark, text light)
+.terminal-header {
+  background: $terminal-dark-gray;
+  border-bottom: 1px solid $terminal-medium-gray;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+
+  h1 {
+    color: $text-on-dark-primary;
+    font-weight: 600;
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+    color: $text-on-dark-secondary;
+  }
+}
+
+// Terminal Cards
+.terminal-card {
+  background: $card-bg;
+  border: 1px solid $card-border-color;
+  border-radius: 8px;
+  box-shadow: $terminal-shadow; // Use lighter shadow
+  transition: all 0.3s ease;
+  color: $card-color; // Text color for content inside card
+
+  &:hover {
+    border-color: $accent-blue;
+    box-shadow: 0 0 20px rgba(88, 166, 255, 0.1); // Lighter hover shadow
+  }
+
+  .card-header {
+    background: $card-light-header-bg;
+    border-bottom: 1px solid $card-light-border;
+    color: $text-on-light-primary;
+    font-weight: 600;
+  }
+
+  .card-body {
+    background: transparent; // Card body background is already set by .terminal-card
+    color: $text-on-light-primary;
+  }
+}
+
+// Metric Cards
+.metric-card {
+  background: $card-bg;
+  border: 1px solid $card-border-color;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: $terminal-shadow; // Use lighter shadow
+  transition: all 0.3s ease;
+  color: $card-color; // Text color for content inside metric card
+
+  &:hover {
+    border-color: $accent-blue;
+    box-shadow: 0 0 20px rgba(88, 166, 255, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .metric-value {
+    font-size: 2rem;
+    font-weight: 600;
+    color: $accent-blue;
+    margin-bottom: 8px;
+  }
+
+  .metric-label {
+    color: $text-on-light-secondary;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+  }
+
+  .metric-change {
+    font-size: 0.8rem;
+    font-weight: 500;
+
+    &.positive {
+      color: $accent-green;
+    }
+
+    &.negative {
+      color: $accent-red;
+    }
+  }
+}
+
+// Terminal Toggle (keep dark background for toggle)
+.terminal-toggle {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $terminal-light-gray; // Darker gray for toggle track
+    transition: 0.4s;
+    border-radius: 30px;
+    border: 1px solid $accent-blue;
+
+    &:before {
+      position: absolute;
+      content: "";
+      height: 22px;
+      width: 22px;
+      left: 3px;
+      bottom: 3px;
+      background-color: $terminal-black; // Black for toggle knob
+      transition: 0.4s;
+      border-radius: 50%;
+      border: 1px solid $accent-blue;
+    }
+  }
+
+  input:checked + .slider {
+    background-color: $accent-green;
+    box-shadow: 0 0 10px rgba(63, 185, 80, 0.3);
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(30px);
+    background-color: $terminal-black;
+  }
+}
+
+// Status Indicators (keep as is, they are accent-based)
+.status-indicator {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+  animation: pulse 2s infinite;
+
+  &.status-online {
+    background: $accent-green;
+    box-shadow: 0 0 10px rgba(63, 185, 80, 0.3);
+  }
+
+  &.status-offline {
+    background: $accent-red;
+    box-shadow: 0 0 10px rgba(248, 81, 73, 0.3);
+  }
+
+  &.status-warning {
+    background: #d29922;
+    box-shadow: 0 0 10px rgba(210, 153, 34, 0.3);
+  }
+
+  &.status-info {
+    background: #39d353;
+    box-shadow: 0 0 10px rgba(57, 211, 83, 0.3);
+  }
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+// Terminal Tables
+.terminal-table {
+  background: $table-bg;
+  color: $table-color; // Dark text for table content
+  border: 1px solid $table-border-color;
+  border-radius: 8px;
+  overflow: hidden;
+
+  th {
+    background: $card-light-header-bg; // Slightly different light background for table headers
+    color: $text-on-light-primary; // Dark text for table headers
+    font-weight: 600;
+    border-bottom: 2px solid $accent-blue;
+    font-size: 0.9rem;
+  }
+
+  td {
+    border-bottom: 1px solid $table-border-color;
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+
+  tr:hover {
+    background: $table-hover-bg;
+  }
+}
+
+// Terminal Alerts (keep as is, they are accent-based)
+.terminal-alert {
+  border: 1px solid;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 10px 0;
+  font-family: $font-family-base; // Use base font family
+  font-weight: 500;
+
+  &.alert-success {
+    background: rgba($accent-green, 0.1);
+    border-color: $accent-green;
+    color: $accent-green;
+    box-shadow: 0 0 10px rgba($accent-green, 0.2);
+  }
+
+  &.alert-warning {
+    background: rgba($accent-yellow, 0.1);
+    border-color: #d29922;
+    color: #d29922;
+    box-shadow: 0 0 10px rgba(210, 153, 34, 0.2);
+  }
+
+  &.alert-danger {
+    background: rgba($accent-red, 0.1);
+    border-color: #f85149;
+    color: #f85149;
+    box-shadow: 0 0 10px rgba(248, 81, 73, 0.2);
+  }
+
+  &.alert-info {
+    background: rgba($accent-cyan, 0.1);
+    border-color: #39d353;
+    color: #39d353;
+    box-shadow: 0 0 10px rgba(57, 211, 83, 0.2);
+  }
+}
+
+// Terminal Buttons (text color should be light on colored buttons)
+.btn-terminal {
+  font-family: $font-family-base; // Use base font family
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  border: 1px solid;
+
+  &.btn-outline-success {
+    border-color: $accent-green;
+    color: $accent-green;
+
+    &:hover {
+      background: $accent-green;
+      color: $text-on-dark-primary; // Light text on hover
+      box-shadow: 0 0 15px rgba($accent-green, 0.3);
+    }
+  }
+
+  &.btn-outline-info {
+    border-color: $accent-blue;
+    color: $accent-blue;
+
+    &:hover {
+      background: $accent-blue;
+      color: $text-on-dark-primary; // Light text on hover
+      box-shadow: 0 0 15px rgba($accent-blue, 0.3);
+    }
+  }
+}
+
+// Terminal Text (default to light card text, override if on dark background)
+.terminal-text {
+  font-family: $font-family-base;
+  color: $text-on-light-primary;
+}
+
+.terminal-heading {
+  font-family: $font-family-base;
+  color: $text-on-light-primary;
+  font-weight: 600;
+}
+
+.terminal-subheading {
+  font-family: $font-family-base;
+  color: $text-on-light-secondary;
+  font-weight: 500;
+}
+
+// Terminal Glow Effects (keep as is)
+.terminal-glow {
+  box-shadow: 0 0 10px rgba($accent-green, 0.3);
+}
+
+.terminal-glow-green {
+  box-shadow: 0 0 10px rgba($accent-green, 0.3);
+}
+
+.terminal-glow-cyan {
+  box-shadow: 0 0 10px rgba($accent-cyan, 0.3);
+}
+
+.terminal-glow-blue {
+  box-shadow: 0 0 10px rgba($accent-blue, 0.3);
+}
+
+// Spinning animation for refresh button (keep as is)
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// Terminal Scrollbar (changed to light background)
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f8f9fa;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $terminal-medium-gray;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $accent-green;
+}
+
+// Responsive adjustments (keep as is)
+@media (max-width: 768px) {
+  .terminal-header {
+    h1 {
+      font-size: 1.2rem;
+    }
+  }
+  .metric-card {
+    padding: 15px;
+    .metric-value {
+      font-size: 1.5rem;
+    }
+  }
+  .terminal-table {
+    th, td {
+      font-size: 0.8rem;
+      padding: 8px;
+    }
+  }
+}

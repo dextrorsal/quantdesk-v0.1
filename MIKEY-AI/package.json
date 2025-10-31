@@ -87,7 +87,7 @@
     "@langchain/openai": "^0.3.17",
     "@solana/spl-token": "^0.3.9",
     "@solana/wallet-adapter-base": "^0.9.23",
-    "@solana/web3.js": "^1.87.6",
+    "@solana/web3.js": "1.87.0",
     "axios": "^1.6.2",
     "bs58": "^6.0.0",
     "bull": "^4.12.2",

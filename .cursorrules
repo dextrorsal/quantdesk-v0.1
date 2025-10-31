@@ -1,0 +1,164 @@
+# QuantDesk Perpetual DEX - AI Assistant Rules
+
+## 🚀 Project Identity
+**QuantDesk** is a sophisticated Solana-based perpetual DEX platform featuring multi-service architecture, AI-powered trading assistance, and real-time data ingestion.
+
+## 🏗️ Multi-Service Architecture
+
+| Service | Port | Technology | Purpose |
+|---------|------|------------|---------|
+| **Backend** | 3002 | Node.js/Express/TypeScript | API Gateway, Database, Oracle |
+| **Frontend** | 3001 | React/Vite/TypeScript | Trading Interface, Portfolio |
+| **MIKEY-AI** | 3000 | LangChain/TypeScript | AI Trading Agent |
+| **Data Ingestion** | 3003 | Node.js/Pipeline | Real-time Data Collection |
+
+## 🛠️ Technology Stack
+
+### Core Technologies
+- **Backend**: Node.js 20+, Express.js, TypeScript, pnpm
+- **Frontend**: React 18, Vite, Tailwind CSS, TypeScript
+- **Smart Contracts**: Rust, Anchor Framework, Solana
+- **Database**: Supabase (PostgreSQL)
+- **Oracle**: Pyth Network
+- **AI**: LangChain, Multi-LLM routing
+
+### Deployment
+- **Frontend/Backend**: Vercel
+- **Optional**: Railway for backend
+- **Smart Contracts**: Solana devnet/mainnet
+
+## 🎯 Architecture Patterns
+
+### Critical Patterns (MUST FOLLOW)
+1. **Database Access**: Always use `databaseService` from `backend/src/services/supabaseDatabase.ts`, never direct Supabase calls
+2. **Error Handling**: Use custom error classes from `backend/src/middleware/errorHandling.ts`
+3. **Rate Limiting**: Tiered rate limits via `backend/src/middleware/rateLimiting.ts`
+4. **Oracle Integration**: Backend-centric via `pythOracleService.getAllPrices()` - returns `Record<string, number>`
+
+### Key Design Decisions
+- **Backend-Centric Oracle**: Pyth prices fetched by backend, normalized and cached
+- **Consolidated Database Service**: Single abstraction layer prevents direct Supabase usage
+- **Multi-Service Coordination**: Services communicate via backend API gateway
+
+## 🤖 BMAD v6 Methodology Integration
+
+**QuantDesk is using BMAD v6 brownfield methodology** - BMAD is already installed and configured. Use when you need structured development workflows for complex tasks.
+
+### When to Use BMAD Workflow
+**For complex features spanning multiple departments or requiring structured development:**
+
+- **Multi-department features** (Frontend + Backend + Smart Contracts)
+- **New major functionality** requiring architecture decisions
+- **High-risk trading features** needing comprehensive testing
+- **Complex integrations** between services
+
+### BMAD v6 Resource Navigation
+- **BMAD Index**: `@bmad/index` - Master index of all BMAD agents and tasks
+- **BMAD Master Agent**: `@bmad/core/agents/bmad-master` - Main orchestrator for BMAD workflows
+- **Available Modules**: 
+  - `@bmad/core/agents/bmad-master` - BMad Master Executor & Orchestrator (start here for complex workflows)
+  - `@bmad/bmm/agents/*` - Business methods module:
+    - `architect` - Architecture & technical decisions
+    - `dev` - Development & implementation
+    - `pm` - Product management
+    - `sm` - Scrum master & agile
+    - `analyst` - Business analysis
+    - `ux-designer` - UX/UI design
+    - `tea` - Test architecture & QA
+  - `@bmad/bmb/agents/bmad-builder` - BMAD Builder agent
+  - `@bmad/cis/agents/*` - Creative & innovation agents (brainstorming-coach, storyteller, etc.)
+- **Module Configuration**: `bmad/{module}/config.yaml` - Module-specific settings
+- **Workflows**: `bmad/{module}/workflows/` - Reusable workflow definitions
+
+### Decision Tree
+```
+Is this a simple bug fix or small feature? 
+├─ Yes → Direct implementation (skip BMAD)
+└─ No → Does it span multiple departments?
+    ├─ Yes → Use BMAD v6 workflow (@bmad/core/agents/bmad-master → activate workflows)
+    └─ No → Use specific agent directly (@bmad/bmm/agents/{agent-name})
+```
+
+## 🔧 Development Quick Start
+
+### Package Manager
+**ALWAYS use pnpm, NEVER npm**
+
+### Essential Commands
+```bash
+# Backend development
+cd backend && pnpm run start:dev
+
+# Frontend development  
+cd frontend && pnpm run dev
+
+# Smart contracts
+cd contracts && anchor build && anchor test
+
+# All services
+npm run dev  # From project root
+```
+
+### Key File Paths
+- **Backend entry**: `backend/src/server.ts`
+- **Database service**: `backend/src/services/supabaseDatabase.ts`
+- **Smart contract**: `contracts/smart-contracts/programs/quantdesk-perp-dex/src/lib.rs`
+- **Frontend entry**: `frontend/src/main.tsx`
+
+## 🔍 AI Development Endpoints (Port 3002)
+
+Use these endpoints to understand the system architecture:
+- `GET /api/dev/codebase-structure` - Full architecture overview
+- `GET /api/dev/market-summary` - Market data structure
+- `GET /api/dev/user-portfolio/:wallet` - User data relationships
+- `GET /api/docs/swagger` - OpenAPI specification
+
+## ⚠️ Common Issues & Solutions
+
+### Expected Devnet Limitations
+- Missing `execute_sql` function in Supabase is EXPECTED for devnet (non-critical)
+- Missing `auth_nonces` table is EXPECTED for devnet (non-critical)
+
+### Data Format Notes
+- Oracle prices are in scientific notation (already normalized by backend)
+- Always use pnpm, not npm
+
+## 🎯 AI Assistant Guidance
+
+### When to Use Direct Implementation
+- Simple bug fixes
+- Small UI adjustments
+- Single-file changes
+- Documentation updates
+
+### When to Consult BMAD v6 Resources
+- **Multi-department features**: Use `@bmad/core/agents/bmad-master` to orchestrate workflow
+- **New trading functionality**: Consult `@bmad/bmm/agents/architect` for architecture decisions
+- **Architecture changes**: Engage `@bmad/bmm/agents/architect` and `@bmad/bmm/agents/pm`
+- **Complex integrations**: Use specific module agents (e.g., `@bmad/bmm/agents/dev`)
+- **High-risk modifications**: Consult `@bmad/bmm/agents/tea` (Test Architecture) first
+- **Quick agent help**: Reference `@bmad/index` to see all available agents
+
+### Context Loading Strategy
+1. **Always load**: Current file context + related files
+2. **For architecture questions**: Use `@bmad/bmm/agents/architect` agent and `docs/architecture.md`
+3. **For BMAD workflows**: Reference `@bmad/index` for available resources
+4. **For complex features**: Follow BMAD v6 methodology via `@bmad/core/agents/bmad-master`
+
+## 📋 Quality Standards
+
+### Code Quality
+- Follow existing patterns in each service
+- Use TypeScript strict mode
+- Implement proper error handling
+- Add comprehensive logging
+
+### Testing Requirements
+- Unit tests for business logic
+- Integration tests for API endpoints
+- Smart contract tests before deployment
+- Use BMAD test architecture agent (`@bmad/bmm/agents/tea`) for complex features
+
+---
+
+**Remember**: This is a trading platform handling real financial data. Always prioritize security, data integrity, and comprehensive testing for trading-related features.

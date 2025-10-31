@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Api - QuantDesk Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #000000;
+            font-size: 14px;
+        }
+        .container {
+            background: #000000;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+        .back-link {
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 8px;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #333333;
+            margin: 20px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ffffff;
+            border: none;
+        }
+        blockquote {
+            border-left: 4px solid #3b82f6;
+            margin: 0;
+            padding-left: 20px;
+            color: #d9d9d9;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #333333;
+        }
+        th, td {
+            border: 1px solid #333333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a1a;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            color: #d9d9d9;
+        }
+        ul, ol {
+            color: #d9d9d9;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        /* Syntax Highlighting Overrides */
+        pre[class*="language-"] {
+            background: #0a0a0a !important;
+            border: 1px solid #333333 !important;
+            border-radius: 8px !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace !important;
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+        }
+        .token.comment { color: #6a9955 !important; }
+        .token.keyword { color: #569cd6 !important; }
+        .token.string { color: #ce9178 !important; }
+        .token.number { color: #b5cea8 !important; }
+        .token.function { color: #dcdcaa !important; }
+        .token.class-name { color: #4ec9b0 !important; }
+        .token.operator { color: #d4d4d4 !important; }
+        .token.punctuation { color: #d4d4d4 !important; }
+        .token.variable { color: #9cdcfe !important; }
+        .token.constant { color: #4fc1ff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="/docs">&larr; Back to Documentation</a>
+        </div>
+        <h1>QuantDesk API Documentation</h1>
+<p>Welcome to the QuantDesk API! This documentation provides comprehensive information about our REST API endpoints for trading, portfolio management, and market data.</p>
+<h2>🔗 <strong>Base URL</strong></h2>
+<div class="codehilite"><pre><span></span><code><span class="n">Development</span><span class="o">:</span><span class="w"> </span><span class="n">https</span><span class="o">://</span><span class="n">localhost</span><span class="o">:</span><span class="mi">3001</span>
+<span class="n">Production</span><span class="o">:</span><span class="w"> </span><span class="n">https</span><span class="o">://</span><span class="n">quantdesk</span><span class="o">.</span><span class="na">app</span>
+<span class="n">Local</span><span class="o">:</span><span class="w"> </span><span class="n">http</span><span class="o">://</span><span class="n">localhost</span><span class="o">:</span><span class="mi">3002</span>
+</code></pre></div>
+
+<h2>🔐 <strong>Authentication</strong></h2>
+<p>Most endpoints require authentication using JWT tokens:</p>
+<div class="codehilite"><pre><span></span><code>Authorization:<span class="w"> </span>Bearer<span class="w"> </span>&lt;your_jwt_token&gt;
+</code></pre></div>
+
+<h3>Getting Started</h3>
+<ol>
+<li><strong>Register/Login</strong> to get your JWT token</li>
+<li><strong>Include the token</strong> in all API requests</li>
+<li><strong>Refresh tokens</strong> as needed</li>
+</ol>
+<h2>📊 <strong>Core Endpoints</strong></h2>
+<h3>Markets</h3>
+<h4>Get All Markets</h4>
+<div class="codehilite"><pre><span></span><code><span class="err">GET /api/supabase-oracle/markets</span>
+</code></pre></div>
+
+<p><strong>Response:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;d87a99b4-148a-49c2-a2ad-ca1ee17a9372&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;symbol&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;BTC-PERP&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;base_asset&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;BTC&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;quote_asset&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;USDT&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;is_active&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;max_leverage&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;tick_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;step_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;min_order_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;max_order_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1000000</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1703123456789</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3>Orders</h3>
+<h4>Place Order</h4>
+<div class="codehilite"><pre><span></span><code><span class="err">POST /api/orders</span>
+<span class="err">Authorization: Bearer &lt;token&gt;</span>
+<span class="err">Content-Type: application/json</span>
+
+<span class="err">{</span>
+<span class="err">  &quot;marketId&quot;: &quot;d87a99b4-148a-49c2-a2ad-ca1ee17a9372&quot;,</span>
+<span class="err">  &quot;side&quot;: &quot;buy&quot;,</span>
+<span class="err">  &quot;size&quot;: 0.1,</span>
+<span class="err">  &quot;price&quot;: 45000,</span>
+<span class="err">  &quot;orderType&quot;: &quot;limit&quot;</span>
+<span class="err">}</span>
+</code></pre></div>
+
+<h4>Get Orders</h4>
+<div class="codehilite"><pre><span></span><code><span class="err">GET /api/orders?status=open&amp;limit=50</span>
+<span class="err">Authorization: Bearer &lt;token&gt;</span>
+</code></pre></div>
+
+<h3>Positions</h3>
+<h4>Get Positions</h4>
+<div class="codehilite"><pre><span></span><code><span class="err">GET /api/positions</span>
+<span class="err">Authorization: Bearer &lt;token&gt;</span>
+</code></pre></div>
+
+<h4>Open Position</h4>
+<div class="codehilite"><pre><span></span><code><span class="err">POST /api/positions</span>
+<span class="err">Authorization: Bearer &lt;token&gt;</span>
+<span class="err">Content-Type: application/json</span>
+
+<span class="err">{</span>
+<span class="err">  &quot;marketId&quot;: &quot;d87a99b4-148a-49c2-a2ad-ca1ee17a9372&quot;,</span>
+<span class="err">  &quot;side&quot;: &quot;long&quot;,</span>
+<span class="err">  &quot;size&quot;: 0.1,</span>
+<span class="err">  &quot;leverage&quot;: 10</span>
+<span class="err">}</span>
+</code></pre></div>
+
+<h3>Portfolio Analytics</h3>
+<h4>Get Portfolio Metrics</h4>
+<div class="codehilite"><pre><span></span><code><span class="err">GET /api/portfolio/metrics</span>
+<span class="err">Authorization: Bearer &lt;token&gt;</span>
+</code></pre></div>
+
+<p><strong>Response:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;totalValue&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;totalPnL&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5000</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;totalPnLPercentage&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">5.0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;dayPnL&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;dayPnLPercentage&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;sharpeRatio&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.2</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;maxDrawdown&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.15</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;winRate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.65</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;totalTrades&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;avgTradeSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>Get Risk Analysis</h4>
+<div class="codehilite"><pre><span></span><code><span class="err">GET /api/portfolio/risk</span>
+<span class="err">Authorization: Bearer &lt;token&gt;</span>
+</code></pre></div>
+
+<h3>Advanced Orders</h3>
+<h4>Place Advanced Order</h4>
+<div class="codehilite"><pre><span></span><code><span class="err">POST /api/advanced-orders</span>
+<span class="err">Authorization: Bearer &lt;token&gt;</span>
+<span class="err">Content-Type: application/json</span>
+
+<span class="err">{</span>
+<span class="err">  &quot;marketId&quot;: &quot;d87a99b4-148a-49c2-a2ad-ca1ee17a9372&quot;,</span>
+<span class="err">  &quot;orderType&quot;: &quot;stop_loss&quot;,</span>
+<span class="err">  &quot;side&quot;: &quot;sell&quot;,</span>
+<span class="err">  &quot;size&quot;: 0.1,</span>
+<span class="err">  &quot;triggerPrice&quot;: 40000,</span>
+<span class="err">  &quot;limitPrice&quot;: 39500</span>
+<span class="err">}</span>
+</code></pre></div>
+
+<h3>Cross-Collateral</h3>
+<h4>Get Collateral Accounts</h4>
+<div class="codehilite"><pre><span></span><code><span class="err">GET /api/cross-collateral/accounts</span>
+<span class="err">Authorization: Bearer &lt;token&gt;</span>
+</code></pre></div>
+
+<h4>Add Collateral</h4>
+<div class="codehilite"><pre><span></span><code><span class="err">POST /api/cross-collateral/accounts</span>
+<span class="err">Authorization: Bearer &lt;token&gt;</span>
+<span class="err">Content-Type: application/json</span>
+
+<span class="err">{</span>
+<span class="err">  &quot;collateralType&quot;: &quot;SOL&quot;,</span>
+<span class="err">  &quot;amount&quot;: 10</span>
+<span class="err">}</span>
+</code></pre></div>
+
+<h2>📈 <strong>WebSocket API</strong></h2>
+<h3>Connection</h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">ws</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">WebSocket</span><span class="p">(</span><span class="s1">&#39;ws://localhost:3002/ws&#39;</span><span class="p">);</span>
+
+<span class="nx">ws</span><span class="p">.</span><span class="nx">onopen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Connected to QuantDesk WebSocket&#39;</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="nx">ws</span><span class="p">.</span><span class="nx">onmessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Received:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div>
+
+<h3>Subscribe to Market Data</h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">ws</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;subscribe&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">channel</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;market_data&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">marketId</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;d87a99b4-148a-49c2-a2ad-ca1ee17a9372&#39;</span>
+<span class="p">}));</span>
+</code></pre></div>
+
+<h3>Subscribe to User Updates</h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">ws</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;subscribe&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">channel</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;user_updates&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">token</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;your_jwt_token&#39;</span>
+<span class="p">}));</span>
+</code></pre></div>
+
+<h2>🔧 <strong>Error Handling</strong></h2>
+<h3>Error Response Format</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error message&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ERROR_CODE&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;details&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;field&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;additional error details&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1703123456789</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3>Common Error Codes</h3>
+<ul>
+<li><code>MISSING_TOKEN</code>: Authentication required</li>
+<li><code>INVALID_TOKEN</code>: Invalid or expired token</li>
+<li><code>INSUFFICIENT_BALANCE</code>: Not enough balance</li>
+<li><code>INVALID_ORDER</code>: Order validation failed</li>
+<li><code>MARKET_CLOSED</code>: Market is not available</li>
+<li><code>RATE_LIMITED</code>: Too many requests</li>
+</ul>
+<h2>📊 <strong>Rate Limits</strong></h2>
+<table>
+<thead>
+<tr>
+<th>Endpoint Type</th>
+<th>Limit</th>
+<th>Window</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Public Data</td>
+<td>100 requests</td>
+<td>1 minute</td>
+</tr>
+<tr>
+<td>Trading</td>
+<td>30 requests</td>
+<td>1 minute</td>
+</tr>
+<tr>
+<td>Authentication</td>
+<td>5 requests</td>
+<td>15 minutes</td>
+</tr>
+<tr>
+<td>WebSocket</td>
+<td>1000 messages</td>
+<td>1 minute</td>
+</tr>
+</tbody>
+</table>
+<h2>🧪 <strong>Testing</strong></h2>
+<h3>Test Environment</h3>
+<p>Use our test environment for development:</p>
+<div class="codehilite"><pre><span></span><code>Base URL: https://api-test.quantdesk.app
+Testnet: Solana Devnet
+</code></pre></div>
+
+<h3>Example Requests</h3>
+<h4>Using cURL</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Get markets</span>
+curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;https://api-dev.quantdesk.app/api/supabase-oracle/markets&quot;</span>
+
+<span class="c1"># Place order</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;https://api-dev.quantdesk.app/api/orders&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer your_token&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">    &quot;marketId&quot;: &quot;d87a99b4-148a-49c2-a2ad-ca1ee17a9372&quot;,</span>
+<span class="s1">    &quot;side&quot;: &quot;buy&quot;,</span>
+<span class="s1">    &quot;size&quot;: 0.1,</span>
+<span class="s1">    &quot;price&quot;: 45000,</span>
+<span class="s1">    &quot;orderType&quot;: &quot;limit&quot;</span>
+<span class="s1">  }&#39;</span>
+</code></pre></div>
+
+<h4>Using JavaScript</h4>
+<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;https://api-dev.quantdesk.app/api/orders&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s1">&#39;Authorization&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Bearer your_token&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;application/json&#39;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">marketId</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;d87a99b4-148a-49c2-a2ad-ca1ee17a9372&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">side</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;buy&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">size</span><span class="o">:</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">price</span><span class="o">:</span><span class="w"> </span><span class="mf">45000</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">orderType</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;limit&#39;</span>
+<span class="w">  </span><span class="p">})</span>
+<span class="p">});</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</code></pre></div>
+
+<h2>📚 <strong>SDKs</strong></h2>
+<h3>JavaScript/TypeScript</h3>
+<div class="codehilite"><pre><span></span><code>npm<span class="w"> </span>install<span class="w"> </span>@quantdesk/sdk
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">QuantDeskClient</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@quantdesk/sdk&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">QuantDeskClient</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">apiKey</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;your_api_key&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">environment</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;development&#39;</span>
+<span class="p">});</span>
+
+<span class="c1">// Place order</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">order</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">orders</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">marketId</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;d87a99b4-148a-49c2-a2ad-ca1ee17a9372&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">side</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;buy&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">size</span><span class="o">:</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">price</span><span class="o">:</span><span class="w"> </span><span class="mf">45000</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">orderType</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;limit&#39;</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<h3>Python</h3>
+<div class="codehilite"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>quantdesk-sdk
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">quantdesk</span> <span class="kn">import</span> <span class="n">QuantDeskClient</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">QuantDeskClient</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="s1">&#39;your_api_key&#39;</span><span class="p">,</span> <span class="n">environment</span><span class="o">=</span><span class="s1">&#39;development&#39;</span><span class="p">)</span>
+
+<span class="c1"># Place order</span>
+<span class="n">order</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">market_id</span><span class="o">=</span><span class="s1">&#39;d87a99b4-148a-49c2-a2ad-ca1ee17a9372&#39;</span><span class="p">,</span>
+    <span class="n">side</span><span class="o">=</span><span class="s1">&#39;buy&#39;</span><span class="p">,</span>
+    <span class="n">size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">price</span><span class="o">=</span><span class="mi">45000</span><span class="p">,</span>
+    <span class="n">order_type</span><span class="o">=</span><span class="s1">&#39;limit&#39;</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<h2>🔄 <strong>Webhooks</strong></h2>
+<h3>Setup Webhook</h3>
+<div class="codehilite"><pre><span></span><code><span class="err">POST /api/webhooks</span>
+<span class="err">Authorization: Bearer &lt;token&gt;</span>
+<span class="err">Content-Type: application/json</span>
+
+<span class="err">{</span>
+<span class="err">  &quot;url&quot;: &quot;https://your-app.com/webhook&quot;,</span>
+<span class="err">  &quot;events&quot;: [&quot;order_filled&quot;, &quot;position_opened&quot;, &quot;position_closed&quot;],</span>
+<span class="err">  &quot;secret&quot;: &quot;your_webhook_secret&quot;</span>
+<span class="err">}</span>
+</code></pre></div>
+
+<h3>Webhook Events</h3>
+<ul>
+<li><code>order_filled</code>: Order was executed</li>
+<li><code>position_opened</code>: New position opened</li>
+<li><code>position_closed</code>: Position closed</li>
+<li><code>deposit_completed</code>: Deposit confirmed</li>
+<li><code>withdrawal_completed</code>: Withdrawal confirmed</li>
+</ul>
+<h2>📞 <strong>Support</strong></h2>
+<ul>
+<li><strong>Documentation</strong>: <a href="https://quantdesk.gitbook.io">GitBook</a></li>
+<li><strong>API Status</strong>: <a href="https://status.quantdesk.app">Status Page</a></li>
+<li><strong>Support</strong>: <a href="https://discord.gg/quantdesk">Discord</a></li>
+<li><strong>Issues</strong>: <a href="https://github.com/dextrorsal/quantdesk/issues">GitHub Issues</a></li>
+</ul>
+<hr />
+<p><em>QuantDesk API - Professional trading infrastructure for the decentralized future</em></p>
+    </div>
+</body>
+</html>
