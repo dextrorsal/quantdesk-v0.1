@@ -232,3 +232,13 @@ _thumbs/
 *.ori
 *.orig
 *.tmp
+# Sensitive project data
+config/data/**
+config/secrets/**
+*.rdb
+*.aof
+*.sqlite
+MIKEY-AI/.env
+**/.env
+**/.env.*
+contracts/target/
